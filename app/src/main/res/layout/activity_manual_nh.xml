@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ConstraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ManualNHActivity">
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.3333" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.6666" />
+
+    <EditText
+        android:id="@+id/fats_nutSetNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="3"
+        android:importantForAutofill="no"
+        android:inputType="numberSigned"
+        app:layout_constraintBottom_toBottomOf="@+id/fats_nutSet"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        tools:ignore="LabelFor" />
+
+    <EditText
+        android:id="@+id/carbs_nutSetNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="3"
+        android:importantForAutofill="no"
+        android:inputType="numberSigned"
+        app:layout_constraintBottom_toBottomOf="@+id/carbs_nutSet"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        tools:ignore="LabelFor" />
+
+    <EditText
+        android:id="@+id/proteins_nutSetNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="3"
+        android:importantForAutofill="no"
+        android:inputType="numberSigned"
+        app:layout_constraintBottom_toBottomOf="@+id/proteins_nutSet"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        tools:ignore="LabelFor" />
+
+    <Button
+        android:id="@+id/applyValues_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:onClick="applyNutritionGoals"
+        android:text="@string/apply_en"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/fats_nutSet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/fats_en"
+        app:layout_constraintBottom_toTopOf="@+id/carbs_nutSet"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/calories_nutSet" />
+
+    <TextView
+        android:id="@+id/carbs_nutSet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/carbohydrates_en"
+        app:layout_constraintBottom_toTopOf="@+id/proteins_nutSet"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/fats_nutSet" />
+
+    <TextView
+        android:id="@+id/proteins_nutSet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/proteins_en"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/carbs_nutSet" />
+
+    <TextView
+        android:id="@+id/calories_nutSet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Calories"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/fats_nutSet"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/calories_nutSetNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="3"
+        android:inputType="numberSigned"
+        app:layout_constraintBottom_toBottomOf="@+id/calories_nutSet"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline2" />
+
+</android.support.constraint.ConstraintLayout>
