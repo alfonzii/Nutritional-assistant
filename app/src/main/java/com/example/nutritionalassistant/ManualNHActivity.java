@@ -10,14 +10,14 @@ import android.widget.EditText;
 
 public class ManualNHActivity extends AppCompatActivity {
     //reference to singleton object
-    DataHolder data = DataHolder.getInstance();
+    private DataHolder data = DataHolder.getInstance();
 
     private EditText fatsSetter;
     private EditText carbsSetter;
     private EditText protsSetter;
     private EditText calsSetter;
 
-    AlertDialog.Builder myAlertBuilder;
+    private AlertDialog.Builder myAlertBuilder;
 
 
     @Override

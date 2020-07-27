@@ -16,8 +16,9 @@ import static com.example.nutritionalassistant.Constants.RESULT_AUTOMATIC_FAILUR
 
 public class NHSetActivity extends AppCompatActivity {
     //reference to singleton object
-    DataHolder data = DataHolder.getInstance();
-    AlertDialog.Builder myAlertBuilder;
+    private DataHolder data = DataHolder.getInstance();
+
+    private AlertDialog.Builder myAlertBuilder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,14 +66,11 @@ public class NHSetActivity extends AppCompatActivity {
             } else {
                 setResult(RESULT_CANCELED);
             }
-        }
-
-        else if (requestCode == AUTOMATIC_REQUEST){
-            if(resultCode == RESULT_OK) {
+        } else if (requestCode == AUTOMATIC_REQUEST) {
+            if (resultCode == RESULT_OK) {
                 setResult(RESULT_OK);
                 finish();
-            }
-            else {
+            } else {
                 setResult(RESULT_CANCELED);
                 finish();
             }

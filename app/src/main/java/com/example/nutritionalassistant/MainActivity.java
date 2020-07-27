@@ -22,17 +22,17 @@ public class MainActivity extends AppCompatActivity {
     //reference to singleton object
     private DataHolder data = DataHolder.getInstance();
 
-    TextView calsValue;
-    TextView fatsValue;
-    TextView carbsValue;
-    TextView proteinsValue;
+    private TextView calsValue;
+    private TextView fatsValue;
+    private TextView carbsValue;
+    private TextView proteinsValue;
 
 
     // Shared preferences object
     private SharedPreferences mPreferences;
 
     // Name of shared preferences file
-    private String sharedPrefFile =
+    private final String sharedPrefFile =
             "com.example.nutritionalassistant";
 
 

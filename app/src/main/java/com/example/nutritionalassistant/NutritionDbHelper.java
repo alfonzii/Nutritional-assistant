@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -46,17 +48,23 @@ public class NutritionDbHelper extends SQLiteOpenHelper {
     private NutritionDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
-    public void onCreate(SQLiteDatabase db) {
+
+    @Override
+    public void onCreate(@NotNull SQLiteDatabase db) {
         db.execSQL(SQL_CREATE_ENTRIES);
         createdDB = false;
     }
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
+    @Override
+    public void onUpgrade(@NotNull SQLiteDatabase db, int oldVersion, int newVersion) {
         // This database is only a cache for online data, so its upgrade policy is
         // to simply to discard the data and start over
         db.execSQL(SQL_DELETE_ENTRIES);
         onCreate(db);
     }
-    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
+    @Override
+    public void onDowngrade(@NotNull SQLiteDatabase db, int oldVersion, int newVersion) {
         onUpgrade(db, oldVersion, newVersion);
     }
 
@@ -71,11 +79,11 @@ public class NutritionDbHelper extends SQLiteOpenHelper {
                 e.printStackTrace();
             }
 
-            BufferedReader buffer = new BufferedReader(new InputStreamReader(inStream));
-
             String line = "";
             db.beginTransaction();
-            try {
+
+            assert inStream != null;
+            try (BufferedReader buffer = new BufferedReader(new InputStreamReader(inStream))) {
                 while ((line = buffer.readLine()) != null) {
                     String[] colums = line.split(";");
                     if (colums.length != 23) {
@@ -98,13 +106,13 @@ public class NutritionDbHelper extends SQLiteOpenHelper {
             db.endTransaction();
         }
     }
-    public List getFoodNamesQuery(Context context, SQLiteDatabase db, boolean sortByAlphabet){
-        //SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+    public List<String> getFoodNamesQuery(@NotNull SQLiteDatabase db, boolean sortByAlphabet) {
         String[] projection = {
                 NutritionDatabaseContract.NutritionDbEntry.COLUMN_NAME_FOOD
         };
         String sortOrder;
-        if(sortByAlphabet)
+        if (sortByAlphabet)
             sortOrder = COLUMN_NAME_FOOD + " ASC";
         else
             sortOrder = null;
@@ -119,8 +127,8 @@ public class NutritionDbHelper extends SQLiteOpenHelper {
                 sortOrder               // The sort order
         );
 
-        List foodNames = new ArrayList<>();
-        while(cursor.moveToNext()) {
+        List<String> foodNames = new ArrayList<>();
+        while (cursor.moveToNext()) {
             String itemName = cursor.getString(
                     cursor.getColumnIndexOrThrow(NutritionDatabaseContract.NutritionDbEntry.COLUMN_NAME_FOOD));
             foodNames.add(itemName);
@@ -128,5 +136,33 @@ public class NutritionDbHelper extends SQLiteOpenHelper {
         cursor.close();
 
         return foodNames;
+    }
+
+    public Food getFoodNutritionsQuery(@NotNull SQLiteDatabase db, String foodName) {
+
+        String selection = NutritionDatabaseContract.NutritionDbEntry.COLUMN_NAME_FOOD + " = ?";
+        String[] selectionArgs = {foodName};
+
+        Cursor cursor = db.query(
+                NutritionDatabaseContract.NutritionDbEntry.TABLE_NAME,
+                null,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null
+        );
+
+        cursor.moveToFirst();
+
+        Food food = new Food();
+        food.setName(foodName);
+        food.setCals(cursor.getInt(cursor.getColumnIndexOrThrow(NutritionDatabaseContract.NutritionDbEntry.COLUMN_ENERGY_FOOD)));
+        food.setCarbs(cursor.getFloat(cursor.getColumnIndexOrThrow(NutritionDatabaseContract.NutritionDbEntry.COLUMN_CARBOHYDRATES_FOOD)));
+        food.setFats(cursor.getFloat(cursor.getColumnIndexOrThrow(NutritionDatabaseContract.NutritionDbEntry.COLUMN_FATS_FOOD)));
+        food.setProts(cursor.getFloat(cursor.getColumnIndexOrThrow(NutritionDatabaseContract.NutritionDbEntry.COLUMN_PROTEINS_FOOD)));
+        cursor.close();
+
+        return food;
     }
 }

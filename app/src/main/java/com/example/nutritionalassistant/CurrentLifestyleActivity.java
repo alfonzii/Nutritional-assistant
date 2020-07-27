@@ -20,8 +20,8 @@ import static com.example.nutritionalassistant.Constants.SEDENTARY;
 
 public class CurrentLifestyleActivity extends AppCompatActivity {
 
-    AlertDialog.Builder myAlertBuilder;
-    DataHolder data = DataHolder.getInstance();
+    private AlertDialog.Builder myAlertBuilder;
+    private DataHolder data = DataHolder.getInstance();
 
     private void runGoalActivity(){
         Intent intent = new Intent(this, GoalActivity.class);
