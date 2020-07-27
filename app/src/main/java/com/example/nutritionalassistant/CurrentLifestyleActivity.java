@@ -13,10 +13,8 @@ import android.view.MenuItem;
 import android.view.View;
 
 import static com.example.nutritionalassistant.Constants.AUTOMATIC_REQUEST;
-import static com.example.nutritionalassistant.Constants.HIGH_ACTIVITY;
-import static com.example.nutritionalassistant.Constants.MEDIUM_ACTIVITY;
-import static com.example.nutritionalassistant.Constants.MILD_ACTIVITY;
-import static com.example.nutritionalassistant.Constants.SEDENTARY;
+import static com.example.nutritionalassistant.Constants.Lifestyle.*;
+
 
 public class CurrentLifestyleActivity extends AppCompatActivity {
 

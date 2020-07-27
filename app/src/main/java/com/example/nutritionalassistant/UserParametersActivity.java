@@ -14,14 +14,14 @@ import android.widget.Spinner;
 public class UserParametersActivity extends AppCompatActivity implements
         AdapterView.OnItemSelectedListener {
     //reference to a singleton object
-    DataHolder data = DataHolder.getInstance();
+    private DataHolder data = DataHolder.getInstance();
 
     private EditText weightEditText;
     private EditText heightEditText;
     private EditText ageEditText;
     private Spinner sexSpinner;
 
-    AlertDialog.Builder myAlertBuilder;
+    private AlertDialog.Builder myAlertBuilder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +58,7 @@ public class UserParametersActivity extends AppCompatActivity implements
                 });
 
         if (data.getAge() != 0 && data.getWeight() != 0 && data.getHeight() != 0) {
-            sexSpinner.setSelection(data.getSex());
+            sexSpinner.setSelection(data.convertSex(data.getSex()));
             ageEditText.setText(Integer.toString(data.getAge()));
             weightEditText.setText(Integer.toString(data.getWeight()));
             heightEditText.setText(Integer.toString(data.getHeight()));
@@ -105,7 +105,7 @@ public class UserParametersActivity extends AppCompatActivity implements
             return;
         }
         //if everything is OK, then we can set data to desired values
-        data.setSex(sex);
+        data.setSex(data.convertSex(sex));
         data.setAge(age);
         data.setWeight(weight);
         data.setHeight(height);

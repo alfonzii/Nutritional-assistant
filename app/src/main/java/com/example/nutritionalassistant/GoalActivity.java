@@ -4,14 +4,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-import static com.example.nutritionalassistant.Constants.GAIN;
-import static com.example.nutritionalassistant.Constants.HIGH_ACTIVITY;
-import static com.example.nutritionalassistant.Constants.LOSE;
-import static com.example.nutritionalassistant.Constants.MAINTAIN;
-import static com.example.nutritionalassistant.Constants.MALE;
-import static com.example.nutritionalassistant.Constants.MEDIUM_ACTIVITY;
-import static com.example.nutritionalassistant.Constants.MILD_ACTIVITY;
-import static com.example.nutritionalassistant.Constants.SEDENTARY;
+import static com.example.nutritionalassistant.Constants.Goal.*;
+import static com.example.nutritionalassistant.Constants.Lifestyle.*;
+import static com.example.nutritionalassistant.Constants.Sex.*;
 
 public class GoalActivity extends AppCompatActivity {
 

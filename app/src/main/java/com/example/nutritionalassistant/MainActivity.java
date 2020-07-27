@@ -79,10 +79,9 @@ public class MainActivity extends AppCompatActivity {
         data.setAge(mPreferences.getInt("AGE", data.getAge()));
         data.setWeight(mPreferences.getInt("WEIGHT", data.getWeight()));
         data.setHeight(mPreferences.getInt("HEIGHT", data.getHeight()));
-        data.setSex(mPreferences.getInt("SEX", data.getSex()));
+        data.setSex(data.convertSex(mPreferences.getInt("SEX", data.convertSex(data.getSex()))));
 
         refreshValues();
-
     }
 
     /**
@@ -105,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
         preferencesEditor.putInt("AGE", data.getAge());
         preferencesEditor.putInt("WEIGHT", data.getWeight());
         preferencesEditor.putInt("HEIGHT", data.getHeight());
-        preferencesEditor.putInt("SEX", data.getSex());
+        preferencesEditor.putInt("SEX", data.convertSex(data.getSex()));
 
         preferencesEditor.apply();
     }

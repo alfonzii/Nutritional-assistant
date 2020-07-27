@@ -1,14 +1,8 @@
 package com.example.nutritionalassistant;
 
-import android.content.res.AssetManager;
-import android.database.sqlite.SQLiteDatabase;
-import android.provider.ContactsContract;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import static com.example.nutritionalassistant.Constants.Lifestyle;
+import static com.example.nutritionalassistant.Constants.Goal;
+import static com.example.nutritionalassistant.Constants.Sex;
 
 //SINGLETON CLASS
 final class DataHolder {
@@ -21,13 +15,13 @@ final class DataHolder {
         return INSTANCE;
     }
 
-    private int sex = 0;
+    private Sex sex;
     private int height = 0;
     private int weight = 0;
     private int age = 0;
 
-    private int lifestyle = -1;
-    private int goal = -1;
+    private Lifestyle lifestyle;
+    private Goal goal;
 
     private int calsGoal = 0;
     private int fatsGoal = 0;
@@ -38,11 +32,27 @@ final class DataHolder {
     private int carbsCurrent = 0;
     private int protsCurrent = 0;
 
+    int convertSex(Sex sex){
+        if(sex == Sex.MALE)
+            return 0;
+        else
+            return 1;
+    }
+
+    Sex convertSex(int i){
+        if(i==0)
+            return Sex.MALE;
+        else if (i == 1)
+            return Sex.FEMALE;
+        else
+            throw new IllegalArgumentException();
+    }
+
     int getAge() {
         return age;
     }
 
-    int getSex() {
+    Sex getSex() {
         return sex;
     }
 
@@ -54,11 +64,11 @@ final class DataHolder {
         return height;
     }
 
-    int getLifestyle() {
+    Lifestyle getLifestyle() {
         return lifestyle;
     }
 
-    int getGoal() {
+    Goal getGoal() {
         return goal;
     }
 
@@ -99,7 +109,7 @@ final class DataHolder {
         this.age = age;
     }
 
-    void setSex(int sex) {
+    void setSex(Sex sex) {
         this.sex = sex;
     }
 
@@ -111,11 +121,11 @@ final class DataHolder {
         this.height = height;
     }
 
-    void setLifestyle(int lifestyle) {
+    void setLifestyle(Lifestyle lifestyle) {
         this.lifestyle = lifestyle;
     }
 
-    void setGoal(int goal) {
+    void setGoal(Goal goal) {
         this.goal = goal;
     }
 
