@@ -3,6 +3,7 @@ package com.example.nutritionalassistant;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.res.AssetManager;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -11,6 +12,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 import static android.provider.BaseColumns._ID;
 import static com.example.nutritionalassistant.NutritionDatabaseContract.NutritionDbEntry.COLUMN_CARBOHYDRATES_FOOD;
@@ -94,5 +97,36 @@ public class NutritionDbHelper extends SQLiteOpenHelper {
             db.setTransactionSuccessful();
             db.endTransaction();
         }
+    }
+    public List getFoodNamesQuery(Context context, SQLiteDatabase db, boolean sortByAlphabet){
+        //SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String[] projection = {
+                NutritionDatabaseContract.NutritionDbEntry.COLUMN_NAME_FOOD
+        };
+        String sortOrder;
+        if(sortByAlphabet)
+            sortOrder = COLUMN_NAME_FOOD + " ASC";
+        else
+            sortOrder = null;
+
+        Cursor cursor = db.query(
+                NutritionDatabaseContract.NutritionDbEntry.TABLE_NAME,   // The table to query
+                projection,             // The array of columns to return (pass null to get all)
+                null,          // The columns for the WHERE clause
+                null,       // The values for the WHERE clause
+                null,           // don't group the rows
+                null,            // don't filter by row groups
+                sortOrder               // The sort order
+        );
+
+        List foodNames = new ArrayList<>();
+        while(cursor.moveToNext()) {
+            String itemName = cursor.getString(
+                    cursor.getColumnIndexOrThrow(NutritionDatabaseContract.NutritionDbEntry.COLUMN_NAME_FOOD));
+            foodNames.add(itemName);
+        }
+        cursor.close();
+
+        return foodNames;
     }
 }

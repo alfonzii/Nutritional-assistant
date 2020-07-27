@@ -33,7 +33,7 @@ public class FoodAddingActivity extends AppCompatActivity {
 
         final NutritionDbHelper dbHelper = NutritionDbHelper.getInstance(this);
 
-        List foodNames = getFoodNamesQuery(this, dbHelper.getReadableDatabase());
+        List foodNames = dbHelper.getFoodNamesQuery(this, dbHelper.getReadableDatabase(), false);
 
         searchbar = findViewById(R.id.foodSearchbar);
         String[] foodDb = new String[foodNames.size()];
@@ -91,7 +91,7 @@ public class FoodAddingActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
-    private List getFoodNamesQuery(Context context, SQLiteDatabase db){
+    /*private List getFoodNamesQuery(Context context, SQLiteDatabase db){
         //SQLiteDatabase db = dbHelper.getReadableDatabase();
         String[] projection = {
                 NutritionDatabaseContract.NutritionDbEntry.COLUMN_NAME_FOOD
@@ -116,7 +116,7 @@ public class FoodAddingActivity extends AppCompatActivity {
         cursor.close();
 
         return foodNames;
-    }
+    }*/
 
     private Food getFoodNutritionsQuery(Context context, SQLiteDatabase db, String foodName){
 
