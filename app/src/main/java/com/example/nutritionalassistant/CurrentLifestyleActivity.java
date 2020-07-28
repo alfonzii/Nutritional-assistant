@@ -17,11 +17,12 @@ import static com.example.nutritionalassistant.Constants.Lifestyle.*;
 
 
 public class CurrentLifestyleActivity extends AppCompatActivity {
-
-    private AlertDialog.Builder myAlertBuilder;
+    //Reference to singleton object
     private DataHolder data = DataHolder.getInstance();
 
-    private void runGoalActivity(){
+    private AlertDialog.Builder myAlertBuilder;
+
+    private void runGoalActivity() {
         Intent intent = new Intent(this, GoalActivity.class);
         startActivityForResult(intent, AUTOMATIC_REQUEST);
     }
@@ -93,12 +94,11 @@ public class CurrentLifestyleActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == AUTOMATIC_REQUEST){
-            if(resultCode == RESULT_OK){
+        if (requestCode == AUTOMATIC_REQUEST) {
+            if (resultCode == RESULT_OK) {
                 setResult(RESULT_OK);
                 finish();
-            }
-            else{
+            } else {
                 setResult(RESULT_CANCELED);
                 finish();
             }

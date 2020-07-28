@@ -9,7 +9,7 @@ import static com.example.nutritionalassistant.Constants.Lifestyle.*;
 import static com.example.nutritionalassistant.Constants.Sex.*;
 
 public class GoalActivity extends AppCompatActivity {
-
+    // Reference to singleton object
     private DataHolder data = DataHolder.getInstance();
 
     private float calculateBasal() {

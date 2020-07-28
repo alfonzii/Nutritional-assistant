@@ -8,14 +8,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import com.example.nutritionalassistant.databinding.ActivityManualNhBinding;
+import com.example.nutritionalassistant.databinding.ActivityNhSetBinding;
+
 public class ManualNHActivity extends AppCompatActivity {
-    //reference to singleton object
+    //Reference to singleton object
     private DataHolder data = DataHolder.getInstance();
 
-    private EditText fatsSetter;
-    private EditText carbsSetter;
-    private EditText protsSetter;
-    private EditText calsSetter;
+    //View binding object
+    private ActivityManualNhBinding binding;
 
     private AlertDialog.Builder myAlertBuilder;
 
@@ -23,12 +24,8 @@ public class ManualNHActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_manual_nh);
-
-        calsSetter = findViewById(R.id.calories_nutSetNumber);
-        fatsSetter = findViewById(R.id.fats_nutSetNumber);
-        carbsSetter = findViewById(R.id.carbs_nutSetNumber);
-        protsSetter = findViewById(R.id.proteins_nutSetNumber);
+        binding = ActivityManualNhBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         myAlertBuilder = new AlertDialog.Builder(ManualNHActivity.this);
         // Add the dialog buttons.
@@ -44,10 +41,10 @@ public class ManualNHActivity extends AppCompatActivity {
     public void applyNutritionGoals(View view) {
         int calsGoal, fatsGoal, carbsGoal, protsGoal;
         try {
-            calsGoal = Integer.parseInt(calsSetter.getText().toString());
-            fatsGoal = Integer.parseInt(fatsSetter.getText().toString());
-            carbsGoal = Integer.parseInt(carbsSetter.getText().toString());
-            protsGoal = Integer.parseInt(protsSetter.getText().toString());
+            calsGoal = Integer.parseInt(binding.caloriesNutSetNumber.getText().toString());
+            fatsGoal = Integer.parseInt(binding.fatsNutSetNumber.getText().toString());
+            carbsGoal = Integer.parseInt(binding.carbsNutSetNumber.getText().toString());
+            protsGoal = Integer.parseInt(binding.proteinsNutSetNumber.getText().toString());
             if (calsGoal < 0 || fatsGoal < 0 || carbsGoal < 0 || protsGoal < 0)
                 throw new ArithmeticException();
         } catch (ArithmeticException e) {

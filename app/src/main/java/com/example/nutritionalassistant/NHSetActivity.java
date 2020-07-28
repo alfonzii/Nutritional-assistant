@@ -15,7 +15,7 @@ import static com.example.nutritionalassistant.Constants.MANUAL_REQUEST;
 import static com.example.nutritionalassistant.Constants.RESULT_AUTOMATIC_FAILURE;
 
 public class NHSetActivity extends AppCompatActivity {
-    //reference to singleton object
+    //Reference to singleton object
     private DataHolder data = DataHolder.getInstance();
 
     private AlertDialog.Builder myAlertBuilder;

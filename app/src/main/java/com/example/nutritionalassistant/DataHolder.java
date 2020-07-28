@@ -32,15 +32,15 @@ final class DataHolder {
     private int carbsCurrent = 0;
     private int protsCurrent = 0;
 
-    int convertSex(Sex sex){
-        if(sex == Sex.MALE)
+    int convertSex(Sex sex) {
+        if (sex == Sex.MALE)
             return 0;
         else
             return 1;
     }
 
-    Sex convertSex(int i){
-        if(i==0)
+    Sex convertSex(int i) {
+        if (i == 0)
             return Sex.MALE;
         else if (i == 1)
             return Sex.FEMALE;

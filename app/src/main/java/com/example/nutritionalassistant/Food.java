@@ -15,7 +15,8 @@ public class Food {
         this.prots = prots;
     }
 
-    public Food() {}
+    public Food() {
+    }
 
     public float getCals() {
         return cals;

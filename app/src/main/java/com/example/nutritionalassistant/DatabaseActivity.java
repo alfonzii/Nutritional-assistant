@@ -35,7 +35,7 @@ public class DatabaseActivity extends AppCompatActivity {
 
         NutritionDbHelper dbHelper = NutritionDbHelper.getInstance(this);
 
-        mNames = (ArrayList<String>)dbHelper.getFoodNamesQuery(dbHelper.getReadableDatabase(), true);
+        mNames = (ArrayList<String>) dbHelper.getFoodNamesQuery(dbHelper.getReadableDatabase(), true);
         initRecyclerView();
     }
 
@@ -46,12 +46,11 @@ public class DatabaseActivity extends AppCompatActivity {
     }
 
 
-
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
-        if(id == R.id.action_filter){
+        if (id == R.id.action_filter) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             // Get the layout inflater
             LayoutInflater inflater = this.getLayoutInflater();
@@ -59,7 +58,7 @@ public class DatabaseActivity extends AppCompatActivity {
             // Inflate and set the layout for the dialog
             // Pass null as the parent view because its going in the dialog layout
             builder.setView(inflater.inflate(R.layout.layout_dialog_filter, null))
-            // Add action buttons
+                    // Add action buttons
                     .setPositiveButton("Sign in", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int id) {
@@ -77,7 +76,7 @@ public class DatabaseActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void initRecyclerView(){
+    private void initRecyclerView() {
         Log.d(TAG, "initRecyclerView: init recyclerview.");
         RecyclerView recyclerView = findViewById(R.id.my_recycler_view);
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, mNames);

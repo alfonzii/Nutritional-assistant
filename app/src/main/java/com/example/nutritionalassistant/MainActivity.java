@@ -5,13 +5,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
+
+import com.example.nutritionalassistant.databinding.ActivityMainBinding;
 
 import static com.example.nutritionalassistant.Constants.FOOD_REQUEST;
 import static com.example.nutritionalassistant.Constants.PARAMETERS_REQUEST;
@@ -19,14 +18,11 @@ import static com.example.nutritionalassistant.Constants.RESULT_AUTOMATIC_FAILUR
 import static com.example.nutritionalassistant.Constants.VALUES_REQUEST;
 
 public class MainActivity extends AppCompatActivity {
-    //reference to singleton object
+    //Reference to singleton object
     private DataHolder data = DataHolder.getInstance();
 
-    private TextView calsValue;
-    private TextView fatsValue;
-    private TextView carbsValue;
-    private TextView proteinsValue;
-
+    //View binding object
+    private ActivityMainBinding binding;
 
     // Shared preferences object
     private SharedPreferences mPreferences;
@@ -37,22 +33,21 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void refreshValues() {
-        calsValue.setText(data.getCalsCurrent() + "/" + data.getCalsGoal());
-        fatsValue.setText(data.getFatsCurrent() + "/" + data.getFatsGoal());
-        carbsValue.setText(data.getCarbsCurrent() + "/" + data.getCarbsGoal());
-        proteinsValue.setText(data.getProtsCurrent() + "/" + data.getProtsGoal());
+        binding.content.mainCaloriesValue.setText(data.getCalsCurrent() + "/" + data.getCalsGoal());
+        binding.content.mainFatsValue.setText(data.getFatsCurrent() + "/" + data.getFatsGoal());
+        binding.content.mainCarbsValue.setText(data.getCarbsCurrent() + "/" + data.getCarbsGoal());
+        binding.content.mainProteinsValue.setText(data.getProtsCurrent() + "/" + data.getProtsGoal());
     }
 
     @SuppressLint("SetTextI18n") //suppress setText warning
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        setSupportActionBar(binding.toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, FoodAddingActivity.class);
@@ -61,11 +56,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
         mPreferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
-
-        calsValue = findViewById(R.id.mainCaloriesValue);
-        fatsValue = findViewById(R.id.mainFatsValue);
-        carbsValue = findViewById(R.id.mainCarbsValue);
-        proteinsValue = findViewById(R.id.mainProteinsValue);
 
         data.setCalsGoal(mPreferences.getInt("CALSGOAL", data.getCalsGoal()));
         data.setFatsGoal(mPreferences.getInt("FATSGOAL", data.getFatsGoal()));
@@ -160,8 +150,7 @@ public class MainActivity extends AppCompatActivity {
                 if (resultCode == RESULT_OK) {
                     //tu bolo pridavanie do values
                     refreshValues();
-                }
-                else if(resultCode == RESULT_AUTOMATIC_FAILURE){
+                } else if (resultCode == RESULT_AUTOMATIC_FAILURE) {
                     Intent uParIntent = new Intent(this, UserParametersActivity.class);
                     startActivityForResult(uParIntent, PARAMETERS_REQUEST);
                 }
