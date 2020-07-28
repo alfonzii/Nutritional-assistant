@@ -59,5 +59,5 @@ To app function correctly when using automatic nutrition settings, you are requi
 * Nexus 5X (API 29, x86 emulator)
 * Samsung Galaxy S4 mini (API 19, physical device)
 
-## Licences
+## Database
 Powered by [NutriDatabaze](https://www.nutridatabaze.cz/)
