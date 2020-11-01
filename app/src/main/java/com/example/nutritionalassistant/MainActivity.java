@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.example.nutritionalassistant.databinding.ActivityMainBinding;
 
@@ -30,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     // Name of shared preferences file
     private final String sharedPrefFile =
             "com.example.nutritionalassistant";
+
+    private int counter = 0;
 
 
     private void refreshValues() {
@@ -173,6 +176,13 @@ public class MainActivity extends AppCompatActivity {
                 }
                 break;
         }
+    }
+
+    public void exampleClick(View view) {
+        TextView tv = new TextView(this);
+        tv.setText("badoo" + counter);
+        binding.content.linearLayout.addView(tv, 2+counter);
+        counter++;
     }
 }
 
