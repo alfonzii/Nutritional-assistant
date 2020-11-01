@@ -50,7 +50,7 @@ To app function correctly when using automatic nutrition settings, you are requi
 ## TODO
 * Implement Database
 * Implement Intake overview
-* Use [View Binding](https://developer.android.com/topic/libraries/view-binding)
+* Use [View Binding](https://developer.android.com/topic/libraries/view-binding) :heavy_check_mark:
 * Make activity hierarchy in AndroidManifest.xml to be able to use "back" action button
 * In food adding dialog popup change number picker to number entering (number picker was used just for personal learning purposes)
 * Use external solution with API for foods (right now I'm using just local database with cca. 1K of entries)
@@ -59,5 +59,5 @@ To app function correctly when using automatic nutrition settings, you are requi
 * Nexus 5X (API 29, x86 emulator)
 * Samsung Galaxy S4 mini (API 19, physical device)
 
-## Licences
+## Database
 Powered by [NutriDatabaze](https://www.nutridatabaze.cz/)
