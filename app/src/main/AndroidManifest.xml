@@ -27,6 +27,7 @@
         <activity
             android:name=".FoodAddingActivity"
             android:label="Food Adding Activity"
+            android:theme="@style/AppTheme.NoActionBar"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".ManualNHActivity"

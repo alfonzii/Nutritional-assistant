@@ -63,6 +63,7 @@
                     android:id="@+id/mainFatsValue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:hint="0"
                     android:textAlignment="center"
                     app:layout_constraintBottom_toBottomOf="@+id/mainFats"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -72,6 +73,7 @@
                     android:id="@+id/mainCarbsValue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:hint="0"
                     android:textAlignment="center"
                     app:layout_constraintBottom_toBottomOf="@+id/mainCarbs"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -81,6 +83,7 @@
                     android:id="@+id/mainProteinsValue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:hint="0"
                     android:textAlignment="center"
                     app:layout_constraintBottom_toBottomOf="@+id/mainProteins"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -100,6 +103,7 @@
                     android:id="@+id/mainCaloriesValue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:hint="0"
                     android:textAlignment="center"
                     app:layout_constraintBottom_toBottomOf="@+id/mainCalories"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -300,14 +304,16 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:background="@drawable/layout_food_bg">
 
                 <TextView
                     android:id="@+id/textView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.1"
-                    android:text="UserAddedFood" />
+                    android:text="UserAddedFood"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/textView3"

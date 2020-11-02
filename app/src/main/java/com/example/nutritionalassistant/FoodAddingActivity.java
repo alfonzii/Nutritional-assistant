@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -28,6 +29,8 @@ public class FoodAddingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityFoodAddingBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        setSupportActionBar(binding.toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         final NutritionDbHelper dbHelper = NutritionDbHelper.getInstance(this);
 
@@ -79,6 +82,13 @@ public class FoodAddingActivity extends AppCompatActivity {
                 builder.show();
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_food_adding, menu);
+        return true;
     }
 
     @Override
