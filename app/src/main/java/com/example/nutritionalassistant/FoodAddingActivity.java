@@ -4,7 +4,9 @@ import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.AppCompatSpinner;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -88,6 +90,18 @@ public class FoodAddingActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_food_adding, menu);
+
+        //NEDA SA TO NEJAK OBIST S POMOCOU VIEW BINDING???????????????????????
+        MenuItem foodCategorySpinner = menu.findItem(R.id.action_category);
+        AppCompatSpinner spinner = (AppCompatSpinner) foodCategorySpinner.getActionView();
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getApplicationContext(),
+                R.array.food_categories, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource
+                (android.R.layout.simple_spinner_dropdown_item);
+
+        spinner.setAdapter(adapter);
+
         return true;
     }
 

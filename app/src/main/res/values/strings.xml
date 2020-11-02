@@ -29,6 +29,13 @@
         <item>Male</item>
         <item>Female</item>
     </string-array>
+
+    <string-array name="food_categories">
+        <item>Product</item>
+        <item>Recipe</item>
+        <item>Restaurant</item>
+    </string-array>
+
     <string name="title_activity_current_lifestyle">CurrentLifestyleActivity</string>
     <string name="action_settings">Settings</string>
 </resources>
