@@ -184,6 +184,11 @@ public class MainActivity extends AppCompatActivity {
         binding.content.linearLayout.addView(tv, 2+counter);
         counter++;
     }
+
+    public void openProductOverviewActivity(View view) {
+        Intent intent = new Intent(this, ProductOverviewActivity.class);
+        startActivity(intent);
+    }
 }
 
 
