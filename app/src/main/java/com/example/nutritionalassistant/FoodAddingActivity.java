@@ -1,6 +1,8 @@
 package com.example.nutritionalassistant;
 
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -103,6 +105,17 @@ public class FoodAddingActivity extends AppCompatActivity {
         spinner.setAdapter(adapter);
 
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        // Not doing anything. Just a demonstration of an activity being used as dialog.
+        // Need to be further coded.
+        if(item.getItemId() == R.id.action_filter){
+            Intent intent = new Intent(this, FilterDialogActivity.class);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

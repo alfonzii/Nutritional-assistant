@@ -51,7 +51,7 @@ public class DatabaseActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.action_filter) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            /*AlertDialog.Builder builder = new AlertDialog.Builder(this);
             // Get the layout inflater
             LayoutInflater inflater = this.getLayoutInflater();
 
@@ -70,7 +70,7 @@ public class DatabaseActivity extends AppCompatActivity {
                             // cancel user login ...
                         }
                     });
-            builder.show();
+            builder.show();*/
         }
 
         return super.onOptionsItemSelected(item);

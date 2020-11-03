@@ -10,16 +10,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".FilterDialogActivity"
+            android:theme="@style/Theme.AppCompat.Dialog">
+        </activity>
+        <activity
             android:name=".DatabaseActivity"
             android:label="Food Database"
-            android:theme="@style/AppTheme.NoActionBar"/>
-        <activity
-            android:name=".GoalActivity" />
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".GoalActivity" />
         <activity
             android:name=".CurrentLifestyleActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".UserParametersActivity" />
+        <activity android:name=".UserParametersActivity" />
         <activity
             android:name=".NHSetActivity"
             android:label="Nutrition Settings"
@@ -27,8 +29,8 @@
         <activity
             android:name=".FoodAddingActivity"
             android:label="Food Adding Activity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ManualNHActivity"
             android:label="Manual Nutrition Settings"
