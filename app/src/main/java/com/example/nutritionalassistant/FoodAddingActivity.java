@@ -111,7 +111,7 @@ public class FoodAddingActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         // Not doing anything. Just a demonstration of an activity being used as dialog.
         // Need to be further coded.
-        if(item.getItemId() == R.id.action_filter){
+        if (item.getItemId() == R.id.action_filter) {
             Intent intent = new Intent(this, FilterDialogActivity.class);
             startActivity(intent);
         }

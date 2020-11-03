@@ -36,6 +36,13 @@
         <item>Restaurant</item>
     </string-array>
 
+    <string-array name="meals">
+        <item>Breakfast</item>
+        <item>Lunch</item>
+        <item>Dinner</item>
+        <item>Snack</item>
+    </string-array>
+
     <string name="title_activity_current_lifestyle">CurrentLifestyleActivity</string>
     <string name="action_settings">Settings</string>
 </resources>
