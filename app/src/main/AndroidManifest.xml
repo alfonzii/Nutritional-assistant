@@ -9,7 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".RecipeOverviewActivity"></activity>
+        <activity
+            android:name=".SwapActivity"
+            android:label="Swap Activity"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity android:name=".RecipeOverviewActivity" />
         <activity android:name=".RestaurantfoodOverviewActivity" />
         <activity android:name=".ProductOverviewActivity" />
         <activity

@@ -36,6 +36,11 @@
         <item>Restaurant</item>
     </string-array>
 
+    <string-array name="swap_categories">
+        <item>Recipe</item>
+        <item>Restaurant</item>
+    </string-array>
+
     <string-array name="meals">
         <item>Breakfast</item>
         <item>Lunch</item>

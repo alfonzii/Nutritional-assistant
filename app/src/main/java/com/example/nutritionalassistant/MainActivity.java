@@ -179,10 +179,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void exampleClick(View view) {
-        TextView tv = new TextView(this);
-        tv.setText("badoo" + counter);
-        binding.content.linearLayout.addView(tv, 2+counter);
-        counter++;
+        Intent intent = new Intent(this, SwapActivity.class);
+        startActivity(intent);
     }
 
     public void openProductOverviewActivity(View view) {
