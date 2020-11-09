@@ -30,7 +30,7 @@ public class UserParametersActivity extends AppCompatActivity implements
         setContentView(binding.getRoot());
 
         // No need to check if view is null. View binding solved this.
-        binding.userSexSpinner.setOnItemSelectedListener(this);
+        binding.spinnerSex.setOnItemSelectedListener(this);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.sex_array, android.R.layout.simple_spinner_item);
@@ -40,7 +40,7 @@ public class UserParametersActivity extends AppCompatActivity implements
 
         // Apply the adapter to the spinner.
         // No need for null check again.
-        binding.userSexSpinner.setAdapter(adapter);
+        binding.spinnerSex.setAdapter(adapter);
 
         myAlertBuilder = new AlertDialog.Builder(UserParametersActivity.this);
         // Add the dialog buttons.
@@ -52,14 +52,14 @@ public class UserParametersActivity extends AppCompatActivity implements
                 });
 
         if (data.getAge() != 0 && data.getWeight() != 0 && data.getHeight() != 0) {
-            binding.userSexSpinner.setSelection(data.convertSex(data.getSex()));
-            binding.userAgeEditTextNumber.setText(Integer.toString(data.getAge()));
-            binding.userWeightEditTextNumber.setText(Integer.toString(data.getWeight()));
-            binding.userHeightEditTextNumber.setText(Integer.toString(data.getHeight()));
+            binding.spinnerSex.setSelection(data.convertSex(data.getSex()));
+            binding.numberAge.setText(Integer.toString(data.getAge()));
+            binding.numberWeight.setText(Integer.toString(data.getWeight()));
+            binding.numberHeight.setText(Integer.toString(data.getHeight()));
         } else {
-            binding.userAgeEditTextNumber.setHint("0");
-            binding.userWeightEditTextNumber.setHint("0");
-            binding.userHeightEditTextNumber.setHint("0");
+            binding.numberAge.setHint("0");
+            binding.numberWeight.setHint("0");
+            binding.numberHeight.setHint("0");
         }
     }
 
@@ -74,10 +74,10 @@ public class UserParametersActivity extends AppCompatActivity implements
     public void applyUserParameters(View view) {
         int sex, age, weight, height;
         try {
-            sex = binding.userSexSpinner.getSelectedItemPosition();
-            age = Integer.parseInt(binding.userAgeEditTextNumber.getText().toString());
-            weight = Integer.parseInt(binding.userWeightEditTextNumber.getText().toString());
-            height = Integer.parseInt(binding.userHeightEditTextNumber.getText().toString());
+            sex = binding.spinnerSex.getSelectedItemPosition();
+            age = Integer.parseInt(binding.numberAge.getText().toString());
+            weight = Integer.parseInt(binding.numberWeight.getText().toString());
+            height = Integer.parseInt(binding.numberHeight.getText().toString());
             if (age < 0 || weight < 0 || height < 0)
                 throw new ArithmeticException();
         } catch (ArithmeticException e) {

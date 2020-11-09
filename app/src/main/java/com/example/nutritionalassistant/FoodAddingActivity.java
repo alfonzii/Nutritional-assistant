@@ -44,9 +44,9 @@ public class FoodAddingActivity extends AppCompatActivity {
         foodDb = foodNames.toArray(foodDb);
         ArrayAdapter<String> adapter =
                 new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, foodDb);
-        binding.foodSearchbar.setAdapter(adapter);
+        binding.searchFood.setAdapter(adapter);
 
-        binding.foodSearchbar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        binding.searchFood.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 final Food foodToAdd = dbHelper.getFoodNutritionsQuery(dbHelper.getReadableDatabase(), ((TextView) view).getText().toString()); //Food.getNutritionValues(((TextView) view).getText().toString());

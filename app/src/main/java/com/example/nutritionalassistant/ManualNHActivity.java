@@ -41,10 +41,10 @@ public class ManualNHActivity extends AppCompatActivity {
     public void applyNutritionGoals(View view) {
         int calsGoal, fatsGoal, carbsGoal, protsGoal;
         try {
-            calsGoal = Integer.parseInt(binding.caloriesNutSetNumber.getText().toString());
-            fatsGoal = Integer.parseInt(binding.fatsNutSetNumber.getText().toString());
-            carbsGoal = Integer.parseInt(binding.carbsNutSetNumber.getText().toString());
-            protsGoal = Integer.parseInt(binding.proteinsNutSetNumber.getText().toString());
+            calsGoal = Integer.parseInt(binding.numberCalories.getText().toString());
+            fatsGoal = Integer.parseInt(binding.numberFats.getText().toString());
+            carbsGoal = Integer.parseInt(binding.numberCarbs.getText().toString());
+            protsGoal = Integer.parseInt(binding.numberProteins.getText().toString());
             if (calsGoal < 0 || fatsGoal < 0 || carbsGoal < 0 || protsGoal < 0)
                 throw new ArithmeticException();
         } catch (ArithmeticException e) {

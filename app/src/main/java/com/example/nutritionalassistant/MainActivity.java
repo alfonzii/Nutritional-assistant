@@ -36,10 +36,10 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void refreshValues() {
-        binding.content.mainCaloriesValue.setText(data.getCalsCurrent() + "/" + data.getCalsGoal());
-        binding.content.mainFatsValue.setText(data.getFatsCurrent() + "/" + data.getFatsGoal());
-        binding.content.mainCarbsValue.setText(data.getCarbsCurrent() + "/" + data.getCarbsGoal());
-        binding.content.mainProteinsValue.setText(data.getProtsCurrent() + "/" + data.getProtsGoal());
+        binding.content.textCaloriesValue.setText(data.getCalsCurrent() + "/" + data.getCalsGoal());
+        binding.content.textFatsValue.setText(data.getFatsCurrent() + "/" + data.getFatsGoal());
+        binding.content.textCarbsValue.setText(data.getCarbsCurrent() + "/" + data.getCarbsGoal());
+        binding.content.textProteinsValue.setText(data.getProtsCurrent() + "/" + data.getProtsGoal());
     }
 
     @SuppressLint("SetTextI18n") //suppress setText warning
