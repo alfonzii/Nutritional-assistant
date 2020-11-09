@@ -7,7 +7,7 @@
     tools:context=".GoalActivity">
 
     <TextView
-        android:id="@+id/title_TextView"
+        android:id="@+id/text_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Set your goal"
@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/gain_Button"
+        android:id="@+id/button_gain"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:onClick="gainClick"
@@ -25,10 +25,10 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline7"
         app:layout_constraintEnd_toStartOf="@+id/guideline6"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_TextView" />
+        app:layout_constraintTop_toBottomOf="@+id/text_title" />
 
     <Button
-        android:id="@+id/lose_Button"
+        android:id="@+id/button_lose"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:onClick="loseClick"
@@ -36,10 +36,10 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline6"
-        app:layout_constraintTop_toBottomOf="@+id/title_TextView" />
+        app:layout_constraintTop_toBottomOf="@+id/text_title" />
 
     <Button
-        android:id="@+id/maintain_Button"
+        android:id="@+id/button_maintain"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:onClick="maintainClick"

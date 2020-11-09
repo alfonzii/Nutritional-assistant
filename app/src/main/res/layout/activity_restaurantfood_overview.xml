@@ -14,7 +14,7 @@
         android:layout_weight="0">
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -24,28 +24,38 @@
             app:srcCompat="@mipmap/ic_launcher" />
 
         <TextView
-            android:id="@+id/textView13"
+            android:id="@+id/text_restaurant_food_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:text="Name of restaurant food"
             android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView"
+            app:layout_constraintBottom_toBottomOf="@+id/image"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/imageView" />
+            app:layout_constraintTop_toTopOf="@+id/image" />
 
         <TextView
-            android:id="@+id/textView15"
+            android:id="@+id/text_restaurant_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Name of restaurant"
+            app:layout_constraintEnd_toEndOf="@+id/text_restaurant_food_name"
+            app:layout_constraintStart_toStartOf="@+id/text_restaurant_food_name"
+            app:layout_constraintTop_toBottomOf="@+id/text_restaurant_food_name" />
+
+        <TextView
+            android:id="@+id/text_quantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="Quantity:"
-            app:layout_constraintStart_toStartOf="@+id/textView13"
-            app:layout_constraintTop_toBottomOf="@+id/imageView"
+            app:layout_constraintStart_toStartOf="@+id/text_restaurant_food_name"
+            app:layout_constraintTop_toBottomOf="@+id/image"
             tools:visibility="invisible" />
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/number_quantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -53,38 +63,28 @@
             android:hint="100"
             android:inputType="number"
             android:textAlignment="textStart"
-            app:layout_constraintStart_toEndOf="@+id/textView15"
-            app:layout_constraintTop_toBottomOf="@+id/imageView"
+            app:layout_constraintStart_toEndOf="@+id/text_quantity"
+            app:layout_constraintTop_toBottomOf="@+id/image"
             tools:visibility="invisible" />
 
         <TextView
-            android:id="@+id/textView20"
+            android:id="@+id/text_meal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:text="Meal:"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView15" />
+            app:layout_constraintTop_toBottomOf="@+id/text_quantity" />
 
         <Spinner
-            android:id="@+id/spinner"
+            android:id="@+id/spinner_meal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawSelectorOnTop="true"
             android:entries="@array/meals"
-            app:layout_constraintBottom_toBottomOf="@+id/textView20"
-            app:layout_constraintStart_toStartOf="@+id/editText" />
-
-        <TextView
-            android:id="@+id/textView21"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Name of restaurant"
-            app:layout_constraintEnd_toEndOf="@+id/textView13"
-            app:layout_constraintStart_toStartOf="@+id/textView13"
-            app:layout_constraintTop_toBottomOf="@+id/textView13" />
+            app:layout_constraintBottom_toBottomOf="@+id/text_meal"
+            app:layout_constraintStart_toStartOf="@+id/number_quantity" />
 
     </android.support.constraint.ConstraintLayout>
 
@@ -94,70 +94,7 @@
         android:layout_weight="0">
 
         <TextView
-            android:id="@+id/mainCarbs"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:layout_marginStart="36dp"
-            android:layout_marginTop="36dp"
-            android:text="@string/carbohydrates_en"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mainFats" />
-
-        <TextView
-            android:id="@+id/mainFats"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:layout_marginStart="36dp"
-            android:layout_marginTop="36dp"
-            android:text="@string/fats_en"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mainCalories" />
-
-        <TextView
-            android:id="@+id/mainProteins"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:layout_marginStart="36dp"
-            android:layout_marginTop="36dp"
-            android:text="@string/proteins_en"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mainCarbs" />
-
-        <TextView
-            android:id="@+id/mainFatsValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="0"
-            android:textAlignment="center"
-            app:layout_constraintBottom_toBottomOf="@+id/mainFats"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <TextView
-            android:id="@+id/mainCarbsValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="0"
-            android:textAlignment="center"
-            app:layout_constraintBottom_toBottomOf="@+id/mainCarbs"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <TextView
-            android:id="@+id/mainProteinsValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="0"
-            android:textAlignment="center"
-            app:layout_constraintBottom_toBottomOf="@+id/mainProteins"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <TextView
-            android:id="@+id/mainCalories"
+            android:id="@+id/text_calories"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -168,17 +105,80 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/mainCaloriesValue"
+            android:id="@+id/text_fats"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="36dp"
+            android:text="@string/fats_en"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_calories" />
+
+        <TextView
+            android:id="@+id/text_carbs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="36dp"
+            android:text="@string/carbohydrates_en"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_fats" />
+
+        <TextView
+            android:id="@+id/text_proteins"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="36dp"
+            android:text="@string/proteins_en"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_carbs" />
+
+        <TextView
+            android:id="@+id/text_calories_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="0"
             android:textAlignment="center"
-            app:layout_constraintBottom_toBottomOf="@+id/mainCalories"
+            app:layout_constraintBottom_toBottomOf="@+id/text_calories"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/text_fats_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="0"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="@+id/text_fats"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/text_carbs_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="0"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="@+id/text_carbs"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/text_proteins_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="0"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="@+id/text_proteins"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
-            android:id="@+id/button13"
+            android:id="@+id/button_add"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -194,10 +194,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TU BUDE MAPA ZOBRAZUJUCA POZICIU RESTAURACIE"
-            app:layout_constraintBottom_toTopOf="@+id/button13"
+            app:layout_constraintBottom_toTopOf="@+id/button_add"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mainProteinsValue" />
+            app:layout_constraintTop_toBottomOf="@+id/text_proteins_value" />
 
     </android.support.constraint.ConstraintLayout>
 

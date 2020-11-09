@@ -7,7 +7,7 @@
     tools:context=".CurrentLifestyleActivity">
 
     <android.support.design.widget.AppBarLayout
-        android:id="@+id/my_toolbarLayout"
+        android:id="@+id/ToolbarLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay"
@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/my_toolbar"
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
@@ -28,14 +28,14 @@
     </android.support.design.widget.AppBarLayout>
 
     <TextView
-        android:id="@+id/title_TextView"
+        android:id="@+id/text_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Choose your lifestyle"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/my_toolbarLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/ToolbarLayout" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline4"
@@ -56,7 +56,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/sedentary_Button"
+        android:id="@+id/button_sedentary"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="Sedentary"
@@ -64,10 +64,10 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_TextView" />
+        app:layout_constraintTop_toBottomOf="@+id/text_title" />
 
     <Button
-        android:id="@+id/mild_Button"
+        android:id="@+id/button_mild"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="Mild activity"
@@ -75,10 +75,10 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline5"
-        app:layout_constraintTop_toBottomOf="@+id/title_TextView" />
+        app:layout_constraintTop_toBottomOf="@+id/text_title" />
 
     <Button
-        android:id="@+id/medium_Button"
+        android:id="@+id/button_medium"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="Medium activity"
@@ -89,7 +89,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline4" />
 
     <Button
-        android:id="@+id/high_Button"
+        android:id="@+id/button_high"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="High activity"

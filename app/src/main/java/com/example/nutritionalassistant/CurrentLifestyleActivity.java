@@ -31,7 +31,7 @@ public class CurrentLifestyleActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_current_lifestyle);
-        Toolbar myToolbar = findViewById(R.id.my_toolbar);
+        Toolbar myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
 
         myAlertBuilder = new AlertDialog.Builder(CurrentLifestyleActivity.this);
