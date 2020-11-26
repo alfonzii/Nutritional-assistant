@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+    android:id="@+id/layout_added_food"
+    android:layout_width="match_parent"
+    android:layout_height="32dp"
+    android:background="@drawable/layout_food_bg"
+    android:onClick="openProductOverviewActivity"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/text_name_added_food"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginStart="8dp"
+        android:layout_weight="0.1"
+        android:gravity="center_vertical"
+        android:text="UserAddedFood"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/text_weight_added_food"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="0.5"
+        android:gravity="center_vertical"
+        android:text="WeightOfFood" />
+
+    <TextView
+        android:id="@+id/text_calories_added_food"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="0.1"
+        android:gravity="center_vertical"
+        android:text="Calories" />
+    </LinearLayout>
+</LinearLayout>

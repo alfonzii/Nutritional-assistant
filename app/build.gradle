@@ -9,7 +9,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.example.nutritionalassistant"
+        applicationId "cz.cuni.mff.nutritionalassistant"
         minSdkVersion 19
         targetSdkVersion 29
         versionCode 1
@@ -22,6 +22,13 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets {
+        main {
+            res {
+                srcDirs 'src/main/res', 'src/main/res/layouts/fooddetails', 'src/main/res/layouts/items', 'src/main/res/layouts/auxiliary', 'src/main/res/layouts/general'
+            }
         }
     }
 

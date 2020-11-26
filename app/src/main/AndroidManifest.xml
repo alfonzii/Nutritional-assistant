@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.nutritionalassistant">
+    package="cz.cuni.mff.nutritionalassistant">
 
     <application
         android:allowBackup="true"
@@ -10,41 +10,41 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".SwapActivity"
+            android:name="cz.cuni.mff.nutritionalassistant.SwapActivity"
             android:label="Swap Activity"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName="cz.cuni.mff.nutritionalassistant.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name=".RecipeOverviewActivity" />
-        <activity android:name=".RestaurantfoodOverviewActivity" />
-        <activity android:name=".ProductOverviewActivity" />
+        <activity android:name="cz.cuni.mff.nutritionalassistant.RecipeOverviewActivity" />
+        <activity android:name="cz.cuni.mff.nutritionalassistant.RestaurantfoodOverviewActivity" />
+        <activity android:name="cz.cuni.mff.nutritionalassistant.ProductOverviewActivity" />
         <activity
-            android:name=".FilterDialogActivity"
+            android:name="cz.cuni.mff.nutritionalassistant.FilterDialogActivity"
             android:theme="@style/Theme.AppCompat.Dialog" />
         <activity
-            android:name=".DatabaseActivity"
+            android:name="cz.cuni.mff.nutritionalassistant.DatabaseActivity"
             android:label="Food Database"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".GoalActivity" />
+        <activity android:name="cz.cuni.mff.nutritionalassistant.GoalActivity" />
         <activity
-            android:name=".CurrentLifestyleActivity"
+            android:name="cz.cuni.mff.nutritionalassistant.CurrentLifestyleActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".UserParametersActivity" />
+        <activity android:name="cz.cuni.mff.nutritionalassistant.UserParametersActivity" />
         <activity
-            android:name=".NHSetActivity"
+            android:name="cz.cuni.mff.nutritionalassistant.NHSetActivity"
             android:label="Nutrition Settings"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName="cz.cuni.mff.nutritionalassistant.MainActivity" />
         <activity
-            android:name=".FoodAddingActivity"
+            android:name="cz.cuni.mff.nutritionalassistant.FoodAddingActivity"
             android:label="Food Adding Activity"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName="cz.cuni.mff.nutritionalassistant.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ManualNHActivity"
+            android:name="cz.cuni.mff.nutritionalassistant.ManualNHActivity"
             android:label="Manual Nutrition Settings"
-            android:parentActivityName=".NHSetActivity" />
+            android:parentActivityName="cz.cuni.mff.nutritionalassistant.NHSetActivity" />
         <activity
-            android:name=".MainActivity"
+            android:name="cz.cuni.mff.nutritionalassistant.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
