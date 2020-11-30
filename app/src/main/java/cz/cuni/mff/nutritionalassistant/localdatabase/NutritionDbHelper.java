@@ -1,4 +1,4 @@
-package cz.cuni.mff.nutritionalassistant;
+package cz.cuni.mff.nutritionalassistant.localdatabase;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -16,6 +16,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+
+import cz.cuni.mff.nutritionalassistant.Food;
 
 import static android.provider.BaseColumns._ID;
 

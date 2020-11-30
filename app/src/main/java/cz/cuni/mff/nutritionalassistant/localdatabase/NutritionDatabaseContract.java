@@ -1,4 +1,4 @@
-package cz.cuni.mff.nutritionalassistant;
+package cz.cuni.mff.nutritionalassistant.localdatabase;
 
 import android.provider.BaseColumns;
 

@@ -12,6 +12,8 @@ import android.view.MenuItem;
 
 import java.util.ArrayList;
 
+import cz.cuni.mff.nutritionalassistant.localdatabase.NutritionDbHelper;
+
 public class DatabaseActivity extends AppCompatActivity {
 
     private static final String TAG = "DatabaseActivity";

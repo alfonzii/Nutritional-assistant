@@ -3,6 +3,7 @@ package cz.cuni.mff.nutritionalassistant;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.widget.NumberPicker;
 import android.widget.TextView;
 
 import cz.cuni.mff.nutritionalassistant.databinding.ActivityFoodAddingBinding;
+import cz.cuni.mff.nutritionalassistant.localdatabase.NutritionDbHelper;
 
 import java.util.List;
 
@@ -102,6 +104,32 @@ public class FoodAddingActivity extends AppCompatActivity {
                 (android.R.layout.simple_spinner_dropdown_item);
 
         spinner.setAdapter(adapter);
+
+        MenuItem.OnActionExpandListener expandListener = new MenuItem.OnActionExpandListener() {
+            @Override
+            public boolean onMenuItemActionCollapse(MenuItem item) {
+                invalidateOptionsMenu();
+                /*for (int i = 0; i < binding.toolbar.getMenu().size(); i++) {
+                    binding.toolbar.getMenu().getItem(i).setVisible(true).setEnabled(true);
+                }*/
+                //binding.toolbar.getMenu().findItem(R.id.action_category).setVisible(true);
+                //binding.toolbar.getMenu().findItem(R.id.action_category).setEnabled(true);
+                //binding.toolbar.getMenu().findItem(R.id.action_filter).setVisible(true);
+                //binding.toolbar.getMenu().findItem(R.id.action_search).setVisible(true);
+                return true;  // Return true to collapse action view
+            }
+
+            @Override
+            public boolean onMenuItemActionExpand(MenuItem item) {
+                for (int i = 0; i < binding.toolbar.getMenu().size(); i++) {
+                    binding.toolbar.getMenu().getItem(i).setVisible(false).setEnabled(false);
+                }
+                return true;  // Return true to expand action view
+            }
+        };
+
+        binding.toolbar.getMenu().findItem(R.id.action_search).setOnActionExpandListener(expandListener);
+        binding.toolbar.getMenu().findItem(R.id.action_category).setOnActionExpandListener(expandListener);
 
         return true;
     }
