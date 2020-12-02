@@ -1,10 +1,15 @@
 package cz.cuni.mff.nutritionalassistant;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import static cz.cuni.mff.nutritionalassistant.Constants.Lifestyle;
 import static cz.cuni.mff.nutritionalassistant.Constants.Goal;
 import static cz.cuni.mff.nutritionalassistant.Constants.Sex;
 
 //SINGLETON CLASS
+@Getter
+@Setter
 final class DataHolder {
     private static final DataHolder INSTANCE = new DataHolder();
 
@@ -48,7 +53,7 @@ final class DataHolder {
             throw new IllegalArgumentException();
     }
 
-    public int getAge() {
+    /*public int getAge() {
         return age;
     }
 
@@ -159,5 +164,5 @@ final class DataHolder {
 
     void setProtsGoal(int protsGoal) {
         this.protsGoal = protsGoal;
-    }
+    }*/
 }

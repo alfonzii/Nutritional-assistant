@@ -1,23 +1,35 @@
 package cz.cuni.mff.nutritionalassistant.foodtypes;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public abstract class Food {
-    private String name;
+    private String foodName;
     private float calories;
     private float fats;
     private float carbohydrates;
     private float proteins;
-    private int amount;
+    private FoodType foodType;
 
-    public Food(String name, float calories, float fats, float carbohydrates, float proteins, int amount) {
-        this.name = name;
+    public static enum FoodType {PRODUCT, RECIPE, RESTAURANTFOOD}
+
+    /*public Food(String foodName, float calories, float fats, float carbohydrates, float proteins, FoodType foodType) {
+        this.foodName = foodName;
         this.calories = calories;
         this.fats = fats;
         this.carbohydrates = carbohydrates;
         this.proteins = proteins;
-        this.amount = amount;
+        this.foodType = foodType;
     }
 
-    public Food() {}
+    public Food() {
+    }
 
     public float getCalories() {
         return calories;
@@ -35,12 +47,12 @@ public abstract class Food {
         return proteins;
     }
 
-    public String getName() {
-        return name;
+    public String getFoodName() {
+        return foodName;
     }
 
-    public int getAmount() {
-        return amount;
+    public FoodType getFoodType() {
+        return foodType;
     }
 
 
@@ -60,11 +72,11 @@ public abstract class Food {
         this.proteins = proteins;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFoodName(String foodName) {
+        this.foodName = foodName;
     }
 
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
+    public void setFoodType(FoodType foodType) {
+        this.foodType = foodType;
+    }*/
 }

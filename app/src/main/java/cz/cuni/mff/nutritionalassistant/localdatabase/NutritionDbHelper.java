@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cz.cuni.mff.nutritionalassistant.Food;
+import cz.cuni.mff.nutritionalassistant.foodtypes.Product;
 
 import static android.provider.BaseColumns._ID;
 
@@ -130,6 +131,43 @@ public class NutritionDbHelper extends SQLiteOpenHelper {
         cursor.close();
 
         return foodNames;
+    }
+
+    public List<cz.cuni.mff.nutritionalassistant.foodtypes.Food> getFoodListByNameQuery(@NotNull SQLiteDatabase db, String foodName) {
+
+        String selection = NutritionDatabaseContract.NutritionDbEntry.COLUMN_NAME_FOOD + " LIKE ?%";
+        String[] selectionArgs = {foodName};
+
+        Cursor cursor = db.query(
+                NutritionDatabaseContract.NutritionDbEntry.TABLE_NAME,
+                null,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null
+        );
+
+        //cursor.moveToFirst();
+
+        List<cz.cuni.mff.nutritionalassistant.foodtypes.Food> suitableFoods = new ArrayList<>();
+        cz.cuni.mff.nutritionalassistant.foodtypes.Food food = new Product();
+
+        while (cursor.moveToNext()) {
+            cursor.getString(
+                    cursor.getColumnIndexOrThrow(NutritionDatabaseContract.NutritionDbEntry.COLUMN_NAME_FOOD));
+            foodNames.add(itemName);
+        }
+
+        /*Food food = new Food();
+        food.setName(foodName);
+        food.setCals(cursor.getInt(cursor.getColumnIndexOrThrow(NutritionDatabaseContract.NutritionDbEntry.COLUMN_ENERGY_FOOD)));
+        food.setCarbs(cursor.getFloat(cursor.getColumnIndexOrThrow(NutritionDatabaseContract.NutritionDbEntry.COLUMN_CARBOHYDRATES_FOOD)));
+        food.setFats(cursor.getFloat(cursor.getColumnIndexOrThrow(NutritionDatabaseContract.NutritionDbEntry.COLUMN_FATS_FOOD)));
+        food.setProts(cursor.getFloat(cursor.getColumnIndexOrThrow(NutritionDatabaseContract.NutritionDbEntry.COLUMN_PROTEINS_FOOD)));*/
+        cursor.close();
+
+        return food;
     }
 
     public Food getFoodNutritionsQuery(@NotNull SQLiteDatabase db, String foodName) {
