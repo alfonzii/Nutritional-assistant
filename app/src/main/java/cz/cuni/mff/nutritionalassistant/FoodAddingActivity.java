@@ -8,6 +8,10 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatSpinner;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,7 +21,10 @@ import android.widget.NumberPicker;
 import android.widget.TextView;
 
 import cz.cuni.mff.nutritionalassistant.databinding.ActivityFoodAddingBinding;
+import cz.cuni.mff.nutritionalassistant.foodtypes.Food;
+import cz.cuni.mff.nutritionalassistant.guidancebot.Brain;
 import cz.cuni.mff.nutritionalassistant.localdatabase.NutritionDbHelper;
+import cz.cuni.mff.nutritionalassistant.utils.FoodAddingAdapter;
 
 import java.util.List;
 
@@ -28,6 +35,7 @@ public class FoodAddingActivity extends AppCompatActivity {
 
     // View binding object
     private ActivityFoodAddingBinding binding;
+    private FoodAddingAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,56 +45,11 @@ public class FoodAddingActivity extends AppCompatActivity {
         setSupportActionBar(binding.toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        final NutritionDbHelper dbHelper = NutritionDbHelper.getInstance(this);
-
-        List<String> foodNames = dbHelper.getFoodNamesQuery(dbHelper.getReadableDatabase(), false);
-
-        String[] foodDb = new String[foodNames.size()];
-        foodDb = foodNames.toArray(foodDb);
-        ArrayAdapter<String> adapter =
-                new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, foodDb);
-        binding.searchFood.setAdapter(adapter);
-
-        binding.searchFood.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                final Food foodToAdd = dbHelper.getFoodNutritionsQuery(dbHelper.getReadableDatabase(), ((TextView) view).getText().toString()); //Food.getNutritionValues(((TextView) view).getText().toString());
-
-                //pozriet co to znamena toten kontext
-                final NumberPicker nPicker = new NumberPicker(FoodAddingActivity.this);
-                nPicker.setMinValue(1);
-                nPicker.setMaxValue(1000);
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(FoodAddingActivity.this);
-                builder.setTitle(foodToAdd.getName());
-                builder.setMessage("On 100g:\n" +
-                        "Calories: " + foodToAdd.getCals() + "\n" +
-                        "Fats: " + foodToAdd.getFats() + "\n" +
-                        "Carbohydrates: " + foodToAdd.getCarbs() + "\n" +
-                        "Proteins: " + foodToAdd.getProts());
-                builder.setView(nPicker);
-                builder.setPositiveButton("Add",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                data.setCalsCurrent(Math.round(foodToAdd.getCals() / 100 * (float) nPicker.getValue()));
-                                data.setFatsCurrent(Math.round(foodToAdd.getFats() / 100 * (float) nPicker.getValue()));
-                                data.setCarbsCurrent(Math.round(foodToAdd.getCarbs() / 100 * (float) nPicker.getValue()));
-                                data.setProtsCurrent(Math.round(foodToAdd.getProts() / 100 * (float) nPicker.getValue()));
-                                setResult(RESULT_OK);
-                                finish();
-                            }
-                        });
-                builder.setNegativeButton("Cancel",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                // what to do when user cliks Cancel
-                            }
-                        });
-                builder.show();
-            }
-        });
+        binding.recyclerFoodAdding.setLayoutManager(new LinearLayoutManager(this));
+        binding.recyclerFoodAdding.addItemDecoration(
+                new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+        adapter = new FoodAddingAdapter(this);
+        binding.recyclerFoodAdding.setAdapter(adapter);
     }
 
     @Override
@@ -98,12 +61,14 @@ public class FoodAddingActivity extends AppCompatActivity {
         MenuItem foodCategorySpinner = menu.findItem(R.id.action_category);
         AppCompatSpinner spinner = (AppCompatSpinner) foodCategorySpinner.getActionView();
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getApplicationContext(),
+        final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getApplicationContext(),
                 R.array.food_categories, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource
                 (android.R.layout.simple_spinner_dropdown_item);
 
         spinner.setAdapter(adapter);
+
+        ((SearchView)menu.findItem(R.id.action_search).getActionView()).setOnQueryTextListener(searchQueryListener);
 
         MenuItem.OnActionExpandListener expandListener = new MenuItem.OnActionExpandListener() {
             @Override
@@ -152,5 +117,18 @@ public class FoodAddingActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
+    private SearchView.OnQueryTextListener searchQueryListener = new SearchView.OnQueryTextListener() {
+        @Override
+        public boolean onQueryTextSubmit(String query) {
+            adapter.clearItems();
+            adapter.addItems(Brain.getInstance().requestFoodLightweightData(
+                    query, Food.FoodType.PRODUCT, FoodAddingActivity.this));
+            return true;
+        }
 
+        @Override
+        public boolean onQueryTextChange(String newText) {
+            return false;
+        }
+    };
 }

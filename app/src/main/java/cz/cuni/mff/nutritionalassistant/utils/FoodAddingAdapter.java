@@ -18,19 +18,19 @@ public class FoodAddingAdapter extends RecyclerView.Adapter<FoodViewHolder> {
     private List<FoodLightweight> data;
     private Context context;
 
-    FoodAddingAdapter(Context context) {
+    public FoodAddingAdapter(Context context) {
         this.data = new ArrayList<>();
         this.context = context;
     }
 
-    void addItems(final List<FoodLightweight> newItems) {
+    public void addItems(final List<FoodLightweight> newItems) {
         data.addAll(newItems);
         // Keep RecyclerView scrolling state
         this.notifyItemRangeChanged(
                 this.getItemCount() - newItems.size(), this.getItemCount());
     }
 
-    void clearItems() {
+    public void clearItems() {
         data.clear();
         this.notifyItemRangeRemoved(0, this.getItemCount());
     }
