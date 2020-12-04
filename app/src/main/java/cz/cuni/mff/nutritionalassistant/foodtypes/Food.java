@@ -17,6 +17,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public abstract class Food implements Serializable {
     private String foodName;
+    // TODO not URL but some Image class (we already downloaded image in RecyclerView)
     private String thumbnailURL;
     private float calories;
     private float fats;

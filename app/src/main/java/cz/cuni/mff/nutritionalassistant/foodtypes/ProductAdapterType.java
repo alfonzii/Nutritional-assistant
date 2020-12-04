@@ -7,6 +7,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class ProductLightweight extends FoodLightweight {
+public class ProductAdapterType extends FoodAdapterType {
     private String brandName;
 }

@@ -15,15 +15,15 @@ import cz.cuni.mff.nutritionalassistant.R;
 import cz.cuni.mff.nutritionalassistant.activity.overview.RecipeOverviewActivity;
 import cz.cuni.mff.nutritionalassistant.activity.overview.RestaurantfoodOverviewActivity;
 import cz.cuni.mff.nutritionalassistant.foodtypes.Food;
-import cz.cuni.mff.nutritionalassistant.foodtypes.FoodLightweight;
-import cz.cuni.mff.nutritionalassistant.foodtypes.ProductLightweight;
+import cz.cuni.mff.nutritionalassistant.foodtypes.FoodAdapterType;
+import cz.cuni.mff.nutritionalassistant.foodtypes.ProductAdapterType;
 import cz.cuni.mff.nutritionalassistant.guidancebot.Brain;
 
 class FoodViewHolder extends RecyclerView.ViewHolder {
     private ImageView imgFoodThumbnail;
     private TextView txtProductName, txtProductServing, txtProductCalories;
     private LinearLayout layout;
-    private FoodLightweight foodLightweight;
+    private FoodAdapterType foodAdapterType;
     private Context context;
 
 
@@ -42,7 +42,7 @@ class FoodViewHolder extends RecyclerView.ViewHolder {
             @Override
             public void onClick(View v) {
                 Intent intentFoodOverview;
-                switch (foodLightweight.getFoodType()) {
+                switch (foodAdapterType.getFoodType()) {
                     case PRODUCT:
                         intentFoodOverview = new Intent(context, ProductOverviewActivity.class);
                         break;
@@ -53,29 +53,29 @@ class FoodViewHolder extends RecyclerView.ViewHolder {
                         intentFoodOverview = new Intent(context, RestaurantfoodOverviewActivity.class);
                         break;
                     default:
-                        throw new IllegalStateException("Unexpected value: " + foodLightweight.getFoodType());
+                        throw new IllegalStateException("Unexpected value: " + foodAdapterType.getFoodType());
                 }
                 intentFoodOverview.putExtra(
                         FoodAddingActivity.EXTRA_SERIALIZABLE_FOOD,
-                        Brain.getInstance().requestFoodDetailedInfo(foodLightweight,context)
+                        Brain.getInstance().requestFoodDetailedInfo(foodAdapterType,context)
                 );
                 ((FoodAddingActivity)context).startActivityForResult(intentFoodOverview, Constants.FOOD_REQUEST);
             }
         });
     }
 
-    void setDetails(FoodLightweight food) {
-        setFoodLightweight(food);
+    void setDetails(FoodAdapterType food) {
+        setFoodAdapterType(food);
         setImgFoodThumbnail();
         setTxtProductName();
-        if (!(food.getFoodType() == Food.FoodType.PRODUCT && (((ProductLightweight) food).getBrandName()) == null)) {
+        if (!(food.getFoodType() == Food.FoodType.PRODUCT && (((ProductAdapterType) food).getBrandName()) == null)) {
             setTxtProductServing();
             setTxtProductCalories();
         }
     }
 
-    private void setFoodLightweight(FoodLightweight foodLightweight) {
-        this.foodLightweight = foodLightweight;
+    private void setFoodAdapterType(FoodAdapterType foodAdapterType) {
+        this.foodAdapterType = foodAdapterType;
     }
 
     private void setImgFoodThumbnail() {
@@ -83,14 +83,14 @@ class FoodViewHolder extends RecyclerView.ViewHolder {
     }
 
     private void setTxtProductName() {
-        txtProductName.setText(foodLightweight.getFoodName());
+        txtProductName.setText(foodAdapterType.getFoodName());
     }
 
     private void setTxtProductServing() {
-        txtProductServing.setText(foodLightweight.getServingUnit());
+        txtProductServing.setText(foodAdapterType.getServingUnit());
     }
 
     private void setTxtProductCalories() {
-        txtProductCalories.setText(Math.round(foodLightweight.getCalories()) + " cal");
+        txtProductCalories.setText(Math.round(foodAdapterType.getCalories()) + " cal");
     }
 }

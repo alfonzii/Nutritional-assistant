@@ -16,13 +16,6 @@ public class Product extends Food {
     private List<Integer> servingQuantity;
     private List<String> servingUnit;
     private List<Integer> servingWeight;
-    private Integer finalServingQuantity;
-    private String finalServingUnit;
-    private Integer finalServingWeight;
-    private float finalCalories;
-    private float finalFats;
-    private float finalCarbohydrates;
-    private float finalProteins;
 
     Product(String foodName, String thumbnailURL, float calories, float fats, float carbohydrates, float proteins, FoodType foodType,
             String brandName, List<Integer> servingQuantity, List<String> servingUnit, List<Integer> servingWeight) {

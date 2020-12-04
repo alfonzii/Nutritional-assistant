@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
+import java.util.ArrayList;
+
 import cz.cuni.mff.nutritionalassistant.DataHolder;
 import cz.cuni.mff.nutritionalassistant.FoodAddingActivity;
 import cz.cuni.mff.nutritionalassistant.R;
@@ -108,22 +110,27 @@ public class ProductOverviewActivity extends AppCompatActivity
     }
 
     public void addFoodToManager(View view) {
-        product.setFinalServingQuantity(Integer.parseInt(binding.numberQuantity.getText().toString()));
-        product.setFinalServingUnit(binding.spinnerServingUnit.getSelectedItem().toString());
-        product.setFinalServingWeight(Math.round(baseWeight * quantity));
-        product.setFinalCalories(newCalories);
-        product.setFinalFats(newFats);
-        product.setFinalCarbohydrates(newCarbohydrates);
-        product.setFinalProteins(newProteins);
+        // We reuse Product object to save info about eaten food into eatenFood structure.
+        // Now, Food cals, fats, carbs and prots are actual values of given product nutritional values
+        // in regard to it's serving unit and quantity (weight), which are stored in zero index of
+        // according lists (no more reference values, because as food is already eaten, we don't
+        // need reference anymore).
+        product.setServingQuantity(new ArrayList<Integer>() {{add(Integer.parseInt(binding.numberQuantity.getText().toString()));}});
+        product.setServingUnit(new ArrayList<String>() {{add(binding.spinnerServingUnit.getSelectedItem().toString());}});
+        product.setServingWeight(new ArrayList<Integer>() {{add(Math.round(baseWeight * quantity));}});
+        product.setCalories(newCalories);
+        product.setFats(newFats);
+        product.setCarbohydrates(newCarbohydrates);
+        product.setProteins(newProteins);
 
         int meal = binding.spinnerMeal.getSelectedItemPosition();
         dataHolder.getEatenFood().get(meal).add(product);
         dataHolder.setLastAddedMeal(meal);
 
-        dataHolder.setCaloriesCurrent(dataHolder.getCaloriesCurrent() + Math.round(newCalories));
-        dataHolder.setFatsCurrent(dataHolder.getFatsCurrent() + Math.round(newFats));
-        dataHolder.setCarbohydratesCurrent(dataHolder.getCarbohydratesCurrent() + Math.round(newCarbohydrates));
-        dataHolder.setProteinsCurrent(dataHolder.getProteinsCurrent() + Math.round(newProteins));
+        dataHolder.setCaloriesCurrent(dataHolder.getCaloriesCurrent() + newCalories);
+        dataHolder.setFatsCurrent(dataHolder.getFatsCurrent() + newFats);
+        dataHolder.setCarbohydratesCurrent(dataHolder.getCarbohydratesCurrent() + newCarbohydrates);
+        dataHolder.setProteinsCurrent(dataHolder.getProteinsCurrent() + newProteins);
 
         setResult(RESULT_OK);
         finish();

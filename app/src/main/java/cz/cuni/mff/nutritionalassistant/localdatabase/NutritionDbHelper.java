@@ -18,9 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cz.cuni.mff.nutritionalassistant.foodtypes.Food;
-import cz.cuni.mff.nutritionalassistant.foodtypes.FoodLightweight;
+import cz.cuni.mff.nutritionalassistant.foodtypes.FoodAdapterType;
 import cz.cuni.mff.nutritionalassistant.foodtypes.Product;
-import cz.cuni.mff.nutritionalassistant.foodtypes.ProductLightweight;
+import cz.cuni.mff.nutritionalassistant.foodtypes.ProductAdapterType;
 
 
 import static android.provider.BaseColumns._ID;
@@ -136,7 +136,7 @@ public class NutritionDbHelper extends SQLiteOpenHelper {
         return foodNames;
     }
 
-    public List<FoodLightweight>
+    public List<FoodAdapterType>
     getFoodLightweightListByNameQuery(@NotNull SQLiteDatabase db, String foodName) {
 
         String selection = NutritionDatabaseContract.NutritionDbEntry.COLUMN_NAME_FOOD + " LIKE ?";
@@ -152,10 +152,10 @@ public class NutritionDbHelper extends SQLiteOpenHelper {
                 null
         );
 
-        List<FoodLightweight> suitableFoods = new ArrayList<>();
+        List<FoodAdapterType> suitableFoods = new ArrayList<>();
 
         while (cursor.moveToNext()) {
-            FoodLightweight food = new ProductLightweight();
+            FoodAdapterType food = new ProductAdapterType();
             food.setFoodName(cursor.getString(
                     cursor.getColumnIndexOrThrow(NutritionDatabaseContract.NutritionDbEntry.COLUMN_NAME_FOOD)));
             food.setCalories(
@@ -163,7 +163,7 @@ public class NutritionDbHelper extends SQLiteOpenHelper {
             food.setThumbnailURL("https://d2eawub7utcl6.cloudfront.net/images/nix-apple-grey.png");
             food.setFoodType(Food.FoodType.PRODUCT);
             food.setServingUnit("100g");
-            ((ProductLightweight) food).setBrandName("dummy brand");
+            ((ProductAdapterType) food).setBrandName("dummy brand");
 
             suitableFoods.add(food);
         }

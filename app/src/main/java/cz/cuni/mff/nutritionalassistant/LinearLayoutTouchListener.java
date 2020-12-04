@@ -75,9 +75,12 @@ public class LinearLayoutTouchListener implements View.OnTouchListener {
                     }
                     if (deltaX > 0) {
                         this.onRightToLeftSwipe();
-                        // BEWARE WITH THIS NOT TO CAUSE NULL POINTER EXCEPTION!!!
-                        ((ViewGroup) item.getParent()).removeView(item);
+                        ViewGroup parent = ((ViewGroup) item.getParent());
                         nutritionValuesSubtraction();
+                        // (indexOfChild - 2) because first child is constLayout and second is generated food.
+                        // First added food (if any) starts with index 3.
+                        removeFoodFromDataholder(getMealLayoutIndex(parent), parent.indexOfChild(item) - 2);
+                        parent.removeView(item);
                         ((MainActivity) activity).refreshValues();
                         return true;
                     }
@@ -114,10 +117,10 @@ public class LinearLayoutTouchListener implements View.OnTouchListener {
         switch (food.getFoodType()){
             case PRODUCT:
                 Product product = (Product) food;
-                dataHolder.setCaloriesCurrent(dataHolder.getCaloriesCurrent() - Math.round(product.getFinalCalories()));
-                dataHolder.setFatsCurrent(dataHolder.getFatsCurrent() - Math.round(product.getFinalFats()));
-                dataHolder.setCarbohydratesCurrent(dataHolder.getCarbohydratesCurrent() - Math.round(product.getFinalCarbohydrates()));
-                dataHolder.setProteinsCurrent(dataHolder.getProteinsCurrent() - Math.round(product.getFinalProteins()));
+                dataHolder.setCaloriesCurrent(dataHolder.getCaloriesCurrent() - product.getCalories());
+                dataHolder.setFatsCurrent(dataHolder.getFatsCurrent() - product.getFats());
+                dataHolder.setCarbohydratesCurrent(dataHolder.getCarbohydratesCurrent() - product.getCarbohydrates());
+                dataHolder.setProteinsCurrent(dataHolder.getProteinsCurrent() - product.getProteins());
                 break;
             case RECIPE:
 
@@ -125,4 +128,22 @@ public class LinearLayoutTouchListener implements View.OnTouchListener {
         }
     }
 
+    private void removeFoodFromDataholder(int mealIndex, int foodIndex) {
+        dataHolder.getEatenFood().get(mealIndex).remove(foodIndex);
+    }
+
+    private int getMealLayoutIndex(ViewGroup parent) {
+        switch (parent.getId()) {
+            case R.id.LinearLayout_breakfast:
+                return MainActivity.BREAKFAST;
+            case  R.id.LinearLayout_lunch:
+                return MainActivity.LUNCH;
+            case R.id.LinearLayout_dinner:
+                return MainActivity.DINNER;
+            case R.id.LinearLayout_snack:
+                return MainActivity.SNACK;
+            default:
+                throw new IllegalStateException("Unexpected value: " + parent.getId());
+        }
+    }
 }

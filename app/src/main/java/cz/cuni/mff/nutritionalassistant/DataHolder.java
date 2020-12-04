@@ -38,14 +38,14 @@ public final class DataHolder {
     private Goal goal;
 
     // TODO mali by to byt floaty, a zobrazovacie views by sa mali starat o ich konverziu
-    private int caloriesGoal = 0;
-    private int fatsGoal = 0;
-    private int carbohydratesGoal = 0;
-    private int proteinsGoal = 0;
-    private int caloriesCurrent = 0;
-    private int fatsCurrent = 0;
-    private int carbohydratesCurrent = 0;
-    private int proteinsCurrent = 0;
+    private float caloriesGoal = 0;
+    private float fatsGoal = 0;
+    private float carbohydratesGoal = 0;
+    private float proteinsGoal = 0;
+    private float caloriesCurrent = 0;
+    private float fatsCurrent = 0;
+    private float carbohydratesCurrent = 0;
+    private float proteinsCurrent = 0;
 
     private List<List<Food>> eatenFood;
     private int lastAddedMeal;

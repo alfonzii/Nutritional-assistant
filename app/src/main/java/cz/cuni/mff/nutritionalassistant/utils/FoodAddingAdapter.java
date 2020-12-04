@@ -11,11 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cz.cuni.mff.nutritionalassistant.R;
-import cz.cuni.mff.nutritionalassistant.foodtypes.FoodLightweight;
+import cz.cuni.mff.nutritionalassistant.foodtypes.FoodAdapterType;
 
 public class FoodAddingAdapter extends RecyclerView.Adapter<FoodViewHolder> {
 
-    private List<FoodLightweight> data;
+    private List<FoodAdapterType> data;
     private Context context;
 
     public FoodAddingAdapter(Context context) {
@@ -23,7 +23,7 @@ public class FoodAddingAdapter extends RecyclerView.Adapter<FoodViewHolder> {
         this.context = context;
     }
 
-    public void addItems(final List<FoodLightweight> newItems) {
+    public void addItems(final List<FoodAdapterType> newItems) {
         data.addAll(newItems);
         // Keep RecyclerView scrolling state
         this.notifyItemRangeChanged(
