@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="cz.cuni.mff.nutritionalassistant.RecipeOverviewActivity">
+    tools:context="cz.cuni.mff.nutritionalassistant.activity.overview.RecipeOverviewActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:id="@+id/image"
+                    android:id="@+id/thumbnail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -40,9 +40,9 @@
                     android:layout_marginStart="16dp"
                     android:text="Meal recipe"
                     android:textSize="20sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/image"
+                    app:layout_constraintBottom_toBottomOf="@+id/thumbnail"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/image" />
+                    app:layout_constraintTop_toTopOf="@+id/thumbnail" />
 
                 <TextView
                     android:id="@+id/text_quantity"
@@ -51,7 +51,7 @@
                     android:layout_marginTop="16dp"
                     android:text="Quantity:"
                     app:layout_constraintStart_toStartOf="@+id/text_recipe_name"
-                    app:layout_constraintTop_toBottomOf="@+id/image" />
+                    app:layout_constraintTop_toBottomOf="@+id/thumbnail" />
 
                 <EditText
                     android:id="@+id/number_quantity"
@@ -63,7 +63,7 @@
                     android:inputType="number"
                     android:textAlignment="textStart"
                     app:layout_constraintStart_toEndOf="@+id/text_quantity"
-                    app:layout_constraintTop_toBottomOf="@+id/image" />
+                    app:layout_constraintTop_toBottomOf="@+id/thumbnail" />
 
                 <TextView
                     android:id="@+id/text_weight_unit"

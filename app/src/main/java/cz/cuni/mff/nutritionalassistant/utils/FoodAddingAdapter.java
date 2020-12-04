@@ -31,8 +31,9 @@ public class FoodAddingAdapter extends RecyclerView.Adapter<FoodViewHolder> {
     }
 
     public void clearItems() {
+        int oldSize = data.size();
         data.clear();
-        this.notifyItemRangeRemoved(0, this.getItemCount());
+        this.notifyItemRangeRemoved(0, oldSize);
     }
 
     @Override
@@ -45,7 +46,7 @@ public class FoodAddingAdapter extends RecyclerView.Adapter<FoodViewHolder> {
     public FoodViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
         view = LayoutInflater.from(context).inflate(R.layout.item_food_adapter_layout, parent, false);
-        return new FoodViewHolder(view);
+        return new FoodViewHolder(view, context);
         }
 
     @Override

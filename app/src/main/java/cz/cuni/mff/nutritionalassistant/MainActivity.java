@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import cz.cuni.mff.nutritionalassistant.activity.overview.ProductOverviewActivity;
 import cz.cuni.mff.nutritionalassistant.databinding.ActivityMainBinding;
 
 import static cz.cuni.mff.nutritionalassistant.Constants.FOOD_REQUEST;
@@ -29,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
     // Name of shared preferences file
     private final String sharedPrefFile =
-            "com.example.nutritionalassistant";
+            "cz.cuni.mff.nutritionalassistant";
 
 
     private void refreshValues() {

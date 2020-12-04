@@ -1,33 +1,26 @@
 package cz.cuni.mff.nutritionalassistant;
 
-import android.content.DialogInterface;
+import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.AlertDialog;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatSpinner;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
-import android.widget.NumberPicker;
-import android.widget.TextView;
 
 import cz.cuni.mff.nutritionalassistant.databinding.ActivityFoodAddingBinding;
 import cz.cuni.mff.nutritionalassistant.foodtypes.Food;
 import cz.cuni.mff.nutritionalassistant.guidancebot.Brain;
 import cz.cuni.mff.nutritionalassistant.localdatabase.NutritionDbHelper;
 import cz.cuni.mff.nutritionalassistant.utils.FoodAddingAdapter;
-
-import java.util.List;
-
 
 public class FoodAddingActivity extends AppCompatActivity {
     // Reference to singleton object
@@ -36,6 +29,9 @@ public class FoodAddingActivity extends AppCompatActivity {
     // View binding object
     private ActivityFoodAddingBinding binding;
     private FoodAddingAdapter adapter;
+
+    public static final String EXTRA_SERIALIZABLE_FOOD =
+            "cz.cuni.mff.nutritionalassistant.EXTRA_SERIALIZABLE_FOOD";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,11 +49,20 @@ public class FoodAddingActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onDestroy() {
+        NutritionDbHelper dbHelper = NutritionDbHelper.getInstance(this);
+        dbHelper.close();
+        super.onDestroy();
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_food_adding, menu);
 
         //NEDA SA TO NEJAK OBIST S POMOCOU VIEW BINDING???????????????????????
+        // Pravdepodobne sa to da obist cez vlastny layout spinnera a nasledne staticke naplnenie
+        // toho spinnera cez XML
         MenuItem foodCategorySpinner = menu.findItem(R.id.action_category);
         AppCompatSpinner spinner = (AppCompatSpinner) foodCategorySpinner.getActionView();
 
@@ -111,10 +116,17 @@ public class FoodAddingActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onDestroy() {
-        NutritionDbHelper dbHelper = NutritionDbHelper.getInstance(this);
-        dbHelper.close();
-        super.onDestroy();
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == Constants.FOOD_REQUEST) {
+            if(resultCode == RESULT_OK) {
+                setResult(RESULT_OK);
+                finish();
+            } else {
+                setResult(RESULT_CANCELED);
+            }
+        }
     }
 
     private SearchView.OnQueryTextListener searchQueryListener = new SearchView.OnQueryTextListener() {
@@ -123,6 +135,8 @@ public class FoodAddingActivity extends AppCompatActivity {
             adapter.clearItems();
             adapter.addItems(Brain.getInstance().requestFoodLightweightData(
                     query, Food.FoodType.PRODUCT, FoodAddingActivity.this));
+            // clear focus of searchview widget to hide keyboard
+            binding.toolbar.getMenu().findItem(R.id.action_search).getActionView().clearFocus();
             return true;
         }
 

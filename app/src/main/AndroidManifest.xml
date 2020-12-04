@@ -15,9 +15,9 @@
             android:parentActivityName="cz.cuni.mff.nutritionalassistant.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name="cz.cuni.mff.nutritionalassistant.RecipeOverviewActivity" />
-        <activity android:name="cz.cuni.mff.nutritionalassistant.RestaurantfoodOverviewActivity" />
-        <activity android:name="cz.cuni.mff.nutritionalassistant.ProductOverviewActivity" />
+        <activity android:name="cz.cuni.mff.nutritionalassistant.activity.overview.RecipeOverviewActivity" />
+        <activity android:name="cz.cuni.mff.nutritionalassistant.activity.overview.RestaurantfoodOverviewActivity" />
+        <activity android:name="cz.cuni.mff.nutritionalassistant.activity.overview.ProductOverviewActivity" />
         <activity
             android:name="cz.cuni.mff.nutritionalassistant.FilterDialogActivity"
             android:theme="@style/Theme.AppCompat.Dialog" />

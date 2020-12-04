@@ -17,9 +17,11 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import cz.cuni.mff.nutritionalassistant.Food;
+import cz.cuni.mff.nutritionalassistant.foodtypes.Food;
+import cz.cuni.mff.nutritionalassistant.foodtypes.FoodLightweight;
 import cz.cuni.mff.nutritionalassistant.foodtypes.Product;
 import cz.cuni.mff.nutritionalassistant.foodtypes.ProductLightweight;
+
 
 import static android.provider.BaseColumns._ID;
 
@@ -134,7 +136,7 @@ public class NutritionDbHelper extends SQLiteOpenHelper {
         return foodNames;
     }
 
-    public List<cz.cuni.mff.nutritionalassistant.foodtypes.FoodLightweight>
+    public List<FoodLightweight>
     getFoodLightweightListByNameQuery(@NotNull SQLiteDatabase db, String foodName) {
 
         String selection = NutritionDatabaseContract.NutritionDbEntry.COLUMN_NAME_FOOD + " LIKE ?";
@@ -150,16 +152,16 @@ public class NutritionDbHelper extends SQLiteOpenHelper {
                 null
         );
 
-        List<cz.cuni.mff.nutritionalassistant.foodtypes.FoodLightweight> suitableFoods = new ArrayList<>();
-        cz.cuni.mff.nutritionalassistant.foodtypes.FoodLightweight food = new ProductLightweight();
+        List<FoodLightweight> suitableFoods = new ArrayList<>();
 
         while (cursor.moveToNext()) {
+            FoodLightweight food = new ProductLightweight();
             food.setFoodName(cursor.getString(
                     cursor.getColumnIndexOrThrow(NutritionDatabaseContract.NutritionDbEntry.COLUMN_NAME_FOOD)));
             food.setCalories(
                     cursor.getInt(cursor.getColumnIndexOrThrow(NutritionDatabaseContract.NutritionDbEntry.COLUMN_ENERGY_FOOD)));
-            food.setDetailedInfoURL("https://d2eawub7utcl6.cloudfront.net/images/nix-apple-grey.png");
-            food.setFoodType(cz.cuni.mff.nutritionalassistant.foodtypes.Food.FoodType.PRODUCT);
+            food.setThumbnailURL("https://d2eawub7utcl6.cloudfront.net/images/nix-apple-grey.png");
+            food.setFoodType(Food.FoodType.PRODUCT);
             food.setServingUnit("100g");
             ((ProductLightweight) food).setBrandName("dummy brand");
 
@@ -170,8 +172,7 @@ public class NutritionDbHelper extends SQLiteOpenHelper {
         return suitableFoods;
     }
 
-    public Food getFoodNutritionsQuery(@NotNull SQLiteDatabase db, String foodName) {
-
+    public Food getFoodDetailedInfo(@NotNull SQLiteDatabase db, String foodName) {
         String selection = NutritionDatabaseContract.NutritionDbEntry.COLUMN_NAME_FOOD + " = ?";
         String[] selectionArgs = {foodName};
 
@@ -187,12 +188,22 @@ public class NutritionDbHelper extends SQLiteOpenHelper {
 
         cursor.moveToFirst();
 
-        Food food = new Food();
-        food.setName(foodName);
-        food.setCals(cursor.getInt(cursor.getColumnIndexOrThrow(NutritionDatabaseContract.NutritionDbEntry.COLUMN_ENERGY_FOOD)));
-        food.setCarbs(cursor.getFloat(cursor.getColumnIndexOrThrow(NutritionDatabaseContract.NutritionDbEntry.COLUMN_CARBOHYDRATES_FOOD)));
+        Food food = new Product();
+        food.setFoodName(foodName);
+        food.setCalories(cursor.getInt(cursor.getColumnIndexOrThrow(NutritionDatabaseContract.NutritionDbEntry.COLUMN_ENERGY_FOOD)));
         food.setFats(cursor.getFloat(cursor.getColumnIndexOrThrow(NutritionDatabaseContract.NutritionDbEntry.COLUMN_FATS_FOOD)));
-        food.setProts(cursor.getFloat(cursor.getColumnIndexOrThrow(NutritionDatabaseContract.NutritionDbEntry.COLUMN_PROTEINS_FOOD)));
+        food.setCarbohydrates(cursor.getFloat(cursor.getColumnIndexOrThrow(NutritionDatabaseContract.NutritionDbEntry.COLUMN_CARBOHYDRATES_FOOD)));
+        food.setProteins(cursor.getFloat(cursor.getColumnIndexOrThrow(NutritionDatabaseContract.NutritionDbEntry.COLUMN_PROTEINS_FOOD)));
+
+        food.setThumbnailURL("https://d2eawub7utcl6.cloudfront.net/images/nix-apple-grey.png");
+        food.setFoodType(Food.FoodType.PRODUCT);
+        ((Product) food).getServingUnit().add("g");
+        ((Product) food).getServingWeight().add(100);
+        ((Product) food).getServingQuantity().add(100);
+        ((Product) food).getServingUnit().add("ounce");
+        ((Product) food).getServingWeight().add(28);
+        ((Product) food).getServingQuantity().add(1);
+        ((Product) food).setBrandName("dummy brand");
         cursor.close();
 
         return food;

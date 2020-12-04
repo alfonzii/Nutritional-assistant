@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="cz.cuni.mff.nutritionalassistant.ProductOverviewActivity">
+    tools:context="cz.cuni.mff.nutritionalassistant.activity.overview.ProductOverviewActivity">
 
 
     <android.support.constraint.ConstraintLayout
@@ -14,7 +14,7 @@
         android:layout_weight="0">
 
         <ImageView
-            android:id="@+id/image"
+            android:id="@+id/thumbnail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -30,9 +30,9 @@
             android:layout_marginStart="16dp"
             android:text="Name of restaurant food"
             android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="@+id/image"
+            app:layout_constraintBottom_toBottomOf="@+id/thumbnail"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/image" />
+            app:layout_constraintTop_toTopOf="@+id/thumbnail" />
 
         <TextView
             android:id="@+id/text_restaurant_name"
@@ -51,7 +51,7 @@
             android:layout_marginTop="16dp"
             android:text="Quantity:"
             app:layout_constraintStart_toStartOf="@+id/text_restaurant_food_name"
-            app:layout_constraintTop_toBottomOf="@+id/image"
+            app:layout_constraintTop_toBottomOf="@+id/thumbnail"
             tools:visibility="invisible" />
 
         <EditText
@@ -64,7 +64,7 @@
             android:inputType="number"
             android:textAlignment="textStart"
             app:layout_constraintStart_toEndOf="@+id/text_quantity"
-            app:layout_constraintTop_toBottomOf="@+id/image"
+            app:layout_constraintTop_toBottomOf="@+id/thumbnail"
             tools:visibility="invisible" />
 
         <TextView

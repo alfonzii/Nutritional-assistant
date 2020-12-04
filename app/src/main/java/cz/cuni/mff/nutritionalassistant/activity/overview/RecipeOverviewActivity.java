@@ -1,7 +1,9 @@
-package cz.cuni.mff.nutritionalassistant;
+package cz.cuni.mff.nutritionalassistant.activity.overview;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import cz.cuni.mff.nutritionalassistant.R;
 
 public class RecipeOverviewActivity extends AppCompatActivity {
 

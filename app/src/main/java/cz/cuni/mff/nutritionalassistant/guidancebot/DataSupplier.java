@@ -17,8 +17,20 @@ class DataSupplier {
         foodLightweightParsedResponse = new ArrayList<>();
     }
 
-    List<FoodLightweight> requestFoodData(String query, Food.FoodType foodType, Context context) {
-        return localDBrequest(query, context);
+    List<FoodLightweight> requestFoodLightweightData(String query, Food.FoodType foodType, Context context) {
+        // TODO
+        return null;
+    }
+
+    Food requestFoodDetailedInfo(String detailedInfoURL){
+        // TODO
+        return null;
+    }
+
+    Food localDetailedInfo(FoodLightweight foodLightweight, Context context){
+        final NutritionDbHelper dbHelper = NutritionDbHelper.getInstance(context);
+        return dbHelper.getFoodDetailedInfo(
+                dbHelper.getReadableDatabase(), foodLightweight.getFoodName());
     }
 
     List<FoodLightweight> localDBrequest(String query, Context context) {
