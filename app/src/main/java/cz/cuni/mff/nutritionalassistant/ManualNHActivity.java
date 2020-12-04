@@ -52,10 +52,10 @@ public class ManualNHActivity extends AppCompatActivity {
             return;
         }
         //if everything is OK, then we can set data to desired values
-        data.setCalsGoal(calsGoal);
+        data.setCaloriesGoal(calsGoal);
         data.setFatsGoal(fatsGoal);
-        data.setCarbsGoal(carbsGoal);
-        data.setProtsGoal(protsGoal);
+        data.setCarbohydratesGoal(carbsGoal);
+        data.setProteinsGoal(protsGoal);
         setResult(RESULT_OK);
         finish();
     }

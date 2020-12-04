@@ -1,5 +1,9 @@
 package cz.cuni.mff.nutritionalassistant;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import cz.cuni.mff.nutritionalassistant.foodtypes.Food;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,13 +14,18 @@ import static cz.cuni.mff.nutritionalassistant.Constants.Sex;
 //SINGLETON CLASS
 @Getter
 @Setter
-final class DataHolder {
+public final class DataHolder {
     private static final DataHolder INSTANCE = new DataHolder();
 
     private DataHolder() {
+        eatenFood = new ArrayList<>();
+        eatenFood.add(new ArrayList<Food>());
+        eatenFood.add(new ArrayList<Food>());
+        eatenFood.add(new ArrayList<Food>());
+        eatenFood.add(new ArrayList<Food>());
     }
 
-    static DataHolder getInstance() {
+    public static DataHolder getInstance() {
         return INSTANCE;
     }
 
@@ -28,14 +37,18 @@ final class DataHolder {
     private Lifestyle lifestyle;
     private Goal goal;
 
-    private int calsGoal = 0;
+    // TODO mali by to byt floaty, a zobrazovacie views by sa mali starat o ich konverziu
+    private int caloriesGoal = 0;
     private int fatsGoal = 0;
-    private int carbsGoal = 0;
-    private int protsGoal = 0;
-    private int calsCurrent = 0;
+    private int carbohydratesGoal = 0;
+    private int proteinsGoal = 0;
+    private int caloriesCurrent = 0;
     private int fatsCurrent = 0;
-    private int carbsCurrent = 0;
-    private int protsCurrent = 0;
+    private int carbohydratesCurrent = 0;
+    private int proteinsCurrent = 0;
+
+    private List<List<Food>> eatenFood;
+    private int lastAddedMeal;
 
     int convertSex(Sex sex) {
         if (sex == Sex.MALE)
@@ -53,116 +66,8 @@ final class DataHolder {
             throw new IllegalArgumentException();
     }
 
-    /*public int getAge() {
-        return age;
+    Food getLastEatenFood() {
+        int lastFood = eatenFood.get(lastAddedMeal).size()-1;
+        return eatenFood.get(lastAddedMeal).get(lastFood);
     }
-
-    Sex getSex() {
-        return sex;
-    }
-
-    int getWeight() {
-        return weight;
-    }
-
-    int getHeight() {
-        return height;
-    }
-
-    Lifestyle getLifestyle() {
-        return lifestyle;
-    }
-
-    Goal getGoal() {
-        return goal;
-    }
-
-    int getCalsCurrent() {
-        return calsCurrent;
-    }
-
-    int getCalsGoal() {
-        return calsGoal;
-    }
-
-    int getCarbsCurrent() {
-        return carbsCurrent;
-    }
-
-    int getCarbsGoal() {
-        return carbsGoal;
-    }
-
-    int getFatsCurrent() {
-        return fatsCurrent;
-    }
-
-    int getFatsGoal() {
-        return fatsGoal;
-    }
-
-    int getProtsCurrent() {
-        return protsCurrent;
-    }
-
-    int getProtsGoal() {
-        return protsGoal;
-    }
-
-
-    void setAge(int age) {
-        this.age = age;
-    }
-
-    void setSex(Sex sex) {
-        this.sex = sex;
-    }
-
-    void setWeight(int weight) {
-        this.weight = weight;
-    }
-
-    void setHeight(int height) {
-        this.height = height;
-    }
-
-    void setLifestyle(Lifestyle lifestyle) {
-        this.lifestyle = lifestyle;
-    }
-
-    void setGoal(Goal goal) {
-        this.goal = goal;
-    }
-
-    void setCalsCurrent(int calsCurrent) {
-        this.calsCurrent = calsCurrent;
-    }
-
-    void setCalsGoal(int calsGoal) {
-        this.calsGoal = calsGoal;
-    }
-
-    void setCarbsCurrent(int carbsCurrent) {
-        this.carbsCurrent = carbsCurrent;
-    }
-
-    void setCarbsGoal(int carbsGoal) {
-        this.carbsGoal = carbsGoal;
-    }
-
-    void setFatsCurrent(int fatsCurrent) {
-        this.fatsCurrent = fatsCurrent;
-    }
-
-    void setFatsGoal(int fatsGoal) {
-        this.fatsGoal = fatsGoal;
-    }
-
-    void setProtsCurrent(int protsCurrent) {
-        this.protsCurrent = protsCurrent;
-    }
-
-    void setProtsGoal(int protsGoal) {
-        this.protsGoal = protsGoal;
-    }*/
 }

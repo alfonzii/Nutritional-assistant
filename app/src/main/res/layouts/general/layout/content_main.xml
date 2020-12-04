@@ -266,17 +266,6 @@
                     android:id="@+id/generated_food2"
                     layout="@layout/layout_generated_food" />
 
-                <include
-                    android:id="@+id/added_food2"
-                    layout="@layout/layout_added_food" />
-
-                <include
-                    android:id="@+id/added_food3"
-                    layout="@layout/layout_added_food" />
-
-                <include
-                    android:id="@+id/added_food4"
-                    layout="@layout/layout_added_food" />
             </LinearLayout>
 
             <LinearLayout
@@ -327,9 +316,6 @@
                     android:id="@+id/generated_food"
                     layout="@layout/layout_generated_food" />
 
-                <include
-                    android:id="@+id/added_food"
-                    layout="@layout/layout_added_food" />
             </LinearLayout>
 
 

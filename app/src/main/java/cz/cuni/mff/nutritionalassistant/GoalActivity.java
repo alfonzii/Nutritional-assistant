@@ -39,17 +39,17 @@ public class GoalActivity extends AppCompatActivity {
 
     private void calculateMacronutrients(float fatsVar, float carbsVar, float protsVar) {
         int carbs, fats, proteins;
-        fats = Math.round((float) data.getCalsGoal() * fatsVar);
-        carbs = Math.round((float) data.getCalsGoal() * carbsVar);
-        proteins = Math.round((float) data.getCalsGoal() * protsVar);
+        fats = Math.round((float) data.getCaloriesGoal() * fatsVar);
+        carbs = Math.round((float) data.getCaloriesGoal() * carbsVar);
+        proteins = Math.round((float) data.getCaloriesGoal() * protsVar);
 
         fats /= 9;
         carbs /= 4;
         proteins /= 4;
 
         data.setFatsGoal(fats);
-        data.setCarbsGoal(carbs);
-        data.setProtsGoal(proteins);
+        data.setCarbohydratesGoal(carbs);
+        data.setProteinsGoal(proteins);
     }
 
     private void calculateMacronutrients() {
@@ -79,19 +79,19 @@ public class GoalActivity extends AppCompatActivity {
     }
 
     public void gainClick(View view) {
-        data.setCalsGoal(Math.round(calculateBasal()) + 400);
+        data.setCaloriesGoal(Math.round(calculateBasal()) + 400);
         data.setGoal(Constants.Goal.GAIN);
         endAcivity();
     }
 
     public void loseClick(View view) {
-        data.setCalsGoal(Math.round(calculateBasal()) - 400);
+        data.setCaloriesGoal(Math.round(calculateBasal()) - 400);
         data.setGoal(Constants.Goal.LOSE);
         endAcivity();
     }
 
     public void maintainClick(View view) {
-        data.setCalsGoal(Math.round(calculateBasal()));
+        data.setCaloriesGoal(Math.round(calculateBasal()));
         data.setGoal(Constants.Goal.MAINTAIN);
         endAcivity();
     }

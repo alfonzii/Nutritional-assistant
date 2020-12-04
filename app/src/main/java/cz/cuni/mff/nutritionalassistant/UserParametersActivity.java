@@ -10,8 +10,7 @@ import android.widget.AdapterView;
 import cz.cuni.mff.nutritionalassistant.databinding.ActivityUserParametersBinding;
 
 
-public class UserParametersActivity extends AppCompatActivity implements
-        AdapterView.OnItemSelectedListener {
+public class UserParametersActivity extends AppCompatActivity  {
     //Reference to a singleton object
     private DataHolder data = DataHolder.getInstance();
 
@@ -27,7 +26,7 @@ public class UserParametersActivity extends AppCompatActivity implements
         setContentView(binding.getRoot());
 
         // No need to check if view is null. View binding solved this.
-        binding.spinnerSex.setOnItemSelectedListener(this);
+        //binding.spinnerSex.setOnItemSelectedListener(this);
 
         /*ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.sex_array, android.R.layout.simple_spinner_item);
@@ -60,13 +59,13 @@ public class UserParametersActivity extends AppCompatActivity implements
         }
     }
 
-    @Override
+    /*@Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-    }
+    }*/
 
     public void applyUserParameters(View view) {
         int sex, age, weight, height;

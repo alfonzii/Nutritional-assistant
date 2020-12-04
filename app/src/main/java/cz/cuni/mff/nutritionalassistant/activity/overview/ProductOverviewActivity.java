@@ -4,18 +4,29 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
+import cz.cuni.mff.nutritionalassistant.DataHolder;
 import cz.cuni.mff.nutritionalassistant.FoodAddingActivity;
 import cz.cuni.mff.nutritionalassistant.R;
 import cz.cuni.mff.nutritionalassistant.foodtypes.Product;
 import cz.cuni.mff.nutritionalassistant.databinding.ActivityProductOverviewBinding;
 
-public class ProductOverviewActivity extends AppCompatActivity {
+public class ProductOverviewActivity extends AppCompatActivity
+        implements AdapterView.OnItemSelectedListener{
 
     private ActivityProductOverviewBinding binding;
     private Product product;
+    private DataHolder dataHolder = DataHolder.getInstance();
 
+    private float baseWeight;
+    private float quantity = 100;
+    private float newCalories;
+    private float newFats;
+    private float newCarbohydrates;
+    private float newProteins;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +36,7 @@ public class ProductOverviewActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         initialSetup();
+        binding.spinnerServingUnit.setOnItemSelectedListener(this);
 
         binding.numberQuantity.addTextChangedListener(new TextWatcher() {
             @Override
@@ -39,13 +51,9 @@ public class ProductOverviewActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                float quantity = s.toString().equals("") ? 0 : Float.parseFloat(s.toString());
-                float multiplicator = quantity / (float) product.getServingWeight().get(0);
-                float newCalories = product.getCalories() * multiplicator;
-                float newFats = product.getFats() * multiplicator;
-                float newCarbohydrates = product.getCarbohydrates() * multiplicator;
-                float newProteins = product.getProteins() * multiplicator;
-                refreshValues(newCalories, newFats, newCarbohydrates, newProteins);
+                quantity = s.toString().equals("") ? 0 : Float.parseFloat(s.toString());
+                calculation();
+                refreshValues();
             }
         });
     }
@@ -72,13 +80,52 @@ public class ProductOverviewActivity extends AppCompatActivity {
     }
 
     private void calculation() {
-
+        float multiplicator = (quantity * baseWeight) / (float) product.getServingWeight().get(0);
+        newCalories = product.getCalories() * multiplicator;
+        newFats = product.getFats() * multiplicator;
+        newCarbohydrates = product.getCarbohydrates() * multiplicator;
+        newProteins = product.getProteins() * multiplicator;
     }
 
-    private void refreshValues(float newCalories, float newFats, float newCarbohydrates, float newProteins) {
+    private void refreshValues() {
         binding.textCaloriesValue.setText(String.valueOf(Math.round(newCalories)));
         binding.textFatsValue.setText(String.valueOf(Math.round(newFats)));
         binding.textCarbsValue.setText(String.valueOf(Math.round(newCarbohydrates)));
         binding.textProteinsValue.setText(String.valueOf(Math.round(newProteins)));
+        binding.textWeightUnit.setText(Math.round(baseWeight * quantity) + " g");
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        baseWeight = (float) product.getServingWeight().get(position) / (float) product.getServingQuantity().get(position);
+        calculation();
+        refreshValues();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+
+    public void addFoodToManager(View view) {
+        product.setFinalServingQuantity(Integer.parseInt(binding.numberQuantity.getText().toString()));
+        product.setFinalServingUnit(binding.spinnerServingUnit.getSelectedItem().toString());
+        product.setFinalServingWeight(Math.round(baseWeight * quantity));
+        product.setFinalCalories(newCalories);
+        product.setFinalFats(newFats);
+        product.setFinalCarbohydrates(newCarbohydrates);
+        product.setFinalProteins(newProteins);
+
+        int meal = binding.spinnerMeal.getSelectedItemPosition();
+        dataHolder.getEatenFood().get(meal).add(product);
+        dataHolder.setLastAddedMeal(meal);
+
+        dataHolder.setCaloriesCurrent(dataHolder.getCaloriesCurrent() + Math.round(newCalories));
+        dataHolder.setFatsCurrent(dataHolder.getFatsCurrent() + Math.round(newFats));
+        dataHolder.setCarbohydratesCurrent(dataHolder.getCarbohydratesCurrent() + Math.round(newCarbohydrates));
+        dataHolder.setProteinsCurrent(dataHolder.getProteinsCurrent() + Math.round(newProteins));
+
+        setResult(RESULT_OK);
+        finish();
     }
 }

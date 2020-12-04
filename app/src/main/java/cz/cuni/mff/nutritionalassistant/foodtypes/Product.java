@@ -19,19 +19,19 @@ public class Product extends Food {
     private Integer finalServingQuantity;
     private String finalServingUnit;
     private Integer finalServingWeight;
+    private float finalCalories;
+    private float finalFats;
+    private float finalCarbohydrates;
+    private float finalProteins;
 
     Product(String foodName, String thumbnailURL, float calories, float fats, float carbohydrates, float proteins, FoodType foodType,
-            String brandName, List<Integer> servingQuantity, List<String> servingUnit, List<Integer> servingWeight,
-            Integer finalServingQuantity, String finalServingUnit, Integer finalServingWeight) {
+            String brandName, List<Integer> servingQuantity, List<String> servingUnit, List<Integer> servingWeight) {
 
         super(foodName, thumbnailURL, calories, fats, carbohydrates, proteins, foodType);
         this.brandName = brandName;
         this.servingQuantity = servingQuantity;
         this.servingUnit = servingUnit;
         this.servingWeight = servingWeight;
-        this.finalServingQuantity = finalServingQuantity;
-        this.finalServingUnit = finalServingUnit;
-        this.finalServingWeight = finalServingWeight;
     }
 
     public Product() {

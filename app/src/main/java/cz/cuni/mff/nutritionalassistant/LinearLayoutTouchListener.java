@@ -7,18 +7,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import cz.cuni.mff.nutritionalassistant.foodtypes.Food;
+import cz.cuni.mff.nutritionalassistant.foodtypes.Product;
+
 public class LinearLayoutTouchListener implements View.OnTouchListener {
     static final String logTag = "ActivitySwipeDetector";
     private Activity activity;
     private View item;
+    private Food food;
     static final int MIN_DISTANCE = 100;// TODO change this runtime based on screen resolution. for 1920x1080 is to small the 100 distance
     private float downX, downY, upX, upY;
 
+    private DataHolder dataHolder = DataHolder.getInstance();
+
     // private MainActivity mMainActivity;
 
-    public LinearLayoutTouchListener(MainActivity mainActivity, View item) {
+    public LinearLayoutTouchListener(MainActivity mainActivity, View item, Food food) {
         activity = mainActivity;
         this.item = item;
+        this.food = food;
     }
 
     public void onRightToLeftSwipe() {
@@ -69,7 +76,9 @@ public class LinearLayoutTouchListener implements View.OnTouchListener {
                     if (deltaX > 0) {
                         this.onRightToLeftSwipe();
                         // BEWARE WITH THIS NOT TO CAUSE NULL POINTER EXCEPTION!!!
-                        ((ViewGroup)item.getParent()).removeView(item);
+                        ((ViewGroup) item.getParent()).removeView(item);
+                        nutritionValuesSubtraction();
+                        ((MainActivity) activity).refreshValues();
                         return true;
                     }
                 } else {
@@ -99,6 +108,21 @@ public class LinearLayoutTouchListener implements View.OnTouchListener {
             }// case MotionEvent.ACTION_UP:
         }
         return false;
+    }
+
+    private void nutritionValuesSubtraction() {
+        switch (food.getFoodType()){
+            case PRODUCT:
+                Product product = (Product) food;
+                dataHolder.setCaloriesCurrent(dataHolder.getCaloriesCurrent() - Math.round(product.getFinalCalories()));
+                dataHolder.setFatsCurrent(dataHolder.getFatsCurrent() - Math.round(product.getFinalFats()));
+                dataHolder.setCarbohydratesCurrent(dataHolder.getCarbohydratesCurrent() - Math.round(product.getFinalCarbohydrates()));
+                dataHolder.setProteinsCurrent(dataHolder.getProteinsCurrent() - Math.round(product.getFinalProteins()));
+                break;
+            case RECIPE:
+
+            case RESTAURANTFOOD:
+        }
     }
 
 }

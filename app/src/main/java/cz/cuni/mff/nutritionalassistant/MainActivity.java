@@ -9,9 +9,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import cz.cuni.mff.nutritionalassistant.activity.overview.ProductOverviewActivity;
 import cz.cuni.mff.nutritionalassistant.databinding.ActivityMainBinding;
+import cz.cuni.mff.nutritionalassistant.foodtypes.Food;
 
 import static cz.cuni.mff.nutritionalassistant.Constants.FOOD_REQUEST;
 import static cz.cuni.mff.nutritionalassistant.Constants.PARAMETERS_REQUEST;
@@ -20,7 +23,7 @@ import static cz.cuni.mff.nutritionalassistant.Constants.VALUES_REQUEST;
 
 public class MainActivity extends AppCompatActivity {
     //Reference to singleton object
-    private DataHolder data = DataHolder.getInstance();
+    private DataHolder dataHolder = DataHolder.getInstance();
 
     //View binding object
     private ActivityMainBinding binding;
@@ -32,12 +35,18 @@ public class MainActivity extends AppCompatActivity {
     private final String sharedPrefFile =
             "cz.cuni.mff.nutritionalassistant";
 
+    // Meal constants
+    private static final int BREAKFAST = 0;
+    private static final int LUNCH = 1;
+    private static final int DINNER = 2;
+    private static final int SNACK = 3;
 
-    private void refreshValues() {
-        binding.content.textCaloriesValue.setText(data.getCalsCurrent() + "/" + data.getCalsGoal());
-        binding.content.textFatsValue.setText(data.getFatsCurrent() + "/" + data.getFatsGoal());
-        binding.content.textCarbsValue.setText(data.getCarbsCurrent() + "/" + data.getCarbsGoal());
-        binding.content.textProteinsValue.setText(data.getProtsCurrent() + "/" + data.getProtsGoal());
+
+    void refreshValues() {
+        binding.content.textCaloriesValue.setText(dataHolder.getCaloriesCurrent() + "/" + dataHolder.getCaloriesGoal());
+        binding.content.textFatsValue.setText(dataHolder.getFatsCurrent() + "/" + dataHolder.getFatsGoal());
+        binding.content.textCarbsValue.setText(dataHolder.getCarbohydratesCurrent() + "/" + dataHolder.getCarbohydratesGoal());
+        binding.content.textProteinsValue.setText(dataHolder.getProteinsCurrent() + "/" + dataHolder.getProteinsGoal());
     }
 
     @SuppressLint("SetTextI18n") //suppress setText warning
@@ -47,16 +56,6 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setSupportActionBar(binding.toolbar);
-
-        binding.content.addedFood.layoutAddedFood.setOnTouchListener(new LinearLayoutTouchListener(
-                this, binding.content.addedFood.layoutAddedFood
-                ));
-        /*binding.content.LinearLayoutAddedFood.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openProductOverviewActivity(v);
-            }
-        });*/
 
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,19 +67,19 @@ public class MainActivity extends AppCompatActivity {
 
         mPreferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
 
-        data.setCalsGoal(mPreferences.getInt("CALSGOAL", data.getCalsGoal()));
-        data.setFatsGoal(mPreferences.getInt("FATSGOAL", data.getFatsGoal()));
-        data.setCarbsGoal(mPreferences.getInt("CARBSGOAL", data.getCarbsGoal()));
-        data.setProtsGoal(mPreferences.getInt("PROTSGOAL", data.getProtsGoal()));
-        data.setCalsCurrent(mPreferences.getInt("CALSCURRENT", data.getCalsCurrent()));
-        data.setFatsCurrent(mPreferences.getInt("FATSCURRENT", data.getFatsCurrent()));
-        data.setCarbsCurrent(mPreferences.getInt("CARBSCURRENT", data.getCalsCurrent()));
-        data.setProtsCurrent(mPreferences.getInt("PROTSCURRENT", data.getProtsCurrent()));
+        dataHolder.setCaloriesGoal(mPreferences.getInt("CALSGOAL", dataHolder.getCaloriesGoal()));
+        dataHolder.setFatsGoal(mPreferences.getInt("FATSGOAL", dataHolder.getFatsGoal()));
+        dataHolder.setCarbohydratesGoal(mPreferences.getInt("CARBSGOAL", dataHolder.getCarbohydratesGoal()));
+        dataHolder.setProteinsGoal(mPreferences.getInt("PROTSGOAL", dataHolder.getProteinsGoal()));
+        dataHolder.setCaloriesCurrent(mPreferences.getInt("CALSCURRENT", dataHolder.getCaloriesCurrent()));
+        dataHolder.setFatsCurrent(mPreferences.getInt("FATSCURRENT", dataHolder.getFatsCurrent()));
+        dataHolder.setCarbohydratesCurrent(mPreferences.getInt("CARBSCURRENT", dataHolder.getCaloriesCurrent()));
+        dataHolder.setProteinsCurrent(mPreferences.getInt("PROTSCURRENT", dataHolder.getProteinsCurrent()));
 
-        data.setAge(mPreferences.getInt("AGE", data.getAge()));
-        data.setWeight(mPreferences.getInt("WEIGHT", data.getWeight()));
-        data.setHeight(mPreferences.getInt("HEIGHT", data.getHeight()));
-        data.setSex(data.convertSex(mPreferences.getInt("SEX", data.convertSex(data.getSex()))));
+        dataHolder.setAge(mPreferences.getInt("AGE", dataHolder.getAge()));
+        dataHolder.setWeight(mPreferences.getInt("WEIGHT", dataHolder.getWeight()));
+        dataHolder.setHeight(mPreferences.getInt("HEIGHT", dataHolder.getHeight()));
+        dataHolder.setSex(dataHolder.convertSex(mPreferences.getInt("SEX", dataHolder.convertSex(dataHolder.getSex()))));
 
         refreshValues();
     }
@@ -93,19 +92,19 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
 
         SharedPreferences.Editor preferencesEditor = mPreferences.edit();
-        preferencesEditor.putInt("CALSGOAL", data.getCalsGoal());
-        preferencesEditor.putInt("FATSGOAL", data.getFatsGoal());
-        preferencesEditor.putInt("CARBSGOAL", data.getCarbsGoal());
-        preferencesEditor.putInt("PROTSGOAL", data.getProtsGoal());
-        preferencesEditor.putInt("CALSCURRENT", data.getCalsCurrent());
-        preferencesEditor.putInt("FATSCURRENT", data.getFatsCurrent());
-        preferencesEditor.putInt("CARBSCURRENT", data.getCarbsCurrent());
-        preferencesEditor.putInt("PROTSCURRENT", data.getProtsCurrent());
+        preferencesEditor.putInt("CALSGOAL", dataHolder.getCaloriesGoal());
+        preferencesEditor.putInt("FATSGOAL", dataHolder.getFatsGoal());
+        preferencesEditor.putInt("CARBSGOAL", dataHolder.getCarbohydratesGoal());
+        preferencesEditor.putInt("PROTSGOAL", dataHolder.getProteinsGoal());
+        preferencesEditor.putInt("CALSCURRENT", dataHolder.getCaloriesCurrent());
+        preferencesEditor.putInt("FATSCURRENT", dataHolder.getFatsCurrent());
+        preferencesEditor.putInt("CARBSCURRENT", dataHolder.getCarbohydratesCurrent());
+        preferencesEditor.putInt("PROTSCURRENT", dataHolder.getProteinsCurrent());
 
-        preferencesEditor.putInt("AGE", data.getAge());
-        preferencesEditor.putInt("WEIGHT", data.getWeight());
-        preferencesEditor.putInt("HEIGHT", data.getHeight());
-        preferencesEditor.putInt("SEX", data.convertSex(data.getSex()));
+        preferencesEditor.putInt("AGE", dataHolder.getAge());
+        preferencesEditor.putInt("WEIGHT", dataHolder.getWeight());
+        preferencesEditor.putInt("HEIGHT", dataHolder.getHeight());
+        preferencesEditor.putInt("SEX", dataHolder.convertSex(dataHolder.getSex()));
 
         preferencesEditor.apply();
     }
@@ -138,10 +137,10 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case R.id.action_resetCurrent:
-                data.setCalsCurrent(0);
-                data.setFatsCurrent(0);
-                data.setCarbsCurrent(0);
-                data.setProtsCurrent(0);
+                dataHolder.setCaloriesCurrent(0);
+                dataHolder.setFatsCurrent(0);
+                dataHolder.setCarbohydratesCurrent(0);
+                dataHolder.setProteinsCurrent(0);
                 refreshValues();
                 break;
 
@@ -169,7 +168,37 @@ public class MainActivity extends AppCompatActivity {
 
             case FOOD_REQUEST:
                 if (resultCode == RESULT_OK) {
-                    //tu bolo pridavanie do foodvalues
+                    View newAddedFood = getLayoutInflater().inflate(R.layout.layout_added_food, null, false);
+                    TextView txtNameAddedFood, txtWeightAddedFood, txtCaloriesAddedFood;
+                    LinearLayout layout;
+                    txtNameAddedFood = newAddedFood.findViewById(R.id.text_name_added_food);
+                    // TODO not using weight, need to fix it
+                    txtWeightAddedFood = newAddedFood.findViewById(R.id.text_weight_added_food);
+                    txtCaloriesAddedFood = newAddedFood.findViewById(R.id.text_calories_added_food);
+                    layout = newAddedFood.findViewById(R.id.layout_added_food);
+                    Food food = dataHolder.getLastEatenFood();
+                    txtNameAddedFood.setText(food.getFoodName());
+                    //txtWeightAddedFood.setText(dataHolder.getEatenFood().get(lastAddedMeal).get(lastFood).get());
+                    txtCaloriesAddedFood.setText(Math.round(food.getCalories()) + " cal");
+
+                    layout.setOnTouchListener(new LinearLayoutTouchListener(
+                            this, newAddedFood, food));
+
+                    switch (dataHolder.getLastAddedMeal()) {
+                        case BREAKFAST:
+                            binding.content.LinearLayoutBreakfast.addView(newAddedFood);
+                            break;
+                        case LUNCH:
+                            binding.content.LinearLayoutLunch.addView(newAddedFood);
+                            break;
+                        case DINNER:
+                            binding.content.LinearLayoutDinner.addView(newAddedFood);
+                            break;
+                        case SNACK:
+                            binding.content.LinearLayoutSnack.addView(newAddedFood);
+                            break;
+                    }
+
                     refreshValues();
                 }
                 break;
@@ -192,8 +221,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openProductOverviewActivity(View view) {
-        Intent intent = new Intent(this, ProductOverviewActivity.class);
-        startActivity(intent);
+        //Intent intent = new Intent(this, ProductOverviewActivity.class);
+        //startActivity(intent);
     }
 }
 
