@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import cz.cuni.mff.nutritionalassistant.foodtypes.Food;
 import cz.cuni.mff.nutritionalassistant.foodtypes.Product;
+import lombok.Getter;
 
 public class LinearLayoutTouchListener implements View.OnTouchListener {
     static final String logTag = "ActivitySwipeDetector";
@@ -87,6 +88,7 @@ public class LinearLayoutTouchListener implements View.OnTouchListener {
                 } else {
                     Log.i(logTag, "Swipe was only " + Math.abs(deltaX) + " long horizontally, need at least " + MIN_DISTANCE);
                     // If we don't swipe food, then we click it and show detailed info
+                    ((MainActivity) activity).setClickedFood(food);
                     v.performClick();
                     // return false; // We don't consume the event
                 }

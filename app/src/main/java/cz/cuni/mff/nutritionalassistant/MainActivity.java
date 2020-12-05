@@ -1,21 +1,28 @@
 package cz.cuni.mff.nutritionalassistant;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import cz.cuni.mff.nutritionalassistant.activity.overview.ProductOverviewActivity;
+import cz.cuni.mff.nutritionalassistant.activity.overview.RecipeOverviewActivity;
+import cz.cuni.mff.nutritionalassistant.activity.overview.RestaurantfoodOverviewActivity;
 import cz.cuni.mff.nutritionalassistant.databinding.ActivityMainBinding;
 import cz.cuni.mff.nutritionalassistant.foodtypes.Food;
 import cz.cuni.mff.nutritionalassistant.foodtypes.Product;
+import cz.cuni.mff.nutritionalassistant.guidancebot.Brain;
+import lombok.Setter;
 
 import static cz.cuni.mff.nutritionalassistant.Constants.FOOD_REQUEST;
 import static cz.cuni.mff.nutritionalassistant.Constants.PARAMETERS_REQUEST;
@@ -36,12 +43,20 @@ public class MainActivity extends AppCompatActivity {
     private final String sharedPrefFile =
             "cz.cuni.mff.nutritionalassistant";
 
+    @Setter
+    private Food clickedFood;
+
+    public static final String ACTION_EXAMINE_DETAILS =
+            "cz.cuni.mff.nutritionalassistant.action.EXAMINE_DETAILS";
+    public static final String EXTRA_SERIALIZABLE_FOOD =
+            "cz.cuni.mff.nutritionalassistant.EXTRA_SERIALIZABLE_FOOD";
+
+
     // Meal constants
     static final int BREAKFAST = 0;
     static final int LUNCH = 1;
     static final int DINNER = 2;
     static final int SNACK = 3;
-
 
     void refreshValues() {
         binding.content.textCaloriesValue.setText(
@@ -156,7 +171,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressLint("SetTextI18n") //suppress setText warning
+    @SuppressLint({"SetTextI18n"}) //suppress setText warning
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -185,8 +200,8 @@ public class MainActivity extends AppCompatActivity {
                     if (food.getFoodType() == Food.FoodType.PRODUCT) {
                         txtWeightAddedFood.setText(
                                 ((Product) food).getServingQuantity().get(0) + " x " +
-                                ((Product) food).getServingUnit().get(0) + " (" +
-                                ((Product) food).getServingWeight().get(0) + " g)"
+                                        ((Product) food).getServingUnit().get(0) + " (" +
+                                        ((Product) food).getServingWeight().get(0) + " g)"
                         );
                     }
                     txtCaloriesAddedFood.setText(Math.round(food.getCalories()) + " cal");
@@ -230,10 +245,23 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void openProductOverviewActivity(View view) {
-        //Intent intent = new Intent(this, ProductOverviewActivity.class);
-        //startActivity(intent);
+    public void examineAddedFoodDetails(View view) {
+        Intent intentFoodDetails;
+        switch (clickedFood.getFoodType()) {
+            case PRODUCT:
+                intentFoodDetails = new Intent(this, ProductOverviewActivity.class);
+                break;
+            case RECIPE:
+                intentFoodDetails = new Intent(this, RecipeOverviewActivity.class);
+                break;
+            case RESTAURANTFOOD:
+                intentFoodDetails = new Intent(this, RestaurantfoodOverviewActivity.class);
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + clickedFood.getFoodType());
+        }
+        intentFoodDetails.setAction(ACTION_EXAMINE_DETAILS);
+        intentFoodDetails.putExtra(EXTRA_SERIALIZABLE_FOOD, clickedFood);
+        startActivity(intentFoodDetails);
     }
 }
-
-

@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import cz.cuni.mff.nutritionalassistant.Constants;
 import cz.cuni.mff.nutritionalassistant.FoodAddingActivity;
+import cz.cuni.mff.nutritionalassistant.MainActivity;
 import cz.cuni.mff.nutritionalassistant.activity.overview.ProductOverviewActivity;
 import cz.cuni.mff.nutritionalassistant.R;
 import cz.cuni.mff.nutritionalassistant.activity.overview.RecipeOverviewActivity;
@@ -25,6 +26,9 @@ class FoodViewHolder extends RecyclerView.ViewHolder {
     private LinearLayout layout;
     private FoodAdapterType foodAdapterType;
     private Context context;
+
+    private static final String ACTION_ADD_FOOD =
+            "cz.cuni.mff.nutritionalassistant.action.ADD_FOOD";
 
 
 
@@ -55,8 +59,9 @@ class FoodViewHolder extends RecyclerView.ViewHolder {
                     default:
                         throw new IllegalStateException("Unexpected value: " + foodAdapterType.getFoodType());
                 }
+                intentFoodOverview.setAction(ACTION_ADD_FOOD);
                 intentFoodOverview.putExtra(
-                        FoodAddingActivity.EXTRA_SERIALIZABLE_FOOD,
+                        MainActivity.EXTRA_SERIALIZABLE_FOOD,
                         Brain.getInstance().requestFoodDetailedInfo(foodAdapterType,context)
                 );
                 ((FoodAddingActivity)context).startActivityForResult(intentFoodOverview, Constants.FOOD_REQUEST);

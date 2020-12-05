@@ -5,12 +5,12 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-    android:id="@+id/layout_added_food"
-    android:layout_width="match_parent"
-    android:layout_height="32dp"
-    android:background="@drawable/layout_food_bg"
-    android:onClick="openProductOverviewActivity"
-    android:orientation="horizontal">
+        android:id="@+id/layout_added_food"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:background="@drawable/layout_food_bg"
+        android:onClick="examineAddedFoodDetails"
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/text_name_added_food"

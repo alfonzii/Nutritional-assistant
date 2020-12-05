@@ -30,9 +30,6 @@ public class FoodAddingActivity extends AppCompatActivity {
     private ActivityFoodAddingBinding binding;
     private FoodAddingAdapter adapter;
 
-    public static final String EXTRA_SERIALIZABLE_FOOD =
-            "cz.cuni.mff.nutritionalassistant.EXTRA_SERIALIZABLE_FOOD";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
