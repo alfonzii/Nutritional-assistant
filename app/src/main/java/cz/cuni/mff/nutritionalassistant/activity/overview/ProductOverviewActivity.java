@@ -97,30 +97,14 @@ public class ProductOverviewActivity extends AppCompatActivity
         binding.numberQuantity.setEnabled(false);
         binding.numberQuantity.setVisibility(View.INVISIBLE);
 
-        // Setup TextView instead of serving unit spinner (we don't need to change serving units)
+        // Setup TextView instead of EditText Quantity number
         ConstraintLayout.LayoutParams params =
-                (ConstraintLayout.LayoutParams) binding.spinnerServingUnit.getLayoutParams();
+                (ConstraintLayout.LayoutParams) binding.numberQuantity.getLayoutParams();
 
-        TextView txtServingUnit = new TextView(this);
+        TextView txtQuantityEditReplacement = new TextView(this);
+        txtQuantityEditReplacement.setId(1);
 
         ConstraintLayout.LayoutParams newParams = new ConstraintLayout.LayoutParams(
-                ConstraintLayout.LayoutParams.WRAP_CONTENT,
-                ConstraintLayout.LayoutParams.WRAP_CONTENT);
-
-        newParams.bottomToBottom = params.bottomToBottom;
-        newParams.startToEnd = params.startToEnd;
-        newParams.topToTop = params.topToTop;
-
-        txtServingUnit.setText(product.getServingUnit().get(0));
-
-        binding.ConstraintLayoutHeader.addView(txtServingUnit, -1, newParams);
-
-        // Setup TextView instead of EditText too
-        params = (ConstraintLayout.LayoutParams) binding.numberQuantity.getLayoutParams();
-
-        TextView txtQuantity = new TextView(this);
-
-        newParams = new ConstraintLayout.LayoutParams(
                 ConstraintLayout.LayoutParams.WRAP_CONTENT,
                 ConstraintLayout.LayoutParams.WRAP_CONTENT);
 
@@ -128,10 +112,36 @@ public class ProductOverviewActivity extends AppCompatActivity
         newParams.startToEnd = params.startToEnd;
         newParams.bottomToBottom = binding.textQuantity.getId();
 
-        txtQuantity.setText(product.getServingQuantity().get(0).toString());
-        //txtQuantity.setGravity(Gravity.BOTTOM);
+        txtQuantityEditReplacement.setText(product.getServingQuantity().get(0).toString());
 
-        binding.ConstraintLayoutHeader.addView(txtQuantity, -1, newParams);
+        binding.ConstraintLayoutHeader.addView(txtQuantityEditReplacement, -1, newParams);
+
+        // Setup TextView instead of serving unit spinner too (we don't need to change serving units)
+        params = (ConstraintLayout.LayoutParams) binding.spinnerServingUnit.getLayoutParams();
+
+        TextView txtServingUnit = new TextView(this);
+        txtServingUnit.setId(2);
+
+        newParams = new ConstraintLayout.LayoutParams(
+                ConstraintLayout.LayoutParams.WRAP_CONTENT,
+                ConstraintLayout.LayoutParams.WRAP_CONTENT);
+
+        newParams.setMarginStart(8);
+        newParams.bottomToBottom = params.bottomToBottom;
+        newParams.startToEnd = txtQuantityEditReplacement.getId();
+        newParams.topToTop = params.topToTop;
+
+        txtServingUnit.setText(product.getServingUnit().get(0));
+
+        binding.ConstraintLayoutHeader.addView(txtServingUnit, -1, newParams);
+
+        // Rebind start constraint of weight text to serving unit TextView
+        newParams = (ConstraintLayout.LayoutParams) binding.textWeightUnit.getLayoutParams();
+
+        newParams.startToEnd = txtServingUnit.getId();
+        newParams.setMarginStart(16);
+
+        binding.textWeightUnit.setLayoutParams(newParams);
     }
 
 
