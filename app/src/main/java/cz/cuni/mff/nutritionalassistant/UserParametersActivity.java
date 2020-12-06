@@ -25,19 +25,6 @@ public class UserParametersActivity extends AppCompatActivity  {
         binding = ActivityUserParametersBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        // No need to check if view is null. View binding solved this.
-        //binding.spinnerSex.setOnItemSelectedListener(this);
-
-        /*ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.sex_array, android.R.layout.simple_spinner_item);
-
-        adapter.setDropDownViewResource
-                (android.R.layout.simple_spinner_dropdown_item);
-
-        // Apply the adapter to the spinner.
-        // No need for null check again.
-        binding.spinnerSex.setAdapter(adapter);*/
-
         myAlertBuilder = new AlertDialog.Builder(UserParametersActivity.this);
         // Add the dialog buttons.
         myAlertBuilder.setPositiveButton("OK",
@@ -58,14 +45,6 @@ public class UserParametersActivity extends AppCompatActivity  {
             binding.numberHeight.setHint("0");
         }
     }
-
-    /*@Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-    }*/
 
     public void applyUserParameters(View view) {
         int sex, age, weight, height;

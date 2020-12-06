@@ -25,5 +25,16 @@ public abstract class Food implements Serializable {
     private float proteins;
     private FoodType foodType;
 
-    public static enum FoodType {PRODUCT, RECIPE, RESTAURANTFOOD}
+    @Getter
+    public enum FoodType {
+        PRODUCT(0),
+        RECIPE(1),
+        RESTAURANTFOOD(2);
+
+        private int id;
+
+        FoodType(int id){
+            this.id = id;
+        }
+    }
 }

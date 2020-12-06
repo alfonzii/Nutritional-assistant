@@ -19,7 +19,7 @@
         <activity android:name="cz.cuni.mff.nutritionalassistant.activity.overview.RestaurantfoodOverviewActivity" />
         <activity android:name="cz.cuni.mff.nutritionalassistant.activity.overview.ProductOverviewActivity" />
         <activity
-            android:name="cz.cuni.mff.nutritionalassistant.FilterDialogActivity"
+            android:name="cz.cuni.mff.nutritionalassistant.utils.FilterDialogActivity"
             android:theme="@style/Theme.AppCompat.Dialog" />
         <activity
             android:name="cz.cuni.mff.nutritionalassistant.DatabaseActivity"
