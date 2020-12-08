@@ -1,25 +1,19 @@
 package cz.cuni.mff.nutritionalassistant.activity.overview;
 
 import android.support.constraint.ConstraintLayout;
-import android.support.constraint.ConstraintSet;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 
 import cz.cuni.mff.nutritionalassistant.DataHolder;
-import cz.cuni.mff.nutritionalassistant.FoodAddingActivity;
 import cz.cuni.mff.nutritionalassistant.MainActivity;
-import cz.cuni.mff.nutritionalassistant.R;
 import cz.cuni.mff.nutritionalassistant.foodtypes.Product;
 import cz.cuni.mff.nutritionalassistant.databinding.ActivityProductOverviewBinding;
 
@@ -59,7 +53,6 @@ public class ProductOverviewActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_product_overview);
         binding = ActivityProductOverviewBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -76,6 +69,9 @@ public class ProductOverviewActivity extends AppCompatActivity
             addFoodSetup();
         }
         binding.textProductName.setText(product.getFoodName());
+        if (product.getBrandName() != null) {
+            binding.textProductBrand.setText(product.getBrandName());
+        }
         //binding.thumbnail SET IMAGE BUT ALWAYS DOWNLOADING IS NASTY. PROBABLY SAVE SOMEWHERE FROM
         // FOOD LIGHTWEIGHT WHERE IT IS ALREADY DOWNLOADED.
         binding.numberQuantity.setText(product.getServingQuantity().get(0).toString());

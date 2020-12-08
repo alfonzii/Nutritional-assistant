@@ -51,8 +51,7 @@
             android:layout_marginTop="16dp"
             android:text="Quantity:"
             app:layout_constraintStart_toStartOf="@+id/text_restaurant_food_name"
-            app:layout_constraintTop_toBottomOf="@+id/thumbnail"
-            tools:visibility="invisible" />
+            app:layout_constraintTop_toBottomOf="@+id/thumbnail" />
 
         <EditText
             android:id="@+id/number_quantity"
@@ -60,12 +59,28 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:ems="2"
-            android:hint="100"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             android:textAlignment="textStart"
             app:layout_constraintStart_toEndOf="@+id/text_quantity"
             app:layout_constraintTop_toBottomOf="@+id/thumbnail"
-            tools:visibility="invisible" />
+            tools:hint="100" />
+
+        <cz.cuni.mff.nutritionalassistant.activity.overview.DynamicWidthSpinner
+            android:id="@+id/spinner_serving_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/text_quantity"
+            app:layout_constraintStart_toEndOf="@+id/number_quantity"
+            app:layout_constraintTop_toTopOf="@+id/text_quantity" />
+
+        <TextView
+            android:id="@+id/text_weight_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="g"
+            app:layout_constraintBottom_toBottomOf="@+id/text_quantity"
+            app:layout_constraintStart_toEndOf="@+id/spinner_serving_unit"
+            app:layout_constraintTop_toTopOf="@+id/text_quantity" />
 
         <TextView
             android:id="@+id/text_meal"

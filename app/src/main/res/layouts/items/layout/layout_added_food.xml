@@ -36,7 +36,7 @@
             android:layout_height="match_parent"
             android:layout_weight="0.1"
             android:gravity="center_vertical|end"
-            android:paddingEnd="4dp"
+            android:paddingEnd="8dp"
             tools:text="Calories" />
     </LinearLayout>
 </LinearLayout>

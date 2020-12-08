@@ -41,8 +41,8 @@ public class FoodAddingActivity extends AppCompatActivity {
         @Override
         public boolean onQueryTextSubmit(String query) {
             adapter.clearItems();
-            adapter.addItems(Brain.getInstance().requestFoodLightweightData(
-                    query, Food.FoodType.PRODUCT, FoodAddingActivity.this));
+            adapter.addItems(Brain.getInstance().requestFoodAdapterTypeData(
+                    query, spinnerCategorySelection, FoodAddingActivity.this));
             // clear focus of searchview widget to hide keyboard
             binding.toolbar.getMenu().findItem(R.id.action_search).getActionView().clearFocus();
             return true;

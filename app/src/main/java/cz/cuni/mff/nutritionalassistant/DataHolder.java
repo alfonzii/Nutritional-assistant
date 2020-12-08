@@ -17,6 +17,7 @@ import static cz.cuni.mff.nutritionalassistant.Constants.Sex;
 public final class DataHolder {
     private static final DataHolder INSTANCE = new DataHolder();
 
+    // We have four meals, that's why we make list of 4 lists.
     private DataHolder() {
         eatenFood = new ArrayList<>();
         eatenFood.add(new ArrayList<Food>());
