@@ -1,6 +1,7 @@
 package cz.cuni.mff.nutritionalassistant.foodtypes;
 
 import java.io.Serializable;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,6 +25,13 @@ public abstract class Food implements Serializable {
     private float carbohydrates;
     private float proteins;
     private FoodType foodType;
+
+    // Zero indexed elements are reference values (NH are bound to them)!!!
+    // We always need to initialize these references before using them!!!
+    // Servings will refer to immutable (just read-only) Lists (we don't need to write to them)
+    private List<Float> servingQuantity;
+    private List<String> servingUnit;
+    private List<Float> servingWeight;
 
     @Getter
     public enum FoodType {

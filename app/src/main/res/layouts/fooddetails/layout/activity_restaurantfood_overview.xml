@@ -9,6 +9,7 @@
 
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/ConstraintLayout_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0">
@@ -77,10 +78,10 @@
             android:id="@+id/text_weight_unit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="g"
             app:layout_constraintBottom_toBottomOf="@+id/text_quantity"
             app:layout_constraintStart_toEndOf="@+id/spinner_serving_unit"
-            app:layout_constraintTop_toTopOf="@+id/text_quantity" />
+            app:layout_constraintTop_toTopOf="@+id/text_quantity"
+            tools:text="g" />
 
         <TextView
             android:id="@+id/text_meal"
@@ -200,6 +201,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="8dp"
             android:text="Add"
+            android:onClick="onAddButtonClick"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

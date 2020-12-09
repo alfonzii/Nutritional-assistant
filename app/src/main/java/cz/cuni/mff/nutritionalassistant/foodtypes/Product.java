@@ -1,6 +1,8 @@
 package cz.cuni.mff.nutritionalassistant.foodtypes;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import lombok.Getter;
@@ -11,25 +13,10 @@ import lombok.Setter;
 public class Product extends Food {
 
     private String brandName;
-    // TODO look up final keyword, because I don't have to change internals of these Lists
-    // zero indexed elements are reference values (NH are bound to them)
-    private List<Float> servingQuantity;
-    private List<String> servingUnit;
-    private List<Float> servingWeight;
-
     Product(String foodName, String thumbnailURL, float calories, float fats, float carbohydrates, float proteins, FoodType foodType,
             String brandName, List<Float> servingQuantity, List<String> servingUnit, List<Float> servingWeight) {
 
-        super(foodName, thumbnailURL, calories, fats, carbohydrates, proteins, foodType);
+        super(foodName, thumbnailURL, calories, fats, carbohydrates, proteins, foodType, servingQuantity, servingUnit, servingWeight);
         this.brandName = brandName;
-        this.servingQuantity = servingQuantity;
-        this.servingUnit = servingUnit;
-        this.servingWeight = servingWeight;
-    }
-
-    public Product() {
-        servingQuantity = new ArrayList<>();
-        servingUnit = new ArrayList<>();
-        servingWeight = new ArrayList<>();
     }
 }
