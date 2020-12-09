@@ -3,10 +3,12 @@ package cz.cuni.mff.nutritionalassistant.foodtypes;
 import java.util.List;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class RestaurantFood extends Food {
     private String brandName;
 

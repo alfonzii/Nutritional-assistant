@@ -23,6 +23,8 @@ import cz.cuni.mff.nutritionalassistant.foodtypes.Food;
 import cz.cuni.mff.nutritionalassistant.foodtypes.FoodAdapterType;
 import cz.cuni.mff.nutritionalassistant.foodtypes.Product;
 import cz.cuni.mff.nutritionalassistant.foodtypes.ProductAdapterType;
+import cz.cuni.mff.nutritionalassistant.foodtypes.RestaurantFood;
+import cz.cuni.mff.nutritionalassistant.foodtypes.RestaurantFoodAdapterType;
 
 
 import static android.provider.BaseColumns._ID;
@@ -157,15 +159,15 @@ public class NutritionDbHelper extends SQLiteOpenHelper {
         List<FoodAdapterType> suitableFoods = new ArrayList<>();
 
         while (cursor.moveToNext()) {
-            FoodAdapterType food = new ProductAdapterType();
+            FoodAdapterType food = new RestaurantFoodAdapterType();
             food.setFoodName(cursor.getString(
                     cursor.getColumnIndexOrThrow(NutritionDatabaseContract.NutritionDbEntry.COLUMN_NAME_FOOD)));
             food.setCalories(
                     cursor.getInt(cursor.getColumnIndexOrThrow(NutritionDatabaseContract.NutritionDbEntry.COLUMN_ENERGY_FOOD)));
             food.setThumbnailURL("https://d2eawub7utcl6.cloudfront.net/images/nix-apple-grey.png");
-            food.setFoodType(Food.FoodType.PRODUCT);
+            food.setFoodType(Food.FoodType.RESTAURANTFOOD);
             food.setServingUnit("100g");
-            ((ProductAdapterType) food).setBrandName("dummy brand");
+            ((RestaurantFoodAdapterType) food).setBrandName("McDonald's");
 
             suitableFoods.add(food);
         }
@@ -190,7 +192,7 @@ public class NutritionDbHelper extends SQLiteOpenHelper {
 
         cursor.moveToFirst();
 
-        Food food = new Product();
+        Food food = new RestaurantFood();
         food.setFoodName(foodName);
         food.setCalories(cursor.getInt(cursor.getColumnIndexOrThrow(NutritionDatabaseContract.NutritionDbEntry.COLUMN_ENERGY_FOOD)));
         food.setFats(cursor.getFloat(cursor.getColumnIndexOrThrow(NutritionDatabaseContract.NutritionDbEntry.COLUMN_FATS_FOOD)));
@@ -198,7 +200,7 @@ public class NutritionDbHelper extends SQLiteOpenHelper {
         food.setProteins(cursor.getFloat(cursor.getColumnIndexOrThrow(NutritionDatabaseContract.NutritionDbEntry.COLUMN_PROTEINS_FOOD)));
 
         food.setThumbnailURL("https://d2eawub7utcl6.cloudfront.net/images/nix-apple-grey.png");
-        food.setFoodType(Food.FoodType.PRODUCT);
+        food.setFoodType(Food.FoodType.RESTAURANTFOOD);
 
         // immutable servingUnit List
         food.setServingUnit(Collections.unmodifiableList(Arrays.asList("g", "ounce")));
@@ -215,7 +217,7 @@ public class NutritionDbHelper extends SQLiteOpenHelper {
         //food.getServingUnit().add("ounce");
         //food.getServingWeight().add(28f);
         //food.getServingQuantity().add(1f);
-        ((Product) food).setBrandName("dummy brand");
+        ((RestaurantFood) food).setBrandName("McDonald's");
         cursor.close();
 
         return food;

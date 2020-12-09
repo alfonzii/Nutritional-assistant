@@ -48,7 +48,7 @@ public class RestaurantfoodOverviewActivity extends AppCompatActivity
 
     private void initialSetupSpecific() {
         if (restaurantFood.getBrandName() != null) {
-            binding.textRestaurantFoodName.setText(restaurantFood.getBrandName());
+            binding.textRestaurantName.setText(restaurantFood.getBrandName());
         }
         if (restaurantFood.getServingWeight() != null) {
             binding.textWeightUnit.setText(
