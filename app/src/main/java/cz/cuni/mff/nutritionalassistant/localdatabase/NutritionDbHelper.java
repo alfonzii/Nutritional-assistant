@@ -15,6 +15,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import cz.cuni.mff.nutritionalassistant.foodtypes.Food;
@@ -197,12 +199,22 @@ public class NutritionDbHelper extends SQLiteOpenHelper {
 
         food.setThumbnailURL("https://d2eawub7utcl6.cloudfront.net/images/nix-apple-grey.png");
         food.setFoodType(Food.FoodType.PRODUCT);
-        ((Product) food).getServingUnit().add("g");
-        ((Product) food).getServingWeight().add(100);
-        ((Product) food).getServingQuantity().add(100);
-        ((Product) food).getServingUnit().add("ounce");
-        ((Product) food).getServingWeight().add(28);
-        ((Product) food).getServingQuantity().add(1);
+
+        // immutable servingUnit List
+        food.setServingUnit(Collections.unmodifiableList(Arrays.asList("g", "ounce")));
+
+        // immutable servingWeight List
+        food.setServingWeight(Collections.unmodifiableList(Arrays.asList(100f, 28.35f)));
+
+        // immutable servingQuantity List
+        food.setServingQuantity(Collections.unmodifiableList(Arrays.asList(100f, 1f)));
+
+        //food.getServingUnit().add("g");
+        //food.getServingWeight().add(100f);
+        //food.getServingQuantity().add(100f);
+        //food.getServingUnit().add("ounce");
+        //food.getServingWeight().add(28f);
+        //food.getServingQuantity().add(1f);
         ((Product) food).setBrandName("dummy brand");
         cursor.close();
 

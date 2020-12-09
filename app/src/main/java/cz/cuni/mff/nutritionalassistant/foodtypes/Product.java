@@ -6,10 +6,12 @@ import java.util.Collections;
 import java.util.List;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class Product extends Food {
 
     private String brandName;
@@ -19,4 +21,5 @@ public class Product extends Food {
         super(foodName, thumbnailURL, calories, fats, carbohydrates, proteins, foodType, servingQuantity, servingUnit, servingWeight);
         this.brandName = brandName;
     }
+
 }

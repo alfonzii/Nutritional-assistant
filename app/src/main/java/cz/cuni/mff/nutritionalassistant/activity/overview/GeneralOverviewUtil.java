@@ -110,11 +110,11 @@ class GeneralOverviewUtil {
         //binding.thumbnail SET IMAGE BUT ALWAYS DOWNLOADING IS NASTY. PROBABLY SAVE SOMEWHERE FROM
         // FOOD LIGHTWEIGHT WHERE IT IS ALREADY DOWNLOADED.
 
-        numberQuantity.setText(correctStringFormat(quantity));
-        txtCaloriesValue.setText(correctStringFormat(food.getCalories()));
-        txtFatsValue.setText(correctStringFormat(food.getFats()));
-        txtCarbohydratesValue.setText(correctStringFormat(food.getCarbohydrates()));
-        txtProteinsValue.setText(correctStringFormat(food.getProteins()));
+        numberQuantity.setText(roundedStringFormat(quantity));
+        txtCaloriesValue.setText(roundedStringFormat(food.getCalories()));
+        txtFatsValue.setText(roundedStringFormat(food.getFats()));
+        txtCarbohydratesValue.setText(roundedStringFormat(food.getCarbohydrates()));
+        txtProteinsValue.setText(roundedStringFormat(food.getProteins()));
     }
 
     void addFoodSetupGeneral() {
@@ -150,10 +150,10 @@ class GeneralOverviewUtil {
     }
 
     private void refreshValues() {
-        txtCaloriesValue.setText(correctStringFormat(newCalories));
-        txtFatsValue.setText(correctStringFormat(newFats));
-        txtCarbohydratesValue.setText(correctStringFormat(newCarbohydrates));
-        txtProteinsValue.setText(correctStringFormat(newProteins));
+        txtCaloriesValue.setText(roundedStringFormat(newCalories));
+        txtFatsValue.setText(roundedStringFormat(newFats));
+        txtCarbohydratesValue.setText(roundedStringFormat(newCarbohydrates));
+        txtProteinsValue.setText(roundedStringFormat(newProteins));
         if (food.getServingWeight() != null) {
             txtWeight.setText("(" + correctStringFormat(baseWeight * quantity) + " g)");
         }
@@ -216,6 +216,7 @@ class GeneralOverviewUtil {
         layoutHeader.addView(txtQuantityEditReplacement, -1, newParams);
 
 
+        // this should not be here, as it's not generalized
         if (food.getFoodType() != Food.FoodType.RECIPE) {
             // Setup TextView instead of serving unit spinner too (we don't need to change serving units)
             params = (ConstraintLayout.LayoutParams) spinnerServingUnit.getLayoutParams();
@@ -324,5 +325,9 @@ class GeneralOverviewUtil {
         } else { // number is decimal
             return String.valueOf(twoDecimalsRound(num));
         }
+    }
+
+    String roundedStringFormat(float num) {
+        return String.valueOf(Math.round(num));
     }
 }

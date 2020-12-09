@@ -5,6 +5,8 @@ import android.os.Bundle;
 
 import cz.cuni.mff.nutritionalassistant.R;
 
+// TODO use GeneralOverviewUtil to work + implement specific init of ingredients + instructions
+
 public class RecipeOverviewActivity extends AppCompatActivity {
 
     @Override

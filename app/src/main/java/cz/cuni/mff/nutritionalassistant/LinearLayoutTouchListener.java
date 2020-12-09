@@ -116,18 +116,10 @@ public class LinearLayoutTouchListener implements View.OnTouchListener {
     }
 
     private void nutritionValuesSubtraction() {
-        switch (food.getFoodType()){
-            case PRODUCT:
-                Product product = (Product) food;
-                dataHolder.setCaloriesCurrent(dataHolder.getCaloriesCurrent() - product.getCalories());
-                dataHolder.setFatsCurrent(dataHolder.getFatsCurrent() - product.getFats());
-                dataHolder.setCarbohydratesCurrent(dataHolder.getCarbohydratesCurrent() - product.getCarbohydrates());
-                dataHolder.setProteinsCurrent(dataHolder.getProteinsCurrent() - product.getProteins());
-                break;
-            case RECIPE:
-
-            case RESTAURANTFOOD:
-        }
+        dataHolder.setCaloriesCurrent(dataHolder.getCaloriesCurrent() - food.getCalories());
+        dataHolder.setFatsCurrent(dataHolder.getFatsCurrent() - food.getFats());
+        dataHolder.setCarbohydratesCurrent(dataHolder.getCarbohydratesCurrent() - food.getCarbohydrates());
+        dataHolder.setProteinsCurrent(dataHolder.getProteinsCurrent() - food.getProteins());
     }
 
     private void removeFoodFromDataholder(int mealIndex, int foodIndex) {
@@ -138,7 +130,7 @@ public class LinearLayoutTouchListener implements View.OnTouchListener {
         switch (parent.getId()) {
             case R.id.LinearLayout_breakfast:
                 return MainActivity.BREAKFAST;
-            case  R.id.LinearLayout_lunch:
+            case R.id.LinearLayout_lunch:
                 return MainActivity.LUNCH;
             case R.id.LinearLayout_dinner:
                 return MainActivity.DINNER;

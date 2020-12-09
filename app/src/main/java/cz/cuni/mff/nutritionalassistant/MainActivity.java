@@ -198,22 +198,16 @@ public class MainActivity extends AppCompatActivity {
                     layout = newAddedFood.findViewById(R.id.layout_added_food);
                     Food food = dataHolder.getLastEatenFood();
                     txtNameAddedFood.setText(food.getFoodName());
-                    if (food.getFoodType() == Food.FoodType.RECIPE) {
+                    if (food.getServingWeight() != null) {
                         txtWeightAddedFood.setText(
-                                ((Recipe) food).getServingQuantity() + " x " +
-                                        ((Recipe) food).getServingUnit()
-                        );
-                    }
-                    else if (((Product)food).getServingWeight() != null) {
-                        txtWeightAddedFood.setText(
-                                ((Product) food).getServingQuantity().get(0) + " x " +
-                                        ((Product) food).getServingUnit().get(0) + " (" +
-                                        ((Product) food).getServingWeight().get(0) + " g)"
+                                food.getServingQuantity().get(0) + " x " +
+                                        food.getServingUnit().get(0) + " (" +
+                                        food.getServingWeight().get(0) + " g)"
                         );
                     } else { // null Product servingWeight
                         txtWeightAddedFood.setText(
-                                ((Product) food).getServingQuantity().get(0) + " x " +
-                                        ((Product) food).getServingUnit().get(0)
+                                food.getServingQuantity().get(0) + " x " +
+                                        food.getServingUnit().get(0)
                         );
                     }
                     txtCaloriesAddedFood.setText(Math.round(food.getCalories()) + " cal");

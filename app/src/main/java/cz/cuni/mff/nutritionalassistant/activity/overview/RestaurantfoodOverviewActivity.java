@@ -10,6 +10,8 @@ import cz.cuni.mff.nutritionalassistant.MainActivity;
 import cz.cuni.mff.nutritionalassistant.databinding.ActivityRestaurantfoodOverviewBinding;
 import cz.cuni.mff.nutritionalassistant.foodtypes.RestaurantFood;
 
+// TODO need to implement geo map feature
+
 public class RestaurantfoodOverviewActivity extends AppCompatActivity
         implements AdapterView.OnItemSelectedListener {
 
