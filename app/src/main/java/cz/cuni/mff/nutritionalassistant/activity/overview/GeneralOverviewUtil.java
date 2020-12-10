@@ -102,6 +102,10 @@ class GeneralOverviewUtil {
         this.txtProteinsValue = txtProteinsValue;
         this.food = food;
         quantity = 1;
+        newCalories = food.getCalories();
+        newFats = food.getFats();
+        newCarbohydrates = food.getCarbohydrates();
+        newProteins = food.getProteins();
     }
 
     // initial setup same for all overview activities
@@ -248,69 +252,6 @@ class GeneralOverviewUtil {
             }
         }
     }
-
-    /*private class ProductUtil implements FoodSpecificOverviewUtil, AdapterView.OnItemSelectedListener {
-        private Product product;
-
-        ProductUtil(Food food) {
-            product = (Product) food;
-        }
-
-        @Override
-        public void initialSetupSpecific() {
-            if (product.getBrandName() != null) {
-                txtBrand.setText(((Product) food).getBrandName());
-            }
-            if (product.getServingWeight() != null) {
-                txtWeight.setText("(" + correctStringFormat(product.getServingWeight().get(0)) + " g)");
-            }
-        }
-
-        @Override
-        public void addFoodSetupSpecific() {
-            ArrayAdapter<String> adapterServingUnit = new ArrayAdapter<>(
-                    context, android.R.layout.simple_spinner_item, (product.getServingUnit()));
-
-            adapterServingUnit.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            spinnerServingUnit.setAdapter(adapterServingUnit);
-            spinnerServingUnit.setOnItemSelectedListener(this);
-        }
-
-        @Override
-        public void examineDetailsSetupSpecific() {
-
-        }
-
-        @Override
-        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            calculateBaseWeight(position);
-            calculateNH();
-            refreshValues();
-        }
-
-        @Override
-        public void onNothingSelected(AdapterView<?> parent) {
-
-        }
-
-        @Override
-        public float calculateMultiplicatorSpecific() {
-            if (product.getServingWeight() == null) {
-                return quantity / product.getServingQuantity().get(0);
-            } else {
-                return (quantity * baseWeight) / product.getServingWeight().get(0);
-            }
-        }
-
-        @Override
-        public void addFoodToManagerSpecific() {
-            product.setServingQuantity(Collections.singletonList(Float.parseFloat(numberQuantity.getText().toString())));
-            product.setServingUnit(Collections.singletonList(spinnerServingUnit.getSelectedItem().toString()));
-            if (product.getServingWeight() != null) {
-                product.setServingWeight(Collections.singletonList(baseWeight * quantity));
-            }
-        }
-    }*/
 
     private float twoDecimalsRound(float num) {
         return Math.round(num * 100) / 100.0f;
