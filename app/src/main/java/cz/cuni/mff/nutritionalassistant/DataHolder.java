@@ -1,9 +1,12 @@
 package cz.cuni.mff.nutritionalassistant;
 
+import android.util.Pair;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import cz.cuni.mff.nutritionalassistant.foodtypes.Food;
+import cz.cuni.mff.nutritionalassistant.foodtypes.Recipe;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,11 +22,17 @@ public final class DataHolder {
 
     // We have four meals, that's why we make list of 4 lists.
     private DataHolder() {
-        eatenFood = new ArrayList<>();
-        eatenFood.add(new ArrayList<Food>());
-        eatenFood.add(new ArrayList<Food>());
-        eatenFood.add(new ArrayList<Food>());
-        eatenFood.add(new ArrayList<Food>());
+        generatedFoods = new ArrayList<>();
+        generatedFoods.add(new Pair<Food, Boolean>(new Recipe(), false));
+        generatedFoods.add(new Pair<Food, Boolean>(new Recipe(), false));
+        generatedFoods.add(new Pair<Food, Boolean>(new Recipe(), false));
+        generatedFoods.add(new Pair<Food, Boolean>(new Recipe(), false));
+
+        userAddedFoods = new ArrayList<>();
+        userAddedFoods.add(new ArrayList<Food>());
+        userAddedFoods.add(new ArrayList<Food>());
+        userAddedFoods.add(new ArrayList<Food>());
+        userAddedFoods.add(new ArrayList<Food>());
     }
 
     public static DataHolder getInstance() {
@@ -48,7 +57,9 @@ public final class DataHolder {
     private float carbohydratesCurrent = 0;
     private float proteinsCurrent = 0;
 
-    private List<List<Food>> eatenFood;
+    // Generated food + flag, if it is checked (eaten)
+    private List<Pair<Food, Boolean>> generatedFoods;
+    private List<List<Food>> userAddedFoods;
     private int lastAddedMeal;
 
     int convertSex(Sex sex) {
@@ -68,7 +79,21 @@ public final class DataHolder {
     }
 
     Food getLastEatenFood() {
-        int lastFood = eatenFood.get(lastAddedMeal).size()-1;
-        return eatenFood.get(lastAddedMeal).get(lastFood);
+        int lastFood = userAddedFoods.get(lastAddedMeal).size() - 1;
+        return userAddedFoods.get(lastAddedMeal).get(lastFood);
+    }
+
+    public void addFoodToCurrentNH(Food food) {
+        caloriesCurrent += food.getCalories();
+        fatsCurrent += food.getFats();
+        carbohydratesCurrent += food.getCarbohydrates();
+        proteinsCurrent += food.getProteins();
+    }
+
+    void subtractFoodFromCurrentNH(Food food) {
+        caloriesCurrent -= food.getCalories();
+        fatsCurrent -= food.getFats();
+        carbohydratesCurrent -= food.getCarbohydrates();
+        proteinsCurrent -= food.getProteins();
     }
 }

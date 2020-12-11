@@ -8,21 +8,28 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutCompat;
+import android.util.Log;
+import android.util.Pair;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.InvalidObjectException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ListIterator;
 
 import cz.cuni.mff.nutritionalassistant.activity.overview.ProductOverviewActivity;
 import cz.cuni.mff.nutritionalassistant.activity.overview.RecipeOverviewActivity;
 import cz.cuni.mff.nutritionalassistant.activity.overview.RestaurantfoodOverviewActivity;
 import cz.cuni.mff.nutritionalassistant.databinding.ActivityMainBinding;
 import cz.cuni.mff.nutritionalassistant.foodtypes.Food;
-import cz.cuni.mff.nutritionalassistant.foodtypes.Product;
-import cz.cuni.mff.nutritionalassistant.foodtypes.Recipe;
 import cz.cuni.mff.nutritionalassistant.guidancebot.Brain;
+import cz.cuni.mff.nutritionalassistant.utils.FormatUtil;
 import lombok.Setter;
 
 import static cz.cuni.mff.nutritionalassistant.Constants.FOOD_REQUEST;
@@ -54,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     // Meal constants
+    private static final int NUMBER_OF_MEALS = 4;
     static final int BREAKFAST = 0;
     static final int LUNCH = 1;
     static final int DINNER = 2;
@@ -269,5 +277,90 @@ public class MainActivity extends AppCompatActivity {
         intentFoodDetails.setAction(ACTION_EXAMINE_DETAILS);
         intentFoodDetails.putExtra(EXTRA_SERIALIZABLE_FOOD, clickedFood);
         startActivity(intentFoodDetails);
+    }
+
+    public void regenerateButtonClick(View view) {
+        List<Boolean> generatedFoodsFlags = new ArrayList<>();
+        for (Pair<Food, Boolean> p : dataHolder.getGeneratedFoods()) {
+            generatedFoodsFlags.add(p.second);
+        }
+
+        List<Food> newGeneratedRecipes = Brain.getInstance().requestRegenerate(generatedFoodsFlags, this);
+        ListIterator<Pair<Food, Boolean>> it = dataHolder.getGeneratedFoods().listIterator();
+        while (it.hasNext()) {
+            if (!it.next().second) {
+                it.set(new Pair<>(newGeneratedRecipes.get(0), false));
+                newGeneratedRecipes.remove(0);
+            }
+        }
+        refreshGeneratedFoods();
+    }
+
+    private void refreshGeneratedFoods() {
+        for (int i = 0; i < NUMBER_OF_MEALS; i++){
+            if (!dataHolder.getGeneratedFoods().get(i).second){
+                Food genFood = dataHolder.getGeneratedFoods().get(i).first;
+                switch (i) {
+                    case BREAKFAST:
+                        binding.content.generatedFoodBreakfast.textNameGeneratedFood.
+                                setText(genFood.getFoodName());
+                        binding.content.generatedFoodBreakfast.textCaloriesGeneratedFood.
+                                setText(FormatUtil.roundedStringFormat(genFood.getCalories()) + " cals");
+                        break;
+                    case LUNCH:
+                        binding.content.generatedFoodLunch.textNameGeneratedFood.
+                                setText(genFood.getFoodName());
+                        binding.content.generatedFoodLunch.textCaloriesGeneratedFood.
+                                setText(FormatUtil.roundedStringFormat(genFood.getCalories()) + " cals");
+                        break;
+                    case DINNER:
+                        binding.content.generatedFoodDinner.textNameGeneratedFood.
+                                setText(genFood.getFoodName());
+                        binding.content.generatedFoodDinner.textCaloriesGeneratedFood.
+                                setText(FormatUtil.roundedStringFormat(genFood.getCalories()) + " cals");
+                        break;
+                    case SNACK:
+                        binding.content.generatedFoodSnack.textNameGeneratedFood.
+                                setText(genFood.getFoodName());
+                        binding.content.generatedFoodSnack.textCaloriesGeneratedFood.
+                                setText(FormatUtil.roundedStringFormat(genFood.getCalories()) + " cals");
+                        break;
+                }
+            }
+        }
+    }
+
+    public void onCheckboxClick(View view) {
+        int checkboxMealID = -1;
+        try {
+            checkboxMealID = recognizeCheckboxMealID(view);
+        } catch (InvalidObjectException e) {
+            Log.e(MainActivity.class.toString(), String.valueOf(e.getCause()));
+            finish();
+        }
+
+        Pair<Food, Boolean> genFood = dataHolder.getGeneratedFoods().get(checkboxMealID);
+
+        if (((CheckBox) view).isChecked()) {
+            dataHolder.addFoodToCurrentNH(genFood.first);
+        } else {
+            dataHolder.subtractFoodFromCurrentNH(genFood.first);
+        }
+        dataHolder.getGeneratedFoods().set(checkboxMealID, new Pair<>(genFood.first, !genFood.second));
+        refreshValues();
+    }
+
+    private int recognizeCheckboxMealID(View view) throws InvalidObjectException {
+        if(view == binding.content.generatedFoodBreakfast.checkBox) {
+            return BREAKFAST;
+        } else if (view == binding.content.generatedFoodLunch.checkBox) {
+            return LUNCH;
+        } else if (view == binding.content.generatedFoodDinner.checkBox) {
+            return DINNER;
+        } else if (view == binding.content.generatedFoodSnack.checkBox) {
+            return SNACK;
+        } else { // ERROR
+            throw new InvalidObjectException("Checkbox " + view.toString() + " not recognized.");
+        }
     }
 }

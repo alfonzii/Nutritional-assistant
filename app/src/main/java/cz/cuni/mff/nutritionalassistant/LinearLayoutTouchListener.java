@@ -8,8 +8,6 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import cz.cuni.mff.nutritionalassistant.foodtypes.Food;
-import cz.cuni.mff.nutritionalassistant.foodtypes.Product;
-import lombok.Getter;
 
 public class LinearLayoutTouchListener implements View.OnTouchListener {
     static final String logTag = "ActivitySwipeDetector";
@@ -77,7 +75,7 @@ public class LinearLayoutTouchListener implements View.OnTouchListener {
                     if (deltaX > 0) {
                         this.onRightToLeftSwipe();
                         ViewGroup parent = ((ViewGroup) item.getParent());
-                        nutritionValuesSubtraction();
+                        dataHolder.subtractFoodFromCurrentNH(food);
                         // (indexOfChild - 2) because first child is constLayout and second is generated food.
                         // First added food (if any) starts with index 3.
                         removeFoodFromDataholder(getMealLayoutIndex(parent), parent.indexOfChild(item) - 2);
@@ -115,15 +113,8 @@ public class LinearLayoutTouchListener implements View.OnTouchListener {
         return false;
     }
 
-    private void nutritionValuesSubtraction() {
-        dataHolder.setCaloriesCurrent(dataHolder.getCaloriesCurrent() - food.getCalories());
-        dataHolder.setFatsCurrent(dataHolder.getFatsCurrent() - food.getFats());
-        dataHolder.setCarbohydratesCurrent(dataHolder.getCarbohydratesCurrent() - food.getCarbohydrates());
-        dataHolder.setProteinsCurrent(dataHolder.getProteinsCurrent() - food.getProteins());
-    }
-
     private void removeFoodFromDataholder(int mealIndex, int foodIndex) {
-        dataHolder.getEatenFood().get(mealIndex).remove(foodIndex);
+        dataHolder.getUserAddedFoods().get(mealIndex).remove(foodIndex);
     }
 
     private int getMealLayoutIndex(ViewGroup parent) {

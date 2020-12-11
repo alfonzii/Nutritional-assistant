@@ -16,6 +16,7 @@ import cz.cuni.mff.nutritionalassistant.DataHolder;
 import cz.cuni.mff.nutritionalassistant.MainActivity;
 import cz.cuni.mff.nutritionalassistant.foodtypes.Product;
 import cz.cuni.mff.nutritionalassistant.databinding.ActivityProductOverviewBinding;
+import cz.cuni.mff.nutritionalassistant.utils.FormatUtil;
 
 public class ProductOverviewActivity extends AppCompatActivity
         implements AdapterView.OnItemSelectedListener {
@@ -57,7 +58,7 @@ public class ProductOverviewActivity extends AppCompatActivity
         }
         if (product.getServingWeight() != null) {
             binding.textWeightUnit.setText(
-                    "(" + overviewUtil.correctStringFormat(product.getServingWeight().get(0)) + " g)");
+                    "(" + FormatUtil.correctStringFormat(product.getServingWeight().get(0)) + " g)");
         }
     }
 

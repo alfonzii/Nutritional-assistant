@@ -6,9 +6,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
+import java.text.Normalizer;
+
 import cz.cuni.mff.nutritionalassistant.MainActivity;
 import cz.cuni.mff.nutritionalassistant.databinding.ActivityRestaurantfoodOverviewBinding;
 import cz.cuni.mff.nutritionalassistant.foodtypes.RestaurantFood;
+import cz.cuni.mff.nutritionalassistant.utils.FormatUtil;
 
 // TODO need to implement geo map feature
 
@@ -52,7 +55,7 @@ public class RestaurantfoodOverviewActivity extends AppCompatActivity
         }
         if (restaurantFood.getServingWeight() != null) {
             binding.textWeightUnit.setText(
-                    "(" + overviewUtil.correctStringFormat(restaurantFood.getServingWeight().get(0)) + " g)");
+                    "(" + FormatUtil.correctStringFormat(restaurantFood.getServingWeight().get(0)) + " g)");
         }
     }
 

@@ -60,11 +60,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:ems="2"
-                    android:hint="1"
                     android:inputType="number"
                     android:textAlignment="textStart"
                     app:layout_constraintStart_toEndOf="@+id/text_quantity"
-                    app:layout_constraintTop_toBottomOf="@+id/thumbnail" />
+                    app:layout_constraintTop_toBottomOf="@+id/thumbnail"
+                    tools:hint="1" />
 
                 <TextView
                     android:id="@+id/text_weight_unit"

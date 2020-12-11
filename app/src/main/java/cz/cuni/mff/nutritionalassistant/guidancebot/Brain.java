@@ -8,6 +8,7 @@ import java.util.List;
 import cz.cuni.mff.nutritionalassistant.Constants;
 import cz.cuni.mff.nutritionalassistant.foodtypes.Food;
 import cz.cuni.mff.nutritionalassistant.foodtypes.FoodAdapterType;
+import cz.cuni.mff.nutritionalassistant.foodtypes.Recipe;
 
 public final class Brain {
     private DataSupplier dataSupplier;
@@ -52,9 +53,10 @@ public final class Brain {
         return null;
     }
 
-    //TODO need to add reasonable parameters
-    public List<Food> requestRegenerate() {
-        return null;
+    // TODO delete context, only local
+    // list of meals (index of list) to be regenerated (false meaning not checked -> to be regenerated)
+    public List<Food> requestRegenerate(List<Boolean> generatedFoodsFlags, Context context) {
+        return generator.requestDummyGeneratedFoods(generatedFoodsFlags, context);
     }
 
     public List<Float> requestNHConstraintsCalculation(

@@ -5,8 +5,6 @@ import android.support.constraint.ConstraintLayout;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -15,10 +13,11 @@ import android.widget.TextView;
 import java.util.Collections;
 
 import cz.cuni.mff.nutritionalassistant.DataHolder;
-import cz.cuni.mff.nutritionalassistant.MainActivity;
 import cz.cuni.mff.nutritionalassistant.foodtypes.Food;
-import cz.cuni.mff.nutritionalassistant.foodtypes.Product;
-import cz.cuni.mff.nutritionalassistant.foodtypes.Recipe;
+import cz.cuni.mff.nutritionalassistant.utils.FormatUtil;
+
+import static cz.cuni.mff.nutritionalassistant.utils.FormatUtil.correctStringFormat;
+import static cz.cuni.mff.nutritionalassistant.utils.FormatUtil.roundedStringFormat;
 
 /*
  * This util packs methods which are common for all overview activities.
@@ -178,13 +177,10 @@ class GeneralOverviewUtil {
         food.setProteins(newProteins);
 
         int meal = spinnerMeal.getSelectedItemPosition();
-        dataHolder.getEatenFood().get(meal).add(food);
+        dataHolder.getUserAddedFoods().get(meal).add(food);
         dataHolder.setLastAddedMeal(meal);
 
-        dataHolder.setCaloriesCurrent(dataHolder.getCaloriesCurrent() + newCalories);
-        dataHolder.setFatsCurrent(dataHolder.getFatsCurrent() + newFats);
-        dataHolder.setCarbohydratesCurrent(dataHolder.getCarbohydratesCurrent() + newCarbohydrates);
-        dataHolder.setProteinsCurrent(dataHolder.getProteinsCurrent() + newProteins);
+        dataHolder.addFoodToCurrentNH(food);
     }
 
     void examineDetailsSetupGeneral(Context context, ConstraintLayout layoutHeader, TextView txtQuantity, TextView txtMeal, Button buttonAdd) {
@@ -251,24 +247,5 @@ class GeneralOverviewUtil {
                 txtWeight.setLayoutParams(newParams);
             }
         }
-    }
-
-    private float twoDecimalsRound(float num) {
-        return Math.round(num * 100) / 100.0f;
-    }
-
-    // returns two digit decimal float number if num is decimal and returns integer if non-decimal
-    String correctStringFormat(float num) {
-        final float EPSILON = 0.001f;
-
-        if (Math.abs(Math.round(num) - num) < EPSILON) {
-            return String.valueOf(Math.round(num));
-        } else { // number is decimal
-            return String.valueOf(twoDecimalsRound(num));
-        }
-    }
-
-    String roundedStringFormat(float num) {
-        return String.valueOf(Math.round(num));
     }
 }

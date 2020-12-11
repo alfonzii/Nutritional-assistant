@@ -113,6 +113,7 @@
                 android:id="@+id/button_regenerate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="regenerateButtonClick"
                 android:text="Re-generate" />
 
             <LinearLayout
@@ -161,7 +162,7 @@
                 </android.support.constraint.ConstraintLayout>
 
                 <include
-                    android:id="@+id/generated_food5"
+                    android:id="@+id/generated_food_breakfast"
                     layout="@layout/layout_generated_food" />
 
             </LinearLayout>
@@ -212,7 +213,7 @@
                 </android.support.constraint.ConstraintLayout>
 
                 <include
-                    android:id="@+id/generated_food6"
+                    android:id="@+id/generated_food_lunch"
                     layout="@layout/layout_generated_food" />
 
             </LinearLayout>
@@ -263,7 +264,7 @@
                 </android.support.constraint.ConstraintLayout>
 
                 <include
-                    android:id="@+id/generated_food2"
+                    android:id="@+id/generated_food_dinner"
                     layout="@layout/layout_generated_food" />
 
             </LinearLayout>
@@ -313,7 +314,7 @@
                 </android.support.constraint.ConstraintLayout>
 
                 <include
-                    android:id="@+id/generated_food"
+                    android:id="@+id/generated_food_snack"
                     layout="@layout/layout_generated_food" />
 
             </LinearLayout>
