@@ -13,6 +13,8 @@ import android.util.Pair;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
+import android.viewbinding.ViewBinding;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -27,6 +29,7 @@ import cz.cuni.mff.nutritionalassistant.activity.overview.ProductOverviewActivit
 import cz.cuni.mff.nutritionalassistant.activity.overview.RecipeOverviewActivity;
 import cz.cuni.mff.nutritionalassistant.activity.overview.RestaurantfoodOverviewActivity;
 import cz.cuni.mff.nutritionalassistant.databinding.ActivityMainBinding;
+import cz.cuni.mff.nutritionalassistant.databinding.LayoutGeneratedFoodBinding;
 import cz.cuni.mff.nutritionalassistant.foodtypes.Food;
 import cz.cuni.mff.nutritionalassistant.guidancebot.Brain;
 import cz.cuni.mff.nutritionalassistant.utils.FormatUtil;
@@ -59,13 +62,6 @@ public class MainActivity extends AppCompatActivity {
     public static final String EXTRA_SERIALIZABLE_FOOD =
             "cz.cuni.mff.nutritionalassistant.EXTRA_SERIALIZABLE_FOOD";
 
-
-    // Meal constants
-    private static final int NUMBER_OF_MEALS = 4;
-    static final int BREAKFAST = 0;
-    static final int LUNCH = 1;
-    static final int DINNER = 2;
-    static final int SNACK = 3;
 
     void refreshValues() {
         binding.content.textCaloriesValue.setText(
@@ -223,20 +219,8 @@ public class MainActivity extends AppCompatActivity {
                     layout.setOnTouchListener(new LinearLayoutTouchListener(
                             this, newAddedFood, food));
 
-                    switch (dataHolder.getLastAddedMeal()) {
-                        case BREAKFAST:
-                            binding.content.LinearLayoutBreakfast.addView(newAddedFood);
-                            break;
-                        case LUNCH:
-                            binding.content.LinearLayoutLunch.addView(newAddedFood);
-                            break;
-                        case DINNER:
-                            binding.content.LinearLayoutDinner.addView(newAddedFood);
-                            break;
-                        case SNACK:
-                            binding.content.LinearLayoutSnack.addView(newAddedFood);
-                            break;
-                    }
+                    MealController.getLayoutFromMealID(
+                            binding, dataHolder.getLastAddedMeal()).addView(newAddedFood);
 
                     refreshValues();
                 }
@@ -297,47 +281,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void refreshGeneratedFoods() {
-        for (int i = 0; i < NUMBER_OF_MEALS; i++){
-            if (!dataHolder.getGeneratedFoods().get(i).second){
+        for (int i = 0; i < MealController.NUMBER_OF_MEALS; i++) {
+            if (!dataHolder.getGeneratedFoods().get(i).second) {
                 Food genFood = dataHolder.getGeneratedFoods().get(i).first;
-                switch (i) {
-                    case BREAKFAST:
-                        binding.content.generatedFoodBreakfast.textNameGeneratedFood.
-                                setText(genFood.getFoodName());
-                        binding.content.generatedFoodBreakfast.textCaloriesGeneratedFood.
-                                setText(FormatUtil.roundedStringFormat(genFood.getCalories()) + " cals");
-                        break;
-                    case LUNCH:
-                        binding.content.generatedFoodLunch.textNameGeneratedFood.
-                                setText(genFood.getFoodName());
-                        binding.content.generatedFoodLunch.textCaloriesGeneratedFood.
-                                setText(FormatUtil.roundedStringFormat(genFood.getCalories()) + " cals");
-                        break;
-                    case DINNER:
-                        binding.content.generatedFoodDinner.textNameGeneratedFood.
-                                setText(genFood.getFoodName());
-                        binding.content.generatedFoodDinner.textCaloriesGeneratedFood.
-                                setText(FormatUtil.roundedStringFormat(genFood.getCalories()) + " cals");
-                        break;
-                    case SNACK:
-                        binding.content.generatedFoodSnack.textNameGeneratedFood.
-                                setText(genFood.getFoodName());
-                        binding.content.generatedFoodSnack.textCaloriesGeneratedFood.
-                                setText(FormatUtil.roundedStringFormat(genFood.getCalories()) + " cals");
-                        break;
-                }
+                LayoutGeneratedFoodBinding generatedFoodBinding = MealController.getGeneratedFoodBindingFromMealID(binding, i);
+                generatedFoodBinding.textNameGeneratedFood.setText(genFood.getFoodName());
+                generatedFoodBinding.textCaloriesGeneratedFood.setText(
+                        FormatUtil.roundedStringFormat(genFood.getCalories()) + " cals");
             }
         }
     }
 
     public void onCheckboxClick(View view) {
         int checkboxMealID = -1;
-        try {
-            checkboxMealID = recognizeCheckboxMealID(view);
-        } catch (InvalidObjectException e) {
-            Log.e(MainActivity.class.toString(), String.valueOf(e.getCause()));
-            finish();
-        }
+        checkboxMealID = MealController.getMealIDfromCheckbox(binding, view);
 
         Pair<Food, Boolean> genFood = dataHolder.getGeneratedFoods().get(checkboxMealID);
 
@@ -350,17 +307,86 @@ public class MainActivity extends AppCompatActivity {
         refreshValues();
     }
 
-    private int recognizeCheckboxMealID(View view) throws InvalidObjectException {
-        if(view == binding.content.generatedFoodBreakfast.checkBox) {
-            return BREAKFAST;
-        } else if (view == binding.content.generatedFoodLunch.checkBox) {
-            return LUNCH;
-        } else if (view == binding.content.generatedFoodDinner.checkBox) {
-            return DINNER;
-        } else if (view == binding.content.generatedFoodSnack.checkBox) {
-            return SNACK;
-        } else { // ERROR
-            throw new InvalidObjectException("Checkbox " + view.toString() + " not recognized.");
+    // Controller class responsible for correct processing when interaction with meal layouts
+    // is needed. This class exists because of modularity reasons. Should we ever need to increase
+    // number of meals, only thing we need to change is content of methods here. Rest of code
+    // will act accordingly to it and no changes should be required to make.
+    static class MealController {
+
+        // Meal constants (Meal IDs)
+        static final int NUMBER_OF_MEALS = 4;
+        static final int BREAKFAST = 0;
+        static final int LUNCH = 1;
+        static final int DINNER = 2;
+        static final int SNACK = 3;
+
+        static int getMealIDfromCheckbox(ActivityMainBinding binding, View view) {
+            if (view == binding.content.generatedFoodBreakfast.checkBox) {
+                return BREAKFAST;
+            } else if (view == binding.content.generatedFoodLunch.checkBox) {
+                return LUNCH;
+            } else if (view == binding.content.generatedFoodDinner.checkBox) {
+                return DINNER;
+            } else if (view == binding.content.generatedFoodSnack.checkBox) {
+                return SNACK;
+            } else { // ERROR
+                throw new IllegalStateException("Unexpected value: " + view.getId());
+            }
+        }
+
+        static int getMealIDfromLayout(ViewGroup parent) {
+            switch (parent.getId()) {
+                case R.id.LinearLayout_breakfast:
+                    return BREAKFAST;
+                case R.id.LinearLayout_lunch:
+                    return LUNCH;
+                case R.id.LinearLayout_dinner:
+                    return DINNER;
+                case R.id.LinearLayout_snack:
+                    return SNACK;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + parent.getId());
+            }
+        }
+
+        static ViewGroup getLayoutFromMealID(ActivityMainBinding binding, int mealID) {
+            LinearLayout layout = null;
+            switch (mealID) {
+                case BREAKFAST:
+                    layout = binding.content.LinearLayoutBreakfast;
+                    break;
+                case LUNCH:
+                    layout = binding.content.LinearLayoutLunch;
+                    break;
+                case DINNER:
+                    layout = binding.content.LinearLayoutDinner;
+                    break;
+                case SNACK:
+                    layout = binding.content.LinearLayoutSnack;
+                    break;
+            }
+            return layout;
+        }
+
+        static LayoutGeneratedFoodBinding getGeneratedFoodBindingFromMealID(ActivityMainBinding binding, int mealID) {
+            LayoutGeneratedFoodBinding genFoodBinding = null;
+            switch (mealID) {
+                case BREAKFAST:
+                    genFoodBinding = binding.content.generatedFoodBreakfast;
+                    break;
+                case LUNCH:
+                    genFoodBinding = binding.content.generatedFoodLunch;
+                    break;
+                case DINNER:
+                    genFoodBinding = binding.content.generatedFoodDinner;
+                    break;
+                case SNACK:
+                    genFoodBinding = binding.content.generatedFoodSnack;
+                    break;
+            }
+            return genFoodBinding;
         }
     }
+
+
 }

@@ -20,19 +20,16 @@ import static cz.cuni.mff.nutritionalassistant.Constants.Sex;
 public final class DataHolder {
     private static final DataHolder INSTANCE = new DataHolder();
 
-    // We have four meals, that's why we make list of 4 lists.
     private DataHolder() {
         generatedFoods = new ArrayList<>();
-        generatedFoods.add(new Pair<Food, Boolean>(new Recipe(), false));
-        generatedFoods.add(new Pair<Food, Boolean>(new Recipe(), false));
-        generatedFoods.add(new Pair<Food, Boolean>(new Recipe(), false));
-        generatedFoods.add(new Pair<Food, Boolean>(new Recipe(), false));
+        for (int i = 0; i < MainActivity.MealController.NUMBER_OF_MEALS; i++) {
+            generatedFoods.add(new Pair<Food, Boolean>(new Recipe(), false));
+        }
 
         userAddedFoods = new ArrayList<>();
-        userAddedFoods.add(new ArrayList<Food>());
-        userAddedFoods.add(new ArrayList<Food>());
-        userAddedFoods.add(new ArrayList<Food>());
-        userAddedFoods.add(new ArrayList<Food>());
+        for (int i = 0; i < MainActivity.MealController.NUMBER_OF_MEALS; i++){
+            userAddedFoods.add(new ArrayList<Food>());
+        }
     }
 
     public static DataHolder getInstance() {
