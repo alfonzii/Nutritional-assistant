@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.util.Pair;
 import android.view.View;
 import android.view.Menu;
@@ -15,16 +16,24 @@ import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.typeadapters.RuntimeTypeAdapterFactory;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
+import cz.cuni.mff.nutritionalassistant.activity.BaseAbstractActivity;
 import cz.cuni.mff.nutritionalassistant.activity.overview.ProductOverviewActivity;
 import cz.cuni.mff.nutritionalassistant.activity.overview.RecipeOverviewActivity;
 import cz.cuni.mff.nutritionalassistant.activity.overview.RestaurantfoodOverviewActivity;
 import cz.cuni.mff.nutritionalassistant.databinding.ActivityMainBinding;
 import cz.cuni.mff.nutritionalassistant.databinding.LayoutGeneratedFoodBinding;
 import cz.cuni.mff.nutritionalassistant.foodtypes.Food;
+import cz.cuni.mff.nutritionalassistant.foodtypes.Product;
+import cz.cuni.mff.nutritionalassistant.foodtypes.Recipe;
+import cz.cuni.mff.nutritionalassistant.foodtypes.RestaurantFood;
 import cz.cuni.mff.nutritionalassistant.guidancebot.Brain;
 import cz.cuni.mff.nutritionalassistant.util.FormatUtil;
 import cz.cuni.mff.nutritionalassistant.util.listener.AddedFoodTouchListener;
@@ -36,19 +45,12 @@ import static cz.cuni.mff.nutritionalassistant.Constants.PARAMETERS_REQUEST;
 import static cz.cuni.mff.nutritionalassistant.Constants.RESULT_AUTOMATIC_FAILURE;
 import static cz.cuni.mff.nutritionalassistant.Constants.VALUES_REQUEST;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseAbstractActivity {
     //Reference to singleton object
-    private DataHolder dataHolder = DataHolder.getInstance();
+    private DataHolder dataHolder;
 
     //View binding object
     private ActivityMainBinding binding;
-
-    // Shared preferences object
-    private SharedPreferences mPreferences;
-
-    // Name of shared preferences file
-    private final String sharedPrefFile =
-            "cz.cuni.mff.nutritionalassistant";
 
     @Setter
     private Food clickedFood;
@@ -74,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        dataHolder = DataHolder.getInstance();
+
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setSupportActionBar(binding.toolbar);
@@ -86,50 +90,27 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        mPreferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
-
-        dataHolder.setCaloriesGoal(mPreferences.getFloat("CALORIESGOAL", dataHolder.getCaloriesGoal()));
-        dataHolder.setFatsGoal(mPreferences.getFloat("FATSGOAL", dataHolder.getFatsGoal()));
-        dataHolder.setCarbohydratesGoal(mPreferences.getFloat("CARBOHYDRATESGOAL", dataHolder.getCarbohydratesGoal()));
-        dataHolder.setProteinsGoal(mPreferences.getFloat("PROTEINSGOAL", dataHolder.getProteinsGoal()));
-        dataHolder.setCaloriesCurrent(mPreferences.getFloat("CALORIESCURRENT", dataHolder.getCaloriesCurrent()));
-        dataHolder.setFatsCurrent(mPreferences.getFloat("FATSCURRENT", dataHolder.getFatsCurrent()));
-        dataHolder.setCarbohydratesCurrent(mPreferences.getFloat("CARBOHYDRATESCURRENT", dataHolder.getCaloriesCurrent()));
-        dataHolder.setProteinsCurrent(mPreferences.getFloat("PROTEINSCURRENT", dataHolder.getProteinsCurrent()));
-
-        dataHolder.setAge(mPreferences.getInt("AGE", dataHolder.getAge()));
-        dataHolder.setWeight(mPreferences.getInt("WEIGHT", dataHolder.getWeight()));
-        dataHolder.setHeight(mPreferences.getInt("HEIGHT", dataHolder.getHeight()));
-        dataHolder.setSex(dataHolder.convertSex(mPreferences.getInt("SEX", dataHolder.convertSex(dataHolder.getSex()))));
-
         refreshValues();
     }
 
-    /**
-     * Callback for activity pause.  Shared preferences are saved here.
-     */
     @Override
-    protected void onPause() {
-        super.onPause();
+    protected void onStop() {
+        super.onStop();
+
+        SharedPreferences mPreferences = getSharedPreferences(SHARED_PREFERENCES_FILE, MODE_PRIVATE);
 
         SharedPreferences.Editor preferencesEditor = mPreferences.edit();
-        preferencesEditor.putFloat("CALORIESGOAL", dataHolder.getCaloriesGoal());
-        preferencesEditor.putFloat("FATSGOAL", dataHolder.getFatsGoal());
-        preferencesEditor.putFloat("CARBOHYDRATESGOAL", dataHolder.getCarbohydratesGoal());
-        preferencesEditor.putFloat("PROTEINSGOAL", dataHolder.getProteinsGoal());
-        preferencesEditor.putFloat("CALORIESCURRENT", dataHolder.getCaloriesCurrent());
-        preferencesEditor.putFloat("FATSCURRENT", dataHolder.getFatsCurrent());
-        preferencesEditor.putFloat("CARBOHYDRATESCURRENT", dataHolder.getCarbohydratesCurrent());
-        preferencesEditor.putFloat("PROTEINSCURRENT", dataHolder.getProteinsCurrent());
 
-        preferencesEditor.putInt("AGE", dataHolder.getAge());
-        preferencesEditor.putInt("WEIGHT", dataHolder.getWeight());
-        preferencesEditor.putInt("HEIGHT", dataHolder.getHeight());
-        preferencesEditor.putInt("SEX", dataHolder.convertSex(dataHolder.getSex()));
+        RuntimeTypeAdapterFactory<Food> foodAdapterFactory = RuntimeTypeAdapterFactory.of(Food.class, "type")
+                .registerSubtype(Product.class, "Product")
+                .registerSubtype(Recipe.class, "Recipe")
+                .registerSubtype(RestaurantFood.class, "RestaurantFood");
 
+        Gson gson = new GsonBuilder().registerTypeAdapterFactory(foodAdapterFactory).create();
+        String json = gson.toJson(dataHolder);
+        preferencesEditor.putString(DataHolder.class.getName(), json);
         preferencesEditor.apply();
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -189,32 +170,8 @@ public class MainActivity extends AppCompatActivity {
 
             case FOOD_REQUEST:
                 if (resultCode == RESULT_OK) {
-                    View newAddedFood = getLayoutInflater().inflate(R.layout.layout_added_food, null, false);
-                    TextView txtNameAddedFood, txtWeightAddedFood, txtCaloriesAddedFood;
-                    LinearLayout layout;
-                    txtNameAddedFood = newAddedFood.findViewById(R.id.text_name_added_food);
-                    txtWeightAddedFood = newAddedFood.findViewById(R.id.text_weight_added_food);
-                    txtCaloriesAddedFood = newAddedFood.findViewById(R.id.text_calories_added_food);
-                    layout = newAddedFood.findViewById(R.id.layout_added_food);
                     Food food = dataHolder.getLastEatenFood();
-                    txtNameAddedFood.setText(food.getFoodName());
-                    if (food.getServingWeight() != null) {
-                        txtWeightAddedFood.setText(
-                                food.getServingQuantity().get(0) + " x " +
-                                        food.getServingUnit().get(0) + " (" +
-                                        food.getServingWeight().get(0) + " g)"
-                        );
-                    } else { // null Product servingWeight
-                        txtWeightAddedFood.setText(
-                                food.getServingQuantity().get(0) + " x " +
-                                        food.getServingUnit().get(0)
-                        );
-                    }
-                    txtCaloriesAddedFood.setText(Math.round(food.getCalories()) + " cal");
-
-                    layout.setOnTouchListener(new AddedFoodTouchListener(
-                            this, newAddedFood, food));
-
+                    View newAddedFood = createAddedFoodView(food);
                     MealController.getLayoutFromMealID(
                             binding, dataHolder.getLastAddedMeal()).addView(newAddedFood);
 
@@ -237,6 +194,36 @@ public class MainActivity extends AppCompatActivity {
     public void exampleClick(View view) {
         Intent intent = new Intent(this, SwapActivity.class);
         startActivity(intent);
+    }
+
+    private View createAddedFoodView(Food food) {
+        View newAddedFood = getLayoutInflater().inflate(R.layout.layout_added_food, null, false);
+        TextView txtNameAddedFood, txtWeightAddedFood, txtCaloriesAddedFood;
+        LinearLayout layout;
+        txtNameAddedFood = newAddedFood.findViewById(R.id.text_name_added_food);
+        txtWeightAddedFood = newAddedFood.findViewById(R.id.text_weight_added_food);
+        txtCaloriesAddedFood = newAddedFood.findViewById(R.id.text_calories_added_food);
+        layout = newAddedFood.findViewById(R.id.layout_added_food);
+
+        txtNameAddedFood.setText(food.getFoodName());
+        if (food.getServingWeight() != null) {
+            txtWeightAddedFood.setText(
+                    food.getServingQuantity().get(0) + " x " +
+                            food.getServingUnit().get(0) + " (" +
+                            food.getServingWeight().get(0) + " g)"
+            );
+        } else { // null Product servingWeight
+            txtWeightAddedFood.setText(
+                    food.getServingQuantity().get(0) + " x " +
+                            food.getServingUnit().get(0)
+            );
+        }
+        txtCaloriesAddedFood.setText(Math.round(food.getCalories()) + " cal");
+
+        layout.setOnTouchListener(new AddedFoodTouchListener(
+                this, newAddedFood, food));
+
+        return newAddedFood;
     }
 
     // LayoutAddedFood.onClick
@@ -279,13 +266,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void refreshGeneratedFoods() {
         for (int i = 0; i < MealController.NUMBER_OF_MEALS; i++) {
-            if (!dataHolder.getGeneratedFoods().get(i).second) {
                 Food genFood = dataHolder.getGeneratedFoods().get(i).first;
                 LayoutGeneratedFoodBinding generatedFoodBinding = MealController.getGeneratedFoodBindingFromMealID(binding, i);
                 generatedFoodBinding.textNameGeneratedFood.setText(genFood.getFoodName());
                 generatedFoodBinding.textCaloriesGeneratedFood.setText(
                         FormatUtil.roundedStringFormat(genFood.getCalories()) + " cals");
-
+            if (!dataHolder.getGeneratedFoods().get(i).second) {
                 generatedFoodBinding.textNameGeneratedFood.setOnClickListener(
                         new GeneratedFoodClickListener(this, genFood));
             }

@@ -2,15 +2,14 @@ package cz.cuni.mff.nutritionalassistant;
 
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 
+import cz.cuni.mff.nutritionalassistant.activity.BaseAbstractActivity;
 import cz.cuni.mff.nutritionalassistant.databinding.ActivityUserParametersBinding;
 
 
-public class UserParametersActivity extends AppCompatActivity  {
+public class UserParametersActivity extends BaseAbstractActivity {
     //Reference to a singleton object
     private DataHolder data = DataHolder.getInstance();
 

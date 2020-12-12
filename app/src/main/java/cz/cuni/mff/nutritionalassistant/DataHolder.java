@@ -14,11 +14,14 @@ import static cz.cuni.mff.nutritionalassistant.Constants.Lifestyle;
 import static cz.cuni.mff.nutritionalassistant.Constants.Goal;
 import static cz.cuni.mff.nutritionalassistant.Constants.Sex;
 
-//SINGLETON CLASS
+//SINGLETON CLASS (but not proper, because we need to assign saved object from SharedPreferences)
 @Getter
 @Setter
 public final class DataHolder {
-    private static final DataHolder INSTANCE = new DataHolder();
+    // Should be final to be proper singleton
+    private static DataHolder INSTANCE = new DataHolder();
+
+    private boolean isInitialized = false;
 
     private DataHolder() {
         generatedFoods = new ArrayList<>();
@@ -32,6 +35,8 @@ public final class DataHolder {
         }
     }
 
+    // Should not exist to be proper singleton
+    public static void setInstance(DataHolder d) { INSTANCE = d; }
     public static DataHolder getInstance() {
         return INSTANCE;
     }

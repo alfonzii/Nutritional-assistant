@@ -13,8 +13,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class Product extends Food {
-
     private String brandName;
+
     Product(String foodName, String thumbnailURL, float calories, float fats, float carbohydrates, float proteins, FoodType foodType,
             String brandName, List<Float> servingQuantity, List<String> servingUnit, List<Float> servingWeight) {
 
