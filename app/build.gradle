@@ -38,7 +38,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation 'com.google.code.gson:gson:2.8.6'
-    implementation("org.danilopianini:gson-extras:0.2.2")
+    implementation 'org.danilopianini:gson-extras:0.2.2' //unonfficial
 
     implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'com.android.support:design:28.0.0'
