@@ -12,14 +12,13 @@
         <activity
             android:name="cz.cuni.mff.nutritionalassistant.SwapActivity"
             android:label="Swap Activity"
-            android:parentActivityName="cz.cuni.mff.nutritionalassistant.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity android:name="cz.cuni.mff.nutritionalassistant.activity.overview.RecipeOverviewActivity" />
         <activity android:name="cz.cuni.mff.nutritionalassistant.activity.overview.RestaurantfoodOverviewActivity" />
         <activity android:name="cz.cuni.mff.nutritionalassistant.activity.overview.ProductOverviewActivity" />
         <activity
-            android:name="cz.cuni.mff.nutritionalassistant.utils.FilterDialogActivity"
+            android:name="cz.cuni.mff.nutritionalassistant.util.FilterDialogActivity"
             android:theme="@style/Theme.AppCompat.Dialog" />
         <activity
             android:name="cz.cuni.mff.nutritionalassistant.DatabaseActivity"
@@ -32,17 +31,14 @@
         <activity android:name="cz.cuni.mff.nutritionalassistant.UserParametersActivity" />
         <activity
             android:name="cz.cuni.mff.nutritionalassistant.NHSetActivity"
-            android:label="Nutrition Settings"
-            android:parentActivityName="cz.cuni.mff.nutritionalassistant.MainActivity" />
+            android:label="Nutrition Settings"/>
         <activity
             android:name="cz.cuni.mff.nutritionalassistant.FoodAddingActivity"
             android:label="Food Adding Activity"
-            android:parentActivityName="cz.cuni.mff.nutritionalassistant.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="cz.cuni.mff.nutritionalassistant.ManualNHActivity"
-            android:label="Manual Nutrition Settings"
-            android:parentActivityName="cz.cuni.mff.nutritionalassistant.NHSetActivity" />
+            android:label="Manual Nutrition Settings"/>
         <activity
             android:name="cz.cuni.mff.nutritionalassistant.MainActivity"
             android:label="@string/app_name"

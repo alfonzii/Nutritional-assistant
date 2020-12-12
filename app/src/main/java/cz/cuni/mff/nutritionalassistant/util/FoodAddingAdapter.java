@@ -1,4 +1,4 @@
-package cz.cuni.mff.nutritionalassistant.utils;
+package cz.cuni.mff.nutritionalassistant.util;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

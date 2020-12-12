@@ -1,22 +1,15 @@
 package cz.cuni.mff.nutritionalassistant.activity.overview;
 
-import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.TextView;
 
-import java.util.Collections;
-
-import cz.cuni.mff.nutritionalassistant.DataHolder;
 import cz.cuni.mff.nutritionalassistant.MainActivity;
 import cz.cuni.mff.nutritionalassistant.foodtypes.Product;
 import cz.cuni.mff.nutritionalassistant.databinding.ActivityProductOverviewBinding;
-import cz.cuni.mff.nutritionalassistant.utils.FormatUtil;
+import cz.cuni.mff.nutritionalassistant.util.FormatUtil;
 
 public class ProductOverviewActivity extends AppCompatActivity
         implements AdapterView.OnItemSelectedListener {

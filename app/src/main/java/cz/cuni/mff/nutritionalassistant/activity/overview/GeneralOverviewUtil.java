@@ -14,10 +14,9 @@ import java.util.Collections;
 
 import cz.cuni.mff.nutritionalassistant.DataHolder;
 import cz.cuni.mff.nutritionalassistant.foodtypes.Food;
-import cz.cuni.mff.nutritionalassistant.utils.FormatUtil;
 
-import static cz.cuni.mff.nutritionalassistant.utils.FormatUtil.correctStringFormat;
-import static cz.cuni.mff.nutritionalassistant.utils.FormatUtil.roundedStringFormat;
+import static cz.cuni.mff.nutritionalassistant.util.FormatUtil.correctStringFormat;
+import static cz.cuni.mff.nutritionalassistant.util.FormatUtil.roundedStringFormat;
 
 /*
  * This util packs methods which are common for all overview activities.

@@ -87,7 +87,7 @@ public final class DataHolder {
         proteinsCurrent += food.getProteins();
     }
 
-    void subtractFoodFromCurrentNH(Food food) {
+    public void subtractFoodFromCurrentNH(Food food) {
         caloriesCurrent -= food.getCalories();
         fatsCurrent -= food.getFats();
         carbohydratesCurrent -= food.getCarbohydrates();

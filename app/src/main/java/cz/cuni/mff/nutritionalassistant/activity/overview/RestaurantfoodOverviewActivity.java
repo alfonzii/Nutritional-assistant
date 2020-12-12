@@ -6,12 +6,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
-import java.text.Normalizer;
-
 import cz.cuni.mff.nutritionalassistant.MainActivity;
 import cz.cuni.mff.nutritionalassistant.databinding.ActivityRestaurantfoodOverviewBinding;
 import cz.cuni.mff.nutritionalassistant.foodtypes.RestaurantFood;
-import cz.cuni.mff.nutritionalassistant.utils.FormatUtil;
+import cz.cuni.mff.nutritionalassistant.util.FormatUtil;
 
 // TODO need to implement geo map feature
 

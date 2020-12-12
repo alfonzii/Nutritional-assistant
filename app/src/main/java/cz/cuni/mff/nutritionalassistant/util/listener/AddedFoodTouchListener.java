@@ -1,4 +1,4 @@
-package cz.cuni.mff.nutritionalassistant;
+package cz.cuni.mff.nutritionalassistant.util.listener;
 
 import android.app.Activity;
 import android.util.Log;
@@ -7,9 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import cz.cuni.mff.nutritionalassistant.DataHolder;
+import cz.cuni.mff.nutritionalassistant.MainActivity;
 import cz.cuni.mff.nutritionalassistant.foodtypes.Food;
 
-public class LinearLayoutTouchListener implements View.OnTouchListener {
+public class AddedFoodTouchListener implements View.OnTouchListener {
     static final String logTag = "ActivitySwipeDetector";
     private Activity activity;
     private View item;
@@ -21,7 +23,7 @@ public class LinearLayoutTouchListener implements View.OnTouchListener {
 
     // private MainActivity mMainActivity;
 
-    public LinearLayoutTouchListener(MainActivity mainActivity, View item, Food food) {
+    public AddedFoodTouchListener(MainActivity mainActivity, View item, Food food) {
         activity = mainActivity;
         this.item = item;
         this.food = food;

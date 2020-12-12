@@ -19,8 +19,8 @@ import cz.cuni.mff.nutritionalassistant.databinding.ActivityFoodAddingBinding;
 import cz.cuni.mff.nutritionalassistant.foodtypes.Food;
 import cz.cuni.mff.nutritionalassistant.guidancebot.Brain;
 import cz.cuni.mff.nutritionalassistant.localdatabase.NutritionDbHelper;
-import cz.cuni.mff.nutritionalassistant.utils.FilterDialogActivity;
-import cz.cuni.mff.nutritionalassistant.utils.FoodAddingAdapter;
+import cz.cuni.mff.nutritionalassistant.util.FilterDialogActivity;
+import cz.cuni.mff.nutritionalassistant.util.FoodAddingAdapter;
 
 public class FoodAddingActivity extends AppCompatActivity {
     // Reference to singleton object
@@ -61,7 +61,6 @@ public class FoodAddingActivity extends AppCompatActivity {
         binding = ActivityFoodAddingBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setSupportActionBar(binding.toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         binding.recyclerFoodAdding.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerFoodAdding.addItemDecoration(

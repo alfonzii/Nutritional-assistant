@@ -17,9 +17,6 @@ public class SwapActivity extends AppCompatActivity {
         binding = ActivitySwapBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setSupportActionBar(binding.toolbar);
-
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override

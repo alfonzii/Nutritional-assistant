@@ -1,26 +1,20 @@
 package cz.cuni.mff.nutritionalassistant;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutCompat;
-import android.util.Log;
 import android.util.Pair;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
-import android.viewbinding.ViewBinding;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.io.InvalidObjectException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
@@ -32,7 +26,9 @@ import cz.cuni.mff.nutritionalassistant.databinding.ActivityMainBinding;
 import cz.cuni.mff.nutritionalassistant.databinding.LayoutGeneratedFoodBinding;
 import cz.cuni.mff.nutritionalassistant.foodtypes.Food;
 import cz.cuni.mff.nutritionalassistant.guidancebot.Brain;
-import cz.cuni.mff.nutritionalassistant.utils.FormatUtil;
+import cz.cuni.mff.nutritionalassistant.util.FormatUtil;
+import cz.cuni.mff.nutritionalassistant.util.listener.AddedFoodTouchListener;
+import cz.cuni.mff.nutritionalassistant.util.listener.GeneratedFoodClickListener;
 import lombok.Setter;
 
 import static cz.cuni.mff.nutritionalassistant.Constants.FOOD_REQUEST;
@@ -63,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
             "cz.cuni.mff.nutritionalassistant.EXTRA_SERIALIZABLE_FOOD";
 
 
-    void refreshValues() {
+    public void refreshValues() {
         binding.content.textCaloriesValue.setText(
                 Math.round(dataHolder.getCaloriesCurrent()) + "/" + Math.round(dataHolder.getCaloriesGoal()));
         binding.content.textFatsValue.setText(
@@ -216,7 +212,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     txtCaloriesAddedFood.setText(Math.round(food.getCalories()) + " cal");
 
-                    layout.setOnTouchListener(new LinearLayoutTouchListener(
+                    layout.setOnTouchListener(new AddedFoodTouchListener(
                             this, newAddedFood, food));
 
                     MealController.getLayoutFromMealID(
@@ -243,6 +239,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    // LayoutAddedFood.onClick
     public void examineAddedFoodDetails(View view) {
         Intent intentFoodDetails;
         switch (clickedFood.getFoodType()) {
@@ -288,6 +285,9 @@ public class MainActivity extends AppCompatActivity {
                 generatedFoodBinding.textNameGeneratedFood.setText(genFood.getFoodName());
                 generatedFoodBinding.textCaloriesGeneratedFood.setText(
                         FormatUtil.roundedStringFormat(genFood.getCalories()) + " cals");
+
+                generatedFoodBinding.textNameGeneratedFood.setOnClickListener(
+                        new GeneratedFoodClickListener(this, genFood));
             }
         }
     }
@@ -307,20 +307,22 @@ public class MainActivity extends AppCompatActivity {
         refreshValues();
     }
 
+
+
     // Controller class responsible for correct processing when interaction with meal layouts
     // is needed. This class exists because of modularity reasons. Should we ever need to increase
     // number of meals, only thing we need to change is content of methods here. Rest of code
     // will act accordingly to it and no changes should be required to make.
-    static class MealController {
+    public static class MealController {
 
         // Meal constants (Meal IDs)
-        static final int NUMBER_OF_MEALS = 4;
-        static final int BREAKFAST = 0;
-        static final int LUNCH = 1;
-        static final int DINNER = 2;
-        static final int SNACK = 3;
+        public static final int NUMBER_OF_MEALS = 4;
+        public static final int BREAKFAST = 0;
+        public static final int LUNCH = 1;
+        public static final int DINNER = 2;
+        public static final int SNACK = 3;
 
-        static int getMealIDfromCheckbox(ActivityMainBinding binding, View view) {
+        public static int getMealIDfromCheckbox(ActivityMainBinding binding, View view) {
             if (view == binding.content.generatedFoodBreakfast.checkBox) {
                 return BREAKFAST;
             } else if (view == binding.content.generatedFoodLunch.checkBox) {
@@ -334,7 +336,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        static int getMealIDfromLayout(ViewGroup parent) {
+        public static int getMealIDfromLayout(ViewGroup parent) {
             switch (parent.getId()) {
                 case R.id.LinearLayout_breakfast:
                     return BREAKFAST;
@@ -349,7 +351,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        static ViewGroup getLayoutFromMealID(ActivityMainBinding binding, int mealID) {
+        public static ViewGroup getLayoutFromMealID(ActivityMainBinding binding, int mealID) {
             LinearLayout layout = null;
             switch (mealID) {
                 case BREAKFAST:
@@ -368,7 +370,7 @@ public class MainActivity extends AppCompatActivity {
             return layout;
         }
 
-        static LayoutGeneratedFoodBinding getGeneratedFoodBindingFromMealID(ActivityMainBinding binding, int mealID) {
+        public static LayoutGeneratedFoodBinding getGeneratedFoodBindingFromMealID(ActivityMainBinding binding, int mealID) {
             LayoutGeneratedFoodBinding genFoodBinding = null;
             switch (mealID) {
                 case BREAKFAST:

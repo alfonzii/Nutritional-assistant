@@ -1,4 +1,4 @@
-package cz.cuni.mff.nutritionalassistant.utils;
+package cz.cuni.mff.nutritionalassistant.util;
 
 public class FormatUtil {
 
