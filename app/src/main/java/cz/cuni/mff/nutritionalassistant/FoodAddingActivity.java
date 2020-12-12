@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 
 import java.util.HashMap;
 
+import cz.cuni.mff.nutritionalassistant.activity.BaseAbstractActivity;
 import cz.cuni.mff.nutritionalassistant.databinding.ActivityFoodAddingBinding;
 import cz.cuni.mff.nutritionalassistant.foodtypes.Food;
 import cz.cuni.mff.nutritionalassistant.guidancebot.Brain;
@@ -22,7 +23,7 @@ import cz.cuni.mff.nutritionalassistant.localdatabase.NutritionDbHelper;
 import cz.cuni.mff.nutritionalassistant.util.FilterDialogActivity;
 import cz.cuni.mff.nutritionalassistant.util.FoodAddingAdapter;
 
-public class FoodAddingActivity extends AppCompatActivity {
+public class FoodAddingActivity extends BaseAbstractActivity {
     // Reference to singleton object
     private DataHolder data = DataHolder.getInstance();
 

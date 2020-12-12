@@ -7,11 +7,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
 import cz.cuni.mff.nutritionalassistant.MainActivity;
+import cz.cuni.mff.nutritionalassistant.activity.BaseAbstractActivity;
 import cz.cuni.mff.nutritionalassistant.foodtypes.Product;
 import cz.cuni.mff.nutritionalassistant.databinding.ActivityProductOverviewBinding;
 import cz.cuni.mff.nutritionalassistant.util.FormatUtil;
 
-public class ProductOverviewActivity extends AppCompatActivity
+public class ProductOverviewActivity extends BaseAbstractActivity
         implements AdapterView.OnItemSelectedListener {
 
     private ActivityProductOverviewBinding binding;

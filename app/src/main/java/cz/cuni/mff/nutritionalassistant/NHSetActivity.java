@@ -8,7 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-public class NHSetActivity extends AppCompatActivity {
+import cz.cuni.mff.nutritionalassistant.activity.BaseAbstractActivity;
+
+public class NHSetActivity extends BaseAbstractActivity {
     //Reference to singleton object
     private DataHolder data = DataHolder.getInstance();
 

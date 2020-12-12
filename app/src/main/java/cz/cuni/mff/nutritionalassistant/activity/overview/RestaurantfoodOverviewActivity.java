@@ -7,13 +7,14 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
 import cz.cuni.mff.nutritionalassistant.MainActivity;
+import cz.cuni.mff.nutritionalassistant.activity.BaseAbstractActivity;
 import cz.cuni.mff.nutritionalassistant.databinding.ActivityRestaurantfoodOverviewBinding;
 import cz.cuni.mff.nutritionalassistant.foodtypes.RestaurantFood;
 import cz.cuni.mff.nutritionalassistant.util.FormatUtil;
 
 // TODO need to implement geo map feature
 
-public class RestaurantfoodOverviewActivity extends AppCompatActivity
+public class RestaurantfoodOverviewActivity extends BaseAbstractActivity
         implements AdapterView.OnItemSelectedListener {
 
     private ActivityRestaurantfoodOverviewBinding binding;

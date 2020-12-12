@@ -36,6 +36,7 @@ import cz.cuni.mff.nutritionalassistant.foodtypes.Recipe;
 import cz.cuni.mff.nutritionalassistant.foodtypes.RestaurantFood;
 import cz.cuni.mff.nutritionalassistant.guidancebot.Brain;
 import cz.cuni.mff.nutritionalassistant.util.FormatUtil;
+import cz.cuni.mff.nutritionalassistant.util.MyGson;
 import cz.cuni.mff.nutritionalassistant.util.listener.AddedFoodTouchListener;
 import cz.cuni.mff.nutritionalassistant.util.listener.GeneratedFoodClickListener;
 import lombok.Setter;
@@ -89,7 +90,8 @@ public class MainActivity extends BaseAbstractActivity {
                 startActivityForResult(intent, FOOD_REQUEST);
             }
         });
-
+        refreshGeneratedFoods();
+        refreshUserAddedFoods();
         refreshValues();
     }
 
@@ -101,13 +103,7 @@ public class MainActivity extends BaseAbstractActivity {
 
         SharedPreferences.Editor preferencesEditor = mPreferences.edit();
 
-        RuntimeTypeAdapterFactory<Food> foodAdapterFactory = RuntimeTypeAdapterFactory.of(Food.class, "type")
-                .registerSubtype(Product.class, "Product")
-                .registerSubtype(Recipe.class, "Recipe")
-                .registerSubtype(RestaurantFood.class, "RestaurantFood");
-
-        Gson gson = new GsonBuilder().registerTypeAdapterFactory(foodAdapterFactory).create();
-        String json = gson.toJson(dataHolder);
+        String json = MyGson.PolymorphicGson.getInstance().toJson(dataHolder);
         preferencesEditor.putString(DataHolder.class.getName(), json);
         preferencesEditor.apply();
     }
@@ -226,6 +222,15 @@ public class MainActivity extends BaseAbstractActivity {
         return newAddedFood;
     }
 
+    private void refreshUserAddedFoods() {
+        for(int meal = 0; meal < MealController.NUMBER_OF_MEALS; meal++) {
+            for(Food food : dataHolder.getUserAddedFoods().get(meal)) {
+                View userAddedFoodView = createAddedFoodView(food);
+                MealController.getLayoutFromMealID(binding, meal).addView(userAddedFoodView);
+            }
+        }
+    }
+
     // LayoutAddedFood.onClick
     public void examineAddedFoodDetails(View view) {
         Intent intentFoodDetails;
@@ -267,14 +272,16 @@ public class MainActivity extends BaseAbstractActivity {
     private void refreshGeneratedFoods() {
         for (int i = 0; i < MealController.NUMBER_OF_MEALS; i++) {
                 Food genFood = dataHolder.getGeneratedFoods().get(i).first;
+                boolean isChecked = dataHolder.getGeneratedFoods().get(i).second;
                 LayoutGeneratedFoodBinding generatedFoodBinding = MealController.getGeneratedFoodBindingFromMealID(binding, i);
                 generatedFoodBinding.textNameGeneratedFood.setText(genFood.getFoodName());
                 generatedFoodBinding.textCaloriesGeneratedFood.setText(
                         FormatUtil.roundedStringFormat(genFood.getCalories()) + " cals");
-            if (!dataHolder.getGeneratedFoods().get(i).second) {
+                generatedFoodBinding.checkBox.setChecked(isChecked);
+            //if (!dataHolder.getGeneratedFoods().get(i).second) {
                 generatedFoodBinding.textNameGeneratedFood.setOnClickListener(
                         new GeneratedFoodClickListener(this, genFood));
-            }
+            //}
         }
     }
 

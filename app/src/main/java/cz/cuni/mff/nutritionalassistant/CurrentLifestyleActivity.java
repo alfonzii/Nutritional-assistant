@@ -12,9 +12,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import cz.cuni.mff.nutritionalassistant.activity.BaseAbstractActivity;
 
 
-public class CurrentLifestyleActivity extends AppCompatActivity {
+public class CurrentLifestyleActivity extends BaseAbstractActivity {
     //Reference to singleton object
     private DataHolder data = DataHolder.getInstance();
 

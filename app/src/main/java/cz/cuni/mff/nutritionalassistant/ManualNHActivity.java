@@ -6,9 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import cz.cuni.mff.nutritionalassistant.activity.BaseAbstractActivity;
 import cz.cuni.mff.nutritionalassistant.databinding.ActivityManualNhBinding;
 
-public class ManualNHActivity extends AppCompatActivity {
+public class ManualNHActivity extends BaseAbstractActivity {
     //Reference to singleton object
     private DataHolder data = DataHolder.getInstance();
 

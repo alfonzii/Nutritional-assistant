@@ -4,8 +4,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import cz.cuni.mff.nutritionalassistant.activity.BaseAbstractActivity;
 
-public class GoalActivity extends AppCompatActivity {
+
+public class GoalActivity extends BaseAbstractActivity {
     // Reference to singleton object
     private DataHolder data = DataHolder.getInstance();
 

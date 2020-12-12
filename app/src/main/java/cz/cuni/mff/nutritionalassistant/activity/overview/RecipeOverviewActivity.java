@@ -7,12 +7,13 @@ import android.widget.TextView;
 
 import cz.cuni.mff.nutritionalassistant.MainActivity;
 import cz.cuni.mff.nutritionalassistant.R;
+import cz.cuni.mff.nutritionalassistant.activity.BaseAbstractActivity;
 import cz.cuni.mff.nutritionalassistant.databinding.ActivityRecipeOverviewBinding;
 import cz.cuni.mff.nutritionalassistant.foodtypes.Recipe;
 
 // TODO use GeneralOverviewUtil to work + implement specific init of ingredients + instructions
 
-public class RecipeOverviewActivity extends AppCompatActivity {
+public class RecipeOverviewActivity extends BaseAbstractActivity {
 
     private ActivityRecipeOverviewBinding binding;
 

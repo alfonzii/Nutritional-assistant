@@ -4,9 +4,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 
+import cz.cuni.mff.nutritionalassistant.activity.BaseAbstractActivity;
 import cz.cuni.mff.nutritionalassistant.databinding.ActivitySwapBinding;
 
-public class SwapActivity extends AppCompatActivity {
+public class SwapActivity extends BaseAbstractActivity {
 
     // View binding object
     private ActivitySwapBinding binding;
