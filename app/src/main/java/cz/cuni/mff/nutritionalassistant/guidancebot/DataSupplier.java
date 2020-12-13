@@ -29,13 +29,13 @@ class DataSupplier {
     Food localDetailedInfo(FoodAdapterType foodAdapterType, Context context){
         final NutritionDbHelper dbHelper = NutritionDbHelper.getInstance(context);
         return dbHelper.getFoodDetailedInfo(
-                dbHelper.getReadableDatabase(), foodAdapterType.getFoodName());
+                dbHelper.getReadableDatabase(), foodAdapterType.getFoodName(), foodAdapterType.getFoodType());
     }
 
-    List<FoodAdapterType> localDBrequest(String query, Context context) {
+    List<FoodAdapterType> localDBrequest(String query, int foodTypeFilter, Context context) {
         final NutritionDbHelper dbHelper = NutritionDbHelper.getInstance(context);
 
         return dbHelper.getFoodLightweightListByNameQuery(
-                dbHelper.getReadableDatabase(), query);
+                dbHelper.getReadableDatabase(), query, foodTypeFilter);
     }
 }

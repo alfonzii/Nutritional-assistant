@@ -29,7 +29,7 @@ public final class Brain {
 
     // TODO local
     public List<FoodAdapterType> requestFoodAdapterTypeData(String query, int foodTypeFilter, Context context) {
-        return dataSupplier.localDBrequest(query, context);
+        return dataSupplier.localDBrequest(query, foodTypeFilter, context);
     }
 
     // TODO local

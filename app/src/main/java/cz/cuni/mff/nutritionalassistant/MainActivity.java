@@ -204,13 +204,13 @@ public class MainActivity extends BaseAbstractActivity {
         txtNameAddedFood.setText(food.getFoodName());
         if (food.getServingWeight() != null) {
             txtWeightAddedFood.setText(
-                    food.getServingQuantity().get(0) + " x " +
+                    FormatUtil.correctStringFormat(food.getServingQuantity().get(0)) + " x " +
                             food.getServingUnit().get(0) + " (" +
-                            food.getServingWeight().get(0) + " g)"
+                            FormatUtil.correctStringFormat(food.getServingWeight().get(0)) + " g)"
             );
         } else { // null Product servingWeight
             txtWeightAddedFood.setText(
-                    food.getServingQuantity().get(0) + " x " +
+                    FormatUtil.correctStringFormat(food.getServingQuantity().get(0)) + " x " +
                             food.getServingUnit().get(0)
             );
         }
