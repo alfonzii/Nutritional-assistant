@@ -26,7 +26,7 @@ public class FoodAddingAdapter extends RecyclerView.Adapter<FoodViewHolder> {
     public void addItems(final List<FoodAdapterType> newItems) {
         data.addAll(newItems);
         // Keep RecyclerView scrolling state
-        this.notifyItemRangeChanged(
+        this.notifyItemRangeInserted(
                 this.getItemCount() - newItems.size(), this.getItemCount());
     }
 

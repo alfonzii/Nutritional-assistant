@@ -177,11 +177,7 @@ public class MainActivity extends BaseAbstractActivity {
 
             case PARAMETERS_REQUEST:
                 if (resultCode == RESULT_OK) {
-                    /*int[] userParams = data.getFloatArrayExtra(UserParametersActivity.EXTRA_PARAMETERS);
-                    sex = userParams[0];
-                    age = userParams[1];
-                    weight = userParams[2];
-                    height = userParams[3];*/
+                    refreshValues();
                 }
                 break;
         }

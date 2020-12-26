@@ -8,7 +8,10 @@ import java.util.List;
 import cz.cuni.mff.nutritionalassistant.Constants;
 import cz.cuni.mff.nutritionalassistant.foodtypes.Food;
 import cz.cuni.mff.nutritionalassistant.foodtypes.FoodAdapterType;
-import cz.cuni.mff.nutritionalassistant.foodtypes.Recipe;
+import cz.cuni.mff.nutritionalassistant.foodtypes.Product;
+import cz.cuni.mff.nutritionalassistant.foodtypes.ProductAdapterType;
+import cz.cuni.mff.nutritionalassistant.guidancebot.api.AdapterDataCallback;
+import cz.cuni.mff.nutritionalassistant.guidancebot.api.DetailedFoodCallback;
 
 public final class Brain {
     private DataSupplier dataSupplier;
@@ -28,13 +31,22 @@ public final class Brain {
     }
 
     // TODO local
-    public List<FoodAdapterType> requestFoodAdapterTypeData(String query, int foodTypeFilter, Context context) {
-        return dataSupplier.localDBrequest(query, foodTypeFilter, context);
+    public void requestFoodAdapterTypeData(String query, int foodTypeFilter, Context context, AdapterDataCallback callbacks) {
+        if (foodTypeFilter == Food.FoodType.PRODUCT.getId()) {
+            dataSupplier.requestProductAdapterTypeData(query, new HashMap<Integer, Integer>(), callbacks);
+        } else {
+            //return dataSupplier.localDBrequest(query, foodTypeFilter, context);
+        }
     }
 
     // TODO local
-    public Food requestFoodDetailedInfo(FoodAdapterType foodAdapterType, Context context) {
-        return dataSupplier.localDetailedInfo(foodAdapterType, context);
+    public void requestFoodDetailedInfo(FoodAdapterType foodAdapterType, DetailedFoodCallback callback) {
+        //return dataSupplier.localDetailedInfo(foodAdapterType, context);
+        if (foodAdapterType.getFoodType() == Food.FoodType.PRODUCT) {
+            if (((ProductAdapterType) foodAdapterType).getBrandName() != null) {
+                dataSupplier.requestBrandedFoodDetailedInfo(((ProductAdapterType) foodAdapterType).getId(), callback);
+            }
+        }
     }
 
 

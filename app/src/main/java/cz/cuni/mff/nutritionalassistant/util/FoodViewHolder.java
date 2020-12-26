@@ -2,6 +2,7 @@ package cz.cuni.mff.nutritionalassistant.util;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -19,6 +20,7 @@ import cz.cuni.mff.nutritionalassistant.foodtypes.Food;
 import cz.cuni.mff.nutritionalassistant.foodtypes.FoodAdapterType;
 import cz.cuni.mff.nutritionalassistant.foodtypes.ProductAdapterType;
 import cz.cuni.mff.nutritionalassistant.guidancebot.Brain;
+import cz.cuni.mff.nutritionalassistant.guidancebot.api.DetailedFoodCallback;
 
 class FoodViewHolder extends RecyclerView.ViewHolder {
     private ImageView imgFoodThumbnail;
@@ -60,11 +62,28 @@ class FoodViewHolder extends RecyclerView.ViewHolder {
                         throw new IllegalStateException("Unexpected value: " + foodAdapterType.getFoodType());
                 }
                 intentFoodOverview.setAction(ACTION_ADD_FOOD);
-                intentFoodOverview.putExtra(
+
+                Brain.getInstance().requestFoodDetailedInfo(foodAdapterType, new DetailedFoodCallback() {
+                    @Override
+                    public void onSuccess(@NonNull Food response) {
+                        intentFoodOverview.putExtra(
+                                MainActivity.EXTRA_SERIALIZABLE_FOOD,
+                                response
+                        );
+                        ((FoodAddingActivity)context).startActivityForResult(intentFoodOverview, Constants.FOOD_REQUEST);
+                    }
+
+                    @Override
+                    public void onFail(@NonNull Throwable throwable) {
+
+                    }
+                });
+
+                /*intentFoodOverview.putExtra(
                         MainActivity.EXTRA_SERIALIZABLE_FOOD,
                         Brain.getInstance().requestFoodDetailedInfo(foodAdapterType,context)
                 );
-                ((FoodAddingActivity)context).startActivityForResult(intentFoodOverview, Constants.FOOD_REQUEST);
+                ((FoodAddingActivity)context).startActivityForResult(intentFoodOverview, Constants.FOOD_REQUEST);*/
             }
         });
     }
@@ -76,6 +95,9 @@ class FoodViewHolder extends RecyclerView.ViewHolder {
         if (!(food.getFoodType() == Food.FoodType.PRODUCT && (((ProductAdapterType) food).getBrandName()) == null)) {
             setTxtProductServing();
             setTxtProductCalories();
+        } else {
+            clearTxtProductServing();
+            clearTxtProductCalories();
         }
     }
 
@@ -97,5 +119,13 @@ class FoodViewHolder extends RecyclerView.ViewHolder {
 
     private void setTxtProductCalories() {
         txtProductCalories.setText(Math.round(foodAdapterType.getCalories()) + " cal");
+    }
+
+    private void clearTxtProductServing() {
+        txtProductServing.setText("");
+    }
+
+    private void clearTxtProductCalories() {
+        txtProductCalories.setText("");
     }
 }

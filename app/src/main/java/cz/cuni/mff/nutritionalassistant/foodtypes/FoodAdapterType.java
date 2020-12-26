@@ -19,5 +19,4 @@ public abstract class FoodAdapterType {
     private Food.FoodType foodType;
     private String servingUnit;
     private float calories;
-    private String detailedInfoURL;
 }

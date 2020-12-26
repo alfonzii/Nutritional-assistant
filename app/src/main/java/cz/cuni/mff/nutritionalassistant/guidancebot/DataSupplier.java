@@ -2,31 +2,47 @@ package cz.cuni.mff.nutritionalassistant.guidancebot;
 
 import android.content.Context;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import cz.cuni.mff.nutritionalassistant.foodtypes.Food;
 import cz.cuni.mff.nutritionalassistant.foodtypes.FoodAdapterType;
+import cz.cuni.mff.nutritionalassistant.guidancebot.api.AdapterDataCallback;
+import cz.cuni.mff.nutritionalassistant.guidancebot.api.DetailedFoodCallback;
+import cz.cuni.mff.nutritionalassistant.guidancebot.api.NutritionixDMS;
 import cz.cuni.mff.nutritionalassistant.localdatabase.NutritionDbHelper;
 
 class DataSupplier {
-    private List<FoodAdapterType> foodAdapterTypeParsedResponse;
+    private NutritionixDMS nutritionixDMS;
 
     DataSupplier() {
-        foodAdapterTypeParsedResponse = new ArrayList<>();
+        nutritionixDMS = new NutritionixDMS();
     }
 
-    List<FoodAdapterType> requestFoodLightweightData(String query, Food.FoodType foodType, Context context) {
+    List<FoodAdapterType> requestFoodAdapterTypeData(
+            String query, Food.FoodType foodType, HashMap<Integer, Integer> nutritionFilterTable) {
         // TODO
         return null;
     }
 
-    Food requestFoodDetailedInfo(String detailedInfoURL){
-        // TODO
+    void requestProductAdapterTypeData(
+            String query, HashMap<Integer, Integer> nutritionFilterTable, AdapterDataCallback callback) {
+        nutritionixDMS.listProducts(query, callback);
+    }
+
+    List<FoodAdapterType> requestRecipeAdapterTypeData(String query, HashMap<Integer, Integer> nutritionFilterTable) {
         return null;
     }
 
-    Food localDetailedInfo(FoodAdapterType foodAdapterType, Context context){
+    List<FoodAdapterType> requestRestaurantFoodAdapterTypeData(String query, HashMap<Integer, Integer> nutritionFilterTable) {
+        return null;
+    }
+
+    void requestBrandedFoodDetailedInfo(String id, DetailedFoodCallback callback) {
+        nutritionixDMS.getBrandedFoodDetails(id, callback);
+    }
+
+    Food localDetailedInfo(FoodAdapterType foodAdapterType, Context context) {
         final NutritionDbHelper dbHelper = NutritionDbHelper.getInstance(context);
         return dbHelper.getFoodDetailedInfo(
                 dbHelper.getReadableDatabase(), foodAdapterType.getFoodName(), foodAdapterType.getFoodType());

@@ -3,7 +3,6 @@ package cz.cuni.mff.nutritionalassistant;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatSpinner;
 import android.support.v7.widget.DividerItemDecoration;
@@ -14,11 +13,14 @@ import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 
 import java.util.HashMap;
+import java.util.List;
 
 import cz.cuni.mff.nutritionalassistant.activity.BaseAbstractActivity;
 import cz.cuni.mff.nutritionalassistant.databinding.ActivityFoodAddingBinding;
 import cz.cuni.mff.nutritionalassistant.foodtypes.Food;
+import cz.cuni.mff.nutritionalassistant.foodtypes.FoodAdapterType;
 import cz.cuni.mff.nutritionalassistant.guidancebot.Brain;
+import cz.cuni.mff.nutritionalassistant.guidancebot.api.AdapterDataCallback;
 import cz.cuni.mff.nutritionalassistant.localdatabase.NutritionDbHelper;
 import cz.cuni.mff.nutritionalassistant.util.FilterDialogActivity;
 import cz.cuni.mff.nutritionalassistant.util.FoodAddingAdapter;
@@ -30,7 +32,7 @@ public class FoodAddingActivity extends BaseAbstractActivity {
     // View binding object
     private ActivityFoodAddingBinding binding;
 
-    private FoodAddingAdapter adapter;
+    private FoodAddingAdapter foodAddingAdapter;
     private int spinnerCategorySelection = Food.FoodType.PRODUCT.getId();
 
     // Key - EditText ID, Value - value of filter parameter
@@ -41,9 +43,20 @@ public class FoodAddingActivity extends BaseAbstractActivity {
     private SearchView.OnQueryTextListener searchQueryListener = new SearchView.OnQueryTextListener() {
         @Override
         public boolean onQueryTextSubmit(String query) {
-            adapter.clearItems();
-            adapter.addItems(Brain.getInstance().requestFoodAdapterTypeData(
-                    query, spinnerCategorySelection, FoodAddingActivity.this));
+            foodAddingAdapter.clearItems();
+            Brain.getInstance().requestFoodAdapterTypeData(
+                    query, spinnerCategorySelection, FoodAddingActivity.this, new AdapterDataCallback() {
+                        @Override
+                        public void onSuccess(@NonNull List<FoodAdapterType> list) {
+                            foodAddingAdapter.addItems(list);
+                        }
+
+                        @Override
+                        public void onFail(@NonNull Throwable throwable) {
+
+                        }
+                    });
+
             // clear focus of searchview widget to hide keyboard
             binding.toolbar.getMenu().findItem(R.id.action_search).getActionView().clearFocus();
             return true;
@@ -66,8 +79,8 @@ public class FoodAddingActivity extends BaseAbstractActivity {
         binding.recyclerFoodAdding.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerFoodAdding.addItemDecoration(
                 new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
-        adapter = new FoodAddingAdapter(this);
-        binding.recyclerFoodAdding.setAdapter(adapter);
+        foodAddingAdapter = new FoodAddingAdapter(this);
+        binding.recyclerFoodAdding.setAdapter(foodAddingAdapter);
     }
 
     @Override
@@ -109,6 +122,7 @@ public class FoodAddingActivity extends BaseAbstractActivity {
             @Override
             public boolean onMenuItemActionCollapse(MenuItem item) {
                 invalidateOptionsMenu();
+                foodAddingAdapter.clearItems();
                 return true;  // Return true to collapse action view
             }
         };

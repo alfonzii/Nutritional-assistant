@@ -16,7 +16,7 @@ class Generator {
     List<Food> requestDummyGeneratedFoods(List<Boolean> generatedFoodsFlags, Context context) {
         Random random = new Random();
         List<Food> output = new ArrayList<>();
-        List<FoodAdapterType> lightweight = dataSupplier.localDBrequest("a", Food.FoodType.PRODUCT.getId(), context);
+        List<FoodAdapterType> lightweight = dataSupplier.localDBrequest("a", Food.FoodType.RECIPE.getId(), context);
         for (Boolean b : generatedFoodsFlags) {
             if (!b) {
                 output.add(dataSupplier.localDetailedInfo(lightweight.get(random.nextInt(6)), context));
