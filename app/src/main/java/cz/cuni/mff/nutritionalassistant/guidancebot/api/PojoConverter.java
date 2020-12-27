@@ -8,9 +8,11 @@ import cz.cuni.mff.nutritionalassistant.foodtypes.Food;
 import cz.cuni.mff.nutritionalassistant.foodtypes.FoodAdapterType;
 import cz.cuni.mff.nutritionalassistant.foodtypes.Product;
 import cz.cuni.mff.nutritionalassistant.foodtypes.ProductAdapterType;
+import cz.cuni.mff.nutritionalassistant.foodtypes.RecipeAdapterType;
 import cz.cuni.mff.nutritionalassistant.guidancebot.api.Nutritionix.NutritionixAdapterProductPojo;
 import cz.cuni.mff.nutritionalassistant.guidancebot.api.Nutritionix.NutritionixAltMeasuresPojo;
 import cz.cuni.mff.nutritionalassistant.guidancebot.api.Nutritionix.NutritionixDetailedProductPojo;
+import cz.cuni.mff.nutritionalassistant.guidancebot.api.Spoonacular.SpoonacularAdapterRecipePojo;
 
 public class PojoConverter {
 
@@ -61,6 +63,25 @@ public class PojoConverter {
             return new Product(pojo.getFoodName(), pojo.getThumb(), pojo.getCalories(),
                     pojo.getFats(), pojo.getCarbohydrates(), pojo.getProteins(), Food.FoodType.PRODUCT, pojo.getBrandName(),
                     servingQuantityFinal, servingUnitFinal, servingWeightFinal);
+        }
+    }
+
+    public static class Spoonacular {
+        public static List<FoodAdapterType> fromSpoonacularPojoList(List<SpoonacularAdapterRecipePojo> pojoList) {
+            List<FoodAdapterType> list = new ArrayList<>();
+
+            for (SpoonacularAdapterRecipePojo pojo : pojoList) {
+                list.add(fromSpoonacularAdapterRecipePojo(pojo));
+            }
+
+            return list;
+        }
+
+        public static FoodAdapterType fromSpoonacularAdapterRecipePojo(SpoonacularAdapterRecipePojo pojo) {
+            return new RecipeAdapterType(
+                    pojo.getRecipeName(), pojo.getThumbnailURL(),
+                    Food.FoodType.RECIPE, "serving",
+                    pojo.getNutrition().getNutrients().get(0).getCalories(), pojo.getId());
         }
     }
 

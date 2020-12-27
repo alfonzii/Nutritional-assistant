@@ -26,7 +26,7 @@ public interface NutritionixApi {
             "x-remote-user-id: 0"})
     @FormUrlEncoded
     @POST("v2/search/instant")
-    Call<List<NutritionixAdapterProductPojo>> listProducts(@FieldMap HashMap<String,Object> param);
+    Call<NutritionixAdapterFullResponsePojo> listProducts(@FieldMap HashMap<String,Object> param);
 
 
     @Headers({"x-app-id: b48b1bce",

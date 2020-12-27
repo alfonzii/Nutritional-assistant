@@ -35,9 +35,10 @@ public final class Brain {
 
         if (foodTypeFilter == Food.FoodType.PRODUCT.getId()) {
             dataSupplier.requestProductAdapterTypeData(query, nutritionFilterTable, callbacks);
-        } else {
-            //return dataSupplier.localDBrequest(query, foodTypeFilter, context);
+        } else if (foodTypeFilter == Food.FoodType.RECIPE.getId()) {
+            dataSupplier.requestRecipeAdapterTypeData(query, nutritionFilterTable, callbacks);
         }
+        //return dataSupplier.localDBrequest(query, foodTypeFilter, context);
     }
 
 

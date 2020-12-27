@@ -2,6 +2,8 @@ package cz.cuni.mff.nutritionalassistant.guidancebot;
 
 import android.content.Context;
 
+import org.json.JSONException;
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -10,13 +12,16 @@ import cz.cuni.mff.nutritionalassistant.foodtypes.FoodAdapterType;
 import cz.cuni.mff.nutritionalassistant.guidancebot.api.AdapterDataCallback;
 import cz.cuni.mff.nutritionalassistant.guidancebot.api.DetailedFoodCallback;
 import cz.cuni.mff.nutritionalassistant.guidancebot.api.Nutritionix.NutritionixDMS;
+import cz.cuni.mff.nutritionalassistant.guidancebot.api.Spoonacular.SpoonacularDMS;
 import cz.cuni.mff.nutritionalassistant.localdatabase.NutritionDbHelper;
 
 class DataSupplier {
     private NutritionixDMS nutritionixDMS;
+    private SpoonacularDMS spoonacularDMS;
 
     DataSupplier() {
         nutritionixDMS = new NutritionixDMS();
+        spoonacularDMS = new SpoonacularDMS();
     }
 
     List<FoodAdapterType> requestFoodAdapterTypeData(
@@ -27,11 +32,15 @@ class DataSupplier {
 
     void requestProductAdapterTypeData(
             String query, HashMap<Integer, Integer> nutritionFilterTable, AdapterDataCallback callback) {
-        nutritionixDMS.listProducts(query, nutritionFilterTable, callback);
+        try {
+            nutritionixDMS.listProducts(query, nutritionFilterTable, callback);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
-    List<FoodAdapterType> requestRecipeAdapterTypeData(String query, HashMap<Integer, Integer> nutritionFilterTable) {
-        return null;
+    void requestRecipeAdapterTypeData(String query, HashMap<Integer, Integer> nutritionFilterTable, AdapterDataCallback callback) {
+        spoonacularDMS.listRecipes(query, nutritionFilterTable, callback);
     }
 
     List<FoodAdapterType> requestRestaurantFoodAdapterTypeData(String query, HashMap<Integer, Integer> nutritionFilterTable) {

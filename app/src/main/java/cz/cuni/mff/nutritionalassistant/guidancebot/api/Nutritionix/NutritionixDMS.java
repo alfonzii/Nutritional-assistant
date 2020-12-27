@@ -2,15 +2,20 @@ package cz.cuni.mff.nutritionalassistant.guidancebot.api.Nutritionix;
 
 import android.util.Log;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import cz.cuni.mff.nutritionalassistant.foodtypes.FoodAdapterType;
 import cz.cuni.mff.nutritionalassistant.foodtypes.ProductAdapterType;
 import cz.cuni.mff.nutritionalassistant.guidancebot.api.AdapterDataCallback;
 import cz.cuni.mff.nutritionalassistant.guidancebot.api.DetailedFoodCallback;
 import cz.cuni.mff.nutritionalassistant.guidancebot.api.PojoConverter;
+import cz.cuni.mff.nutritionalassistant.util.FilterDialogActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -38,7 +43,7 @@ public class NutritionixDMS {
         Call<NutritionixDetailedFullResponsePojo> call;
 
         // is common
-        if(product.getBrandName() == null) {
+        if (product.getBrandName() == null) {
             call = nutritionixApi.detailsCommonProduct(product.getFoodName());
         } else { //is branded
             call = nutritionixApi.detailsBrandedProduct(product.getId());
@@ -67,17 +72,67 @@ public class NutritionixDMS {
         });
     }
 
-    public void listProducts(String query, HashMap<Integer, Integer> nutritionFilterTable, AdapterDataCallback callbacks) {
+    public void listProducts(String query, HashMap<Integer, Integer> nutritionFilterTable, AdapterDataCallback callbacks) throws JSONException {
         Call<NutritionixAdapterFullResponsePojo> call;
 
-        if(nutritionFilterTable.isEmpty()) {
+        if (nutritionFilterTable.isEmpty()) {
             call = nutritionixApi.listProducts(query);
-        } /*else {
+        } else {
             HashMap<String, Object> parameters = new HashMap<>();
+            JSONObject caloriesBounds = new JSONObject();
+            JSONObject fatsBounds = new JSONObject();
+            JSONObject carbsBounds = new JSONObject();
+            JSONObject proteinBounds = new JSONObject();
 
+            for (Map.Entry<Integer, Integer> entry : nutritionFilterTable.entrySet()) {
+                switch (entry.getKey()) {
+                    case FilterDialogActivity.MIN_CALORIES:
+                        caloriesBounds.put("gte", entry.getValue());
+                        break;
+                    case FilterDialogActivity.MAX_CALORIES:
+                        caloriesBounds.put("lte", entry.getValue());
+                        break;
+                    case FilterDialogActivity.MIN_FATS:
+                        fatsBounds.put("gte", entry.getValue());
+                        break;
+                    case FilterDialogActivity.MAX_FATS:
+                        fatsBounds.put("lte", entry.getValue());
+                        break;
+                    case FilterDialogActivity.MIN_CARBOHYDRATES:
+                        carbsBounds.put("gte", entry.getValue());
+                        break;
+                    case FilterDialogActivity.MAX_CARBOHYDRATES:
+                        carbsBounds.put("lte", entry.getValue());
+                        break;
+                    case FilterDialogActivity.MIN_PROTEINS:
+                        proteinBounds.put("gte", entry.getValue());
+                        break;
+                    case FilterDialogActivity.MAX_PROTEINS:
+                        proteinBounds.put("lte", entry.getValue());
+                        break;
+                }
+            }
 
+            JSONObject filterArgs = new JSONObject();
 
-        }*/
+            if (caloriesBounds.length() != 0) {
+                filterArgs.put("208", caloriesBounds);
+            }
+            if (fatsBounds.length() != 0) {
+                filterArgs.put("204", fatsBounds);
+            }
+            if (carbsBounds.length() != 0) {
+                filterArgs.put("205", carbsBounds);
+            }
+            if (proteinBounds.length() != 0) {
+                filterArgs.put("203", proteinBounds);
+            }
+
+            parameters.put("query", query);
+            parameters.put("full_nutrients", filterArgs);
+
+            call = nutritionixApi.listProducts(parameters);
+        }
 
         call.enqueue(new Callback<NutritionixAdapterFullResponsePojo>() {
             @Override
@@ -90,12 +145,9 @@ public class NutritionixDMS {
 
                 try {
                     correctResponse.addAll(PojoConverter.Nutritionix.fromNutritionixPojoList(response.body().getCommon()));
+                    correctResponse.addAll(PojoConverter.Nutritionix.fromNutritionixPojoList(response.body().getBranded()));
                 } catch (NullPointerException e) {
-                    try {
-                        correctResponse.addAll(PojoConverter.Nutritionix.fromNutritionixPojoList(response.body().getBranded()));
-                    } catch (NullPointerException ex) {
 
-                    }
                 }
                 if (callbacks != null) {
                     callbacks.onSuccess(correctResponse);
@@ -108,11 +160,10 @@ public class NutritionixDMS {
                 if (callbacks != null) {
                     callbacks.onFail(t);
                 }
-            }});
-        }
-
-
+            }
+        });
     }
+}
 
     /*try {
             Thread t = new Thread(new Runnable() {
