@@ -1,6 +1,7 @@
 package cz.cuni.mff.nutritionalassistant.guidancebot.api;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -8,11 +9,13 @@ import cz.cuni.mff.nutritionalassistant.foodtypes.Food;
 import cz.cuni.mff.nutritionalassistant.foodtypes.FoodAdapterType;
 import cz.cuni.mff.nutritionalassistant.foodtypes.Product;
 import cz.cuni.mff.nutritionalassistant.foodtypes.ProductAdapterType;
+import cz.cuni.mff.nutritionalassistant.foodtypes.Recipe;
 import cz.cuni.mff.nutritionalassistant.foodtypes.RecipeAdapterType;
 import cz.cuni.mff.nutritionalassistant.guidancebot.api.Nutritionix.NutritionixAdapterProductPojo;
 import cz.cuni.mff.nutritionalassistant.guidancebot.api.Nutritionix.NutritionixAltMeasuresPojo;
 import cz.cuni.mff.nutritionalassistant.guidancebot.api.Nutritionix.NutritionixDetailedProductPojo;
 import cz.cuni.mff.nutritionalassistant.guidancebot.api.Spoonacular.SpoonacularAdapterRecipePojo;
+import cz.cuni.mff.nutritionalassistant.guidancebot.api.Spoonacular.SpoonacularDetailedRecipePojo;
 
 public class PojoConverter {
 
@@ -82,6 +85,53 @@ public class PojoConverter {
                     pojo.getRecipeName(), pojo.getThumbnailURL(),
                     Food.FoodType.RECIPE, "serving",
                     pojo.getNutrition().getNutrients().get(0).getCalories(), pojo.getId());
+        }
+
+        public static Food fromSpoonacularDetailedRecipePojo(SpoonacularDetailedRecipePojo pojo) {
+            List<Float> servingQuantity = Collections.singletonList(1f);
+            List<String> servingUnit = Collections.singletonList("serving");
+            //List<Float> servingWeight = null;
+
+            float calories = 0;
+            float fats = 0;
+            float carbohydrates = 0;
+            float proteins = 0;
+
+            for (SpoonacularDetailedRecipePojo.Nutrition.Nutrients nutrient : pojo.getNutrition().getNutrients()) {
+                switch (nutrient.getNutrientName()) {
+                    case "Calories":
+                        calories = nutrient.getNutrientAmount();
+                        break;
+                    case "Fat":
+                        fats = nutrient.getNutrientAmount();
+                        break;
+                    case "Carbohydrates":
+                        carbohydrates = nutrient.getNutrientAmount();
+                        break;
+                    case "Protein":
+                        proteins = nutrient.getNutrientAmount();
+                        break;
+                }
+            }
+
+            List<Recipe.Ingredient> ingredientList = new ArrayList<>();
+
+            for (SpoonacularDetailedRecipePojo.Ingredient ingredient : pojo.getIngredients()) {
+                Recipe.Ingredient newIngredient = new Recipe.Ingredient();
+
+                newIngredient.setName(ingredient.getName());
+                newIngredient.setMetricUnit(ingredient.getMeasures().getMetric().getUnitShort());
+                newIngredient.setMetricAmount(ingredient.getMeasures().getMetric().getAmount());
+                newIngredient.setUsUnit(ingredient.getMeasures().getUs().getUnitShort());
+                newIngredient.setUsAmount(ingredient.getMeasures().getUs().getAmount());
+
+                ingredientList.add(newIngredient);
+            }
+
+            return new Recipe(pojo.getRecipeName(), pojo.getThumbnailURL(), calories, fats, carbohydrates, proteins,
+                    Food.FoodType.RECIPE, servingQuantity, servingUnit, null, ingredientList, pojo.getInstructions(),
+                    pojo.getServings(), pojo.getReadyInMinutes());
+
         }
     }
 

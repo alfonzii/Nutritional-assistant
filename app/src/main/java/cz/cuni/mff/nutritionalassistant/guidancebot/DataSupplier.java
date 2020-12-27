@@ -51,6 +51,10 @@ class DataSupplier {
         nutritionixDMS.getProductDetails(product, callback);
     }
 
+    void requestRecipeDetailedInfo(FoodAdapterType recipe, DetailedFoodCallback callback) {
+        spoonacularDMS.getRecipeDetails(recipe, callback);
+    }
+
 //-----------------------------------------------------------------------------------------------------------------------------------
 
     Food localDetailedInfo(FoodAdapterType foodAdapterType, Context context) {

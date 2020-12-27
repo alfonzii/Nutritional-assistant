@@ -46,6 +46,8 @@ public final class Brain {
         //return dataSupplier.localDetailedInfo(foodAdapterType, context);
         if (foodAdapterType.getFoodType() == Food.FoodType.PRODUCT) {
             dataSupplier.requestProductDetailedInfo(foodAdapterType, callback);
+        } else if (foodAdapterType.getFoodType() == Food.FoodType.RECIPE) {
+            dataSupplier.requestRecipeDetailedInfo(foodAdapterType, callback);
         }
     }
 

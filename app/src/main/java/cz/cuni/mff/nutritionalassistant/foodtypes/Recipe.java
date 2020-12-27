@@ -17,6 +17,17 @@ public class Recipe extends Food {
     int numberOfServings; //neviem ci nemoze byt 0.5 serving alebo podobne, tak podla toho sa urci typ servingu
     int readyInMinutes;
 
+    public Recipe(String foodName, String thumbnailURL, float calories, float fats, float carbohydrates, float proteins, FoodType foodType,
+                   List<Float> servingQuantity, List<String> servingUnit, List<Float> servingWeight,
+                  List<Ingredient> ingredients, String instructions, int numberOfServings, int readyInMinutes) {
+
+        super(foodName, thumbnailURL, calories, fats, carbohydrates, proteins, foodType, servingQuantity, servingUnit, servingWeight);
+        this.ingredients = ingredients;
+        this.instructions = instructions;
+        this.numberOfServings = numberOfServings;
+        this.readyInMinutes = readyInMinutes;
+    }
+
     @Getter
     @Setter
     @NoArgsConstructor

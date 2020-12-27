@@ -1,7 +1,9 @@
 package cz.cuni.mff.nutritionalassistant.foodtypes;
 
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+@Getter
 @NoArgsConstructor
 public class RecipeAdapterType extends FoodAdapterType {
     private int id;

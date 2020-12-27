@@ -46,6 +46,8 @@ public class RecipeOverviewActivity extends BaseAbstractActivity {
     private void initialSetupSpecific() {
         initIngredients();
         initInstructions();
+        initServings();
+        initTimeToPrepare();
     }
 
     private void initIngredients() {
@@ -61,6 +63,14 @@ public class RecipeOverviewActivity extends BaseAbstractActivity {
         TextView textViewInstructions = new TextView(this);
         textViewInstructions.setText(recipe.getInstructions());
         binding.LinearLayoutInstructions.addView(textViewInstructions);
+    }
+
+    private void initServings() {
+        binding.textServingsVariable.setText(String.valueOf(recipe.getNumberOfServings()));
+    }
+
+    private void initTimeToPrepare() {
+        binding.textPreparationTimeVariable.setText(String.valueOf(recipe.getReadyInMinutes()));
     }
 
     public void onAddButtonClick(View view) {
