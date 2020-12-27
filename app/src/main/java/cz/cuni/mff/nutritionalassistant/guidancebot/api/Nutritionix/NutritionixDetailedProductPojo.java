@@ -1,4 +1,4 @@
-package cz.cuni.mff.nutritionalassistant.guidancebot.api;
+package cz.cuni.mff.nutritionalassistant.guidancebot.api.Nutritionix;
 
 import com.google.gson.annotations.SerializedName;
 

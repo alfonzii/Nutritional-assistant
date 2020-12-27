@@ -1,12 +1,16 @@
-package cz.cuni.mff.nutritionalassistant.guidancebot.api;
+package cz.cuni.mff.nutritionalassistant.guidancebot.api.Nutritionix;
 
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
-import cz.cuni.mff.nutritionalassistant.foodtypes.Food;
 import cz.cuni.mff.nutritionalassistant.foodtypes.FoodAdapterType;
+import cz.cuni.mff.nutritionalassistant.foodtypes.ProductAdapterType;
+import cz.cuni.mff.nutritionalassistant.guidancebot.api.AdapterDataCallback;
+import cz.cuni.mff.nutritionalassistant.guidancebot.api.DetailedFoodCallback;
+import cz.cuni.mff.nutritionalassistant.guidancebot.api.PojoConverter;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -28,8 +32,17 @@ public class NutritionixDMS {
         nutritionixApi = retrofit.create(NutritionixApi.class);
     }
 
-    public void getBrandedFoodDetails(String id, DetailedFoodCallback callback) {
-        Call<NutritionixDetailedFullResponsePojo> call = nutritionixApi.detailsBrandedProduct(id);
+    public void getProductDetails(FoodAdapterType productAdapterType, DetailedFoodCallback callback) {
+
+        ProductAdapterType product = (ProductAdapterType) productAdapterType;
+        Call<NutritionixDetailedFullResponsePojo> call;
+
+        // is common
+        if(product.getBrandName() == null) {
+            call = nutritionixApi.detailsCommonProduct(product.getFoodName());
+        } else { //is branded
+            call = nutritionixApi.detailsBrandedProduct(product.getId());
+        }
 
         call.enqueue(new Callback<NutritionixDetailedFullResponsePojo>() {
             @Override
@@ -40,7 +53,7 @@ public class NutritionixDMS {
                 }
 
                 if (callback != null) {
-                    callback.onSuccess(PojoConverter.fromNutritionixDetailedProductPojo(response.body().getFoods().get(0)));
+                    callback.onSuccess(PojoConverter.Nutritionix.fromNutritionixDetailedProductPojo(response.body().getFoods().get(0)));
                 }
             }
 
@@ -52,34 +65,56 @@ public class NutritionixDMS {
                 }
             }
         });
+    }
 
-        /*call.enqueue(new Callback<NutritionixDetailedProductPojo>() {
+    public void listProducts(String query, HashMap<Integer, Integer> nutritionFilterTable, AdapterDataCallback callbacks) {
+        Call<NutritionixAdapterFullResponsePojo> call;
+
+        if(nutritionFilterTable.isEmpty()) {
+            call = nutritionixApi.listProducts(query);
+        } /*else {
+            HashMap<String, Object> parameters = new HashMap<>();
+
+
+
+        }*/
+
+        call.enqueue(new Callback<NutritionixAdapterFullResponsePojo>() {
             @Override
-            public void onResponse(Call<NutritionixDetailedProductPojo> call, Response<NutritionixDetailedProductPojo> response) {
+            public void onResponse(Call<NutritionixAdapterFullResponsePojo> call, Response<NutritionixAdapterFullResponsePojo> response) {
                 if (!response.isSuccessful()) {
                     Log.d(NutritionixDMS.class.getName(), "Code: " + response.code());
                     return;
                 }
+                final List<FoodAdapterType> correctResponse = new ArrayList<>();
 
-                if (callback != null) {
-                    callback.onSuccess(PojoConverter.fromNutritionixDetailedProductPojo(response.body()));
+                try {
+                    correctResponse.addAll(PojoConverter.Nutritionix.fromNutritionixPojoList(response.body().getCommon()));
+                } catch (NullPointerException e) {
+                    try {
+                        correctResponse.addAll(PojoConverter.Nutritionix.fromNutritionixPojoList(response.body().getBranded()));
+                    } catch (NullPointerException ex) {
+
+                    }
+                }
+                if (callbacks != null) {
+                    callbacks.onSuccess(correctResponse);
                 }
             }
 
             @Override
-            public void onFailure(Call<NutritionixDetailedProductPojo> call, Throwable t) {
+            public void onFailure(Call<NutritionixAdapterFullResponsePojo> call, Throwable t) {
                 Log.d(NutritionixDMS.class.getName(), t.getMessage());
-                if (callback != null) {
-                    callback.onFail(t);
+                if (callbacks != null) {
+                    callbacks.onFail(t);
                 }
-            }
-        });*/
+            }});
+        }
+
+
     }
 
-    public void listProducts(String query, AdapterDataCallback callbacks) {
-        Call<NutritionixAdapterFullResponsePojo> call = nutritionixApi.listProducts(query);
-
-        /*try {
+    /*try {
             Thread t = new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -98,35 +133,3 @@ public class NutritionixDMS {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }*/
-
-        call.enqueue(new Callback<NutritionixAdapterFullResponsePojo>() {
-            @Override
-            public void onResponse(Call<NutritionixAdapterFullResponsePojo> call, Response<NutritionixAdapterFullResponsePojo> response) {
-                if (!response.isSuccessful()) {
-                    Log.d(NutritionixDMS.class.getName(), "Code: " + response.code());
-                    return;
-                }
-                final List<FoodAdapterType> correctResponse = new ArrayList<>();
-
-                try {
-                    correctResponse.addAll(PojoConverter.fromNutritionixPojoList(response.body().getCommon()));
-                    correctResponse.addAll(PojoConverter.fromNutritionixPojoList(response.body().getBranded()));
-                } catch (NullPointerException e) {
-
-                }
-                if (callbacks != null) {
-                    callbacks.onSuccess(correctResponse);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<NutritionixAdapterFullResponsePojo> call, Throwable t) {
-                Log.d(NutritionixDMS.class.getName(), t.getMessage());
-                if (callbacks != null) {
-                    callbacks.onFail(t);
-                }
-            }});
-        }
-
-
-    }

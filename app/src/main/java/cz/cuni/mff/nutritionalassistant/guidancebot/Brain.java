@@ -30,22 +30,21 @@ public final class Brain {
         return INSTANCE;
     }
 
-    // TODO local
-    public void requestFoodAdapterTypeData(String query, int foodTypeFilter, Context context, AdapterDataCallback callbacks) {
+    public void requestFoodAdapterTypeData(
+            String query, int foodTypeFilter, HashMap<Integer, Integer> nutritionFilterTable, AdapterDataCallback callbacks) {
+
         if (foodTypeFilter == Food.FoodType.PRODUCT.getId()) {
-            dataSupplier.requestProductAdapterTypeData(query, new HashMap<Integer, Integer>(), callbacks);
+            dataSupplier.requestProductAdapterTypeData(query, nutritionFilterTable, callbacks);
         } else {
             //return dataSupplier.localDBrequest(query, foodTypeFilter, context);
         }
     }
 
-    // TODO local
+
     public void requestFoodDetailedInfo(FoodAdapterType foodAdapterType, DetailedFoodCallback callback) {
         //return dataSupplier.localDetailedInfo(foodAdapterType, context);
         if (foodAdapterType.getFoodType() == Food.FoodType.PRODUCT) {
-            if (((ProductAdapterType) foodAdapterType).getBrandName() != null) {
-                dataSupplier.requestBrandedFoodDetailedInfo(((ProductAdapterType) foodAdapterType).getId(), callback);
-            }
+            dataSupplier.requestProductDetailedInfo(foodAdapterType, callback);
         }
     }
 

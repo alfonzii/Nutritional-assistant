@@ -9,7 +9,7 @@ import cz.cuni.mff.nutritionalassistant.foodtypes.Food;
 import cz.cuni.mff.nutritionalassistant.foodtypes.FoodAdapterType;
 import cz.cuni.mff.nutritionalassistant.guidancebot.api.AdapterDataCallback;
 import cz.cuni.mff.nutritionalassistant.guidancebot.api.DetailedFoodCallback;
-import cz.cuni.mff.nutritionalassistant.guidancebot.api.NutritionixDMS;
+import cz.cuni.mff.nutritionalassistant.guidancebot.api.Nutritionix.NutritionixDMS;
 import cz.cuni.mff.nutritionalassistant.localdatabase.NutritionDbHelper;
 
 class DataSupplier {
@@ -27,7 +27,7 @@ class DataSupplier {
 
     void requestProductAdapterTypeData(
             String query, HashMap<Integer, Integer> nutritionFilterTable, AdapterDataCallback callback) {
-        nutritionixDMS.listProducts(query, callback);
+        nutritionixDMS.listProducts(query, nutritionFilterTable, callback);
     }
 
     List<FoodAdapterType> requestRecipeAdapterTypeData(String query, HashMap<Integer, Integer> nutritionFilterTable) {
@@ -38,9 +38,11 @@ class DataSupplier {
         return null;
     }
 
-    void requestBrandedFoodDetailedInfo(String id, DetailedFoodCallback callback) {
-        nutritionixDMS.getBrandedFoodDetails(id, callback);
+    void requestProductDetailedInfo(FoodAdapterType product, DetailedFoodCallback callback) {
+        nutritionixDMS.getProductDetails(product, callback);
     }
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 
     Food localDetailedInfo(FoodAdapterType foodAdapterType, Context context) {
         final NutritionDbHelper dbHelper = NutritionDbHelper.getInstance(context);

@@ -45,7 +45,7 @@ public class FoodAddingActivity extends BaseAbstractActivity {
         public boolean onQueryTextSubmit(String query) {
             foodAddingAdapter.clearItems();
             Brain.getInstance().requestFoodAdapterTypeData(
-                    query, spinnerCategorySelection, FoodAddingActivity.this, new AdapterDataCallback() {
+                    query, spinnerCategorySelection, filterTable, new AdapterDataCallback() {
                         @Override
                         public void onSuccess(@NonNull List<FoodAdapterType> list) {
                             foodAddingAdapter.addItems(list);
