@@ -84,8 +84,44 @@ public class PojoConverter {
             return new RecipeAdapterType(
                     pojo.getRecipeName(), pojo.getThumbnailURL(),
                     Food.FoodType.RECIPE, "serving",
-                    pojo.getNutrition().getNutrients().get(0).getCalories(), pojo.getId());
+                    pojo.getNutrition().getNutrients().get(0).getNutrientAmount(), pojo.getId());
+                                                        // nutrientAmount should be calories
         }
+
+        public static List<Food> fromSpoonacularGenerativeRecipesPojoList(List<SpoonacularAdapterRecipePojo> pojoList) {
+            List<Food> list = new ArrayList<>();
+
+            for(SpoonacularAdapterRecipePojo pojo : pojoList) {
+                list.add(fromSpoonacularGenerativeRecipePojo(pojo));
+            }
+
+            return list;
+        }
+
+        private static Food fromSpoonacularGenerativeRecipePojo(SpoonacularAdapterRecipePojo pojo) {
+            int caloriesIndex = 0;
+            int proteinsIndex = 1;
+            int fatsIndex = 2;
+            int carbsIndex = 3;
+
+            return new Recipe(
+                    pojo.getRecipeName(),
+                    pojo.getThumbnailURL(),
+                    pojo.getNutrition().getNutrients().get(caloriesIndex).getNutrientAmount(),
+                    pojo.getNutrition().getNutrients().get(fatsIndex).getNutrientAmount(),
+                    pojo.getNutrition().getNutrients().get(carbsIndex).getNutrientAmount(),
+                    pojo.getNutrition().getNutrients().get(proteinsIndex).getNutrientAmount(),
+                    Food.FoodType.RECIPE,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    0,
+                    0
+            );
+        }
+
 
         public static Food fromSpoonacularDetailedRecipePojo(SpoonacularDetailedRecipePojo pojo) {
             List<Float> servingQuantity = Collections.singletonList(1f);

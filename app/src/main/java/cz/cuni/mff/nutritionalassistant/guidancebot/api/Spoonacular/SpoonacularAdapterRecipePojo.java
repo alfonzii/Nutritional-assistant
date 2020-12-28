@@ -19,7 +19,7 @@ public class SpoonacularAdapterRecipePojo {
     private Nutrition nutrition;
 
 
-    @Getter
+    /*@Getter
     public static class Nutrition {
         private List<Nutrients> nutrients;
 
@@ -29,5 +29,19 @@ public class SpoonacularAdapterRecipePojo {
             private float calories;
         }
 
+    }*/
+
+    @Getter
+    public static class Nutrition {
+        private List<Nutrients> nutrients;
+
+        @Getter
+        public static class Nutrients {
+            @SerializedName("title")
+            private String nutrientName;
+
+            @SerializedName("amount")
+            private float nutrientAmount;
+        }
     }
 }

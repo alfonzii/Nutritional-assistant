@@ -70,7 +70,7 @@
                     android:id="@+id/text_weight_unit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="x portion"
+                    android:text="x serving"
                     app:layout_constraintBottom_toBottomOf="@+id/text_quantity"
                     app:layout_constraintStart_toEndOf="@+id/number_quantity"
                     app:layout_constraintTop_toTopOf="@+id/text_quantity"

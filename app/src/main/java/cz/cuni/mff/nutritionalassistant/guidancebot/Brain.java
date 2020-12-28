@@ -8,8 +8,6 @@ import java.util.List;
 import cz.cuni.mff.nutritionalassistant.Constants;
 import cz.cuni.mff.nutritionalassistant.foodtypes.Food;
 import cz.cuni.mff.nutritionalassistant.foodtypes.FoodAdapterType;
-import cz.cuni.mff.nutritionalassistant.foodtypes.Product;
-import cz.cuni.mff.nutritionalassistant.foodtypes.ProductAdapterType;
 import cz.cuni.mff.nutritionalassistant.guidancebot.api.AdapterDataCallback;
 import cz.cuni.mff.nutritionalassistant.guidancebot.api.DetailedFoodCallback;
 
@@ -18,7 +16,7 @@ public final class Brain {
     private Generator generator;
     private Mathematics mathematics;
 
-    private static final Brain INSTANCE = new Brain();
+    private static Brain INSTANCE;
 
     private Brain() {
         dataSupplier = new DataSupplier();
@@ -27,6 +25,9 @@ public final class Brain {
     }
 
     public static Brain getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new Brain();
+        }
         return INSTANCE;
     }
 
@@ -71,11 +72,12 @@ public final class Brain {
     // list of meals (index of list) to be regenerated (false meaning not checked -> to be regenerated)
     public List<Food> requestRegenerate(List<Boolean> generatedFoodsFlags, Context context) {
         return generator.requestDummyGeneratedFoods(generatedFoodsFlags, context);
+        //return generator.requestGeneratedFoods(generatedFoodsFlags, context);
     }
 
-    public List<Float> requestNHConstraintsCalculation(
-            Constants.Sex sex, int height, int weight, int age, Constants.Lifestyle lifestyle, Constants.Goal goal) {
-        return null;
+    public void requestNHConstraintsCalculation() {
+        mathematics.setGoalNH();
+        mathematics.setConstraints(mathematics.getModifiedTEE());
     }
 
     //requestDialog - after adding non-generated food

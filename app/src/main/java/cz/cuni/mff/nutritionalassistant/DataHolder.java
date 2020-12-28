@@ -7,11 +7,10 @@ import java.util.List;
 
 import cz.cuni.mff.nutritionalassistant.foodtypes.Food;
 import cz.cuni.mff.nutritionalassistant.foodtypes.Recipe;
+import cz.cuni.mff.nutritionalassistant.guidancebot.Mathematics;
 import lombok.Getter;
 import lombok.Setter;
 
-import static cz.cuni.mff.nutritionalassistant.Constants.Lifestyle;
-import static cz.cuni.mff.nutritionalassistant.Constants.Goal;
 import static cz.cuni.mff.nutritionalassistant.Constants.Sex;
 
 //SINGLETON CLASS (but not proper, because we need to assign saved object from SharedPreferences)
@@ -46,8 +45,8 @@ public final class DataHolder {
     private int weight = 0;
     private int age = 0;
 
-    private Lifestyle lifestyle;
-    private Goal goal;
+    private Mathematics.Lifestyle lifestyle;
+    private Mathematics.Goal goal;
 
     // TODO mali by to byt floaty, a zobrazovacie views by sa mali starat o ich konverziu
     private float caloriesGoal = 0;

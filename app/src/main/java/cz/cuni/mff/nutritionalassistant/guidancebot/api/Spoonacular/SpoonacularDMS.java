@@ -5,12 +5,14 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import cz.cuni.mff.nutritionalassistant.foodtypes.FoodAdapterType;
 import cz.cuni.mff.nutritionalassistant.foodtypes.RecipeAdapterType;
 import cz.cuni.mff.nutritionalassistant.guidancebot.api.AdapterDataCallback;
 import cz.cuni.mff.nutritionalassistant.guidancebot.api.DetailedFoodCallback;
 import cz.cuni.mff.nutritionalassistant.guidancebot.api.PojoConverter;
+import cz.cuni.mff.nutritionalassistant.util.FilterDialogActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -35,7 +37,7 @@ public class SpoonacularDMS {
     public void getRecipeDetails(FoodAdapterType recipeAdapterType, DetailedFoodCallback callback) {
         RecipeAdapterType recipe = (RecipeAdapterType) recipeAdapterType;
 
-        Call<SpoonacularDetailedRecipePojo> call = spoonacularApi.detailsRecipe(recipe.getId(),true, apiKey);
+        Call<SpoonacularDetailedRecipePojo> call = spoonacularApi.detailsRecipe(recipe.getId(), true, apiKey);
 
         call.enqueue(new Callback<SpoonacularDetailedRecipePojo>() {
             @Override
@@ -63,9 +65,48 @@ public class SpoonacularDMS {
     public void listRecipes(String query, HashMap<Integer, Integer> nutritionFilterTable, AdapterDataCallback callback) {
         Call<SpoonacularAdapterFullReposnsePojo> call;
 
-        //if(nutritionFilterTable.isEmpty()) {
-        call = spoonacularApi.listRecipes(query, true, 0, 50, apiKey);
-        //}
+        if (nutritionFilterTable.isEmpty()) {
+            call = spoonacularApi.listRecipes(query, true, 0, 50, apiKey);
+        } else {
+            HashMap<String, String> params = new HashMap<>();
+            params.put("query", query);
+            params.put("instructionsRequired", "true");
+            params.put("number", "50");
+
+            for (Map.Entry<Integer, Integer> entry : nutritionFilterTable.entrySet()) {
+                switch (entry.getKey()) {
+                    case FilterDialogActivity.MIN_CALORIES:
+                        params.put("minCalories", entry.getValue().toString());
+                        break;
+                    case FilterDialogActivity.MAX_CALORIES:
+                        params.put("maxCalories", entry.getValue().toString());
+                        break;
+                    case FilterDialogActivity.MIN_FATS:
+                        params.put("minFat", entry.getValue().toString());
+                        break;
+                    case FilterDialogActivity.MAX_FATS:
+                        params.put("maxFat", entry.getValue().toString());
+                        break;
+                    case FilterDialogActivity.MIN_CARBOHYDRATES:
+                        params.put("minCarbs", entry.getValue().toString());
+                        break;
+                    case FilterDialogActivity.MAX_CARBOHYDRATES:
+                        params.put("maxCarbs", entry.getValue().toString());
+                        break;
+                    case FilterDialogActivity.MIN_PROTEINS:
+                        params.put("minProtein", entry.getValue().toString());
+                        break;
+                    case FilterDialogActivity.MAX_PROTEINS:
+                        params.put("maxProtein", entry.getValue().toString());
+                        break;
+                }
+            }
+
+            params.put("apiKey", apiKey);
+
+
+            call = spoonacularApi.listRecipes(params);
+        }
 
         call.enqueue(new Callback<SpoonacularAdapterFullReposnsePojo>() {
             @Override

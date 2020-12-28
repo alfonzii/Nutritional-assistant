@@ -15,10 +15,6 @@ final public class Constants {
     // User parameters
     public static enum Sex {MALE, FEMALE}
 
-    public static enum Lifestyle {SEDENTARY, MILD_ACTIVITY, MEDIUM_ACTIVITY, HIGH_ACTIVITY}
-
-    public static enum Goal {GAIN, LOSE, MAINTAIN}
-
     private Constants() {
     }
 }

@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import cz.cuni.mff.nutritionalassistant.activity.BaseAbstractActivity;
+import cz.cuni.mff.nutritionalassistant.guidancebot.Mathematics;
 
 
 public class CurrentLifestyleActivity extends BaseAbstractActivity {
@@ -70,22 +71,22 @@ public class CurrentLifestyleActivity extends BaseAbstractActivity {
     }
 
     public void sedentaryClick(View view) {
-        data.setLifestyle(Constants.Lifestyle.SEDENTARY);
+        data.setLifestyle(Mathematics.Lifestyle.SEDENTARY);
         runGoalActivity();
     }
 
     public void mildClick(View view) {
-        data.setLifestyle(Constants.Lifestyle.MILD_ACTIVITY);
+        data.setLifestyle(Mathematics.Lifestyle.MILD_ACTIVITY);
         runGoalActivity();
     }
 
     public void mediumClick(View view) {
-        data.setLifestyle(Constants.Lifestyle.MEDIUM_ACTIVITY);
+        data.setLifestyle(Mathematics.Lifestyle.MEDIUM_ACTIVITY);
         runGoalActivity();
     }
 
     public void highClick(View view) {
-        data.setLifestyle(Constants.Lifestyle.HIGH_ACTIVITY);
+        data.setLifestyle(Mathematics.Lifestyle.HIGH_ACTIVITY);
         runGoalActivity();
     }
 
