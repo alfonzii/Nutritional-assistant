@@ -68,12 +68,13 @@ public final class Brain {
         return null;
     }
 
-    // TODO delete context, only local
-    // list of meals (index of list) to be regenerated (false meaning not checked -> to be regenerated)
-    public List<Food> requestRegenerate(List<Boolean> generatedFoodsFlags, Context context) {
+    // list of meals (index of list) to be regenerated (false meaning not checked && not added custom food -> to be regenerated)
+    public void requestRegenerate(List<Boolean> generatedFoodsFlags, Context context, GeneratedFoodListCallback callback) {
         //return generator.requestDummyGeneratedFoods(generatedFoodsFlags, context);
-        mathematics.setConstraints(mathematics.getModifiedTEE());
-        return generator.randomizedFoodGeneration(generatedFoodsFlags, context);
+        if (allGenFlagsFalse(generatedFoodsFlags)){
+            mathematics.setConstraints(mathematics.getModifiedTEE());
+        }
+        generator.randomizedFoodGeneration(generatedFoodsFlags, context, true, callback);
     }
 
     public void requestNHConstraintsCalculation() {
@@ -82,4 +83,13 @@ public final class Brain {
     }
 
     //requestDialog - after adding non-generated food
+
+    private boolean allGenFlagsFalse(List<Boolean> genFoodsFlags) {
+        for (Boolean bool : genFoodsFlags) {
+            if (bool) { //means flag is true
+                return false;
+            }
+        }
+        return true;
+    }
 }

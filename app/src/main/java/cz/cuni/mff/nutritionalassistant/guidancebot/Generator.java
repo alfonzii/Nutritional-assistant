@@ -1,6 +1,8 @@
 package cz.cuni.mff.nutritionalassistant.guidancebot;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.util.Log;
 import android.util.Pair;
 
 import com.google.gson.Gson;
@@ -9,21 +11,29 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import cz.cuni.mff.nutritionalassistant.DataHolder;
+import cz.cuni.mff.nutritionalassistant.MainActivity;
 import cz.cuni.mff.nutritionalassistant.foodtypes.Food;
 import cz.cuni.mff.nutritionalassistant.foodtypes.FoodAdapterType;
-import cz.cuni.mff.nutritionalassistant.guidancebot.api.Spoonacular.SpoonacularAdapterFullReposnsePojo;
+import cz.cuni.mff.nutritionalassistant.foodtypes.Recipe;
+import cz.cuni.mff.nutritionalassistant.guidancebot.api.DetailedFoodCallback;
+import cz.cuni.mff.nutritionalassistant.guidancebot.api.DetailedFoodGenerateCallback;
+import cz.cuni.mff.nutritionalassistant.guidancebot.api.Spoonacular.SpoonacularDMS;
 
 class Generator {
 
     private DataSupplier dataSupplier;
-    private Mathematics mathematics;
+    private DataHolder dataHolder;
+    private SpoonacularDMS recipeDMS;
 
     Generator() {
         dataSupplier = new DataSupplier();
-        mathematics = Mathematics.getInstance();
+        dataHolder = DataHolder.getInstance();
+        recipeDMS = new SpoonacularDMS();
     }
 
     List<Food> requestDummyGeneratedFoods(List<Boolean> generatedFoodsFlags, Context context) {
@@ -41,57 +51,105 @@ class Generator {
 //-------------------------------------------------RANDOMIZED-ALGORITHM----------------------------------------------------------------------------------
 
     // false flag means new food is needed to be generated
-    List<Food> randomizedFoodGeneration(List<Boolean> generatedFoodFlags, Context context) {
-        List<Food> breakfastList = filterUnsatisfyingFoods(dataSupplier.getBreakfastRecipesList(context), mathematics.getBreakfastConstr());
-        List<Food> lunchList = filterUnsatisfyingFoods(dataSupplier.getMainCourseRecipesList(context), mathematics.getLunchConstr());
-        List<Food> dinnerList = filterUnsatisfyingFoods(dataSupplier.getMainCourseRecipesList(context), mathematics.getDinnerConstr());
-        List<Food> snackList = filterUnsatisfyingFoods(dataSupplier.getSnackRecipesList(context), mathematics.getSnackConstr());
+    void randomizedFoodGeneration(List<Boolean> generatedFoodFlags, Context context, boolean satisfyMealConstr, GeneratedFoodListCallback generatedListCallback) {
+
+        List<List<Food>> mealFoodDataList = new ArrayList<>();
+
+        for (int i = 0; i < MainActivity.MealController.NUMBER_OF_MEALS; i++) {
+            if (!generatedFoodFlags.get(i)) {
+                List<Food> recipesList;
+                Pair<Float, Float> constr;
+
+                if (i == MainActivity.MealController.BREAKFAST) {
+                    recipesList = dataSupplier.getBreakfastRecipesList(context);
+                    constr = dataHolder.getBreakfastConstr();
+                } else if (i == MainActivity.MealController.LUNCH) {
+                    recipesList = dataSupplier.getMainCourseRecipesList(context);
+                    constr = dataHolder.getLunchConstr();
+                } else if (i == MainActivity.MealController.DINNER) {
+                    recipesList = dataSupplier.getMainCourseRecipesList(context);
+                    constr = dataHolder.getDinnerConstr();
+                } else { // i == SNACK
+                    recipesList = dataSupplier.getSnackRecipesList(context);
+                    constr = dataHolder.getSnackConstr();
+                }
+
+                if (satisfyMealConstr) {
+                    mealFoodDataList.add(filterUnsatisfyingFoods(recipesList, constr));
+                } else {
+                    mealFoodDataList.add(recipesList);
+                }
+            }
+        }
 
         Random random = new Random();
         boolean isSatysfyingConstr = false;
 
-        int breakfastIndex, lunchIndex, dinnerIndex, snackIndex;
-
-        List<Food> answer = new ArrayList<>();
-
         while (!isSatysfyingConstr) {
-            breakfastIndex = random.nextInt(breakfastList.size());
-            lunchIndex = random.nextInt(lunchList.size());
-            dinnerIndex = random.nextInt(dinnerList.size());
-            snackIndex = random.nextInt(snackList.size());
 
-            Food breakfastFood, lunchFood, dinnerFood, snackFood;
+            List<Food> foodCombination = new ArrayList<>();
 
-            breakfastFood = breakfastList.get(breakfastIndex);
-            lunchFood = lunchList.get(lunchIndex);
-            dinnerFood = dinnerList.get(dinnerIndex);
-            snackFood = snackList.get(snackIndex);
+            for (List<Food> mealRecipes : mealFoodDataList) {
+                int index = random.nextInt(mealRecipes.size());
+                foodCombination.add(mealRecipes.get(index));
+            }
 
-
-            float totalCal = breakfastFood.getCalories() + lunchFood.getCalories() + dinnerFood.getCalories() + snackFood.getCalories();
-            if (satisfiesConstraints(totalCal, mathematics.getCalsConstr())) {
-
-                float totalFats = breakfastFood.getFats() + lunchFood.getFats() + dinnerFood.getFats() + snackFood.getFats();
-                if (satisfiesConstraints(totalFats, mathematics.getFatsConstr())) {
-
-                    float totalCarbs = breakfastFood.getCarbohydrates() + lunchFood.getCarbohydrates() + dinnerFood.getCarbohydrates() + snackFood.getCarbohydrates();
-                    if (satisfiesConstraints(totalCarbs, mathematics.getCarbConstr())) {
-
-                        float totalProts = breakfastFood.getProteins() + lunchFood.getProteins() + dinnerFood.getProteins() + snackFood.getProteins();
-                        if (satisfiesConstraints(totalProts, mathematics.getProtConstr())) {
+            float totalCal = 0;
+            float totalFats = 0;
+            float totalCarbs = 0;
+            float totalProts = 0;
+            for (Food food : foodCombination) {
+                totalCal += food.getCalories();
+                totalFats += food.getFats();
+                totalCarbs += food.getCarbohydrates();
+                totalProts += food.getProteins();
+            }
+            if (satisfiesConstraints(totalCal, dataHolder.getCalsConstr())) {
+                if (satisfiesConstraints(totalFats, dataHolder.getFatsConstr())) {
+                    if (satisfiesConstraints(totalCarbs, dataHolder.getCarbConstr())) {
+                        if (satisfiesConstraints(totalProts, dataHolder.getProtConstr())) {
 
                             // satisfying combination found
                             isSatysfyingConstr = true;
-                            answer.add(breakfastFood);
-                            answer.add(lunchFood);
-                            answer.add(dinnerFood);
-                            answer.add(snackFood);
+
+                            List<Food> answer = Collections.synchronizedList(new ArrayList<>());
+                            for (int i = 0; i < foodCombination.size(); i++) {
+                                answer.add(null);
+                            }
+
+                            DetailedFoodGenerateCallback callback = new DetailedFoodGenerateCallback() {
+                                @Override
+                                public void onSuccess(@NonNull Food response, int position) {
+                                    answer.set(position, response);
+                                    if (isAsyncAnswerListReady(answer)) {
+                                        generatedListCallback.onSuccess(answer);
+                                    }
+                                }
+
+                                private boolean isAsyncAnswerListReady(List<Food> answer) {
+                                    for (int i = 0; i < answer.size(); i++) {
+                                        if (answer.get(i) == null) {
+                                            return false;
+                                        }
+                                    }
+                                    return true;
+                                }
+
+                                @Override
+                                public void onFail(@NonNull Throwable throwable) {
+                                    Log.e(Generator.class.getName(), throwable.getMessage());
+                                    generatedListCallback.onFail(throwable);
+                                }
+                            };
+
+                            for (int i = 0; i < foodCombination.size(); i++) {
+                                recipeDMS.getGeneratedRecipeDetails(((Recipe) foodCombination.get(i)).getId(), i, callback);
+                            }
                         }
                     }
                 }
             }
         }
-        return answer;
     }
 
     private boolean satisfiesConstraints(float nutriValue, Pair<Float, Float> constr) {

@@ -104,7 +104,7 @@ public class PojoConverter {
             int fatsIndex = 2;
             int carbsIndex = 3;
 
-            return new Recipe(
+            Recipe recipe = new Recipe(
                     pojo.getRecipeName(),
                     pojo.getThumbnailURL(),
                     pojo.getNutrition().getNutrients().get(caloriesIndex).getNutrientAmount(),
@@ -120,6 +120,8 @@ public class PojoConverter {
                     0,
                     0
             );
+            recipe.setId(pojo.getId());
+            return recipe;
         }
 
 

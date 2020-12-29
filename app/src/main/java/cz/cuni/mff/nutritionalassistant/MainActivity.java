@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -35,6 +36,7 @@ import cz.cuni.mff.nutritionalassistant.foodtypes.Product;
 import cz.cuni.mff.nutritionalassistant.foodtypes.Recipe;
 import cz.cuni.mff.nutritionalassistant.foodtypes.RestaurantFood;
 import cz.cuni.mff.nutritionalassistant.guidancebot.Brain;
+import cz.cuni.mff.nutritionalassistant.guidancebot.GeneratedFoodListCallback;
 import cz.cuni.mff.nutritionalassistant.util.FormatUtil;
 import cz.cuni.mff.nutritionalassistant.util.MyGson;
 import cz.cuni.mff.nutritionalassistant.util.listener.AddedFoodTouchListener;
@@ -254,15 +256,23 @@ public class MainActivity extends BaseAbstractActivity {
             generatedFoodsFlags.add(p.second);
         }
 
-        List<Food> newGeneratedRecipes = Brain.getInstance().requestRegenerate(generatedFoodsFlags, this);
-        ListIterator<Pair<Food, Boolean>> it = dataHolder.getGeneratedFoods().listIterator();
-        while (it.hasNext()) {
-            if (!it.next().second) {
-                it.set(new Pair<>(newGeneratedRecipes.get(0), false));
-                newGeneratedRecipes.remove(0);
+        Brain.getInstance().requestRegenerate(generatedFoodsFlags, this, new GeneratedFoodListCallback() {
+            @Override
+            public void onSuccess(@NonNull List<Food> newGeneratedRecipes) {
+                ListIterator<Pair<Food, Boolean>> it = dataHolder.getGeneratedFoods().listIterator();
+                while (it.hasNext()) {
+                    if (!it.next().second) {
+                        it.set(new Pair<>(newGeneratedRecipes.get(0), false));
+                        newGeneratedRecipes.remove(0);
+                    }
+                }
+                refreshGeneratedFoods();
             }
-        }
-        refreshGeneratedFoods();
+            @Override
+            public void onFail(@NonNull Throwable throwable) {
+
+            }
+        });
     }
 
     private void refreshGeneratedFoods() {

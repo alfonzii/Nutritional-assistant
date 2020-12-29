@@ -90,6 +90,24 @@ public class Mathematics {
         lunchConstr = new Pair<>(0.9f * (0.35f * tee), 1.1f * (0.35f * tee));
         dinnerConstr = new Pair<>(0.9f * (0.2f * tee), 1.1f * (0.2f * tee));
         snackConstr = new Pair<>(0.9f * (0.2f * tee), 1.1f * (0.2f * tee));
+
+        saveConstraints();
+    }
+
+    private void saveConstraints() {
+        dataHolder.setFatsReq(fatsReq);
+        dataHolder.setCarbsReq(carbsReq);
+        dataHolder.setProtsReq(protsReq);
+
+        dataHolder.setCalsConstr(calsConstr);
+        dataHolder.setFatsConstr(fatsConstr);
+        dataHolder.setCarbConstr(carbConstr);
+        dataHolder.setProtConstr(protConstr);
+
+        dataHolder.setBreakfastConstr(breakfastConstr);
+        dataHolder.setLunchConstr(lunchConstr);
+        dataHolder.setDinnerConstr(dinnerConstr);
+        dataHolder.setSnackConstr(snackConstr);
     }
 
     @Getter

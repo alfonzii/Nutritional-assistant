@@ -12,6 +12,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class Recipe extends Food {
+    int id;
     List<Ingredient> ingredients;
     String instructions; //List<String>, zalezi od sposobu citania z JSON odpovede
     int numberOfServings; //neviem ci nemoze byt 0.5 serving alebo podobne, tak podla toho sa urci typ servingu

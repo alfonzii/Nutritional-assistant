@@ -14,6 +14,7 @@ import java.util.List;
 
 import cz.cuni.mff.nutritionalassistant.foodtypes.Food;
 import cz.cuni.mff.nutritionalassistant.foodtypes.FoodAdapterType;
+import cz.cuni.mff.nutritionalassistant.foodtypes.RecipeAdapterType;
 import cz.cuni.mff.nutritionalassistant.guidancebot.api.AdapterDataCallback;
 import cz.cuni.mff.nutritionalassistant.guidancebot.api.DetailedFoodCallback;
 import cz.cuni.mff.nutritionalassistant.guidancebot.api.Nutritionix.NutritionixDMS;
@@ -59,7 +60,7 @@ class DataSupplier {
     }
 
     void requestRecipeDetailedInfo(FoodAdapterType recipe, DetailedFoodCallback callback) {
-        spoonacularDMS.getRecipeDetails(recipe, callback);
+        spoonacularDMS.getRecipeDetails(((RecipeAdapterType) recipe).getId(), callback);
     }
 
 //------------------------------------------LOCAL----------------------------------------------------------------------------------

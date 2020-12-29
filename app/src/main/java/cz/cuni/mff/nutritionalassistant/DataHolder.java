@@ -58,6 +58,10 @@ public final class DataHolder {
     private float carbohydratesCurrent = 0;
     private float proteinsCurrent = 0;
 
+    private float fatsReq, carbsReq, protsReq;
+    private Pair<Float, Float> calsConstr, fatsConstr, carbConstr, protConstr;
+    private Pair<Float, Float> breakfastConstr, lunchConstr, dinnerConstr, snackConstr;
+
     // Generated food + flag, if it is checked (eaten)
     private List<Pair<Food, Boolean>> generatedFoods;
     private List<List<Food>> userAddedFoods;

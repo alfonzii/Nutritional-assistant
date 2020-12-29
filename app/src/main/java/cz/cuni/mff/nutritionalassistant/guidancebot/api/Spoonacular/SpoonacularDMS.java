@@ -11,6 +11,7 @@ import cz.cuni.mff.nutritionalassistant.foodtypes.FoodAdapterType;
 import cz.cuni.mff.nutritionalassistant.foodtypes.RecipeAdapterType;
 import cz.cuni.mff.nutritionalassistant.guidancebot.api.AdapterDataCallback;
 import cz.cuni.mff.nutritionalassistant.guidancebot.api.DetailedFoodCallback;
+import cz.cuni.mff.nutritionalassistant.guidancebot.api.DetailedFoodGenerateCallback;
 import cz.cuni.mff.nutritionalassistant.guidancebot.api.PojoConverter;
 import cz.cuni.mff.nutritionalassistant.util.FilterDialogActivity;
 import retrofit2.Call;
@@ -34,10 +35,8 @@ public class SpoonacularDMS {
         spoonacularApi = retrofit.create(SpoonacularApi.class);
     }
 
-    public void getRecipeDetails(FoodAdapterType recipeAdapterType, DetailedFoodCallback callback) {
-        RecipeAdapterType recipe = (RecipeAdapterType) recipeAdapterType;
-
-        Call<SpoonacularDetailedRecipePojo> call = spoonacularApi.detailsRecipe(recipe.getId(), true, apiKey);
+    public void getRecipeDetails(int recipeId, DetailedFoodCallback callback) {
+        Call<SpoonacularDetailedRecipePojo> call = spoonacularApi.detailsRecipe(recipeId, true, apiKey);
 
         call.enqueue(new Callback<SpoonacularDetailedRecipePojo>() {
             @Override
@@ -49,6 +48,32 @@ public class SpoonacularDMS {
 
                 if (callback != null) {
                     callback.onSuccess(PojoConverter.Spoonacular.fromSpoonacularDetailedRecipePojo(response.body()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SpoonacularDetailedRecipePojo> call, Throwable t) {
+                Log.d(SpoonacularDMS.class.getName(), t.getMessage());
+                if (callback != null) {
+                    callback.onFail(t);
+                }
+            }
+        });
+    }
+
+    public void getGeneratedRecipeDetails(int recipeId, int mealPosition, DetailedFoodGenerateCallback callback) {
+        Call<SpoonacularDetailedRecipePojo> call = spoonacularApi.detailsRecipe(recipeId, true, apiKey);
+
+        call.enqueue(new Callback<SpoonacularDetailedRecipePojo>() {
+            @Override
+            public void onResponse(Call<SpoonacularDetailedRecipePojo> call, Response<SpoonacularDetailedRecipePojo> response) {
+                if (!response.isSuccessful()) {
+                    Log.d(SpoonacularDMS.class.getName(), "Code: " + response.code());
+                    return;
+                }
+
+                if (callback != null) {
+                    callback.onSuccess(PojoConverter.Spoonacular.fromSpoonacularDetailedRecipePojo(response.body()), mealPosition);
                 }
             }
 
