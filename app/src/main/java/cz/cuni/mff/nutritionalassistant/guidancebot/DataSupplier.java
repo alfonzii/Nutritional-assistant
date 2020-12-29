@@ -82,7 +82,7 @@ class DataSupplier {
 
     List<Food> getSnackRecipesList(Context context) {
         SpoonacularAdapterFullReposnsePojo snackPojo = gson.fromJson(
-                loadJSONFromAsset("main_course_recipes.json", context), SpoonacularAdapterFullReposnsePojo.class);
+                loadJSONFromAsset("snack_recipes.json", context), SpoonacularAdapterFullReposnsePojo.class);
 
         return PojoConverter.Spoonacular.fromSpoonacularGenerativeRecipesPojoList(snackPojo.getResults());
     }

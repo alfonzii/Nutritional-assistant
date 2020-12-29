@@ -10,6 +10,8 @@ import lombok.Getter;
 
 @Getter
 public class Mathematics {
+    private static Mathematics INSTANCE;
+
     private DataHolder dataHolder;
 
     private float fatsReq, carbsReq, protsReq;
@@ -17,8 +19,15 @@ public class Mathematics {
     private Pair<Float, Float> breakfastConstr, lunchConstr, dinnerConstr, snackConstr;
 
 
-    Mathematics() {
+    private Mathematics() {
         dataHolder = DataHolder.getInstance();
+    }
+
+    static Mathematics getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new Mathematics();
+        }
+        return  INSTANCE;
     }
 
     // Basal Metabolic Rate
@@ -68,13 +77,13 @@ public class Mathematics {
     void setConstraints(float tee) {
         Random random = new Random();
 
-        fatsReq = ((random.nextInt(6) + 25) / 100f) * (tee/9);
-        carbsReq = ((random.nextInt(6) + 55) / 100f) * (tee/4);
-        protsReq = ((random.nextInt(6) + 10) / 100f) * (tee/4);
+        fatsReq = ((random.nextInt(6) + 25) / 100f) * (tee / 9);
+        carbsReq = ((random.nextInt(6) + 55) / 100f) * (tee / 4);
+        protsReq = ((random.nextInt(6) + 10) / 100f) * (tee / 4);
 
         calsConstr = new Pair<>(0.9f * tee, 1.1f * tee);
         fatsConstr = new Pair<>(0.9f * fatsReq, 1.1f * fatsReq);
-        carbConstr = new Pair<>(0.9f* carbsReq, 1.1f * carbsReq);
+        carbConstr = new Pair<>(0.9f * carbsReq, 1.1f * carbsReq);
         protConstr = new Pair<>(0.9f * protsReq, 1.1f * protsReq);
 
         breakfastConstr = new Pair<>(0.9f * (0.25f * tee), 1.1f * (0.25f * tee));

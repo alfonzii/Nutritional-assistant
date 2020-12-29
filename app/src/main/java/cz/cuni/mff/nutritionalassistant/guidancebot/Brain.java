@@ -21,7 +21,7 @@ public final class Brain {
     private Brain() {
         dataSupplier = new DataSupplier();
         generator = new Generator();
-        mathematics = new Mathematics();
+        mathematics = Mathematics.getInstance();
     }
 
     public static Brain getInstance() {
@@ -71,8 +71,9 @@ public final class Brain {
     // TODO delete context, only local
     // list of meals (index of list) to be regenerated (false meaning not checked -> to be regenerated)
     public List<Food> requestRegenerate(List<Boolean> generatedFoodsFlags, Context context) {
-        return generator.requestDummyGeneratedFoods(generatedFoodsFlags, context);
-        //return generator.requestGeneratedFoods(generatedFoodsFlags, context);
+        //return generator.requestDummyGeneratedFoods(generatedFoodsFlags, context);
+        mathematics.setConstraints(mathematics.getModifiedTEE());
+        return generator.randomizedFoodGeneration(generatedFoodsFlags, context);
     }
 
     public void requestNHConstraintsCalculation() {
