@@ -86,7 +86,8 @@ public class MainActivity extends BaseAbstractActivity {
     private void reset(boolean isButtonClicked) {
         // clear user added foods frontend
         for (int meal = 0; meal < MealController.NUMBER_OF_MEALS; meal++) {
-            MealController.getLayoutFromMealID(binding, meal).removeAllViews();
+            int childCount = MealController.getLayoutFromMealID(binding, meal).getChildCount();
+            MealController.getLayoutFromMealID(binding, meal).removeViews(2, childCount - 2);
         }
         // clear user added foods backend
         for (List<Food> mealList : dataHolder.getUserAddedFoods()) {
@@ -103,7 +104,7 @@ public class MainActivity extends BaseAbstractActivity {
         // reset is called from MainActivity initialization
         if (!isButtonClicked) {
             if (dataHolder.getAdHocFlag() == DataHolder.AdHocFlag.NEXTDAY) {
-                if (dataHolder.getCaloriesCurrent() - dataHolder.getCaloriesGoal() > 0){
+                if (dataHolder.getCaloriesCurrent() - dataHolder.getCaloriesGoal() > 0) {
                     dataHolder.setCaloriesExcess(dataHolder.getCaloriesCurrent() - dataHolder.getCaloriesGoal());
                 } else {
                     dataHolder.setCaloriesExcess(0);
@@ -302,21 +303,39 @@ public class MainActivity extends BaseAbstractActivity {
     }
 
     public void regenerateButtonClick(View view) {
-        List<Boolean> generatedFoodsFlags = new ArrayList<>();
+        List<Boolean> generatedFoodsChecked = new ArrayList<>();
         for (Pair<Food, Boolean> p : dataHolder.getGeneratedFoods()) {
-            generatedFoodsFlags.add(p.second);
+            generatedFoodsChecked.add(p.second);
+        }
+
+        List<Boolean> userAddedFoodsFlags = new ArrayList<>();
+        for (List<Food> mealList : dataHolder.getUserAddedFoods()) {
+            userAddedFoodsFlags.add(mealList.size() != 0);
+        }
+
+        List<Boolean> generatedFoodsFlags = new ArrayList<>();
+        for (int i = 0; i < MealController.NUMBER_OF_MEALS; i++) {
+            generatedFoodsFlags.add(generatedFoodsChecked.get(i) || userAddedFoodsFlags.get(i));
         }
 
         Brain.getInstance().requestRegenerate(generatedFoodsFlags, this, new GeneratedFoodListCallback() {
             @Override
             public void onSuccess(@NonNull List<Food> newGeneratedRecipes) {
-                ListIterator<Pair<Food, Boolean>> it = dataHolder.getGeneratedFoods().listIterator();
-                while (it.hasNext()) {
+                //ListIterator<Pair<Food, Boolean>> it = dataHolder.getGeneratedFoods().listIterator();
+
+                for (int i = 0; i < MealController.NUMBER_OF_MEALS; i++) {
+                    if (!generatedFoodsFlags.get(i)) {
+                        dataHolder.getGeneratedFoods().set(i, new Pair<>(newGeneratedRecipes.get(0), false));
+                        newGeneratedRecipes.remove(0);
+                    }
+                }
+
+                /*while (it.hasNext()) {
                     if (!it.next().second) {
                         it.set(new Pair<>(newGeneratedRecipes.get(0), false));
                         newGeneratedRecipes.remove(0);
                     }
-                }
+                }*/
                 refreshGeneratedFoods();
             }
 
@@ -346,7 +365,7 @@ public class MainActivity extends BaseAbstractActivity {
             LayoutGeneratedFoodBinding generatedFoodBinding = MealController.getGeneratedFoodBindingFromMealID(binding, i);
             generatedFoodBinding.textNameGeneratedFood.setText(genFood.getFoodName());
             generatedFoodBinding.textCaloriesGeneratedFood.setText(
-                    FormatUtil.roundedStringFormat(genFood.getCalories() * genFood.getServingQuantity().get(0)) + " cals");
+                    FormatUtil.roundedStringFormat(genFood.getCalories()) + " cals");
             generatedFoodBinding.checkBox.setChecked(isChecked);
             //if (!dataHolder.getGeneratedFoods().get(i).second) {
             generatedFoodBinding.textNameGeneratedFood.setOnClickListener(

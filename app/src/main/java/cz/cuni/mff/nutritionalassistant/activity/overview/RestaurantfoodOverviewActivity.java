@@ -78,8 +78,8 @@ public class RestaurantfoodOverviewActivity extends BaseAbstractActivity
     }
 
     public void onAddButtonClick(View view) {
-        overviewUtil.onAddButtonClickGeneral();
-        setResult(RESULT_OK);
-        finish();
+        overviewUtil.onAddButtonClickGeneral(this);
+        //setResult(RESULT_OK);
+        //finish();
     }
 }

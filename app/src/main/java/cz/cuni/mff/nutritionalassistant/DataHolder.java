@@ -100,19 +100,17 @@ public final class DataHolder {
     }
 
     public void addFoodToCurrentNH(Food food) {
-        float quantity = food.getServingQuantity().get(0);
-        caloriesCurrent += food.getCalories() * quantity;
-        fatsCurrent += food.getFats() * quantity;
-        carbohydratesCurrent += food.getCarbohydrates() * quantity;
-        proteinsCurrent += food.getProteins() * quantity;
+        caloriesCurrent += food.getCalories();
+        fatsCurrent += food.getFats();
+        carbohydratesCurrent += food.getCarbohydrates();
+        proteinsCurrent += food.getProteins();
     }
 
     public void subtractFoodFromCurrentNH(Food food) {
-        float quantity = food.getServingQuantity().get(0);
-        caloriesCurrent -= food.getCalories() * quantity;
-        fatsCurrent -= food.getFats() * quantity;
-        carbohydratesCurrent -= food.getCarbohydrates() * quantity;
-        proteinsCurrent -= food.getProteins() * quantity;
+        caloriesCurrent -= food.getCalories();
+        fatsCurrent -= food.getFats();
+        carbohydratesCurrent -= food.getCarbohydrates();
+        proteinsCurrent -= food.getProteins();
     }
 
     public static enum AdHocFlag {

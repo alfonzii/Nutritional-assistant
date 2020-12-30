@@ -1,9 +1,12 @@
 package cz.cuni.mff.nutritionalassistant.activity.overview;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.constraint.ConstraintLayout;
+import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,9 +16,12 @@ import android.widget.TextView;
 import java.util.Collections;
 
 import cz.cuni.mff.nutritionalassistant.DataHolder;
+import cz.cuni.mff.nutritionalassistant.MainActivity;
+import cz.cuni.mff.nutritionalassistant.activity.BaseAbstractActivity;
 import cz.cuni.mff.nutritionalassistant.foodtypes.Food;
 import cz.cuni.mff.nutritionalassistant.foodtypes.Recipe;
 
+import static android.app.Activity.RESULT_OK;
 import static cz.cuni.mff.nutritionalassistant.util.FormatUtil.correctStringFormat;
 import static cz.cuni.mff.nutritionalassistant.util.FormatUtil.roundedStringFormat;
 
@@ -113,11 +119,11 @@ class GeneralOverviewUtil {
         //binding.thumbnail SET IMAGE BUT ALWAYS DOWNLOADING IS NASTY. PROBABLY SAVE SOMEWHERE FROM
         // FOOD LIGHTWEIGHT WHERE IT IS ALREADY DOWNLOADED.
 
-        numberQuantity.setText(roundedStringFormat(quantity));
-        txtCaloriesValue.setText(roundedStringFormat(food.getCalories() * quantity));
-        txtFatsValue.setText(roundedStringFormat(food.getFats() * quantity));
-        txtCarbohydratesValue.setText(roundedStringFormat(food.getCarbohydrates() * quantity));
-        txtProteinsValue.setText(roundedStringFormat(food.getProteins() * quantity));
+        numberQuantity.setText(correctStringFormat(quantity));
+        txtCaloriesValue.setText(roundedStringFormat(food.getCalories()));
+        txtFatsValue.setText(roundedStringFormat(food.getFats()));
+        txtCarbohydratesValue.setText(roundedStringFormat(food.getCarbohydrates()));
+        txtProteinsValue.setText(roundedStringFormat(food.getProteins()));
     }
 
     void addFoodSetupGeneral() {
@@ -162,9 +168,40 @@ class GeneralOverviewUtil {
         }
     }
 
-    void onAddButtonClickGeneral() {
+    void onAddButtonClickGeneral(Context context) {
+        if (dataHolder.getAdHocFlag() == DataHolder.AdHocFlag.UNSET) {
+            AlertDialog.Builder myAlertBuilder;
+            myAlertBuilder = new AlertDialog.Builder(context);
 
+            DialogInterface.OnClickListener clickListener = (dialog, which) -> {
+                switch (which) {
+                    case DialogInterface.BUTTON_POSITIVE:
+                        dataHolder.setAdHocFlag(DataHolder.AdHocFlag.THISDAY);
+                        break;
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        dataHolder.setAdHocFlag(DataHolder.AdHocFlag.NEXTDAY);
+                        break;
+                    case DialogInterface.BUTTON_NEUTRAL:
+                        dataHolder.setAdHocFlag(DataHolder.AdHocFlag.CHEATDAY);
+                        break;
+                }
+                addFood(context);
+            };
+            myAlertBuilder.setPositiveButton("THISDAY", clickListener);
+            myAlertBuilder.setNegativeButton("NEXTDAY", clickListener);
+            myAlertBuilder.setNeutralButton("CHEATDAY", clickListener);
+            myAlertBuilder.setTitle("Guidance bot");
+            myAlertBuilder.setMessage(
+                    "You are about to add non-generated food in your meal plan. " +
+                            "Which of the ad-hoc features should guidance bot use to act accordingly?\n");
+            // Create and show the AlertDialog.
+            myAlertBuilder.show();
+        } else {
+            addFood(context);
+        }
+    }
 
+    private void addFood(Context context) {
         food.setServingQuantity(Collections.singletonList(Float.parseFloat(numberQuantity.getText().toString())));
         // Not general, but too simple to divide code
         if (food.getFoodType() != Food.FoodType.RECIPE) {
@@ -183,6 +220,9 @@ class GeneralOverviewUtil {
         dataHolder.setLastAddedMeal(meal);
 
         dataHolder.addFoodToCurrentNH(food);
+
+        ((BaseAbstractActivity)context).setResult(RESULT_OK);
+        ((BaseAbstractActivity)context).finish();
     }
 
     void examineDetailsSetupGeneral(Context context, ConstraintLayout layoutHeader, TextView txtQuantity, TextView txtMeal, Button buttonAdd) {

@@ -98,7 +98,7 @@ class Generator {
 
         while (!isSatysfyingConstr) {
             counter++;
-            if (counter > 2500000) {
+            if (counter > 1000000) {
                 if (generatedListCallback != null && satisfyMealConstr) {
                     generatedListCallback.onFail(new Throwable("Too many iterations of algorithm using meal constraints."));
                     return;

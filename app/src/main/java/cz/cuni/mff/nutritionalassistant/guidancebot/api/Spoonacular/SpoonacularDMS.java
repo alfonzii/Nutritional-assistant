@@ -27,7 +27,7 @@ public class SpoonacularDMS {
 
     private Retrofit retrofit;
     private SpoonacularApi spoonacularApi;
-    private String apiKey = "53eb0eca288d46358db6dafd0961a0b9";
+    private String apiKey = "54483141f36447f38d9451d5ea8236cd"; //"53eb0eca288d46358db6dafd0961a0b9";
 
     public SpoonacularDMS() {
         retrofit = new Retrofit.Builder()
@@ -78,6 +78,12 @@ public class SpoonacularDMS {
                 if (callback != null) {
                     Food food = PojoConverter.Spoonacular.fromSpoonacularDetailedRecipePojo(response.body());
                     food.setServingQuantity(Collections.singletonList(quantity));
+                    if (quantity != 1) {
+                        food.setCalories(food.getCalories()*quantity);
+                        food.setFats(food.getFats()*quantity);
+                        food.setCarbohydrates(food.getCarbohydrates()*quantity);
+                        food.setProteins(food.getProteins()*quantity);
+                    }
                     callback.onSuccess(food, mealPosition);
                 }
             }

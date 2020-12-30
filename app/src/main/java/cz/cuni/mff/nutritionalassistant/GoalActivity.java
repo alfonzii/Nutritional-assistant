@@ -71,7 +71,7 @@ public class GoalActivity extends BaseAbstractActivity {
 
     private void endAcivity() {
         //calculateMacronutrients();
-        Brain.getInstance().requestNHConstraintsCalculation();
+        Brain.getInstance().requestNHConstraintsCalculation(data.getCaloriesExcess());
         setResult(RESULT_OK);
         finish();
     }
