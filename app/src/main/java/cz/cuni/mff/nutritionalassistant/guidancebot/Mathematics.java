@@ -94,6 +94,18 @@ public class Mathematics {
         saveConstraints();
     }
 
+    void updateConstraints() {
+        calsConstr = new Pair<>(0.9f * dataHolder.getCaloriesGoal() - dataHolder.getCaloriesCurrent(), 1.1f * dataHolder.getCaloriesGoal() - dataHolder.getCaloriesCurrent());
+        fatsConstr = new Pair<>(0.9f * dataHolder.getFatsReq() - dataHolder.getFatsCurrent(), 1.1f * dataHolder.getFatsReq() - dataHolder.getFatsCurrent());
+        carbConstr = new Pair<>(0.9f * dataHolder.getCarbsReq() - dataHolder.getCarbohydratesCurrent(), 1.1f * dataHolder.getCarbsReq() - dataHolder.getCarbohydratesCurrent());
+        protConstr = new Pair<>(0.9f * dataHolder.getProtsReq() - dataHolder.getProteinsCurrent(), 1.1f * dataHolder.getProtsReq() - dataHolder.getProteinsCurrent());
+
+        dataHolder.setCalsConstr(calsConstr);
+        dataHolder.setFatsConstr(fatsConstr);
+        dataHolder.setCarbConstr(carbConstr);
+        dataHolder.setProtConstr(protConstr);
+    }
+
     private void saveConstraints() {
         dataHolder.setFatsReq(fatsReq);
         dataHolder.setCarbsReq(carbsReq);

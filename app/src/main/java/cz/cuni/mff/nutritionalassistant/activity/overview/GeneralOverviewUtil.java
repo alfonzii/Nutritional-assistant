@@ -14,6 +14,7 @@ import java.util.Collections;
 
 import cz.cuni.mff.nutritionalassistant.DataHolder;
 import cz.cuni.mff.nutritionalassistant.foodtypes.Food;
+import cz.cuni.mff.nutritionalassistant.foodtypes.Recipe;
 
 import static cz.cuni.mff.nutritionalassistant.util.FormatUtil.correctStringFormat;
 import static cz.cuni.mff.nutritionalassistant.util.FormatUtil.roundedStringFormat;
@@ -99,7 +100,7 @@ class GeneralOverviewUtil {
         this.txtCarbohydratesValue = txtCarbohydratesValue;
         this.txtProteinsValue = txtProteinsValue;
         this.food = food;
-        quantity = 1;
+        quantity = food.getServingQuantity().get(0);
         newCalories = food.getCalories();
         newFats = food.getFats();
         newCarbohydrates = food.getCarbohydrates();
@@ -113,10 +114,10 @@ class GeneralOverviewUtil {
         // FOOD LIGHTWEIGHT WHERE IT IS ALREADY DOWNLOADED.
 
         numberQuantity.setText(roundedStringFormat(quantity));
-        txtCaloriesValue.setText(roundedStringFormat(food.getCalories()));
-        txtFatsValue.setText(roundedStringFormat(food.getFats()));
-        txtCarbohydratesValue.setText(roundedStringFormat(food.getCarbohydrates()));
-        txtProteinsValue.setText(roundedStringFormat(food.getProteins()));
+        txtCaloriesValue.setText(roundedStringFormat(food.getCalories() * quantity));
+        txtFatsValue.setText(roundedStringFormat(food.getFats() * quantity));
+        txtCarbohydratesValue.setText(roundedStringFormat(food.getCarbohydrates() * quantity));
+        txtProteinsValue.setText(roundedStringFormat(food.getProteins() * quantity));
     }
 
     void addFoodSetupGeneral() {

@@ -89,16 +89,18 @@ public final class DataHolder {
     }
 
     public void addFoodToCurrentNH(Food food) {
-        caloriesCurrent += food.getCalories();
-        fatsCurrent += food.getFats();
-        carbohydratesCurrent += food.getCarbohydrates();
-        proteinsCurrent += food.getProteins();
+        float quantity = food.getServingQuantity().get(0);
+        caloriesCurrent += food.getCalories() * quantity;
+        fatsCurrent += food.getFats() * quantity;
+        carbohydratesCurrent += food.getCarbohydrates() * quantity;
+        proteinsCurrent += food.getProteins() * quantity;
     }
 
     public void subtractFoodFromCurrentNH(Food food) {
-        caloriesCurrent -= food.getCalories();
-        fatsCurrent -= food.getFats();
-        carbohydratesCurrent -= food.getCarbohydrates();
-        proteinsCurrent -= food.getProteins();
+        float quantity = food.getServingQuantity().get(0);
+        caloriesCurrent -= food.getCalories() * quantity;
+        fatsCurrent -= food.getFats() * quantity;
+        carbohydratesCurrent -= food.getCarbohydrates() * quantity;
+        proteinsCurrent -= food.getProteins() * quantity;
     }
 }

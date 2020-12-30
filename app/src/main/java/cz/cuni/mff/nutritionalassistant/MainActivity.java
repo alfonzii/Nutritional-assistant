@@ -1,11 +1,13 @@
 package cz.cuni.mff.nutritionalassistant;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.Pair;
@@ -270,7 +272,19 @@ public class MainActivity extends BaseAbstractActivity {
             }
             @Override
             public void onFail(@NonNull Throwable throwable) {
-
+                AlertDialog.Builder myAlertBuilder;
+                myAlertBuilder = new AlertDialog.Builder(MainActivity.this);
+                // Add the dialog buttons.
+                myAlertBuilder.setPositiveButton("Dismiss",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        });
+                myAlertBuilder.setTitle("Error");
+                myAlertBuilder.setMessage(
+                        "Application wasn't able to generate meal plan for you because of following reason:\n" + throwable.getMessage());
+                // Create and show the AlertDialog.
+                myAlertBuilder.show();
             }
         });
     }
@@ -282,7 +296,7 @@ public class MainActivity extends BaseAbstractActivity {
                 LayoutGeneratedFoodBinding generatedFoodBinding = MealController.getGeneratedFoodBindingFromMealID(binding, i);
                 generatedFoodBinding.textNameGeneratedFood.setText(genFood.getFoodName());
                 generatedFoodBinding.textCaloriesGeneratedFood.setText(
-                        FormatUtil.roundedStringFormat(genFood.getCalories()) + " cals");
+                        FormatUtil.roundedStringFormat(genFood.getCalories() * genFood.getServingQuantity().get(0)) + " cals");
                 generatedFoodBinding.checkBox.setChecked(isChecked);
             //if (!dataHolder.getGeneratedFoods().get(i).second) {
                 generatedFoodBinding.textNameGeneratedFood.setOnClickListener(

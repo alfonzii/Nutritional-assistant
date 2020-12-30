@@ -19,6 +19,7 @@ import cz.cuni.mff.nutritionalassistant.DataHolder;
 import cz.cuni.mff.nutritionalassistant.MainActivity;
 import cz.cuni.mff.nutritionalassistant.foodtypes.Food;
 import cz.cuni.mff.nutritionalassistant.foodtypes.FoodAdapterType;
+import cz.cuni.mff.nutritionalassistant.foodtypes.Product;
 import cz.cuni.mff.nutritionalassistant.foodtypes.Recipe;
 import cz.cuni.mff.nutritionalassistant.guidancebot.api.DetailedFoodCallback;
 import cz.cuni.mff.nutritionalassistant.guidancebot.api.DetailedFoodGenerateCallback;
@@ -76,6 +77,12 @@ class Generator {
 
                 if (satisfyMealConstr) {
                     mealFoodDataList.add(filterUnsatisfyingFoods(recipesList, constr));
+                    if (mealFoodDataList.get(mealFoodDataList.size() - 1).size() == 0) {
+                        if (generatedListCallback != null) {
+                            generatedListCallback.onFail(new Throwable("Meal list for generation empty."));
+                            return;
+                        }
+                    }
                 } else {
                     mealFoodDataList.add(recipesList);
                 }
@@ -84,14 +91,26 @@ class Generator {
 
         Random random = new Random();
         boolean isSatysfyingConstr = false;
+        int counter = 0;
+
 
         while (!isSatysfyingConstr) {
+            counter++;
+            if (counter > 1000000) {
+                if (generatedListCallback != null && satisfyMealConstr) {
+                    generatedListCallback.onFail(new Throwable("Too many iterations of algorithm using meal constraints."));
+                    return;
+                } else if (generatedListCallback != null) {
+                    generatedListCallback.onFail(new Throwable("Too many iterations of algorithm WITHOUT using meal constraints."));
+                    return;
+                }
+            }
 
             List<Food> foodCombination = new ArrayList<>();
 
             for (List<Food> mealRecipes : mealFoodDataList) {
                 int index = random.nextInt(mealRecipes.size());
-                foodCombination.add(mealRecipes.get(index));
+                foodCombination.add(doublePortion(mealRecipes.get(index), random.nextInt(2)));
             }
 
             float totalCal = 0;
@@ -137,13 +156,14 @@ class Generator {
 
                                 @Override
                                 public void onFail(@NonNull Throwable throwable) {
-                                    Log.e(Generator.class.getName(), throwable.getMessage());
                                     generatedListCallback.onFail(throwable);
                                 }
                             };
 
+                            Log.d("FoodLOG", "Found combination + satisfConstrEnabled:" + satisfyMealConstr);
                             for (int i = 0; i < foodCombination.size(); i++) {
-                                recipeDMS.getGeneratedRecipeDetails(((Recipe) foodCombination.get(i)).getId(), i, callback);
+                                recipeDMS.getGeneratedRecipeDetails(((Recipe)
+                                        foodCombination.get(i)).getId(), i, foodCombination.get(i).getServingQuantity().get(0), callback);
                             }
                         }
                     }
@@ -164,6 +184,23 @@ class Generator {
             }
         }
         return filteredList;
+    }
+
+    private Food doublePortion(Food food, int toUse) {
+        if (toUse == 0) {
+            food.setServingQuantity(Collections.singletonList(1f));
+            return food;
+        } else {
+            Recipe recipe = new Recipe();
+            recipe.setFoodName(food.getFoodName());
+            recipe.setId(((Recipe) food).getId());
+            recipe.setServingQuantity(Collections.singletonList(2f));
+            recipe.setCalories(food.getCalories()*2);
+            recipe.setFats(food.getFats()*2);
+            recipe.setCarbohydrates(food.getCarbohydrates()*2);
+            recipe.setProteins(food.getProteins()*2);
+            return recipe;
+        }
     }
 
 }

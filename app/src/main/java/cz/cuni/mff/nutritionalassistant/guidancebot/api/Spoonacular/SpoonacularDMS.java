@@ -3,11 +3,14 @@ package cz.cuni.mff.nutritionalassistant.guidancebot.api.Spoonacular;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import cz.cuni.mff.nutritionalassistant.foodtypes.Food;
 import cz.cuni.mff.nutritionalassistant.foodtypes.FoodAdapterType;
+import cz.cuni.mff.nutritionalassistant.foodtypes.Recipe;
 import cz.cuni.mff.nutritionalassistant.foodtypes.RecipeAdapterType;
 import cz.cuni.mff.nutritionalassistant.guidancebot.api.AdapterDataCallback;
 import cz.cuni.mff.nutritionalassistant.guidancebot.api.DetailedFoodCallback;
@@ -24,7 +27,7 @@ public class SpoonacularDMS {
 
     private Retrofit retrofit;
     private SpoonacularApi spoonacularApi;
-    private String apiKey = "54483141f36447f38d9451d5ea8236cd";
+    private String apiKey = "53eb0eca288d46358db6dafd0961a0b9";
 
     public SpoonacularDMS() {
         retrofit = new Retrofit.Builder()
@@ -61,7 +64,7 @@ public class SpoonacularDMS {
         });
     }
 
-    public void getGeneratedRecipeDetails(int recipeId, int mealPosition, DetailedFoodGenerateCallback callback) {
+    public void getGeneratedRecipeDetails(int recipeId, int mealPosition, float quantity, DetailedFoodGenerateCallback callback) {
         Call<SpoonacularDetailedRecipePojo> call = spoonacularApi.detailsRecipe(recipeId, true, apiKey);
 
         call.enqueue(new Callback<SpoonacularDetailedRecipePojo>() {
@@ -73,7 +76,9 @@ public class SpoonacularDMS {
                 }
 
                 if (callback != null) {
-                    callback.onSuccess(PojoConverter.Spoonacular.fromSpoonacularDetailedRecipePojo(response.body()), mealPosition);
+                    Food food = PojoConverter.Spoonacular.fromSpoonacularDetailedRecipePojo(response.body());
+                    food.setServingQuantity(Collections.singletonList(quantity));
+                    callback.onSuccess(food, mealPosition);
                 }
             }
 

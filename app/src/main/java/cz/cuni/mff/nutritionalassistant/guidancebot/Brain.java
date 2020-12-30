@@ -1,6 +1,8 @@
 package cz.cuni.mff.nutritionalassistant.guidancebot;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.util.Log;
 
 import java.util.HashMap;
 import java.util.List;
@@ -73,8 +75,37 @@ public final class Brain {
         //return generator.requestDummyGeneratedFoods(generatedFoodsFlags, context);
         if (allGenFlagsFalse(generatedFoodsFlags)){
             mathematics.setConstraints(mathematics.getModifiedTEE());
+        } else {
+            mathematics.updateConstraints();
         }
-        generator.randomizedFoodGeneration(generatedFoodsFlags, context, true, callback);
+        generator.randomizedFoodGeneration(generatedFoodsFlags, context, true, new GeneratedFoodListCallback() {
+            @Override
+            public void onSuccess(@NonNull List<Food> response) {
+                if (callback != null) {
+                    callback.onSuccess(response);
+                }
+            }
+
+            @Override
+            public void onFail(@NonNull Throwable throwable) {
+                generator.randomizedFoodGeneration(generatedFoodsFlags, context, false, new GeneratedFoodListCallback() {
+                    @Override
+                    public void onSuccess(@NonNull List<Food> response) {
+                        if (callback != null) {
+                            callback.onSuccess(response);
+                        }
+                    }
+
+                    @Override
+                    public void onFail(@NonNull Throwable throwable) {
+                        Log.e(Brain.class.getName(), throwable.getMessage());
+                        if (callback != null) {
+                            callback.onFail(throwable);
+                        }
+                    }
+                });
+            }
+        });
     }
 
     public void requestNHConstraintsCalculation() {
