@@ -163,6 +163,8 @@ class GeneralOverviewUtil {
     }
 
     void onAddButtonClickGeneral() {
+
+
         food.setServingQuantity(Collections.singletonList(Float.parseFloat(numberQuantity.getText().toString())));
         // Not general, but too simple to divide code
         if (food.getFoodType() != Food.FoodType.RECIPE) {

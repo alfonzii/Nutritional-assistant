@@ -2,7 +2,10 @@ package cz.cuni.mff.nutritionalassistant;
 
 import android.util.Pair;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import cz.cuni.mff.nutritionalassistant.foodtypes.Food;
@@ -26,12 +29,15 @@ public final class DataHolder {
         generatedFoods = new ArrayList<>();
         for (int i = 0; i < MainActivity.MealController.NUMBER_OF_MEALS; i++) {
             generatedFoods.add(new Pair<Food, Boolean>(new Recipe(), false));
+            generatedFoods.get(i).first.setServingQuantity(Collections.singletonList(1f));
         }
 
         userAddedFoods = new ArrayList<>();
         for (int i = 0; i < MainActivity.MealController.NUMBER_OF_MEALS; i++){
             userAddedFoods.add(new ArrayList<Food>());
         }
+
+        lastRunDate = DateFormat.getDateInstance().format(new Date());
     }
 
     // Should not exist to be proper singleton
@@ -47,6 +53,11 @@ public final class DataHolder {
 
     private Mathematics.Lifestyle lifestyle;
     private Mathematics.Goal goal;
+
+    private AdHocFlag adHocFlag = AdHocFlag.UNSET;
+
+    private String lastRunDate;
+    private float caloriesExcess = 0;
 
     // TODO mali by to byt floaty, a zobrazovacie views by sa mali starat o ich konverziu
     private float caloriesGoal = 0;
@@ -102,5 +113,9 @@ public final class DataHolder {
         fatsCurrent -= food.getFats() * quantity;
         carbohydratesCurrent -= food.getCarbohydrates() * quantity;
         proteinsCurrent -= food.getProteins() * quantity;
+    }
+
+    public static enum AdHocFlag {
+        UNSET, CHEATDAY, NEXTDAY, THISDAY
     }
 }

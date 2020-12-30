@@ -55,8 +55,8 @@ public class Mathematics {
 
     // modif parameters is for further modification of TEE, for example when having surplus
     // of calories from yesterday
-    float getModifiedTEE(int modif) {
-        return getTEE() + dataHolder.getGoal().getTeeModification() - modif;
+    float getModifiedTEE(float caloriesExcess) {
+        return getTEE() + dataHolder.getGoal().getTeeModification() - caloriesExcess;
     }
 
     float getModifiedTEE() {
@@ -66,11 +66,11 @@ public class Mathematics {
 //------------------------------------------------------------------------------------------------------------------------------------------------
 
     // For UI purposes
-    void setGoalNH() {
-        dataHolder.setCaloriesGoal(getModifiedTEE());
-        dataHolder.setFatsGoal(0.28f * (getModifiedTEE() / 9));
-        dataHolder.setCarbohydratesGoal(0.58f * (getModifiedTEE() / 4));
-        dataHolder.setProteinsGoal(0.14f * (getModifiedTEE() / 4));
+    void setGoalNH(float caloriesExcess) {
+        dataHolder.setCaloriesGoal(getModifiedTEE(caloriesExcess));
+        dataHolder.setFatsGoal(0.28f * (getModifiedTEE(caloriesExcess) / 9));
+        dataHolder.setCarbohydratesGoal(0.58f * (getModifiedTEE(caloriesExcess) / 4));
+        dataHolder.setProteinsGoal(0.14f * (getModifiedTEE(caloriesExcess) / 4));
     }
 
     // For mealplan generation purposes

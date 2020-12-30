@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import cz.cuni.mff.nutritionalassistant.Constants;
+import cz.cuni.mff.nutritionalassistant.DataHolder;
 import cz.cuni.mff.nutritionalassistant.foodtypes.Food;
 import cz.cuni.mff.nutritionalassistant.foodtypes.FoodAdapterType;
 import cz.cuni.mff.nutritionalassistant.guidancebot.api.AdapterDataCallback;
@@ -18,12 +19,15 @@ public final class Brain {
     private Generator generator;
     private Mathematics mathematics;
 
+    private DataHolder dataHolder;
+
     private static Brain INSTANCE;
 
     private Brain() {
         dataSupplier = new DataSupplier();
         generator = new Generator();
         mathematics = Mathematics.getInstance();
+        dataHolder = DataHolder.getInstance();
     }
 
     public static Brain getInstance() {
@@ -74,7 +78,7 @@ public final class Brain {
     public void requestRegenerate(List<Boolean> generatedFoodsFlags, Context context, GeneratedFoodListCallback callback) {
         //return generator.requestDummyGeneratedFoods(generatedFoodsFlags, context);
         if (allGenFlagsFalse(generatedFoodsFlags)){
-            mathematics.setConstraints(mathematics.getModifiedTEE());
+            mathematics.setConstraints(mathematics.getModifiedTEE(dataHolder.getCaloriesExcess()));
         } else {
             mathematics.updateConstraints();
         }
@@ -108,12 +112,10 @@ public final class Brain {
         });
     }
 
-    public void requestNHConstraintsCalculation() {
-        mathematics.setGoalNH();
-        mathematics.setConstraints(mathematics.getModifiedTEE());
+    public void requestNHConstraintsCalculation(float caloriesExcess) {
+        mathematics.setGoalNH(caloriesExcess);
+        mathematics.setConstraints(mathematics.getModifiedTEE(caloriesExcess));
     }
-
-    //requestDialog - after adding non-generated food
 
     private boolean allGenFlagsFalse(List<Boolean> genFoodsFlags) {
         for (Boolean bool : genFoodsFlags) {

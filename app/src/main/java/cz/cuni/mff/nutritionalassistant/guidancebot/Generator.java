@@ -5,11 +5,6 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 import android.util.Pair;
 
-import com.google.gson.Gson;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -89,6 +84,13 @@ class Generator {
             }
         }
 
+        if (mealFoodDataList.isEmpty()) {
+            if (generatedListCallback != null) {
+                generatedListCallback.onFail(new Throwable("Nothing to generate."));
+                return;
+            }
+        }
+
         Random random = new Random();
         boolean isSatysfyingConstr = false;
         int counter = 0;
@@ -96,7 +98,7 @@ class Generator {
 
         while (!isSatysfyingConstr) {
             counter++;
-            if (counter > 1000000) {
+            if (counter > 2500000) {
                 if (generatedListCallback != null && satisfyMealConstr) {
                     generatedListCallback.onFail(new Throwable("Too many iterations of algorithm using meal constraints."));
                     return;
@@ -124,9 +126,14 @@ class Generator {
                 totalProts += food.getProteins();
             }
             if (satisfiesConstraints(totalCal, dataHolder.getCalsConstr())) {
+                //Log.d("FoodLOG", "-----------------------------------------------------------------------");
+                //Log.d("FoodLOG", "Satisfies calories constraints");
                 if (satisfiesConstraints(totalFats, dataHolder.getFatsConstr())) {
+                    //Log.d("FoodLOG", "Satisfies fats constraints");
                     if (satisfiesConstraints(totalCarbs, dataHolder.getCarbConstr())) {
+                        //Log.d("FoodLOG", "Satisfies carbs constraints");
                         if (satisfiesConstraints(totalProts, dataHolder.getProtConstr())) {
+                            //Log.d("FoodLOG", "Satisfies proteins constrants");
 
                             // satisfying combination found
                             isSatysfyingConstr = true;
@@ -161,9 +168,15 @@ class Generator {
                             };
 
                             Log.d("FoodLOG", "Found combination + satisfConstrEnabled:" + satisfyMealConstr);
+                            Log.d("FoodLOG", "iterations:" + counter);
+                            Log.d("FoodLOG", "TotalCals: " + totalCal);
+                            Log.d("FoodLOG", "TotalFats: " + totalFats);
+                            Log.d("FoodLOG", "TotalCarbs: " + totalCarbs);
+                            Log.d("FoodLOG", "TotalProts: " + totalProts);
                             for (int i = 0; i < foodCombination.size(); i++) {
                                 recipeDMS.getGeneratedRecipeDetails(((Recipe)
                                         foodCombination.get(i)).getId(), i, foodCombination.get(i).getServingQuantity().get(0), callback);
+                                Log.d("FoodLOG", foodCombination.get(i).getFoodName());
                             }
                         }
                     }
