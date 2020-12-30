@@ -6279,22 +6279,22 @@
                 "nutrients": [
                     {
                         "title": "Calories",
-                        "amount": 485.762,
+                        "amount": 454.88,
                         "unit": "kcal"
                     },
                     {
                         "title": "Protein",
-                        "amount": 19.022,
+                        "amount": 17.65,
                         "unit": "g"
                     },
                     {
                         "title": "Fat",
-                        "amount": 10.528,
+                        "amount": 10.47,
                         "unit": "g"
                     },
                     {
                         "title": "Carbohydrates",
-                        "amount": 82.2751,
+                        "amount": 75.65,
                         "unit": "g"
                     }
                 ]

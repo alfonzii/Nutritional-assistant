@@ -147,6 +147,8 @@ public class MainActivity extends BaseAbstractActivity {
             Brain.getInstance().requestNHConstraintsCalculation(dataHolder.getCaloriesExcess());
         }
 
+        dataHolder.setLastRunDate(DateFormat.getDateInstance().format(new Date()));
+
         refreshGeneratedFoods();
         refreshUserAddedFoods();
         refreshValues();
@@ -308,19 +310,9 @@ public class MainActivity extends BaseAbstractActivity {
             generatedFoodsChecked.add(p.second);
         }
 
-        List<Boolean> userAddedFoodsFlags = new ArrayList<>();
-        for (List<Food> mealList : dataHolder.getUserAddedFoods()) {
-            userAddedFoodsFlags.add(mealList.size() != 0);
-        }
-
-        List<Boolean> generatedFoodsFlags = new ArrayList<>();
-        for (int i = 0; i < MealController.NUMBER_OF_MEALS; i++) {
-            generatedFoodsFlags.add(generatedFoodsChecked.get(i) || userAddedFoodsFlags.get(i));
-        }
-
-        Brain.getInstance().requestRegenerate(generatedFoodsFlags, this, new GeneratedFoodListCallback() {
+        Brain.getInstance().requestRegenerate(generatedFoodsChecked, this, new GeneratedFoodListCallback() {
             @Override
-            public void onSuccess(@NonNull List<Food> newGeneratedRecipes) {
+            public void onSuccess(@NonNull List<Food> newGeneratedRecipes, List<Boolean> generatedFoodsFlags) {
                 //ListIterator<Pair<Food, Boolean>> it = dataHolder.getGeneratedFoods().listIterator();
 
                 for (int i = 0; i < MealController.NUMBER_OF_MEALS; i++) {

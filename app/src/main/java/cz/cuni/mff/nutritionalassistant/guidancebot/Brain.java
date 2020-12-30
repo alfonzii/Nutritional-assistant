@@ -4,11 +4,13 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import cz.cuni.mff.nutritionalassistant.Constants;
 import cz.cuni.mff.nutritionalassistant.DataHolder;
+import cz.cuni.mff.nutritionalassistant.MainActivity;
 import cz.cuni.mff.nutritionalassistant.foodtypes.Food;
 import cz.cuni.mff.nutritionalassistant.foodtypes.FoodAdapterType;
 import cz.cuni.mff.nutritionalassistant.guidancebot.api.AdapterDataCallback;
@@ -75,28 +77,45 @@ public final class Brain {
     }
 
     // list of meals (index of list) to be regenerated (false meaning not checked && not added custom food -> to be regenerated)
-    public void requestRegenerate(List<Boolean> generatedFoodsFlags, Context context, GeneratedFoodListCallback callback) {
+    public void requestRegenerate(List<Boolean> generatedFoodsChecked, Context context, GeneratedFoodListCallback callback) {
         //return generator.requestDummyGeneratedFoods(generatedFoodsFlags, context);
-        if (allGenFlagsFalse(generatedFoodsFlags)){
+        List<Boolean> generatedFoodsFlags = generatedFoodsChecked;
+
+        if (dataHolder.getAdHocFlag() == DataHolder.AdHocFlag.THISDAY) {
+            List<Boolean> userAddedFoodsFlags = new ArrayList<>();
+            for (List<Food> mealList : dataHolder.getUserAddedFoods()) {
+                userAddedFoodsFlags.add(mealList.size() != 0);
+            }
+
+            generatedFoodsFlags = new ArrayList<>();
+            for (int i = 0; i < MainActivity.MealController.NUMBER_OF_MEALS; i++) {
+                generatedFoodsFlags.add(generatedFoodsChecked.get(i) || userAddedFoodsFlags.get(i));
+            }
+        }
+
+        if (allGenFlagsFalse(generatedFoodsFlags)) {
             mathematics.setConstraints(mathematics.getModifiedTEE(dataHolder.getCaloriesExcess()));
         } else {
             mathematics.updateConstraints();
         }
+
+
+        final List<Boolean> finalGeneratedFoodsFlags = generatedFoodsFlags;
         generator.randomizedFoodGeneration(generatedFoodsFlags, context, true, new GeneratedFoodListCallback() {
             @Override
-            public void onSuccess(@NonNull List<Food> response) {
+            public void onSuccess(@NonNull List<Food> response, List<Boolean> genFoodFlags) {
                 if (callback != null) {
-                    callback.onSuccess(response);
+                    callback.onSuccess(response, genFoodFlags);
                 }
             }
 
             @Override
             public void onFail(@NonNull Throwable throwable) {
-                generator.randomizedFoodGeneration(generatedFoodsFlags, context, false, new GeneratedFoodListCallback() {
+                generator.randomizedFoodGeneration(finalGeneratedFoodsFlags, context, false, new GeneratedFoodListCallback() {
                     @Override
-                    public void onSuccess(@NonNull List<Food> response) {
+                    public void onSuccess(@NonNull List<Food> response, List<Boolean> genFoodFlags) {
                         if (callback != null) {
-                            callback.onSuccess(response);
+                            callback.onSuccess(response, genFoodFlags);
                         }
                     }
 

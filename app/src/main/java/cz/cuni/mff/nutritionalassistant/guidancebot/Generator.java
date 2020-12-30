@@ -148,7 +148,9 @@ class Generator {
                                 public void onSuccess(@NonNull Food response, int position) {
                                     answer.set(position, response);
                                     if (isAsyncAnswerListReady(answer)) {
-                                        generatedListCallback.onSuccess(answer);
+                                        if (generatedListCallback != null) {
+                                            generatedListCallback.onSuccess(answer, generatedFoodFlags);
+                                        }
                                     }
                                 }
 
@@ -163,7 +165,9 @@ class Generator {
 
                                 @Override
                                 public void onFail(@NonNull Throwable throwable) {
-                                    generatedListCallback.onFail(throwable);
+                                    if (generatedListCallback != null) {
+                                        generatedListCallback.onFail(throwable);
+                                    }
                                 }
                             };
 
