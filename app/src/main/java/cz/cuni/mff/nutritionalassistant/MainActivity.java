@@ -1,6 +1,7 @@
 package cz.cuni.mff.nutritionalassistant;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -300,17 +301,22 @@ public class MainActivity extends BaseAbstractActivity {
             generatedFoodsChecked.add(p.second);
         }
 
-        Brain.getInstance().requestRegenerate(generatedFoodsChecked, this, new GeneratedFoodListCallback() {
+        binding.content.progressBar.setVisibility(View.VISIBLE);
+        binding.content.progressBar.setIndeterminate(true);
+        Thread t = new Thread() {
             @Override
-            public void onSuccess(@NonNull List<Food> newGeneratedRecipes, List<Boolean> generatedFoodsFlags) {
-                //ListIterator<Pair<Food, Boolean>> it = dataHolder.getGeneratedFoods().listIterator();
+            public void run() {
+                Brain.getInstance().requestRegenerate(generatedFoodsChecked, getApplicationContext(), new GeneratedFoodListCallback() {
+                    @Override
+                    public void onSuccess(@NonNull List<Food> newGeneratedRecipes, List<Boolean> generatedFoodsFlags) {
+                        //ListIterator<Pair<Food, Boolean>> it = dataHolder.getGeneratedFoods().listIterator();
 
-                for (int i = 0; i < MealController.NUMBER_OF_MEALS; i++) {
-                    if (!generatedFoodsFlags.get(i)) {
-                        dataHolder.getGeneratedFoods().set(i, new Pair<>(newGeneratedRecipes.get(0), false));
-                        newGeneratedRecipes.remove(0);
-                    }
-                }
+                        for (int i = 0; i < MealController.NUMBER_OF_MEALS; i++) {
+                            if (!generatedFoodsFlags.get(i)) {
+                                dataHolder.getGeneratedFoods().set(i, new Pair<>(newGeneratedRecipes.get(0), false));
+                                newGeneratedRecipes.remove(0);
+                            }
+                        }
 
                 /*while (it.hasNext()) {
                     if (!it.next().second) {
@@ -318,26 +324,39 @@ public class MainActivity extends BaseAbstractActivity {
                         newGeneratedRecipes.remove(0);
                     }
                 }*/
-                refreshGeneratedFoods();
-            }
+                        refreshGeneratedFoods();
+                        binding.content.progressBar.setIndeterminate(false);
+                        binding.content.progressBar.setVisibility(View.GONE);
+                    }
 
-            @Override
-            public void onFail(@NonNull Throwable throwable) {
-                AlertDialog.Builder myAlertBuilder;
-                myAlertBuilder = new AlertDialog.Builder(MainActivity.this);
-                // Add the dialog buttons.
-                myAlertBuilder.setPositiveButton("Dismiss",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
+                    @Override
+                    public void onFail(@NonNull Throwable throwable) {
+                        MainActivity.this.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                AlertDialog.Builder myAlertBuilder;
+                                myAlertBuilder = new AlertDialog.Builder(MainActivity.this);
+                                // Add the dialog buttons.
+                                myAlertBuilder.setPositiveButton("Dismiss",
+                                        new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int which) {
+                                            }
+                                        });
+                                myAlertBuilder.setTitle("Error");
+                                myAlertBuilder.setMessage(
+                                        "Application wasn't able to generate meal plan for you because of following reason:\n" + throwable.getMessage());
+                                // Create and show the AlertDialog.
+                                myAlertBuilder.show();
+                                binding.content.progressBar.setIndeterminate(false);
+                                binding.content.progressBar.setVisibility(View.GONE);
                             }
                         });
-                myAlertBuilder.setTitle("Error");
-                myAlertBuilder.setMessage(
-                        "Application wasn't able to generate meal plan for you because of following reason:\n" + throwable.getMessage());
-                // Create and show the AlertDialog.
-                myAlertBuilder.show();
+                    }
+                });
             }
-        });
+        };
+        t.start();
+
     }
 
     private void refreshGeneratedFoods() {

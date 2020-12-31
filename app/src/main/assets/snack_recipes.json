@@ -14589,22 +14589,22 @@
                 "nutrients": [
                     {
                         "title": "Calories",
-                        "amount": 151.49,
+                        "amount": 55.26,
                         "unit": "kcal"
                     },
                     {
                         "title": "Protein",
-                        "amount": 1.9462,
+                        "amount": 0.47,
                         "unit": "g"
                     },
                     {
                         "title": "Fat",
-                        "amount": 4.75377,
+                        "amount": 4.39,
                         "unit": "g"
                     },
                     {
                         "title": "Carbohydrates",
-                        "amount": 26.6191,
+                        "amount": 3.67,
                         "unit": "g"
                     }
                 ]
