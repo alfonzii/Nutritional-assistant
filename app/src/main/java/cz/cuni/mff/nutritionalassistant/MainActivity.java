@@ -8,8 +8,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.util.Pair;
 import android.view.View;
 import android.view.Menu;
@@ -19,15 +17,10 @@ import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.typeadapters.RuntimeTypeAdapterFactory;
-
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.ListIterator;
 
 import cz.cuni.mff.nutritionalassistant.activity.BaseAbstractActivity;
 import cz.cuni.mff.nutritionalassistant.activity.overview.ProductOverviewActivity;
@@ -36,9 +29,6 @@ import cz.cuni.mff.nutritionalassistant.activity.overview.RestaurantfoodOverview
 import cz.cuni.mff.nutritionalassistant.databinding.ActivityMainBinding;
 import cz.cuni.mff.nutritionalassistant.databinding.LayoutGeneratedFoodBinding;
 import cz.cuni.mff.nutritionalassistant.foodtypes.Food;
-import cz.cuni.mff.nutritionalassistant.foodtypes.Product;
-import cz.cuni.mff.nutritionalassistant.foodtypes.Recipe;
-import cz.cuni.mff.nutritionalassistant.foodtypes.RestaurantFood;
 import cz.cuni.mff.nutritionalassistant.guidancebot.Brain;
 import cz.cuni.mff.nutritionalassistant.guidancebot.GeneratedFoodListCallback;
 import cz.cuni.mff.nutritionalassistant.util.FormatUtil;

@@ -28,13 +28,13 @@ public class ProductOverviewActivity extends BaseAbstractActivity
 
         product = (Product) getIntent().getSerializableExtra(MainActivity.EXTRA_SERIALIZABLE_FOOD);
         overviewUtil = new GeneralOverviewUtil(
-                binding.textProductName, binding.textProductBrand, binding.numberQuantity,
+                binding.textProductName, binding.textProductBrand, binding.thumbnail, binding.numberQuantity,
                 binding.spinnerServingUnit, binding.textWeightUnit, binding.spinnerMeal,
                 binding.textCaloriesValue, binding.textFatsValue, binding.textCarbsValue, binding.textProteinsValue,
                 product
         );
 
-        overviewUtil.initialSetupGeneral();
+        overviewUtil.initialSetupGeneral(this);
         this.initialSetupSpecific();
 
         if (getIntent().getAction().equals(MainActivity.ACTION_EXAMINE_DETAILS)) {

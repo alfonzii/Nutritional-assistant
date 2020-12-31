@@ -2,6 +2,7 @@ package cz.cuni.mff.nutritionalassistant.util;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -106,7 +107,7 @@ class FoodViewHolder extends RecyclerView.ViewHolder {
     }
 
     private void setImgFoodThumbnail() {
-        // TODO
+        new DownloadImage(context, imgFoodThumbnail).execute(foodAdapterType.getThumbnailURL());
     }
 
     private void setTxtProductName() {

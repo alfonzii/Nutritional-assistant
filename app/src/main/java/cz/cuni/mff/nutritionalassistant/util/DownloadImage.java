@@ -19,7 +19,7 @@ public class DownloadImage extends AsyncTask<String, Integer, Drawable> {
     private ImageView characterImage;
     private Context context;
 
-    DownloadImage(Context context, ImageView characterImage) {
+    public DownloadImage(Context context, ImageView characterImage) {
         this.context = context;
         this.characterImage = characterImage;
     }

@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -20,6 +21,7 @@ import cz.cuni.mff.nutritionalassistant.MainActivity;
 import cz.cuni.mff.nutritionalassistant.activity.BaseAbstractActivity;
 import cz.cuni.mff.nutritionalassistant.foodtypes.Food;
 import cz.cuni.mff.nutritionalassistant.foodtypes.Recipe;
+import cz.cuni.mff.nutritionalassistant.util.DownloadImage;
 
 import static android.app.Activity.RESULT_OK;
 import static cz.cuni.mff.nutritionalassistant.util.FormatUtil.correctStringFormat;
@@ -38,6 +40,7 @@ import static cz.cuni.mff.nutritionalassistant.util.FormatUtil.roundedStringForm
 class GeneralOverviewUtil {
 
     private TextView txtName, txtBrand;
+    private ImageView imgThumbnail;
     private EditText numberQuantity;
     private DynamicWidthSpinner spinnerServingUnit;
     private TextView txtWeight;
@@ -76,12 +79,13 @@ class GeneralOverviewUtil {
     };
 
     // Constructor for Product / RestaurantFood
-    GeneralOverviewUtil(TextView txtName, TextView txtBrand, EditText numberQuantity,
+    GeneralOverviewUtil(TextView txtName, TextView txtBrand, ImageView imgThumbnail, EditText numberQuantity,
                         DynamicWidthSpinner spinnerServingUnit, TextView txtWeight, Spinner spinnerMeal,
                         TextView txtCaloriesValue, TextView txtFatsValue, TextView txtCarbohydratesValue, TextView txtProteinsValue,
                         Food food) {
         this.txtName = txtName;
         this.txtBrand = txtBrand;
+        this.imgThumbnail = imgThumbnail;
         this.numberQuantity = numberQuantity;
         this.spinnerServingUnit = spinnerServingUnit;
         this.txtWeight = txtWeight;
@@ -95,10 +99,11 @@ class GeneralOverviewUtil {
     }
 
     // Constructor for Recipe
-    GeneralOverviewUtil(TextView txtName, EditText numberQuantity, Spinner spinnerMeal,
+    GeneralOverviewUtil(TextView txtName, ImageView imgThumbnail, EditText numberQuantity, Spinner spinnerMeal,
                         TextView txtCaloriesValue, TextView txtFatsValue, TextView txtCarbohydratesValue, TextView txtProteinsValue,
                         Food food) {
         this.txtName = txtName;
+        this.imgThumbnail = imgThumbnail;
         this.numberQuantity = numberQuantity;
         this.spinnerMeal = spinnerMeal;
         this.txtCaloriesValue = txtCaloriesValue;
@@ -114,10 +119,9 @@ class GeneralOverviewUtil {
     }
 
     // initial setup same for all overview activities
-    void initialSetupGeneral() {
+    void initialSetupGeneral(Context context) {
         txtName.setText(food.getFoodName());
-        //binding.thumbnail SET IMAGE BUT ALWAYS DOWNLOADING IS NASTY. PROBABLY SAVE SOMEWHERE FROM
-        // FOOD LIGHTWEIGHT WHERE IT IS ALREADY DOWNLOADED.
+        new DownloadImage(context, imgThumbnail).execute(food.getThumbnailURL());
 
         numberQuantity.setText(correctStringFormat(quantity));
         txtCaloriesValue.setText(roundedStringFormat(food.getCalories()));

@@ -14,7 +14,7 @@ public class NutritionixDetailedProductPojo {
     @SerializedName("brand_name")
     private String brandName;
 
-    private String thumb;
+    private Photo photo;
 
     @SerializedName("nf_calories")
     private float calories;
@@ -39,4 +39,9 @@ public class NutritionixDetailedProductPojo {
 
     @SerializedName("alt_measures")
     private List<NutritionixAltMeasuresPojo> altMeasures;
+
+    @Getter
+    public static class Photo {
+        private String thumb;
+    }
 }

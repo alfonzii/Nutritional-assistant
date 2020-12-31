@@ -15,11 +15,16 @@ public class NutritionixAdapterProductPojo {
     @SerializedName("nf_calories")
     private float calories;
 
-    private String thumb; //thumb not used
+    private Photo photo;
 
     @SerializedName("nix_item_id")
     private String id;
 
     @SerializedName("brand_name")
     private String brandName;
+
+    @Getter
+    public static class Photo {
+        private String thumb;
+    }
 }

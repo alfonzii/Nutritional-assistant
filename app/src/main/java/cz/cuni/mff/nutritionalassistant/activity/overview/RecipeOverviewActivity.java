@@ -28,11 +28,11 @@ public class RecipeOverviewActivity extends BaseAbstractActivity {
 
         recipe = (Recipe) getIntent().getSerializableExtra(MainActivity.EXTRA_SERIALIZABLE_FOOD);
         overviewUtil = new GeneralOverviewUtil(
-                binding.textRecipeName, binding.numberQuantity, binding.spinnerMeal, binding.textCaloriesValue,
+                binding.textRecipeName, binding.thumbnail, binding.numberQuantity, binding.spinnerMeal, binding.textCaloriesValue,
                 binding.textFatsValue, binding.textCarbsValue, binding.textProteinsValue, recipe
         );
 
-        overviewUtil.initialSetupGeneral();
+        overviewUtil.initialSetupGeneral(this);
         this.initialSetupSpecific();
 
         if (getIntent().getAction().equals(MainActivity.ACTION_EXAMINE_DETAILS)) {

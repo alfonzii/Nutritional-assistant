@@ -30,13 +30,13 @@ public class RestaurantfoodOverviewActivity extends BaseAbstractActivity
 
         restaurantFood = (RestaurantFood) getIntent().getSerializableExtra(MainActivity.EXTRA_SERIALIZABLE_FOOD);
         overviewUtil = new GeneralOverviewUtil(
-                binding.textRestaurantFoodName, binding.textRestaurantName, binding.numberQuantity,
+                binding.textRestaurantFoodName, binding.textRestaurantName, binding.thumbnail, binding.numberQuantity,
                 binding.spinnerServingUnit, binding.textWeightUnit, binding.spinnerMeal,
                 binding.textCaloriesValue, binding.textFatsValue, binding.textCarbsValue, binding.textProteinsValue,
                 restaurantFood
                 );
 
-        overviewUtil.initialSetupGeneral();
+        overviewUtil.initialSetupGeneral(this);
         this.initialSetupSpecific();
 
         if (getIntent().getAction().equals(MainActivity.ACTION_EXAMINE_DETAILS)) {

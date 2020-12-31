@@ -24,7 +24,7 @@ public class PojoConverter {
 
     public static class Nutritionix {
         public static FoodAdapterType fromNutritionixAdapterProductPojo(NutritionixAdapterProductPojo pojo) {
-            return new ProductAdapterType(pojo.getFoodName(), pojo.getThumb(), Food.FoodType.PRODUCT,
+            return new ProductAdapterType(pojo.getFoodName(), pojo.getPhoto().getThumb(), Food.FoodType.PRODUCT,
                     pojo.getServingUnit(), pojo.getCalories(), pojo.getBrandName(), pojo.getId());
         }
 
@@ -63,7 +63,7 @@ public class PojoConverter {
             List<String> servingUnitFinal = Collections.unmodifiableList(servingUnit);
             List<Float> servingWeightFinal = servingWeight == null ? null : Collections.unmodifiableList(servingWeight);
 
-            return new Product(pojo.getFoodName(), pojo.getThumb(), pojo.getCalories(),
+            return new Product(pojo.getFoodName(), pojo.getPhoto().getThumb(), pojo.getCalories(),
                     pojo.getFats(), pojo.getCarbohydrates(), pojo.getProteins(), Food.FoodType.PRODUCT, pojo.getBrandName(),
                     servingQuantityFinal, servingUnitFinal, servingWeightFinal);
         }
