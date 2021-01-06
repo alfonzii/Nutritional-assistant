@@ -32,7 +32,7 @@ class Generator {
 //-------------------------------------------------RANDOMIZED-ALGORITHM----------------------------------------------------------------------------------
 
     // false flag means new food is needed to be generated
-    void randomizedFoodGeneration(List<Boolean> generatedFoodFlags, Context context, boolean satisfyMealConstr, GeneratedFoodListCallback generatedListCallback) {
+    void randomizedFoodGeneration(List<Boolean> generatedFoodFlags, Context context, boolean satisfyMealConstr, boolean satisfyMacroConstr, GeneratedFoodListCallback generatedListCallback) {
 
         List<List<Food>> mealFoodDataList = new ArrayList<>();
 
@@ -87,8 +87,11 @@ class Generator {
                 if (generatedListCallback != null && satisfyMealConstr) {
                     generatedListCallback.onFail(new Throwable("Too many iterations of algorithm using meal constraints."));
                     return;
-                } else if (generatedListCallback != null) {
+                } else if (generatedListCallback != null && satisfyMacroConstr) {
                     generatedListCallback.onFail(new Throwable("Too many iterations of algorithm WITHOUT using meal constraints."));
+                    return;
+                } else if (generatedListCallback != null) {
+                    generatedListCallback.onFail(new Throwable("Too many iterations of algorithm without using meal and macro constraints."));
                     return;
                 }
             }
@@ -97,7 +100,7 @@ class Generator {
 
             for (List<Food> mealRecipes : mealFoodDataList) {
                 int index = random.nextInt(mealRecipes.size());
-                foodCombination.add(doublePortion(mealRecipes.get(index), random.nextInt(2)));
+                foodCombination.add(portionHeuristic(mealRecipes.get(index), random.nextInt(3)));
             }
 
             float totalCal = 0;
@@ -111,17 +114,29 @@ class Generator {
                 totalProts += food.getProteins();
             }
             if (satisfiesConstraints(totalCal, dataHolder.getCalsConstr())) {
+                if(satisfyMacroConstr) {
+                    List<Float> macrosList = new ArrayList<>();
+                    macrosList.add(totalFats);
+                    macrosList.add(totalCarbs);
+                    macrosList.add(totalProts);
+                    if (satisfiesMacroConstraints(macrosList)){
+                        isSatysfyingConstr = true;
+                    }
+                } else {
+                    isSatysfyingConstr = true;
+                }
+
                 //Log.d("FoodLOG", "-----------------------------------------------------------------------");
                 //Log.d("FoodLOG", "Satisfies calories constraints");
-                if (satisfiesConstraints(totalFats, dataHolder.getFatsConstr())) {
+                //if (satisfiesConstraints(totalFats, dataHolder.getFatsConstr())) {
                     //Log.d("FoodLOG", "Satisfies fats constraints");
-                    if (satisfiesConstraints(totalCarbs, dataHolder.getCarbConstr())) {
+                    //if (satisfiesConstraints(totalCarbs, dataHolder.getCarbConstr())) {
                         //Log.d("FoodLOG", "Satisfies carbs constraints");
-                        if (satisfiesConstraints(totalProts, dataHolder.getProtConstr())) {
+                        if (isSatysfyingConstr) {
                             //Log.d("FoodLOG", "Satisfies proteins constrants");
 
                             // satisfying combination found
-                            isSatysfyingConstr = true;
+                            //isSatysfyingConstr = true;
 
                             List<Food> answer = Collections.synchronizedList(new ArrayList<>());
                             for (int i = 0; i < foodCombination.size(); i++) {
@@ -168,10 +183,21 @@ class Generator {
                                 Log.d("FoodLOG", foodCombination.get(i).getFoodName());
                             }
                         }
-                    }
+                    //}
+                //}
+            }
+        }
+    }
+
+    private boolean satisfiesMacroConstraints (List<Float> macros) {
+        if (satisfiesConstraints(macros.get(0), dataHolder.getFatsConstr())) {
+            if (satisfiesConstraints(macros.get(1), dataHolder.getCarbConstr())) {
+                if (satisfiesConstraints(macros.get(2), dataHolder.getProtConstr())){
+                    return true;
                 }
             }
         }
+        return false;
     }
 
     private boolean satisfiesConstraints(float nutriValue, Pair<Float, Float> constr) {
@@ -188,11 +214,11 @@ class Generator {
         return filteredList;
     }
 
-    private Food doublePortion(Food food, int toUse) {
+    private Food portionHeuristic(Food food, int toUse) {
         if (toUse == 0) {
             food.setServingQuantity(Collections.singletonList(1f));
             return food;
-        } else {
+        } else if (toUse == 1) {
             Recipe recipe = new Recipe();
             recipe.setFoodName(food.getFoodName());
             recipe.setId(((Recipe) food).getId());
@@ -201,6 +227,16 @@ class Generator {
             recipe.setFats(food.getFats()*2);
             recipe.setCarbohydrates(food.getCarbohydrates()*2);
             recipe.setProteins(food.getProteins()*2);
+            return recipe;
+        } else { // toUse == 2
+            Recipe recipe = new Recipe();
+            recipe.setFoodName(food.getFoodName());
+            recipe.setId(((Recipe) food).getId());
+            recipe.setServingQuantity(Collections.singletonList(0.5f));
+            recipe.setCalories(food.getCalories()/2);
+            recipe.setFats(food.getFats()/2);
+            recipe.setCarbohydrates(food.getCarbohydrates()/2);
+            recipe.setProteins(food.getProteins()/2);
             return recipe;
         }
     }

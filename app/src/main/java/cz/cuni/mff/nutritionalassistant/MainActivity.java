@@ -188,9 +188,6 @@ public class MainActivity extends BaseAbstractActivity {
                 reset();
                 refreshValues();
                 break;
-
-            case R.id.action_foodDatabase:
-                // TODO vycistit
         }
         return super.onOptionsItemSelected(item);
     }

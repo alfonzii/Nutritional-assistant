@@ -85,7 +85,7 @@ public final class Brain {
 
 
         final List<Boolean> finalGeneratedFoodsFlags = generatedFoodsFlags;
-        generator.randomizedFoodGeneration(generatedFoodsFlags, context, true, new GeneratedFoodListCallback() {
+        generator.randomizedFoodGeneration(generatedFoodsFlags, context, true, true, new GeneratedFoodListCallback() {
             private boolean alreadyFailed = false;
 
             @Override
@@ -99,7 +99,7 @@ public final class Brain {
             public void onFail(@NonNull Throwable throwable) {
                 if (!alreadyFailed) {
                     alreadyFailed = true;
-                    generator.randomizedFoodGeneration(finalGeneratedFoodsFlags, context, false, new GeneratedFoodListCallback() {
+                    generator.randomizedFoodGeneration(finalGeneratedFoodsFlags, context, false, true, new GeneratedFoodListCallback() {
                         private boolean secondFailed = false;
                         @Override
                         public void onSuccess(@NonNull List<Food> response, List<Boolean> genFoodFlags) {
@@ -112,10 +112,26 @@ public final class Brain {
                         public void onFail(@NonNull Throwable throwable) {
                             if (!secondFailed) {
                                 secondFailed = true;
-                                Log.e(Brain.class.getName(), throwable.getMessage());
-                                if (callback != null) {
-                                    callback.onFail(throwable);
-                                }
+                                generator.randomizedFoodGeneration(finalGeneratedFoodsFlags, context, false, false, new GeneratedFoodListCallback() {
+                                    private boolean thirdFailed = false;
+                                    @Override
+                                    public void onSuccess(@NonNull List<Food> response, List<Boolean> genFoodFlags) {
+                                        if (callback != null) {
+                                            callback.onSuccess(response, genFoodFlags);
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFail(@NonNull Throwable throwable) {
+                                        if (!thirdFailed) {
+                                            thirdFailed = true;
+                                            Log.e(Brain.class.getName(), throwable.getMessage());
+                                            if (callback != null) {
+                                                callback.onFail(throwable);
+                                            }
+                                        }
+                                    }
+                                });
                             }
                         }
                     });
