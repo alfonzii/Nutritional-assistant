@@ -18,6 +18,14 @@ public class Mathematics {
     private Pair<Float, Float> calsConstr, fatsConstr, carbConstr, protConstr;
     private Pair<Float, Float> breakfastConstr, lunchConstr, dinnerConstr, snackConstr;
 
+    // constants which can be changed to create different constraints
+    private float marginError = 0.1f;
+    private float lowerMargin = 1f - marginError, upperMargin = 1f + marginError;
+    private float pBreakfast = 0.25f;
+    private float pLunch = 0.35f;
+    private float pDinner = 0.2f;
+    private float pSnack = 0.2f;
+
 
     private Mathematics() {
         dataHolder = DataHolder.getInstance();
@@ -81,24 +89,24 @@ public class Mathematics {
         carbsReq = ((random.nextInt(6) + 55) / 100f) * (tee / 4);
         protsReq = ((random.nextInt(6) + 10) / 100f) * (tee / 4);
 
-        calsConstr = new Pair<>(0.9f * tee, 1.1f * tee);
-        fatsConstr = new Pair<>(0.9f * fatsReq, 1.1f * fatsReq);
-        carbConstr = new Pair<>(0.9f * carbsReq, 1.1f * carbsReq);
-        protConstr = new Pair<>(0.9f * protsReq, 1.1f * protsReq);
+        calsConstr = new Pair<>(lowerMargin * tee, upperMargin * tee);
+        fatsConstr = new Pair<>(lowerMargin * fatsReq, upperMargin * fatsReq);
+        carbConstr = new Pair<>(lowerMargin * carbsReq, upperMargin * carbsReq);
+        protConstr = new Pair<>(lowerMargin * protsReq, upperMargin * protsReq);
 
-        breakfastConstr = new Pair<>(0.9f * (0.25f * tee), 1.1f * (0.25f * tee));
-        lunchConstr = new Pair<>(0.9f * (0.35f * tee), 1.1f * (0.35f * tee));
-        dinnerConstr = new Pair<>(0.9f * (0.2f * tee), 1.1f * (0.2f * tee));
-        snackConstr = new Pair<>(0.9f * (0.2f * tee), 1.1f * (0.2f * tee));
+        breakfastConstr = new Pair<>(lowerMargin * (pBreakfast * tee), upperMargin * (pBreakfast * tee));
+        lunchConstr = new Pair<>(lowerMargin * (pLunch * tee), upperMargin * (pLunch * tee));
+        dinnerConstr = new Pair<>(lowerMargin * (pDinner * tee), upperMargin * (pDinner * tee));
+        snackConstr = new Pair<>(lowerMargin * (pSnack * tee), upperMargin * (pSnack * tee));
 
         saveConstraints();
     }
 
     void updateConstraints() {
-        calsConstr = new Pair<>(0.9f * dataHolder.getCaloriesGoal() - dataHolder.getCaloriesCurrent(), 1.1f * dataHolder.getCaloriesGoal() - dataHolder.getCaloriesCurrent());
-        fatsConstr = new Pair<>(0.9f * dataHolder.getFatsReq() - dataHolder.getFatsCurrent(), 1.1f * dataHolder.getFatsReq() - dataHolder.getFatsCurrent());
-        carbConstr = new Pair<>(0.9f * dataHolder.getCarbsReq() - dataHolder.getCarbohydratesCurrent(), 1.1f * dataHolder.getCarbsReq() - dataHolder.getCarbohydratesCurrent());
-        protConstr = new Pair<>(0.9f * dataHolder.getProtsReq() - dataHolder.getProteinsCurrent(), 1.1f * dataHolder.getProtsReq() - dataHolder.getProteinsCurrent());
+        calsConstr = new Pair<>(lowerMargin * dataHolder.getCaloriesGoal() - dataHolder.getCaloriesCurrent(), upperMargin * dataHolder.getCaloriesGoal() - dataHolder.getCaloriesCurrent());
+        fatsConstr = new Pair<>(lowerMargin * dataHolder.getFatsReq() - dataHolder.getFatsCurrent(), upperMargin * dataHolder.getFatsReq() - dataHolder.getFatsCurrent());
+        carbConstr = new Pair<>(lowerMargin * dataHolder.getCarbsReq() - dataHolder.getCarbohydratesCurrent(), upperMargin * dataHolder.getCarbsReq() - dataHolder.getCarbohydratesCurrent());
+        protConstr = new Pair<>(lowerMargin * dataHolder.getProtsReq() - dataHolder.getProteinsCurrent(), upperMargin * dataHolder.getProtsReq() - dataHolder.getProteinsCurrent());
 
         dataHolder.setCalsConstr(calsConstr);
         dataHolder.setFatsConstr(fatsConstr);

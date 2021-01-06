@@ -46,8 +46,9 @@ public final class Brain {
             dataSupplier.requestProductAdapterTypeData(query, nutritionFilterTable, callbacks);
         } else if (foodTypeFilter == Food.FoodType.RECIPE.getId()) {
             dataSupplier.requestRecipeAdapterTypeData(query, nutritionFilterTable, callbacks);
+        } else { //foodTypeFilter == Food.FoodType.RESTAURANTFOOD.getId()
+            dataSupplier.requestRestaurantFoodAdapterTypeData(query, nutritionFilterTable, callbacks);
         }
-        //return dataSupplier.localDBrequest(query, foodTypeFilter, context);
     }
 
 
@@ -60,25 +61,8 @@ public final class Brain {
         }
     }
 
-
-    // To be used API
-    public List<FoodAdapterType> requestFoodAdapterTypeData(
-            String query, int foodTypeFilter, HashMap<Integer, Integer> nutritionFilterTable) {
-        return null;
-    }
-
-    public Food requestFoodDetailedInfo(String detailedInfoURL) {
-        return null;
-    }
-
-    public List<FoodAdapterType> requestSwapFoodAdapterTypeData(
-            Food foodToSwap, int foodTypeFilter, int restaurantRadius) {
-        return null;
-    }
-
     // list of meals (index of list) to be regenerated (false meaning not checked && not added custom food -> to be regenerated)
     public void requestRegenerate(List<Boolean> generatedFoodsChecked, Context context, GeneratedFoodListCallback callback) {
-        //return generator.requestDummyGeneratedFoods(generatedFoodsFlags, context);
         List<Boolean> generatedFoodsFlags = generatedFoodsChecked;
 
         if (dataHolder.getAdHocFlag() == DataHolder.AdHocFlag.THISDAY) {
@@ -102,6 +86,8 @@ public final class Brain {
 
         final List<Boolean> finalGeneratedFoodsFlags = generatedFoodsFlags;
         generator.randomizedFoodGeneration(generatedFoodsFlags, context, true, new GeneratedFoodListCallback() {
+            private boolean alreadyFailed = false;
+
             @Override
             public void onSuccess(@NonNull List<Food> response, List<Boolean> genFoodFlags) {
                 if (callback != null) {
@@ -111,22 +97,29 @@ public final class Brain {
 
             @Override
             public void onFail(@NonNull Throwable throwable) {
-                generator.randomizedFoodGeneration(finalGeneratedFoodsFlags, context, false, new GeneratedFoodListCallback() {
-                    @Override
-                    public void onSuccess(@NonNull List<Food> response, List<Boolean> genFoodFlags) {
-                        if (callback != null) {
-                            callback.onSuccess(response, genFoodFlags);
+                if (!alreadyFailed) {
+                    alreadyFailed = true;
+                    generator.randomizedFoodGeneration(finalGeneratedFoodsFlags, context, false, new GeneratedFoodListCallback() {
+                        private boolean secondFailed = false;
+                        @Override
+                        public void onSuccess(@NonNull List<Food> response, List<Boolean> genFoodFlags) {
+                            if (callback != null) {
+                                callback.onSuccess(response, genFoodFlags);
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onFail(@NonNull Throwable throwable) {
-                        Log.e(Brain.class.getName(), throwable.getMessage());
-                        if (callback != null) {
-                            callback.onFail(throwable);
+                        @Override
+                        public void onFail(@NonNull Throwable throwable) {
+                            if (!secondFailed) {
+                                secondFailed = true;
+                                Log.e(Brain.class.getName(), throwable.getMessage());
+                                if (callback != null) {
+                                    callback.onFail(throwable);
+                                }
+                            }
                         }
-                    }
-                });
+                    });
+                }
             }
         });
     }

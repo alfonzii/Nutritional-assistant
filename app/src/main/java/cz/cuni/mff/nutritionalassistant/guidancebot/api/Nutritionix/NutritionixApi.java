@@ -1,7 +1,6 @@
 package cz.cuni.mff.nutritionalassistant.guidancebot.api.Nutritionix;
 
 import java.util.HashMap;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -28,6 +27,11 @@ public interface NutritionixApi {
     @POST("v2/search/instant")
     Call<NutritionixAdapterFullResponsePojo> listProducts(@FieldMap HashMap<String,Object> param);
 
+    @Headers({"x-app-id: b48b1bce",
+            "x-app-key: c95400340ee0389a6cfa23fc4fdbcebd",
+            "x-remote-user-id: 0"})
+    @GET("v2/locations")
+    Call<NutritionixRestaurantsFullResponsePojo> listRestaurants(@Query("ll") String coordinates, @Query("distance") int radiusMeters);
 
     @Headers({"x-app-id: b48b1bce",
             "x-app-key: c95400340ee0389a6cfa23fc4fdbcebd",

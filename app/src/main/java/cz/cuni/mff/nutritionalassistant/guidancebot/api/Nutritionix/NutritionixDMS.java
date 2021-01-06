@@ -1,6 +1,7 @@
 package cz.cuni.mff.nutritionalassistant.guidancebot.api.Nutritionix;
 
 import android.util.Log;
+import android.util.Pair;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,6 +28,14 @@ public class NutritionixDMS {
 
     private Retrofit retrofit;
     private NutritionixApi nutritionixApi;
+
+    /*CONSTANTS FOR RESTAURANTS
+    * In case of tweaking, change the final variables to desired values.
+    * Default coordinate values set your location to park in front of White House in Washington D.C.
+    * To use restaurant features, only US locations coordinates can be used
+    */
+    private final Pair<String, String> coordinates = new Pair<>("38.8950", "-77.0366");
+    private final int radiusMeters = 500;
 
     public NutritionixDMS() {
         retrofit = new Retrofit.Builder()
@@ -72,11 +81,31 @@ public class NutritionixDMS {
         });
     }
 
-    public void listProducts(String query, HashMap<Integer, Integer> nutritionFilterTable, AdapterDataCallback callbacks) throws JSONException {
+    public void listProducts(
+            String query,
+            HashMap<Integer, Integer> nutritionFilterTable,
+            AdapterDataCallback callback
+    ) throws JSONException {
+        listProducts(query, nutritionFilterTable, new HashMap<>(), callback);
+    }
+
+    private void listProducts(
+            String query,
+            HashMap<Integer, Integer> nutritionFilterTable,
+            HashMap<String, Object> additionalArgs, //argument used for listing RestaurantFoods
+            AdapterDataCallback callback
+    ) throws JSONException {
+
         Call<NutritionixAdapterFullResponsePojo> call;
 
         if (nutritionFilterTable.isEmpty()) {
-            call = nutritionixApi.listProducts(query);
+            if (additionalArgs.isEmpty()) {
+                call = nutritionixApi.listProducts(query);
+            } else {
+                HashMap<String, Object> args = new HashMap<>(additionalArgs);
+                args.put("query", query);
+                call = nutritionixApi.listProducts(args);
+            }
         } else {
             HashMap<String, Object> parameters = new HashMap<>();
             JSONObject caloriesBounds = new JSONObject();
@@ -131,7 +160,15 @@ public class NutritionixDMS {
             parameters.put("query", query);
             parameters.put("full_nutrients", filterArgs);
 
-            call = nutritionixApi.listProducts(parameters);
+            if (additionalArgs.isEmpty()) {
+                call = nutritionixApi.listProducts(parameters);
+            } else {
+                parameters.putAll(additionalArgs);
+                /*for (Map.Entry<String, Object> entry : additionalArgs.entrySet()) {
+                    parameters.put(entry.getKey(), entry.getValue());
+                }*/
+                call = nutritionixApi.listProducts(parameters);
+            }
         }
 
         call.enqueue(new Callback<NutritionixAdapterFullResponsePojo>() {
@@ -144,43 +181,83 @@ public class NutritionixDMS {
                 final List<FoodAdapterType> correctResponse = new ArrayList<>();
 
                 try {
-                    correctResponse.addAll(PojoConverter.Nutritionix.fromNutritionixPojoList(response.body().getCommon()));
+                    // TODO
+                    //correctResponse.addAll(PojoConverter.Nutritionix.fromNutritionixPojoList(response.body().getCommon()));
                     correctResponse.addAll(PojoConverter.Nutritionix.fromNutritionixPojoList(response.body().getBranded()));
                 } catch (NullPointerException e) {
 
                 }
-                if (callbacks != null) {
-                    callbacks.onSuccess(correctResponse);
+                if (callback != null) {
+                    callback.onSuccess(correctResponse);
                 }
             }
 
             @Override
             public void onFailure(Call<NutritionixAdapterFullResponsePojo> call, Throwable t) {
                 Log.d(NutritionixDMS.class.getName(), t.getMessage());
-                if (callbacks != null) {
-                    callbacks.onFail(t);
+                if (callback != null) {
+                    callback.onFail(t);
                 }
             }
         });
     }
-}
 
-    /*try {
-            Thread t = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        Response<NutritionixAdapterFullResponsePojo> response = call.execute();
-                        correctResponse.addAll(PojoConverter.fromNutritionixPojoList(response.body().getCommon()));
-                        correctResponse.addAll(PojoConverter.fromNutritionixPojoList(response.body().getBranded()));
-                    } catch (IOException e){
+    public void listRestaurantFoods(
+            String query,
+            HashMap<Integer, Integer> nutritionFilterTable,
+            AdapterDataCallback callback
+    ) {
+        Call<NutritionixRestaurantsFullResponsePojo> call;
+        call = nutritionixApi.listRestaurants(coordinates.first + "," + coordinates.second, radiusMeters);
 
-                    }
+        call.enqueue(new Callback<NutritionixRestaurantsFullResponsePojo>() {
 
+            private String brandedIdsListFormat(List<String> idsList) {
+                String str = idsList.toString();
+                str = str.replaceAll(",", "\",");
+                str = str.replaceAll(" ", " \"");
+                str = str.replace("[", "[\"");
+                str = str.replace("]", "\"]");
+                return str;
+            }
+
+            @Override
+            public void onResponse(Call<NutritionixRestaurantsFullResponsePojo> call, Response<NutritionixRestaurantsFullResponsePojo> response) {
+                if (!response.isSuccessful()) {
+                    Log.d(NutritionixDMS.class.getName(), "Code: " + response.code());
+                    return;
                 }
-            });
-            t.start();
-            t.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }*/
+
+                if (response.body() != null) {
+                    // TODO otestovat co sa deje v pripade ze nemam ziadne restauracie v okoli (ci getRestaurants vracia prazdny array alebo null)
+                    final List<NutritionixRestaurantPojo> restaurantPojoList = new ArrayList<>(response.body().getRestaurants());
+                    final List<String> brandIdList = new ArrayList<>();
+
+                    for(NutritionixRestaurantPojo pojo : restaurantPojoList) {
+                        brandIdList.add(pojo.getBrandId());
+                    }
+                    HashMap<String, Object> additionalArgs = new HashMap<>();
+                    additionalArgs.put("branded", "true");
+                    additionalArgs.put("self", "false");
+                    additionalArgs.put("common", "false");
+                    additionalArgs.put("brand_ids", brandedIdsListFormat(brandIdList));//brandIdList.toArray());
+                    try {
+                        listProducts(query, nutritionFilterTable, additionalArgs, callback);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<NutritionixRestaurantsFullResponsePojo> call, Throwable t) {
+                Log.d(NutritionixDMS.class.getName(), t.getMessage());
+                if (callback != null) {
+                    callback.onFail(t);
+                }
+            }
+        });
+    }
+
+
+}

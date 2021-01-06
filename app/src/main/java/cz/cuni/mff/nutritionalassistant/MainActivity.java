@@ -303,10 +303,13 @@ public class MainActivity extends BaseAbstractActivity {
 
         binding.content.progressBar.setVisibility(View.VISIBLE);
         binding.content.progressBar.setIndeterminate(true);
+        disableCheckboxes();
         Thread t = new Thread() {
             @Override
             public void run() {
                 Brain.getInstance().requestRegenerate(generatedFoodsChecked, getApplicationContext(), new GeneratedFoodListCallback() {
+                    //private boolean alreadyFailed = false;
+
                     @Override
                     public void onSuccess(@NonNull List<Food> newGeneratedRecipes, List<Boolean> generatedFoodsFlags) {
                         //ListIterator<Pair<Food, Boolean>> it = dataHolder.getGeneratedFoods().listIterator();
@@ -318,15 +321,10 @@ public class MainActivity extends BaseAbstractActivity {
                             }
                         }
 
-                /*while (it.hasNext()) {
-                    if (!it.next().second) {
-                        it.set(new Pair<>(newGeneratedRecipes.get(0), false));
-                        newGeneratedRecipes.remove(0);
-                    }
-                }*/
                         refreshGeneratedFoods();
                         binding.content.progressBar.setIndeterminate(false);
                         binding.content.progressBar.setVisibility(View.GONE);
+                        enableCheckboxes();
                     }
 
                     @Override
@@ -349,6 +347,7 @@ public class MainActivity extends BaseAbstractActivity {
                                 myAlertBuilder.show();
                                 binding.content.progressBar.setIndeterminate(false);
                                 binding.content.progressBar.setVisibility(View.GONE);
+                                enableCheckboxes();
                             }
                         });
                     }
@@ -388,6 +387,18 @@ public class MainActivity extends BaseAbstractActivity {
         }
         dataHolder.getGeneratedFoods().set(checkboxMealID, new Pair<>(genFood.first, !genFood.second));
         refreshValues();
+    }
+
+    private void disableCheckboxes() {
+        for (int i = 0; i < MealController.NUMBER_OF_MEALS; i++) {
+            MealController.getGeneratedFoodBindingFromMealID(binding, i).checkBox.setEnabled(false);
+        }
+    }
+
+    private void enableCheckboxes() {
+        for (int i = 0; i < MealController.NUMBER_OF_MEALS; i++) {
+            MealController.getGeneratedFoodBindingFromMealID(binding, i).checkBox.setEnabled(true);
+        }
     }
 
 

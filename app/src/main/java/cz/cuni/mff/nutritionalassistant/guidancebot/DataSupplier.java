@@ -32,12 +32,6 @@ class DataSupplier {
         spoonacularDMS = new SpoonacularDMS();
     }
 
-    List<FoodAdapterType> requestFoodAdapterTypeData(
-            String query, Food.FoodType foodType, HashMap<Integer, Integer> nutritionFilterTable) {
-        // TODO
-        return null;
-    }
-
     void requestProductAdapterTypeData(
             String query, HashMap<Integer, Integer> nutritionFilterTable, AdapterDataCallback callback) {
         try {
@@ -51,8 +45,8 @@ class DataSupplier {
         spoonacularDMS.listRecipes(query, nutritionFilterTable, callback);
     }
 
-    List<FoodAdapterType> requestRestaurantFoodAdapterTypeData(String query, HashMap<Integer, Integer> nutritionFilterTable) {
-        return null;
+    void requestRestaurantFoodAdapterTypeData(String query, HashMap<Integer, Integer> nutritionFilterTable, AdapterDataCallback callback) {
+        nutritionixDMS.listRestaurantFoods(query, nutritionFilterTable, callback);
     }
 
     void requestProductDetailedInfo(FoodAdapterType product, DetailedFoodCallback callback) {

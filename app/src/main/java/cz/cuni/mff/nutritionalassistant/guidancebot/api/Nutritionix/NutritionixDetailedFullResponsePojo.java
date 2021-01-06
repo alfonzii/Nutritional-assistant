@@ -5,7 +5,6 @@ import java.util.List;
 import lombok.Getter;
 
 @Getter
-public class NutritionixDetailedFullResponsePojo {
-
+class NutritionixDetailedFullResponsePojo {
     private List<NutritionixDetailedProductPojo> foods;
 }

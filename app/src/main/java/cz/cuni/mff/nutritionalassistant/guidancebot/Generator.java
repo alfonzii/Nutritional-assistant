@@ -13,10 +13,7 @@ import java.util.Random;
 import cz.cuni.mff.nutritionalassistant.DataHolder;
 import cz.cuni.mff.nutritionalassistant.MainActivity;
 import cz.cuni.mff.nutritionalassistant.foodtypes.Food;
-import cz.cuni.mff.nutritionalassistant.foodtypes.FoodAdapterType;
-import cz.cuni.mff.nutritionalassistant.foodtypes.Product;
 import cz.cuni.mff.nutritionalassistant.foodtypes.Recipe;
-import cz.cuni.mff.nutritionalassistant.guidancebot.api.DetailedFoodCallback;
 import cz.cuni.mff.nutritionalassistant.guidancebot.api.DetailedFoodGenerateCallback;
 import cz.cuni.mff.nutritionalassistant.guidancebot.api.Spoonacular.SpoonacularDMS;
 
@@ -30,18 +27,6 @@ class Generator {
         dataSupplier = new DataSupplier();
         dataHolder = DataHolder.getInstance();
         recipeDMS = new SpoonacularDMS();
-    }
-
-    List<Food> requestDummyGeneratedFoods(List<Boolean> generatedFoodsFlags, Context context) {
-        Random random = new Random();
-        List<Food> output = new ArrayList<>();
-        List<FoodAdapterType> lightweight = dataSupplier.localDBrequest("a", Food.FoodType.RECIPE.getId(), context);
-        for (Boolean b : generatedFoodsFlags) {
-            if (!b) {
-                output.add(dataSupplier.localDetailedInfo(lightweight.get(random.nextInt(6)), context));
-            }
-        }
-        return output;
     }
 
 //-------------------------------------------------RANDOMIZED-ALGORITHM----------------------------------------------------------------------------------

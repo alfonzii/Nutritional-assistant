@@ -72,6 +72,7 @@ public class SpoonacularDMS {
             public void onResponse(Call<SpoonacularDetailedRecipePojo> call, Response<SpoonacularDetailedRecipePojo> response) {
                 if (!response.isSuccessful()) {
                     Log.d(SpoonacularDMS.class.getName(), "Code: " + response.code());
+                    callback.onFail(new Throwable(response.message() + " " + response.code()));
                     return;
                 }
 
