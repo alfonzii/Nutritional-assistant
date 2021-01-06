@@ -181,12 +181,12 @@ public class NutritionixDMS {
                 final List<FoodAdapterType> correctResponse = new ArrayList<>();
 
                 try {
-                    // TODO
-                    //correctResponse.addAll(PojoConverter.Nutritionix.fromNutritionixPojoList(response.body().getCommon()));
+                    correctResponse.addAll(PojoConverter.Nutritionix.fromNutritionixPojoList(response.body().getCommon()));
+                } catch (NullPointerException ignored){}
+                try {
                     correctResponse.addAll(PojoConverter.Nutritionix.fromNutritionixPojoList(response.body().getBranded()));
-                } catch (NullPointerException e) {
+                } catch (NullPointerException ignored){}
 
-                }
                 if (callback != null) {
                     callback.onSuccess(correctResponse);
                 }
@@ -240,7 +240,7 @@ public class NutritionixDMS {
                     additionalArgs.put("branded", "true");
                     additionalArgs.put("self", "false");
                     additionalArgs.put("common", "false");
-                    additionalArgs.put("brand_ids", brandedIdsListFormat(brandIdList));//brandIdList.toArray());
+                    additionalArgs.put("brand_ids", brandedIdsListFormat(brandIdList));
                     try {
                         listProducts(query, nutritionFilterTable, additionalArgs, callback);
                     } catch (JSONException e) {

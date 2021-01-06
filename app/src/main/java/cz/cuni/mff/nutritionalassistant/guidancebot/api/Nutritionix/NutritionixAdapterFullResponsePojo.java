@@ -6,7 +6,6 @@ import lombok.Getter;
 
 @Getter
 class NutritionixAdapterFullResponsePojo {
-    // TODO
-    //private List<NutritionixAdapterProductPojo> common;
+    private List<NutritionixAdapterProductPojo> common;
     private List<NutritionixAdapterProductPojo> branded;
 }
