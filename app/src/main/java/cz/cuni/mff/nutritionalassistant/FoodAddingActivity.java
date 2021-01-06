@@ -21,7 +21,6 @@ import cz.cuni.mff.nutritionalassistant.foodtypes.Food;
 import cz.cuni.mff.nutritionalassistant.foodtypes.FoodAdapterType;
 import cz.cuni.mff.nutritionalassistant.guidancebot.Brain;
 import cz.cuni.mff.nutritionalassistant.guidancebot.api.AdapterDataCallback;
-import cz.cuni.mff.nutritionalassistant.localdatabase.NutritionDbHelper;
 import cz.cuni.mff.nutritionalassistant.util.FilterDialogActivity;
 import cz.cuni.mff.nutritionalassistant.util.FoodAddingAdapter;
 
@@ -81,13 +80,6 @@ public class FoodAddingActivity extends BaseAbstractActivity {
                 new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         foodAddingAdapter = new FoodAddingAdapter(this);
         binding.recyclerFoodAdding.setAdapter(foodAddingAdapter);
-    }
-
-    @Override
-    protected void onDestroy() {
-        NutritionDbHelper dbHelper = NutritionDbHelper.getInstance(this);
-        dbHelper.close();
-        super.onDestroy();
     }
 
     @Override

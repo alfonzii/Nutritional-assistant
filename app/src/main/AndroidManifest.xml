@@ -22,10 +22,6 @@
         <activity
             android:name="cz.cuni.mff.nutritionalassistant.util.FilterDialogActivity"
             android:theme="@style/Theme.AppCompat.Dialog" />
-        <activity
-            android:name="cz.cuni.mff.nutritionalassistant.DatabaseActivity"
-            android:label="Food Database"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name="cz.cuni.mff.nutritionalassistant.GoalActivity" />
         <activity
             android:name="cz.cuni.mff.nutritionalassistant.CurrentLifestyleActivity"

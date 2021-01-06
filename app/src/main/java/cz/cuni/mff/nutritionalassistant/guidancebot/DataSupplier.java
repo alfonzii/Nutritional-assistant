@@ -21,7 +21,6 @@ import cz.cuni.mff.nutritionalassistant.guidancebot.api.Nutritionix.NutritionixD
 import cz.cuni.mff.nutritionalassistant.guidancebot.api.PojoConverter;
 import cz.cuni.mff.nutritionalassistant.guidancebot.api.Spoonacular.SpoonacularAdapterFullReposnsePojo;
 import cz.cuni.mff.nutritionalassistant.guidancebot.api.Spoonacular.SpoonacularDMS;
-import cz.cuni.mff.nutritionalassistant.localdatabase.NutritionDbHelper;
 
 class DataSupplier {
     private NutritionixDMS nutritionixDMS;
@@ -96,21 +95,5 @@ class DataSupplier {
             return null;
         }
         return json;
-    }
-
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-
-    Food localDetailedInfo(FoodAdapterType foodAdapterType, Context context) {
-        final NutritionDbHelper dbHelper = NutritionDbHelper.getInstance(context);
-        return dbHelper.getFoodDetailedInfo(
-                dbHelper.getReadableDatabase(), foodAdapterType.getFoodName(), foodAdapterType.getFoodType());
-    }
-
-    List<FoodAdapterType> localDBrequest(String query, int foodTypeFilter, Context context) {
-        final NutritionDbHelper dbHelper = NutritionDbHelper.getInstance(context);
-
-        return dbHelper.getFoodLightweightListByNameQuery(
-                dbHelper.getReadableDatabase(), query, foodTypeFilter);
     }
 }

@@ -190,8 +190,7 @@ public class MainActivity extends BaseAbstractActivity {
                 break;
 
             case R.id.action_foodDatabase:
-                Intent databaseIntent = new Intent(this, DatabaseActivity.class);
-                startActivity(databaseIntent);
+                // TODO vycistit
         }
         return super.onOptionsItemSelected(item);
     }
