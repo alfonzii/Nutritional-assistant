@@ -30,10 +30,10 @@ public class NutritionixDMS {
     private NutritionixApi nutritionixApi;
 
     /*CONSTANTS FOR RESTAURANTS
-    * In case of tweaking, change the final variables to desired values.
-    * Default coordinate values set your location to park in front of White House in Washington D.C.
-    * To use restaurant features, only US locations coordinates can be used
-    */
+     * In case of tweaking, change the final variables to desired values.
+     * Default coordinate values set your location to park in front of White House in Washington D.C.
+     * To use restaurant features, only US locations coordinates can be used
+     */
     private final Pair<String, String> coordinates = new Pair<>("38.8950", "-77.0366");
     private final int radiusMeters = 500;
 
@@ -67,7 +67,11 @@ public class NutritionixDMS {
                 }
 
                 if (callback != null) {
-                    callback.onSuccess(PojoConverter.Nutritionix.fromNutritionixDetailedProductPojo(response.body().getFoods().get(0)));
+                    if (response.body() != null) {
+                        callback.onSuccess(PojoConverter.Nutritionix.fromNutritionixDetailedProductPojo(response.body().getFoods().get(0)));
+                    } else {
+                        callback.onFail(new Throwable("Error while getting product details."));
+                    }
                 }
             }
 
@@ -180,12 +184,15 @@ public class NutritionixDMS {
                 }
                 final List<FoodAdapterType> correctResponse = new ArrayList<>();
 
-                try {
-                    correctResponse.addAll(PojoConverter.Nutritionix.fromNutritionixPojoList(response.body().getCommon()));
-                } catch (NullPointerException ignored){}
-                try {
-                    correctResponse.addAll(PojoConverter.Nutritionix.fromNutritionixPojoList(response.body().getBranded()));
-                } catch (NullPointerException ignored){}
+
+                if (response.body() != null) {
+                    if (response.body().getCommon() != null){
+                        correctResponse.addAll(PojoConverter.Nutritionix.fromNutritionixPojoList(response.body().getCommon()));
+                    }
+                    if (response.body().getBranded() != null){
+                        correctResponse.addAll(PojoConverter.Nutritionix.fromNutritionixPojoList(response.body().getBranded()));
+                    }
+                }
 
                 if (callback != null) {
                     callback.onSuccess(correctResponse);
@@ -233,7 +240,7 @@ public class NutritionixDMS {
                     final List<NutritionixRestaurantPojo> restaurantPojoList = new ArrayList<>(response.body().getRestaurants());
                     final List<String> brandIdList = new ArrayList<>();
 
-                    for(NutritionixRestaurantPojo pojo : restaurantPojoList) {
+                    for (NutritionixRestaurantPojo pojo : restaurantPojoList) {
                         brandIdList.add(pojo.getBrandId());
                     }
                     HashMap<String, Object> additionalArgs = new HashMap<>();
