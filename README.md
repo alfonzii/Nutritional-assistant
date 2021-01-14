@@ -1,5 +1,5 @@
 # Nutritional_assistant
-Simple android application for nutrition control with adaptive meal plan generation.
+Simple android application for nutrition control with adaptive meal plan generation created in Java with Android SDK.
 
 ## User manual
 
@@ -45,7 +45,7 @@ Again, there will be more categories (calories, fats, carbohydrates, proteins).
 To app function correctly when using automatic nutrition settings, you are required to enter your physical parameters, here.
 
 ### Minimum API Version
-* 19 (Android 4.4.2 KitKat)
+* 23 (Android 6.0 Marshmallow)
 
 ## TODO
 * Implement Database
@@ -57,7 +57,7 @@ To app function correctly when using automatic nutrition settings, you are requi
 
 ## Tested on devices
 * Nexus 5X (API 29, x86 emulator)
-* Samsung Galaxy S4 mini (API 19, physical device)
+* Huawei P8 Lite (Android 6.0, API 23, physical device)
 
 ## Database
-Powered by [NutriDatabaze](https://www.nutridatabaze.cz/)
+Powered by [Nutritionix](https://www.nutritionix.com/business/api) & [Spoonacular](https://spoonacular.com/food-api) API
