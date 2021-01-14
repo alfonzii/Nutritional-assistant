@@ -1,5 +1,5 @@
 # Nutritional_assistant
-Simple android application for nutrition control
+Simple android application for nutrition control with adaptive meal plan generation.
 
 ## User manual
 
