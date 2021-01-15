@@ -1,21 +1,26 @@
 # Nutritional-assistant
-Simple android application for nutrition control with adaptive meal plan generation created in Java with Android SDK.
+Simple android application for nutrition control and weight goal with adaptive meal plan generation created in _Java_ with _Android SDK_.
 
-## Screenshots
-TODO
+Biggest asset of this application in comparison to similar nutrition control/manager apps on market is that users don't have to strictly obey given meal plan. Instead, they can deviate from it if needed and still be able to meet their nutrition limits and goals by using application's adaptive meal plan re-generation.
+
+## Quick overview
+Application helps it's users to get dreamed weight in relatively painless, straightforward and healthy way. User provides 6 parameters (sex, age, weight, height, lifestyle, weight goal), from which are daily nutrition intake limits calculated to meet chosen weight goal. Afterwards, user can generate daily meal plan that many times as he needs, to be finally happy with the one generated (beware of API request limit (tu bude anchor) in this version of app). Generated meal plan satisfies nutrition limits as much as possible. Application also supports adding foods from provided databases manually. Adding food manually breaks generated meal plan, because it changes assumed nutrition intake. User can deal with such sitations by using application's adaptive re-generation of meal plan, so it's now possible for user to add his own foods to meals and be sure that in the end, his nutrition limits will be satisfied.
 
 ## User manual
 
 ### Main activity
-On main screen you see overview of your daily food intake an generated meal plan. You got four main options from main:
+On main screen you see overview of your daily food intake an generated meal plan. You got four main options from this activity:
 
 1. Add food (floating button)
 2. Reset your daily income
 3. Settings
 4. (Re-)Generate meal plan
 
+### Screenshots
+TODO Main activity screenshots
+
 #### Add food
-When you click food adding button, application get you to an activity, where you have search bar.
+When you click food adding button, application gets you to an activity, where you have search bar.
 You can start typing and search bar will provide you with suggestions to what are you writing.
 After you choose what you want to eat or have eaten, dialog window will pop up on you with number picker to choose grams of your food
 and you can add this food to your daily income.
