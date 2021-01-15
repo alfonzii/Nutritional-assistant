@@ -11,19 +11,22 @@ Application helps it's users to get dreamed weight in relatively painless, strai
 ### Main activity
 On main screen you see overview of your daily food intake, generated meal plan and manually added foods. You got four main options from this activity:
 
-1. Add food (floating button)
-2. Reset
-3. Settings
-4. (Re-)Generate meal plan
+__1. Add food (floating button)__
+__2. Reset__
+__3. Settings__
+__4. (Re)Generate meal plan__
 
-Checking generated food changes it's state and adds or subtracts it's nutrition values from daily intake. Swiping left on manually added food removes it from nutrition manager. Clicking on any (manual/generated) food opens _OverviewActivity_ with details of given food.
+Other actions you can do on _MainActivity_:
+* __Checking generated food__ – changes it's state and adds or subtracts it's nutrition values from daily intake
+* __Swiping left manually added food__ – removes it from nutrition manager
+* __Clicking on any (manual/generated) food__ – opens _OverviewActivity_ with details of given food
 
 ### Screenshots
 TODO Main activity screenshots
 
 ### 1. Add food
-When you click food adding button, application gets you to an activity, where you have search bar.
-You can start typing and search bar will provide you with suggestions to what are you writing.
+Clicking food adding button, application gets you to a _FoodAddingActivity_, from where you can search and filter foods you want to manually add.
+To actually search for foods you have to hit __search__ button on keyboard. Application doesn't give suggestions to keywords. This is ___intentional___ feature, trying to minimize API calls to API servers, because of daily API request limit.
 After you choose what you want to eat or have eaten, dialog window will pop up on you with number picker to choose grams of your food
 and you can add this food to your daily income.
 
