@@ -1,5 +1,5 @@
 # Nutritional-assistant
-Simple android application for nutrition control and weight goal with adaptive meal plan generation created in _Java_ with _Android SDK_.
+Simple android application for nutrition control and weight goal achievement with adaptive meal plan generation created in _Java_ with _Android SDK_.
 
 Biggest asset of this application in comparison to similar nutrition control/manager apps on market is that users don't have to strictly obey given meal plan. Instead, they can deviate from it if needed and still be able to meet their nutrition limits and goals by using application's adaptive meal plan re-generation.
 
