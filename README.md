@@ -1,4 +1,4 @@
-# Nutritional_assistant
+# Nutritional-assistant
 Simple android application for nutrition control with adaptive meal plan generation created in Java with Android SDK.
 
 ## User manual
