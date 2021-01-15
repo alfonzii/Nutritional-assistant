@@ -11,9 +11,9 @@ Application helps it's users to get dreamed weight in relatively painless, strai
 ### Main activity
 On main screen you see overview of your daily food intake, generated meal plan and manually added foods. You got four main options from this activity:
 
-__1. Add food (floating button)__
-__2. Reset__
-__3. Settings__
+__1. Add food (floating button)__  
+__2. Reset__  
+__3. Settings__  
 __4. (Re)Generate meal plan__
 
 Other actions you can do on _MainActivity_:
