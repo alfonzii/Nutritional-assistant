@@ -25,10 +25,14 @@ Other actions you can do on _MainActivity_:
 TODO Main activity screenshots
 
 ### 1. Add food
-Clicking food adding button, application gets you to a _FoodAddingActivity_, from where you can search and filter foods you want to manually add.
-To actually search for foods you have to hit __search__ button on keyboard. Application doesn't give suggestions to keywords. This is ___intentional___ feature, trying to minimize API calls to API servers, because of daily [API request limit](#api-request-limit).
-After you choose what you want to eat or have eaten, dialog window will pop up on you with number picker to choose grams of your food
-and you can add this food to your daily income.
+Clicking food adding button gets you to a _FoodAddingActivity_, from where you can search and filter foods you want to manually add. ***To actually search for foods you have to hit search button on keyboard.*** Application doesn't give suggestions to keywords. This is ___intentional___ feature, trying to minimize API calls to API servers, because of daily [API request limit](#api-request-limit).
+After you choose what you want to eat or have eaten, _OverviewActivity_ of given food will be shown so you can set quantity, serving size and meal where to add food. Hitting __ADD button__ adds food into your log.
+
+#### Manually adding food for the first time a day
+When you manually add food to your log for the first time in a day, you will be presented with 3 options to choose from. That happens because you are deviating from generated meal plan and application needs to know, how to act accordingly. These options are:
+* _Cheatday_ – tells application to not bother with any adaptive re-generation settings for meal plan. Basically, choosing this option makes app ignore any manually added food.
+* _Nextday_ – application will transfer any caloric excess from this day to next day at the end of the day. On next day, application will generate meal plan considering this caloric excess (will generate plan from your recommended daily caloric intake minus caloric excess from yesterday), so in total it will be the same caloric intake for both days.
+* _Thisday_ – application will generate till the end of the day such meal plans, that considering manually added food, it's still able to keep to daily nutrition limits as much as possible. 
 
 ### 2. Reset
 From main screen you got option (in action bar) to reset your daily food income. Simply press the button and you are back to 0s.
@@ -58,11 +62,26 @@ Again, there will be more categories (calories, fats, carbohydrates, proteins).
 #### User parameters
 To app function correctly when using automatic nutrition settings, you are required to enter your physical parameters, here.
 
+## Technical details
+
+### Guidance bot
+TODO
+
+### Food types
+TODO
+
 ### API request limit
 TODO
 
 ### Minimum API Version
 * 23 (Android 6.0 Marshmallow)
+
+### Tested on devices
+* Nexus 5X (API 29, x86 emulator)
+* Huawei P8 Lite (Android 6.0, API 23, physical device)
+
+## Known issues
+TODO
 
 ## TODO
 * Implement Database
@@ -71,10 +90,6 @@ TODO
 * Make activity hierarchy in AndroidManifest.xml to be able to use "back" action button
 * In food adding dialog popup change number picker to number entering (number picker was used just for personal learning purposes)
 * Use external solution with API for foods (right now I'm using just local database with cca. 1K of entries)
-
-## Tested on devices
-* Nexus 5X (API 29, x86 emulator)
-* Huawei P8 Lite (Android 6.0, API 23, physical device)
 
 ## Database
 Powered by [Nutritionix](https://www.nutritionix.com/business/api) & [Spoonacular](https://spoonacular.com/food-api) API
