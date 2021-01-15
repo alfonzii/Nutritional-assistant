@@ -42,8 +42,8 @@ From main screen you got option (in action bar) to reset your daily food income 
 ### 3. Settings
 Clicking Settings action button presents you with 2 options:
 
-1. Nutrition settings
-2. User parameters
+__1. Nutrition settings__  
+__2. User parameters__
 
 #### Nutrition settings
 In nutrition settings you can set your daily nutrition limits. You can choose from manual or automatic setting.
@@ -60,11 +60,17 @@ After _User parameters_ and _Nutrition settings_ are set, clicking on __RE-GENER
 
 ## Technical details
 
-### Guidance bot
-TODO
-
 ### Food types
-TODO
+Three food types are supported:
+__1. Product__  
+__2. Recipe__  
+__3. Restaurant food__
+
+Recipes are recipes, restaurant foods are foods available from restaurants in user vicinity and products are everything else, which is not recipe or restaurant food.
+
+Application supports __Restaurant food__ in USA regions. It means, if there are any restaurants nearby user, their food can be found in manual food adding by setting food type filter to _Restaurant_.
+
+For now, application doesn't implement GPS support and setting of radius in which to consider restaurants. To tweak with this functionality, you have to change _NutritionixDMS_ class constant fields _coordinates_ and _radiusMeters_. 
 
 ### API request limit
 TODO
