@@ -26,7 +26,7 @@ TODO Main activity screenshots
 
 ### 1. Add food
 Clicking food adding button, application gets you to a _FoodAddingActivity_, from where you can search and filter foods you want to manually add.
-To actually search for foods you have to hit __search__ button on keyboard. Application doesn't give suggestions to keywords. This is ___intentional___ feature, trying to minimize API calls to API servers, because of daily [API request limit](#API request limit).
+To actually search for foods you have to hit __search__ button on keyboard. Application doesn't give suggestions to keywords. This is ___intentional___ feature, trying to minimize API calls to API servers, because of daily [API request limit](#api-request-limit).
 After you choose what you want to eat or have eaten, dialog window will pop up on you with number picker to choose grams of your food
 and you can add this food to your daily income.
 
