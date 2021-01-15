@@ -78,8 +78,8 @@ By using [Nutritionix](https://www.nutritionix.com/business/api) and [Spoonacula
 #### Instructions to provide custom authorization keys for Nutritionix and Spoonacular
 
 
-### Minimum API Version
-* 23 (Android 6.0 Marshmallow)
+### Minimum Android Version
+* Android 6.0 Marshmallow (API 23)
 
 ### Tested on devices
 * Nexus 5X (API 29, x86 emulator)
