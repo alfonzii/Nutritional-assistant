@@ -32,35 +32,31 @@ After you choose what you want to eat or have eaten, _OverviewActivity_ of given
 When you manually add food to your log for the first time in a day, you will be presented with 3 options to choose from. That happens because you are deviating from generated meal plan and application needs to know, how to act accordingly. These options are:
 * _Cheatday_ – tells application to not bother with any adaptive re-generation settings for meal plan. Basically, choosing this option makes app ignore any manually added food.
 * _Nextday_ – application will transfer any caloric excess from this day to next day at the end of the day. On next day, application will generate meal plan considering this caloric excess (will generate plan from your recommended daily caloric intake minus caloric excess from yesterday), so in total it will be the same caloric intake for both days.
-* _Thisday_ – application will generate till the end of the day such meal plans, that considering manually added food, it's still able to keep to daily nutrition limits as much as possible. 
+* _Thisday_ – application will generate till the end of the day such meal plans, that considering manually added food, it's still able to keep to daily nutrition limits as much as possible.
+
+Choosing one option makes it permanent till the end of the day or reset.
 
 ### 2. Reset
-From main screen you got option (in action bar) to reset your daily food income. Simply press the button and you are back to 0s.
+From main screen you got option (in action bar) to reset your daily food income and adaptive feature (if set). Simply press the button and you are back to 0s.
 
 ### 3. Settings
-Clicking Settings action button presents you with 4 options:
+Clicking Settings action button presents you with 2 options:
 
 1. Nutrition settings
-2. Database (Work in progress)
-3. Intake overview (TODO)
-4. User parameters
+2. User parameters
 
 #### Nutrition settings
 In nutrition settings you can set your daily nutrition limits. You can choose from manual or automatic setting.
 From manual you can set limits manually, but most of time, automatic is sufficent. If you choose automatic, then you are asked about your current lifestyle
-(sedentary, mild activity, medium activity, high activity) and what is your fitness goal (gain, lose, maintain). After entering these, app calculates you your daily limit calories.
-Prerequisite to this automatic calculation is entering your parameters in User parameters acitivty. If you haven't entered them, app won't let you do automatic calculation
+(sedentary, mild activity, medium activity, high activity) and what is your weight goal (gain, lose, maintain). After entering these, app calculates your daily nutrition limit.
+Prerequisite to this automatic calculation is entering your parameters in _UserParametersAcitivty_. If you haven't entered them, app won't let you do automatic calculation
 and will ask you to enter them.
 
-#### Database (Work in progress)
-You can filter foods by calories, fats, carbohydrates and proteins. From given filter variables, database presents you with food sufficing these constrains.
-
-#### Intake overview (TODO)
-Here you will be able to see your intake graphs in long term and check on how you keep to your diet.
-Again, there will be more categories (calories, fats, carbohydrates, proteins).
-
 #### User parameters
-To app function correctly when using automatic nutrition settings, you are required to enter your physical parameters, here.
+For application correct functioning when using automatic nutrition settings, you are required to enter your physical parameters here.
+
+### 4. (Re)Generate meal plan
+After _User parameters_ and _Nutrition settings_ are set, clicking on __RE-GENERATE button__ generates a meal plan satisfying calculated nutrition daily limits as much as possible. If generated meal plan is unsatisfactory, clicking button again gives some other meal plan. Generated foods which are already checked won't be re-generated.
 
 ## Technical details
 
