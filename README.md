@@ -76,7 +76,7 @@ For now, application doesn't implement GPS support and setting of radius in whic
 By using [Nutritionix](https://www.nutritionix.com/business/api) and [Spoonacular](https://spoonacular.com/food-api) free plans, application is limited by their daily API requests limit. Application got default provided authorization keys for both services, but ***it's HIGHLY RECOMMENDED*** you provide your own keys so you can manage your API requests consumption.
 
 #### Instructions to provide custom authorization keys for Nutritionix and Spoonacular
-
+TODO
 
 ### Minimum Android Version
 * Android 6.0 Marshmallow (API 23)
