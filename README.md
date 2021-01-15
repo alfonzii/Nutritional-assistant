@@ -9,26 +9,28 @@ Application helps it's users to get dreamed weight in relatively painless, strai
 ## User manual
 
 ### Main activity
-On main screen you see overview of your daily food intake an generated meal plan. You got four main options from this activity:
+On main screen you see overview of your daily food intake, generated meal plan and manually added foods. You got four main options from this activity:
 
 1. Add food (floating button)
-2. Reset your daily income
+2. Reset
 3. Settings
 4. (Re-)Generate meal plan
+
+Checking generated food changes it's state and adds or subtracts it's nutrition values from daily intake. Swiping left on manually added food removes it from nutrition manager. Clicking on any (manual/generated) food opens _OverviewActivity_ with details of given food.
 
 ### Screenshots
 TODO Main activity screenshots
 
-#### Add food
+### 1. Add food
 When you click food adding button, application gets you to an activity, where you have search bar.
 You can start typing and search bar will provide you with suggestions to what are you writing.
 After you choose what you want to eat or have eaten, dialog window will pop up on you with number picker to choose grams of your food
 and you can add this food to your daily income.
 
-#### Reset your daily income
+### 2. Reset
 From main screen you got option (in action bar) to reset your daily food income. Simply press the button and you are back to 0s.
 
-### Settings
+### 3. Settings
 Clicking Settings action button presents you with 4 options:
 
 1. Nutrition settings
