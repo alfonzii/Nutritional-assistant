@@ -61,7 +61,7 @@ After _User parameters_ and _Nutrition settings_ are set, clicking on __RE-GENER
 ## Technical details
 
 ### Food types
-Three food types are supported:
+Three food types are supported:  
 __1. Product__  
 __2. Recipe__  
 __3. Restaurant food__
@@ -73,7 +73,10 @@ Application supports __Restaurant food__ in USA regions. It means, if there are 
 For now, application doesn't implement GPS support and setting of radius in which to consider restaurants. To tweak with this functionality, you have to change _NutritionixDMS_ class constant fields _coordinates_ and _radiusMeters_. 
 
 ### API request limit
-TODO
+By using [Nutritionix](https://www.nutritionix.com/business/api) and [Spoonacular](https://spoonacular.com/food-api) free plans, application is limited by their daily API requests limit. Application got default provided authorization keys for both services, but ***it's HIGHLY RECOMMENDED*** you provide your own keys so you can manage your API requests consumption.
+
+#### Instructions to provide custom authorization keys for Nutritionix and Spoonacular
+
 
 ### Minimum API Version
 * 23 (Android 6.0 Marshmallow)
@@ -93,5 +96,5 @@ TODO
 * In food adding dialog popup change number picker to number entering (number picker was used just for personal learning purposes)
 * Use external solution with API for foods (right now I'm using just local database with cca. 1K of entries)
 
-## Database
+## Dataset
 Powered by [Nutritionix](https://www.nutritionix.com/business/api) & [Spoonacular](https://spoonacular.com/food-api) API
