@@ -1,14 +1,18 @@
 # Nutritional-assistant
 Simple android application for nutrition control with adaptive meal plan generation created in Java with Android SDK.
 
+## Screenshots
+TODO
+
 ## User manual
 
 ### Main activity
-On main screen you see overview of your daily food intake. You got three options from main:
+On main screen you see overview of your daily food intake an generated meal plan. You got four main options from main:
 
 1. Add food (floating button)
 2. Reset your daily income
 3. Settings
+4. (Re-)Generate meal plan
 
 #### Add food
 When you click food adding button, application get you to an activity, where you have search bar.
