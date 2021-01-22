@@ -1,3 +1,5 @@
+IN CONSTRUCTION. README NOT FINISHED YET AND ONLY IN CONCEPT VERSION.
+
 # Nutritional-assistant
 Simple android application for __nutrition control__ and __weight goal__ achievement with __adaptive meal plan generation__ created in _Java_ with _Android SDK_.
 
