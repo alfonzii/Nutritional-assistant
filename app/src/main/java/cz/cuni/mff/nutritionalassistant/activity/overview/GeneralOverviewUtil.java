@@ -173,7 +173,7 @@ class GeneralOverviewUtil {
     }
 
     void onAddButtonClickGeneral(Context context) {
-        if (dataHolder.getAdHocFlag() == DataHolder.AdHocFlag.UNSET) {
+        if (dataHolder.getAdHocFlag() == DataHolder.AdHocFlag.UNSET && !numberQuantity.getText().toString().equals("")) {
             AlertDialog.Builder myAlertBuilder;
             myAlertBuilder = new AlertDialog.Builder(context);
 
@@ -206,7 +206,12 @@ class GeneralOverviewUtil {
     }
 
     private void addFood(Context context) {
-        food.setServingQuantity(Collections.singletonList(Float.parseFloat(numberQuantity.getText().toString())));
+        // Can be empty; need to catch NFE if empty
+        try {
+            food.setServingQuantity(Collections.singletonList(Float.parseFloat(numberQuantity.getText().toString())));
+        } catch (NumberFormatException e) {
+            return;
+        }
         // Not general, but too simple to divide code
         if (food.getFoodType() != Food.FoodType.RECIPE) {
             food.setServingUnit(Collections.singletonList(spinnerServingUnit.getSelectedItem().toString()));

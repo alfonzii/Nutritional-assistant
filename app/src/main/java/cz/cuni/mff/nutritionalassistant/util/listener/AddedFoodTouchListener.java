@@ -31,13 +31,13 @@ public class AddedFoodTouchListener implements View.OnTouchListener {
 
     public void onRightToLeftSwipe() {
         Log.i(logTag, "RightToLeftSwipe!");
-        Toast.makeText(activity, "RightToLeftSwipe", Toast.LENGTH_SHORT).show();
+        Toast.makeText(activity, "Removed!", Toast.LENGTH_SHORT).show();
         // activity.doSomething();
     }
 
     public void onLeftToRightSwipe() {
         Log.i(logTag, "LeftToRightSwipe!");
-        Toast.makeText(activity, "LeftToRightSwipe", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(activity, "LeftToRightSwipe", Toast.LENGTH_SHORT).show();
         // activity.doSomething();
     }
 

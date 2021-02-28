@@ -3,6 +3,8 @@ package cz.cuni.mff.nutritionalassistant.activity.overview;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import cz.cuni.mff.nutritionalassistant.MainActivity;
@@ -19,6 +21,13 @@ public class RecipeOverviewActivity extends BaseAbstractActivity {
 
     private GeneralOverviewUtil overviewUtil;
     private Recipe recipe;
+    private boolean metricUnits = true;
+
+    Switch.OnCheckedChangeListener switchListener = (buttonView, isChecked) -> {
+        metricUnits = !metricUnits;
+        initIngredients();
+    };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +40,7 @@ public class RecipeOverviewActivity extends BaseAbstractActivity {
                 binding.textRecipeName, binding.thumbnail, binding.numberQuantity, binding.spinnerMeal, binding.textCaloriesValue,
                 binding.textFatsValue, binding.textCarbsValue, binding.textProteinsValue, recipe
         );
+        binding.switch1.setOnCheckedChangeListener(switchListener);
 
         overviewUtil.initialSetupGeneral(this);
         this.initialSetupSpecific();
@@ -51,10 +61,17 @@ public class RecipeOverviewActivity extends BaseAbstractActivity {
     }
 
     private void initIngredients() {
-        for(Recipe.Ingredient ingredient : recipe.getIngredients()) {
+        int childCount = binding.LinearLayoutIngredients.getChildCount();
+        binding.LinearLayoutIngredients.removeViews(1, childCount - 1);
+        for (Recipe.Ingredient ingredient : recipe.getIngredients()) {
             TextView textViewIngredient = new TextView(this);
-            textViewIngredient.setText(
-                    ingredient.getMetricAmount() + " " + ingredient.getMetricUnit() + " " + ingredient.getName());
+            if (metricUnits) {
+                textViewIngredient.setText(
+                        ingredient.getMetricAmount() + " " + ingredient.getMetricUnit() + " " + ingredient.getName());
+            } else {
+                textViewIngredient.setText(
+                        ingredient.getUsAmount() + " " + ingredient.getUsUnit() + " " + ingredient.getName());
+            }
             binding.LinearLayoutIngredients.addView(textViewIngredient);
         }
     }

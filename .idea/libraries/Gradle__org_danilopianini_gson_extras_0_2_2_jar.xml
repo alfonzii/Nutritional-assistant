@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: org.danilopianini:gson-extras:0.2.2@jar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.danilopianini/gson-extras/0.2.2/b4ea88081d47eaeff61948537f80357167c67039/gson-extras-0.2.2.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.danilopianini/gson-extras/0.2.2/ad5f53f23b32035f805d72cb78cbf6994f5267df/gson-extras-0.2.2-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.danilopianini/gson-extras/0.2.2/e114ce38c477fc674ce73ec3fd4f352f71f5f1d3/gson-extras-0.2.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

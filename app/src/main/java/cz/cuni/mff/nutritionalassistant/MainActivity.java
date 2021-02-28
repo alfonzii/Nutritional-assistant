@@ -133,6 +133,8 @@ public class MainActivity extends BaseAbstractActivity {
             }
         });
 
+        // Change .getDateInstance() to .getDateTimeInstance() and rerun to check Nextday
+        // functionality instantly.
         if (!dataHolder.getLastRunDate().equals(DateFormat.getDateInstance().format(new Date()))) {
             reset(false);
             Brain.getInstance().requestNHConstraintsCalculation(dataHolder.getCaloriesExcess());
@@ -303,51 +305,75 @@ public class MainActivity extends BaseAbstractActivity {
         Thread t = new Thread() {
             @Override
             public void run() {
-                Brain.getInstance().requestRegenerate(generatedFoodsChecked, getApplicationContext(), new GeneratedFoodListCallback() {
-                    //private boolean alreadyFailed = false;
+                try {
+                    Brain.getInstance().requestRegenerate(generatedFoodsChecked, getApplicationContext(), new GeneratedFoodListCallback() {
+                        //private boolean alreadyFailed = false;
 
-                    @Override
-                    public void onSuccess(@NonNull List<Food> newGeneratedRecipes, List<Boolean> generatedFoodsFlags) {
-                        //ListIterator<Pair<Food, Boolean>> it = dataHolder.getGeneratedFoods().listIterator();
+                        @Override
+                        public void onSuccess(@NonNull List<Food> newGeneratedRecipes, List<Boolean> generatedFoodsFlags) {
+                            //ListIterator<Pair<Food, Boolean>> it = dataHolder.getGeneratedFoods().listIterator();
 
-                        for (int i = 0; i < MealController.NUMBER_OF_MEALS; i++) {
-                            if (!generatedFoodsFlags.get(i)) {
-                                dataHolder.getGeneratedFoods().set(i, new Pair<>(newGeneratedRecipes.get(0), false));
-                                newGeneratedRecipes.remove(0);
+                            for (int i = 0; i < MealController.NUMBER_OF_MEALS; i++) {
+                                if (!generatedFoodsFlags.get(i)) {
+                                    dataHolder.getGeneratedFoods().set(i, new Pair<>(newGeneratedRecipes.get(0), false));
+                                    newGeneratedRecipes.remove(0);
+                                }
                             }
+
+                            refreshGeneratedFoods();
+                            binding.content.progressBar.setIndeterminate(false);
+                            binding.content.progressBar.setVisibility(View.GONE);
+                            enableCheckboxes();
                         }
 
-                        refreshGeneratedFoods();
-                        binding.content.progressBar.setIndeterminate(false);
-                        binding.content.progressBar.setVisibility(View.GONE);
-                        enableCheckboxes();
-                    }
-
-                    @Override
-                    public void onFail(@NonNull Throwable throwable) {
-                        MainActivity.this.runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                AlertDialog.Builder myAlertBuilder;
-                                myAlertBuilder = new AlertDialog.Builder(MainActivity.this);
-                                // Add the dialog buttons.
-                                myAlertBuilder.setPositiveButton("Dismiss",
-                                        new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface dialog, int which) {
-                                            }
-                                        });
-                                myAlertBuilder.setTitle("Error");
-                                myAlertBuilder.setMessage(
-                                        "Application wasn't able to generate meal plan for you because of following reason:\n" + throwable.getMessage());
-                                // Create and show the AlertDialog.
-                                myAlertBuilder.show();
-                                binding.content.progressBar.setIndeterminate(false);
-                                binding.content.progressBar.setVisibility(View.GONE);
-                                enableCheckboxes();
-                            }
-                        });
-                    }
-                });
+                        @Override
+                        public void onFail(@NonNull Throwable throwable) {
+                            MainActivity.this.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    AlertDialog.Builder myAlertBuilder;
+                                    myAlertBuilder = new AlertDialog.Builder(MainActivity.this);
+                                    // Add the dialog buttons.
+                                    myAlertBuilder.setPositiveButton("Dismiss",
+                                            new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                }
+                                            });
+                                    myAlertBuilder.setTitle("Error");
+                                    myAlertBuilder.setMessage(
+                                            "Application wasn't able to generate meal plan for you because of following reason:\n" + throwable.getMessage());
+                                    // Create and show the AlertDialog.
+                                    myAlertBuilder.show();
+                                    binding.content.progressBar.setIndeterminate(false);
+                                    binding.content.progressBar.setVisibility(View.GONE);
+                                    enableCheckboxes();
+                                }
+                            });
+                        }
+                    });
+                } catch (NullPointerException e) {
+                    MainActivity.this.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            AlertDialog.Builder myAlertBuilder;
+                            myAlertBuilder = new AlertDialog.Builder(MainActivity.this);
+                            // Add the dialog buttons.
+                            myAlertBuilder.setPositiveButton("Dismiss",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                        }
+                                    });
+                            myAlertBuilder.setTitle("Error");
+                            myAlertBuilder.setMessage(
+                                    "Set your parameters first!");
+                            // Create and show the AlertDialog.
+                            myAlertBuilder.show();
+                            binding.content.progressBar.setIndeterminate(false);
+                            binding.content.progressBar.setVisibility(View.GONE);
+                            enableCheckboxes();
+                        }
+                    });
+                }
             }
         };
         t.start();

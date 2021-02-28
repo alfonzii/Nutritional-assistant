@@ -98,9 +98,20 @@ class Generator {
 
             List<Food> foodCombination = new ArrayList<>();
 
-            for (List<Food> mealRecipes : mealFoodDataList) {
-                int index = random.nextInt(mealRecipes.size());
-                foodCombination.add(portionHeuristic(mealRecipes.get(index), random.nextInt(3)));
+            // To ensure that we satisfy meal constraints we use recipes in their default portions,
+            if (satisfyMealConstr) {
+                for (List<Food> mealRecipes : mealFoodDataList) {
+                    int index = random.nextInt(mealRecipes.size());
+                    foodCombination.add(portionHeuristic(mealRecipes.get(index), 0));
+                }
+            }
+            // When we don't need to satisfy meal con., we can use portions size heuristic, because
+            // we don't care anymore about meal constraints
+            else {
+                for (List<Food> mealRecipes : mealFoodDataList) {
+                    int index = random.nextInt(mealRecipes.size());
+                    foodCombination.add(portionHeuristic(mealRecipes.get(index), random.nextInt(3)));
+                }
             }
 
             float totalCal = 0;
@@ -114,85 +125,73 @@ class Generator {
                 totalProts += food.getProteins();
             }
             if (satisfiesConstraints(totalCal, dataHolder.getCalsConstr())) {
-                if(satisfyMacroConstr) {
+                if (satisfyMacroConstr) {
                     List<Float> macrosList = new ArrayList<>();
                     macrosList.add(totalFats);
                     macrosList.add(totalCarbs);
                     macrosList.add(totalProts);
-                    if (satisfiesMacroConstraints(macrosList)){
+                    if (satisfiesMacroConstraints(macrosList)) {
                         isSatysfyingConstr = true;
                     }
                 } else {
                     isSatysfyingConstr = true;
                 }
 
-                //Log.d("FoodLOG", "-----------------------------------------------------------------------");
-                //Log.d("FoodLOG", "Satisfies calories constraints");
-                //if (satisfiesConstraints(totalFats, dataHolder.getFatsConstr())) {
-                    //Log.d("FoodLOG", "Satisfies fats constraints");
-                    //if (satisfiesConstraints(totalCarbs, dataHolder.getCarbConstr())) {
-                        //Log.d("FoodLOG", "Satisfies carbs constraints");
-                        if (isSatysfyingConstr) {
-                            //Log.d("FoodLOG", "Satisfies proteins constrants");
 
-                            // satisfying combination found
-                            //isSatysfyingConstr = true;
+                if (isSatysfyingConstr) {
+                    List<Food> answer = Collections.synchronizedList(new ArrayList<>());
+                    for (int i = 0; i < foodCombination.size(); i++) {
+                        answer.add(null);
+                    }
 
-                            List<Food> answer = Collections.synchronizedList(new ArrayList<>());
-                            for (int i = 0; i < foodCombination.size(); i++) {
-                                answer.add(null);
+                    DetailedFoodGenerateCallback callback = new DetailedFoodGenerateCallback() {
+                        @Override
+                        public void onSuccess(@NonNull Food response, int position) {
+                            answer.set(position, response);
+                            if (isAsyncAnswerListReady(answer)) {
+                                if (generatedListCallback != null) {
+                                    generatedListCallback.onSuccess(answer, generatedFoodFlags);
+                                }
                             }
+                        }
 
-                            DetailedFoodGenerateCallback callback = new DetailedFoodGenerateCallback() {
-                                @Override
-                                public void onSuccess(@NonNull Food response, int position) {
-                                    answer.set(position, response);
-                                    if (isAsyncAnswerListReady(answer)) {
-                                        if (generatedListCallback != null) {
-                                            generatedListCallback.onSuccess(answer, generatedFoodFlags);
-                                        }
-                                    }
+                        private boolean isAsyncAnswerListReady(List<Food> answer) {
+                            for (int i = 0; i < answer.size(); i++) {
+                                if (answer.get(i) == null) {
+                                    return false;
                                 }
+                            }
+                            return true;
+                        }
 
-                                private boolean isAsyncAnswerListReady(List<Food> answer) {
-                                    for (int i = 0; i < answer.size(); i++) {
-                                        if (answer.get(i) == null) {
-                                            return false;
-                                        }
-                                    }
-                                    return true;
-                                }
+                        @Override
+                        public void onFail(@NonNull Throwable throwable) {
+                            if (generatedListCallback != null) {
+                                generatedListCallback.onFail(throwable);
+                            }
+                        }
+                    };
 
-                                @Override
-                                public void onFail(@NonNull Throwable throwable) {
-                                    if (generatedListCallback != null) {
-                                        generatedListCallback.onFail(throwable);
-                                    }
-                                }
-                            };
-
-                            Log.d("FoodLOG", "Found combination + satisfConstrEnabled:" + satisfyMealConstr);
+                            /*Log.d("FoodLOG", "Found combination + satisfConstrEnabled:" + satisfyMealConstr);
                             Log.d("FoodLOG", "iterations:" + counter);
                             Log.d("FoodLOG", "TotalCals: " + totalCal);
                             Log.d("FoodLOG", "TotalFats: " + totalFats);
                             Log.d("FoodLOG", "TotalCarbs: " + totalCarbs);
-                            Log.d("FoodLOG", "TotalProts: " + totalProts);
-                            for (int i = 0; i < foodCombination.size(); i++) {
-                                recipeDMS.getGeneratedRecipeDetails(((Recipe)
-                                        foodCombination.get(i)).getId(), i, foodCombination.get(i).getServingQuantity().get(0), callback);
-                                Log.d("FoodLOG", foodCombination.get(i).getFoodName());
-                            }
-                        }
-                    //}
-                //}
+                            Log.d("FoodLOG", "TotalProts: " + totalProts);*/
+                    for (int i = 0; i < foodCombination.size(); i++) {
+                        recipeDMS.getGeneratedRecipeDetails(((Recipe)
+                                foodCombination.get(i)).getId(), i, foodCombination.get(i).getServingQuantity().get(0), callback);
+                        Log.d("FoodLOG", foodCombination.get(i).getFoodName());
+                    }
+                }
             }
         }
     }
 
-    private boolean satisfiesMacroConstraints (List<Float> macros) {
+    private boolean satisfiesMacroConstraints(List<Float> macros) {
         if (satisfiesConstraints(macros.get(0), dataHolder.getFatsConstr())) {
             if (satisfiesConstraints(macros.get(1), dataHolder.getCarbConstr())) {
-                if (satisfiesConstraints(macros.get(2), dataHolder.getProtConstr())){
+                if (satisfiesConstraints(macros.get(2), dataHolder.getProtConstr())) {
                     return true;
                 }
             }
@@ -223,20 +222,20 @@ class Generator {
             recipe.setFoodName(food.getFoodName());
             recipe.setId(((Recipe) food).getId());
             recipe.setServingQuantity(Collections.singletonList(2f));
-            recipe.setCalories(food.getCalories()*2);
-            recipe.setFats(food.getFats()*2);
-            recipe.setCarbohydrates(food.getCarbohydrates()*2);
-            recipe.setProteins(food.getProteins()*2);
+            recipe.setCalories(food.getCalories() * 2);
+            recipe.setFats(food.getFats() * 2);
+            recipe.setCarbohydrates(food.getCarbohydrates() * 2);
+            recipe.setProteins(food.getProteins() * 2);
             return recipe;
         } else { // toUse == 2
             Recipe recipe = new Recipe();
             recipe.setFoodName(food.getFoodName());
             recipe.setId(((Recipe) food).getId());
             recipe.setServingQuantity(Collections.singletonList(0.5f));
-            recipe.setCalories(food.getCalories()/2);
-            recipe.setFats(food.getFats()/2);
-            recipe.setCarbohydrates(food.getCarbohydrates()/2);
-            recipe.setProteins(food.getProteins()/2);
+            recipe.setCalories(food.getCalories() / 2);
+            recipe.setFats(food.getFats() / 2);
+            recipe.setCarbohydrates(food.getCarbohydrates() / 2);
+            recipe.setProteins(food.getProteins() / 2);
             return recipe;
         }
     }
