@@ -1,286 +1,286 @@
 [
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_launcher_background.xml.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\drawable\\ic_launcher_background.xml"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_ic_info.png.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\drawable-xxhdpi\\ic_info.png"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\layout_layout_generated_food.xml.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\layouts\\items\\layout\\layout_generated_food.xml"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_ic_reset_current_values.png.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\drawable-xhdpi\\ic_reset_current_values.png"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\layout_item_product_common_layout.xml.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\layouts\\items\\layout\\item_product_common_layout.xml"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher_round.png.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher_round.png"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_ic_filter.png.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\drawable-hdpi\\ic_filter.png"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi_ic_search.xml.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\layouts\\general\\drawable-anydpi\\ic_search.xml"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_ic_info.png.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\drawable-xxhdpi\\ic_info.png"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\layout_item_food_adapter_layout.xml.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\layouts\\items\\layout\\item_food_adapter_layout.xml"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v24_ic_launcher_foreground.xml.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\drawable-v24\\ic_launcher_foreground.xml"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\layout_content_main.xml.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\layouts\\general\\layout\\content_main.xml"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher.png.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.png"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_manual_nh.xml.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\layouts\\general\\layout\\activity_manual_nh.xml"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_ic_search.png.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\layouts\\general\\drawable-mdpi\\ic_search.png"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\mipmap-anydpi-v26\\ic_launcher_round.xml"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_nh_set.xml.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\layouts\\general\\layout\\activity_nh_set.xml"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_ic_food_category.png.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\drawable-xhdpi\\ic_food_category.png"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher_round.png.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher_round.png"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_ic_filter.png.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\drawable-hdpi\\ic_filter.png"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\mipmap-anydpi-v26\\ic_launcher_round.xml"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_current_lifestyle.xml.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\layouts\\general\\layout\\activity_current_lifestyle.xml"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_style_black_24dp.xml.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\drawable\\ic_style_black_24dp.xml"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\menu_menu_main.xml.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\menu\\menu_main.xml"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_user_parameters.xml.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\layouts\\general\\layout\\activity_user_parameters.xml"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_ic_info.png.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\drawable-xhdpi\\ic_info.png"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_ic_info.png.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\drawable-xhdpi\\ic_info.png"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.png"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_ic_eat_food.png.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\drawable-hdpi\\ic_eat_food.png"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_ic_search.png.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\layouts\\general\\drawable-xxhdpi\\ic_search.png"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\layout_item_food_adapter_layout.xml.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\layouts\\items\\layout\\item_food_adapter_layout.xml"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_ic_eat_food.png.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\drawable-mdpi\\ic_eat_food.png"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher.png.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.png"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_ic_eat_food.png.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\drawable-xxhdpi\\ic_eat_food.png"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_ic_food_category.png.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\drawable-xxhdpi\\ic_food_category.png"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.png"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_current_lifestyle.xml.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\layouts\\general\\layout\\activity_current_lifestyle.xml"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_ic_search.png.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\layouts\\general\\drawable-hdpi\\ic_search.png"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_recipe_overview.xml.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\layouts\\fooddetails\\layout\\activity_recipe_overview.xml"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher_round.png.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher_round.png"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi_ic_search.xml.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\layouts\\general\\drawable-anydpi\\ic_search.xml"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_ic_filter.png.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\drawable-xxhdpi\\ic_filter.png"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_ic_filter.png.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\drawable-xhdpi\\ic_filter.png"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_nh_set.xml.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\layouts\\general\\layout\\activity_nh_set.xml"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_ic_reset_current_values.png.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\drawable-mdpi\\ic_reset_current_values.png"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_goal.xml.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\layouts\\general\\layout\\activity_goal.xml"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_food_adding.xml.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\layouts\\general\\layout\\activity_food_adding.xml"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi_ic_info.xml.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\drawable-anydpi\\ic_info.xml"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable_layout_food_bg.xml.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\drawable\\layout_food_bg.xml"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_ic_reset_current_values.png.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\drawable-mdpi\\ic_reset_current_values.png"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher_round.png.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher_round.png"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\layout_item_product_common_layout.xml.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\layouts\\items\\layout\\item_product_common_layout.xml"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_filter_dialog.xml.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\layouts\\auxiliary\\layout\\activity_filter_dialog.xml"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_ic_reset_current_values.png.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\drawable-xxhdpi\\ic_reset_current_values.png"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_ic_info.png.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\drawable-mdpi\\ic_info.png"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\layout_layout_generated_food.xml.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\layouts\\items\\layout\\layout_generated_food.xml"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher_round.png.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher_round.png"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_ic_filter.png.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\drawable-mdpi\\ic_filter.png"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\layout_content_main.xml.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\layouts\\general\\layout\\content_main.xml"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi_ic_food_category.xml.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\drawable-anydpi\\ic_food_category.xml"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_ic_search.png.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\layouts\\general\\drawable-xxhdpi\\ic_search.png"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_ic_info.png.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\drawable-mdpi\\ic_info.png"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\menu_menu_food_adding.xml.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\menu\\menu_food_adding.xml"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.png"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_search_black_24dp.xml.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\drawable\\ic_search_black_24dp.xml"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_search_black_24dp.xml.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\drawable\\ic_search_black_24dp.xml"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_ic_eat_food.png.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\drawable-xhdpi\\ic_eat_food.png"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher_round.png.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher_round.png"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-anydpi-v26_ic_launcher.xml.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\mipmap-anydpi-v26\\ic_launcher.xml"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi_ic_filter.xml.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\drawable-anydpi\\ic_filter.xml"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_ic_eat_food.png.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\drawable-xxhdpi\\ic_eat_food.png"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher.png"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_ic_food_category.png.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\drawable-mdpi\\ic_food_category.png"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable_empty_wide_divider.xml.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\drawable\\empty_wide_divider.xml"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_ic_reset_current_values.png.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\drawable-xxhdpi\\ic_reset_current_values.png"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_ic_food_category.png.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\drawable-xxhdpi\\ic_food_category.png"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_restaurantfood_overview.xml.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\layouts\\fooddetails\\layout\\activity_restaurantfood_overview.xml"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_ic_food_category.png.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\drawable-hdpi\\ic_food_category.png"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher.png.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher.png"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher_round.png.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_round.png"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_ic_reset_current_values.png.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\drawable-xhdpi\\ic_reset_current_values.png"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi_ic_eat_food.xml.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\drawable-anydpi\\ic_eat_food.xml"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_swap.xml.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\layouts\\general\\layout\\activity_swap.xml"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_ic_filter.png.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\drawable-xhdpi\\ic_filter.png"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_launcher.png.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.png"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi_ic_reset_current_values.xml.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\drawable-anydpi\\ic_reset_current_values.xml"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable_empty_tall_divider.xml.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\drawable\\empty_tall_divider.xml"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\mipmap-anydpi-v26\\ic_launcher.xml"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi_ic_reset_current_values.xml.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\drawable-anydpi\\ic_reset_current_values.xml"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_launcher_round.png.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher_round.png"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\layout_layout_added_food.xml.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\layouts\\items\\layout\\layout_added_food.xml"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_style_black_24dp.xml.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\drawable\\ic_style_black_24dp.xml"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_launcher_round.png.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher_round.png"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_swap.xml.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\layouts\\general\\layout\\activity_swap.xml"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\layout_layout_listitem.xml.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\layouts\\items\\layout\\layout_listitem.xml"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_user_parameters.xml.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\layouts\\general\\layout\\activity_user_parameters.xml"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_ic_food_category.png.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\drawable-xhdpi\\ic_food_category.png"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable_layout_food_bg.xml.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\drawable\\layout_food_bg.xml"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_ic_filter.png.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\drawable-xxhdpi\\ic_filter.png"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_restaurantfood_overview.xml.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\layouts\\fooddetails\\layout\\activity_restaurantfood_overview.xml"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_main.xml.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\layouts\\general\\layout\\activity_main.xml"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\menu_menu_swap.xml.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\menu\\menu_swap.xml"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_goal.xml.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\layouts\\general\\layout\\activity_goal.xml"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\menu_menu_food_adding.xml.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\menu\\menu_food_adding.xml"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi_ic_eat_food.xml.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\drawable-anydpi\\ic_eat_food.xml"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\layout_layout_added_food.xml.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\layouts\\items\\layout\\layout_added_food.xml"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi_ic_filter.xml.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\drawable-anydpi\\ic_filter.xml"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_ic_info.png.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\drawable-hdpi\\ic_info.png"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi_ic_food_category.xml.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\drawable-anydpi\\ic_food_category.xml"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\layout_layout_listitem.xml.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\layouts\\items\\layout\\layout_listitem.xml"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\menu_menu_swap.xml.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\menu\\menu_swap.xml"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_recipe_overview.xml.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\layouts\\fooddetails\\layout\\activity_recipe_overview.xml"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_ic_filter.png.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\drawable-mdpi\\ic_filter.png"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_main.xml.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\layouts\\general\\layout\\activity_main.xml"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_ic_search.png.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\layouts\\general\\drawable-hdpi\\ic_search.png"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher.png"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher.png.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher.png"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_ic_food_category.png.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\drawable-mdpi\\ic_food_category.png"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\menu_menu_lifestyle.xml.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\menu\\menu_lifestyle.xml"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_launcher_background.xml.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\drawable\\ic_launcher_background.xml"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi_ic_info.xml.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\drawable-anydpi\\ic_info.xml"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v24_ic_launcher_foreground.xml.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\drawable-v24\\ic_launcher_foreground.xml"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable_empty_wide_divider.xml.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\drawable\\empty_wide_divider.xml"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_ic_reset_current_values.png.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\drawable-hdpi\\ic_reset_current_values.png"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher_round.png.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_round.png"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_food_adding.xml.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\layouts\\general\\layout\\activity_food_adding.xml"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_product_overview.xml.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\layouts\\fooddetails\\layout\\activity_product_overview.xml"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_product_overview.xml.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\layouts\\fooddetails\\layout\\activity_product_overview.xml"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\menu_menu_main.xml.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\menu\\menu_main.xml"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_ic_eat_food.png.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\drawable-hdpi\\ic_eat_food.png"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_ic_info.png.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\drawable-hdpi\\ic_info.png"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable_empty_tall_divider.xml.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\drawable\\empty_tall_divider.xml"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_ic_eat_food.png.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\drawable-mdpi\\ic_eat_food.png"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_ic_search.png.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\layouts\\general\\drawable-xhdpi\\ic_search.png"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_ic_search.png.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\layouts\\general\\drawable-xhdpi\\ic_search.png"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_filter_dialog.xml.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\layouts\\auxiliary\\layout\\activity_filter_dialog.xml"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_manual_nh.xml.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\layouts\\general\\layout\\activity_manual_nh.xml"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_ic_eat_food.png.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\drawable-xhdpi\\ic_eat_food.png"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_ic_reset_current_values.png.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\drawable-hdpi\\ic_reset_current_values.png"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\menu_menu_lifestyle.xml.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\menu\\menu_lifestyle.xml"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_ic_food_category.png.flat",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\drawable-hdpi\\ic_food_category.png"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_ic_search.png.flat",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\layouts\\general\\drawable-mdpi\\ic_search.png"
     }
 ]

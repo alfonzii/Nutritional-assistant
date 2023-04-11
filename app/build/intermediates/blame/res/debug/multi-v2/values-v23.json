@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v23\\values-v23.xml",
+            "outputFile": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v23\\values-v23.xml",
             "map": [
                 {
                     "source": "C:\\Users\\qwerty_\\.gradle\\caches\\transforms-2\\files-2.1\\557088c2261856844df2ba6e611dbac5\\cardview-v7-28.0.0\\res\\values-v23\\values-v23.xml",

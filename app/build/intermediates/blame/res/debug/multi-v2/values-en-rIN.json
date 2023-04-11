@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-en-rIN\\values-en-rIN.xml",
+            "outputFile": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-en-rIN\\values-en-rIN.xml",
             "map": [
                 {
                     "source": "C:\\Users\\qwerty_\\.gradle\\caches\\transforms-2\\files-2.1\\1090cc5fd27c0f400f4aa3824629562e\\navigation-ui-1.0.0\\res\\values-en-rIN\\values-en-rIN.xml",

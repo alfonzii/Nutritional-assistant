@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml:2:1-52:12
-INJECTED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml:2:1-52:12
-INJECTED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml:2:1-52:12
-INJECTED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml:2:1-52:12
+ADDED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml:2:1-52:12
+INJECTED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml:2:1-52:12
+INJECTED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml:2:1-52:12
+INJECTED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml:2:1-52:12
 MERGED from [com.android.databinding:viewbinding:3.6.3] C:\Users\qwerty_\.gradle\caches\transforms-2\files-2.1\45b04a3e363897b9eada65e5d84e5934\viewbinding-3.6.3\AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.navigation:navigation-ui:1.0.0] C:\Users\qwerty_\.gradle\caches\transforms-2\files-2.1\1090cc5fd27c0f400f4aa3824629562e\navigation-ui-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:design:28.0.0] C:\Users\qwerty_\.gradle\caches\transforms-2\files-2.1\7b842e7eb855e107750dbaeaf2359553\design-28.0.0\AndroidManifest.xml:17:1-24:12
@@ -40,29 +40,29 @@ MERGED from [com.android.support:interpolator:28.0.0] C:\Users\qwerty_\.gradle\c
 MERGED from [android.arch.lifecycle:livedata:1.1.1] C:\Users\qwerty_\.gradle\caches\transforms-2\files-2.1\9baf189892bdcd71960ed5fbd866316b\livedata-1.1.1\AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\qwerty_\.gradle\caches\transforms-2\files-2.1\40227f4ed696287ec96b7c1f9aaf7636\livedata-core-1.1.1\AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.core:runtime:1.1.1] C:\Users\qwerty_\.gradle\caches\transforms-2\files-2.1\eef90b9a0443c52f697f2befd53a32d3\runtime-1.1.1\AndroidManifest.xml:17:1-22:12
-INJECTED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml:2:1-52:12
-INJECTED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml:2:1-52:12
-INJECTED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml:2:1-52:12
+INJECTED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml:2:1-52:12
+INJECTED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml:2:1-52:12
+INJECTED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml:2:1-52:12
 	package
-		ADDED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml:3:5-47
-		INJECTED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml
-		INJECTED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml:3:5-47
+		INJECTED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml
 	android:versionName
-		INJECTED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml:2:1-52:12
-		INJECTED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml:2:1-52:12
+		INJECTED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml
 	android:versionCode
-		INJECTED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml:2:1-52:12
-		INJECTED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml:2:1-52:12
+		INJECTED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml
 	xmlns:android
-		ADDED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml:2:11-69
+		ADDED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml:2:11-69
 uses-permission#android.permission.INTERNET
-ADDED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml:5:5-67
+ADDED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml:5:5-67
 	android:name
-		ADDED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml:5:22-64
+		ADDED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml:5:22-64
 application
-ADDED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml:7:5-50:19
+ADDED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml:7:5-50:19
 MERGED from [com.android.support:design:28.0.0] C:\Users\qwerty_\.gradle\caches\transforms-2\files-2.1\7b842e7eb855e107750dbaeaf2359553\design-28.0.0\AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:design:28.0.0] C:\Users\qwerty_\.gradle\caches\transforms-2\files-2.1\7b842e7eb855e107750dbaeaf2359553\design-28.0.0\AndroidManifest.xml:22:5-20
 MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\qwerty_\.gradle\caches\transforms-2\files-2.1\c33838df7ee8a7c79c8a8915fd94ce59\constraint-layout-1.1.3\AndroidManifest.xml:9:5-20
@@ -74,99 +74,99 @@ MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\qwerty_\.g
 	android:appComponentFactory
 		ADDED from [com.android.support:support-compat:28.0.0] C:\Users\qwerty_\.gradle\caches\transforms-2\files-2.1\f1491a81a65d4033a56d6549564e765e\support-compat-28.0.0\AndroidManifest.xml:22:18-91
 	android:supportsRtl
-		ADDED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml:12:9-35
+		ADDED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml:12:9-35
 	android:label
-		ADDED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml:10:9-41
+		ADDED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml:10:9-41
 	android:roundIcon
-		ADDED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml:11:9-54
+		ADDED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml:11:9-54
 	android:icon
-		ADDED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml:9:9-43
+		ADDED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml:9:9-43
 	android:allowBackup
-		ADDED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml:8:9-35
+		ADDED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml:8:9-35
 	android:theme
-		ADDED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml:13:9-40
+		ADDED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml:13:9-40
 activity#cz.cuni.mff.nutritionalassistant.SwapActivity
-ADDED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml:14:9-18:20
+ADDED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml:14:9-18:20
 	android:label
-		ADDED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml:16:13-42
+		ADDED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml:16:13-42
 	android:theme
-		ADDED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml:17:13-56
+		ADDED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml:17:13-56
 	android:name
-		ADDED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml:15:13-73
+		ADDED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml:15:13-73
 activity#cz.cuni.mff.nutritionalassistant.activity.overview.RecipeOverviewActivity
-ADDED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml:19:9-110
+ADDED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml:19:9-110
 	android:name
-		ADDED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml:19:19-107
+		ADDED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml:19:19-107
 activity#cz.cuni.mff.nutritionalassistant.activity.overview.RestaurantfoodOverviewActivity
-ADDED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml:20:9-118
+ADDED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml:20:9-118
 	android:name
-		ADDED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml:20:19-115
+		ADDED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml:20:19-115
 activity#cz.cuni.mff.nutritionalassistant.activity.overview.ProductOverviewActivity
-ADDED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml:21:9-111
+ADDED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml:21:9-111
 	android:name
-		ADDED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml:21:19-108
+		ADDED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml:21:19-108
 activity#cz.cuni.mff.nutritionalassistant.util.FilterDialogActivity
-ADDED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml:22:9-24:61
+ADDED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml:22:9-24:61
 	android:theme
-		ADDED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml:24:13-58
+		ADDED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml:24:13-58
 	android:name
-		ADDED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml:23:13-86
+		ADDED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml:23:13-86
 activity#cz.cuni.mff.nutritionalassistant.GoalActivity
-ADDED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml:25:9-82
+ADDED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml:25:9-82
 	android:name
-		ADDED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml:25:19-79
+		ADDED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml:25:19-79
 activity#cz.cuni.mff.nutritionalassistant.CurrentLifestyleActivity
-ADDED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml:26:9-28:59
+ADDED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml:26:9-28:59
 	android:theme
-		ADDED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml:28:13-56
+		ADDED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml:28:13-56
 	android:name
-		ADDED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml:27:13-85
+		ADDED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml:27:13-85
 activity#cz.cuni.mff.nutritionalassistant.UserParametersActivity
-ADDED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml:29:9-92
+ADDED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml:29:9-92
 	android:name
-		ADDED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml:29:19-89
+		ADDED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml:29:19-89
 activity#cz.cuni.mff.nutritionalassistant.NHSetActivity
-ADDED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml:30:9-32:49
+ADDED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml:30:9-32:49
 	android:label
-		ADDED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml:32:13-47
+		ADDED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml:32:13-47
 	android:name
-		ADDED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml:31:13-74
+		ADDED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml:31:13-74
 activity#cz.cuni.mff.nutritionalassistant.FoodAddingActivity
-ADDED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml:33:9-36:59
+ADDED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml:33:9-36:59
 	android:label
-		ADDED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml:35:13-49
+		ADDED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml:35:13-49
 	android:theme
-		ADDED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml:36:13-56
+		ADDED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml:36:13-56
 	android:name
-		ADDED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml:34:13-79
+		ADDED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml:34:13-79
 activity#cz.cuni.mff.nutritionalassistant.ManualNHActivity
-ADDED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml:37:9-39:56
+ADDED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml:37:9-39:56
 	android:label
-		ADDED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml:39:13-54
+		ADDED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml:39:13-54
 	android:name
-		ADDED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml:38:13-77
+		ADDED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml:38:13-77
 activity#cz.cuni.mff.nutritionalassistant.MainActivity
-ADDED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml:40:9-49:20
+ADDED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml:40:9-49:20
 	android:label
-		ADDED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml:42:13-45
+		ADDED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml:42:13-45
 	android:theme
-		ADDED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml:43:13-56
+		ADDED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml:43:13-56
 	android:name
-		ADDED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml:41:13-73
+		ADDED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml:41:13-73
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml:44:13-48:29
+ADDED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml:44:13-48:29
 action#android.intent.action.MAIN
-ADDED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml:45:17-69
+ADDED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml:45:17-69
 	android:name
-		ADDED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml:45:25-66
+		ADDED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml:45:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml:47:17-77
+ADDED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml:47:17-77
 	android:name
-		ADDED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml:47:27-74
+		ADDED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml:47:27-74
 uses-sdk
-INJECTED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml
-INJECTED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml
 MERGED from [com.android.databinding:viewbinding:3.6.3] C:\Users\qwerty_\.gradle\caches\transforms-2\files-2.1\45b04a3e363897b9eada65e5d84e5934\viewbinding-3.6.3\AndroidManifest.xml:20:5-44
 MERGED from [com.android.databinding:viewbinding:3.6.3] C:\Users\qwerty_\.gradle\caches\transforms-2\files-2.1\45b04a3e363897b9eada65e5d84e5934\viewbinding-3.6.3\AndroidManifest.xml:20:5-44
 MERGED from [android.arch.navigation:navigation-ui:1.0.0] C:\Users\qwerty_\.gradle\caches\transforms-2\files-2.1\1090cc5fd27c0f400f4aa3824629562e\navigation-ui-1.0.0\AndroidManifest.xml:20:5-44
@@ -239,13 +239,13 @@ MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\qwerty_\.gradl
 MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\qwerty_\.gradle\caches\transforms-2\files-2.1\40227f4ed696287ec96b7c1f9aaf7636\livedata-core-1.1.1\AndroidManifest.xml:20:5-44
 MERGED from [android.arch.core:runtime:1.1.1] C:\Users\qwerty_\.gradle\caches\transforms-2\files-2.1\eef90b9a0443c52f697f2befd53a32d3\runtime-1.1.1\AndroidManifest.xml:20:5-44
 MERGED from [android.arch.core:runtime:1.1.1] C:\Users\qwerty_\.gradle\caches\transforms-2\files-2.1\eef90b9a0443c52f697f2befd53a32d3\runtime-1.1.1\AndroidManifest.xml:20:5-44
-INJECTED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml
-INJECTED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml
 	android:targetSdkVersion
-		INJECTED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml
-		INJECTED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml
-		INJECTED from C:\Users\qwerty_\Documents\AndroidStudioProjects\Nutritionalassistant\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\qwerty_\StudioProjects\Nutritional-assistant\app\src\main\AndroidManifest.xml

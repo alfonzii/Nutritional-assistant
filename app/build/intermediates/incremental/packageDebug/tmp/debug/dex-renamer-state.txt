@@ -1,7 +1,7 @@
-#Fri Jan 29 19:11:26 CET 2021
-base.0=C\:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\out\\classes.dex
+#Tue Apr 11 17:33:33 CEST 2023
+base.0=C\:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\out\\classes.dex
 path.1=classes.dex
 renamed.1=classes2.dex
 path.0=classes.dex
 renamed.0=classes.dex
-base.1=C\:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\out\\classes.dex
+base.1=C\:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\out\\classes.dex

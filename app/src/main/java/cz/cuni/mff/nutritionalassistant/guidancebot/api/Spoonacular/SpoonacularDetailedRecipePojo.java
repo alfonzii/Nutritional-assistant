@@ -49,7 +49,7 @@ public class SpoonacularDetailedRecipePojo {
 
         @Getter
         public static class Nutrients {
-            @SerializedName("title")
+            @SerializedName("name")
             private String nutrientName;
 
             @SerializedName("amount")

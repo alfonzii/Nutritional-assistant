@@ -1,74 +1,74 @@
 [
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\layout_listitem.xml",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\layouts\\items\\layout\\layout_listitem.xml"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\item_product_common_layout.xml",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\layouts\\items\\layout\\item_product_common_layout.xml"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_user_parameters.xml",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\layouts\\general\\layout\\activity_user_parameters.xml"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_swap.xml",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\layouts\\general\\layout\\activity_swap.xml"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_swap.xml",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\layouts\\general\\layout\\activity_swap.xml"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\layout_generated_food.xml",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\layouts\\items\\layout\\layout_generated_food.xml"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_main.xml",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\layouts\\general\\layout\\activity_main.xml"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_recipe_overview.xml",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\layouts\\fooddetails\\layout\\activity_recipe_overview.xml"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_current_lifestyle.xml",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\layouts\\general\\layout\\activity_current_lifestyle.xml"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_goal.xml",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\layouts\\general\\layout\\activity_goal.xml"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_recipe_overview.xml",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\layouts\\fooddetails\\layout\\activity_recipe_overview.xml"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\item_food_adapter_layout.xml",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\layouts\\items\\layout\\item_food_adapter_layout.xml"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_food_adding.xml",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\layouts\\general\\layout\\activity_food_adding.xml"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\content_main.xml",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\layouts\\general\\layout\\content_main.xml"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_nh_set.xml",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\layouts\\general\\layout\\activity_nh_set.xml"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\layout_added_food.xml",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\layouts\\items\\layout\\layout_added_food.xml"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_manual_nh.xml",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\layouts\\general\\layout\\activity_manual_nh.xml"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_restaurantfood_overview.xml",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\layouts\\fooddetails\\layout\\activity_restaurantfood_overview.xml"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\layout_generated_food.xml",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\layouts\\items\\layout\\layout_generated_food.xml"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_user_parameters.xml",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\layouts\\general\\layout\\activity_user_parameters.xml"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_goal.xml",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\layouts\\general\\layout\\activity_goal.xml"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_manual_nh.xml",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\layouts\\general\\layout\\activity_manual_nh.xml"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\layout_added_food.xml",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\layouts\\items\\layout\\layout_added_food.xml"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_filter_dialog.xml",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\layouts\\auxiliary\\layout\\activity_filter_dialog.xml"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_filter_dialog.xml",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\layouts\\auxiliary\\layout\\activity_filter_dialog.xml"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\layout_listitem.xml",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\layouts\\items\\layout\\layout_listitem.xml"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\item_product_common_layout.xml",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\layouts\\items\\layout\\item_product_common_layout.xml"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_main.xml",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\layouts\\general\\layout\\activity_main.xml"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_restaurantfood_overview.xml",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\layouts\\fooddetails\\layout\\activity_restaurantfood_overview.xml"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_product_overview.xml",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\layouts\\fooddetails\\layout\\activity_product_overview.xml"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\content_main.xml",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\layouts\\general\\layout\\content_main.xml"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_nh_set.xml",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\layouts\\general\\layout\\activity_nh_set.xml"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\item_food_adapter_layout.xml",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\layouts\\items\\layout\\item_food_adapter_layout.xml"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_food_adding.xml",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\layouts\\general\\layout\\activity_food_adding.xml"
     },
     {
-        "merged": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_product_overview.xml",
-        "source": "C:\\Users\\qwerty_\\Documents\\AndroidStudioProjects\\Nutritionalassistant\\app\\src\\main\\res\\layouts\\fooddetails\\layout\\activity_product_overview.xml"
+        "merged": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_current_lifestyle.xml",
+        "source": "C:\\Users\\qwerty_\\StudioProjects\\Nutritional-assistant\\app\\src\\main\\res\\layouts\\general\\layout\\activity_current_lifestyle.xml"
     }
 ]
