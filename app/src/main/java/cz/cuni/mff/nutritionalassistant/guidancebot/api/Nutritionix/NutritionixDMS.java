@@ -1,5 +1,6 @@
 package cz.cuni.mff.nutritionalassistant.guidancebot.api.Nutritionix;
 
+import android.accounts.NetworkErrorException;
 import android.util.Log;
 import android.util.Pair;
 
@@ -70,7 +71,7 @@ public class NutritionixDMS {
                     if (response.body() != null) {
                         callback.onSuccess(PojoConverter.Nutritionix.fromNutritionixDetailedProductPojo(response.body().getFoods().get(0)));
                     } else {
-                        callback.onFail(new Throwable("Error while getting product details."));
+                        callback.onFail(new NetworkErrorException("Error while getting product details."));
                     }
                 }
             }

@@ -1,7 +1,9 @@
 package cz.cuni.mff.nutritionalassistant.guidancebot.api.Spoonacular;
 
+import android.accounts.NetworkErrorException;
 import android.util.Log;
 
+import java.net.ConnectException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -72,7 +74,7 @@ public class SpoonacularDMS {
             public void onResponse(Call<SpoonacularDetailedRecipePojo> call, Response<SpoonacularDetailedRecipePojo> response) {
                 if (!response.isSuccessful()) {
                     Log.d(SpoonacularDMS.class.getName(), "Code: " + response.code());
-                    callback.onFail(new Throwable(response.message() + " " + response.code()));
+                    callback.onFail(new ConnectException(response.message() + " " + response.code()));
                     return;
                 }
 
