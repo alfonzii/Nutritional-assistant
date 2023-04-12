@@ -27,7 +27,7 @@ public class ManualNHActivity extends BaseAbstractActivity {
 
         myAlertBuilder = new AlertDialog.Builder(ManualNHActivity.this);
         // Add the dialog buttons.
-        myAlertBuilder.setPositiveButton("OK",
+        myAlertBuilder.setPositiveButton(getString(R.string.ok_en),
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // User clicked OK button.
@@ -45,8 +45,8 @@ public class ManualNHActivity extends BaseAbstractActivity {
             protsGoal = Integer.parseInt(binding.numberProteins.getText().toString());
         } catch (NumberFormatException e) {
             // Set the dialog title and message.
-            myAlertBuilder.setTitle("Error");
-            myAlertBuilder.setMessage("You didn't write all values.");
+            myAlertBuilder.setTitle(getString(R.string.error_en));
+            myAlertBuilder.setMessage(getString(R.string.not_all_values_exception_en));
 
             // Create and show the AlertDialog.
             myAlertBuilder.show();

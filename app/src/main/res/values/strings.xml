@@ -50,4 +50,44 @@
 
     <string name="title_activity_current_lifestyle">CurrentLifestyleActivity</string>
     <string name="action_settings">Settings</string>
+
+
+    <!-- GeneralOverviewUtil -->
+    <string name="thisday_en">THISDAY</string>
+    <string name="nextday_en">NEXTDAY</string>
+    <string name="cheatday_en">CHEATDAY</string>
+    <string name="guidancebot_en">Guidance bot</string>
+    <string name="guidancebotmessage_en">You are about to add non-generated food in your meal plan. Which of the ad-hoc features should guidance bot use to act accordingly?\n</string>
+
+    <!-- Generator -->
+    <string name="empty_list_exception_en">Meal list for generation empty.</string>
+    <string name="nothing_to_generate_exception_en">Nothing to generate.</string>
+    <string name="heuristic_1_failed_exception_en">Too many iterations of algorithm using meal constraints.</string>
+    <string name="heuristic_2_failed_exception_en">Too many iterations of algorithm WITHOUT using meal constraints.</string>
+    <string name="heuristic_3_failed_exception_en">Too many iterations of algorithm without using meal and macro constraints.</string>
+
+    <!-- NutritionixDMS -->
+    <string name="product_details_fetching_exception_en">Error while getting product details.</string>
+
+    <!-- FilterDialogActivity -->
+    <string name="ok_en">OK</string>
+    <string name="error_en">Error</string>
+    <string name="wrong_format_en">Wrong format. Minimum number shouldn\'t be bigger than max.</string>
+
+    <!-- FoodViewHolder -->
+    <string name="unexpected_value_en">"Unexpected value: "</string>
+
+    <!-- CurrentLifestyleActivity -->
+    <string name="dismiss_en">Dismiss</string>
+    <string name="info_en">Info</string>
+
+    <!-- MainActivity -->
+    <string name="meal_plan_generation_exception_en">Application wasn\'t able to generate meal plan for you because of following reason:\n</string>
+    <string name="set_parameters_en">Set your parameters first!</string>
+
+    <!-- ManualNHActivity -->
+    <string name="not_all_values_exception_en">You didn\'t write all values.</string>
+
+    <!-- NHSetActivity -->
+    <string name="not_defined_parameters_en">You don\'t have defined user parameters. Please, fill them in and then return back for automatic calculation.</string>
 </resources>

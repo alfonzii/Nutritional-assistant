@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import java.util.Collections;
 
+import cz.cuni.mff.nutritionalassistant.R;
 import cz.cuni.mff.nutritionalassistant.data.DataHolder;
 import cz.cuni.mff.nutritionalassistant.activity.BaseAbstractActivity;
 import cz.cuni.mff.nutritionalassistant.foodtypes.Food;
@@ -188,13 +189,11 @@ class GeneralOverviewUtil {
                 }
                 addFood(context);
             };
-            myAlertBuilder.setPositiveButton("THISDAY", clickListener);
-            myAlertBuilder.setNegativeButton("NEXTDAY", clickListener);
-            myAlertBuilder.setNeutralButton("CHEATDAY", clickListener);
-            myAlertBuilder.setTitle("Guidance bot");
-            myAlertBuilder.setMessage(
-                    "You are about to add non-generated food in your meal plan. " +
-                            "Which of the ad-hoc features should guidance bot use to act accordingly?\n");
+            myAlertBuilder.setPositiveButton(context.getString(R.string.thisday_en), clickListener);
+            myAlertBuilder.setNegativeButton(context.getString(R.string.nextday_en), clickListener);
+            myAlertBuilder.setNeutralButton(context.getString(R.string.cheatday_en), clickListener);
+            myAlertBuilder.setTitle(context.getString(R.string.guidancebot_en));
+            myAlertBuilder.setMessage(context.getString(R.string.guidancebotmessage_en));
             // Create and show the AlertDialog.
             myAlertBuilder.show();
         } else {

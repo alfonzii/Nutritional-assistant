@@ -60,7 +60,7 @@ class FoodViewHolder extends RecyclerView.ViewHolder {
                         intentFoodOverview = new Intent(context, RestaurantfoodOverviewActivity.class);
                         break;
                     default:
-                        throw new IllegalStateException("Unexpected value: " + foodAdapterType.getFoodType());
+                        throw new IllegalStateException(context.getString(R.string.unexpected_value_en) + foodAdapterType.getFoodType());
                 }
                 intentFoodOverview.setAction(ACTION_ADD_FOOD);
 

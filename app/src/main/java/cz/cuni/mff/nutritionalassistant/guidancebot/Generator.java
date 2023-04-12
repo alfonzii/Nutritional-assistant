@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeoutException;
 
+import cz.cuni.mff.nutritionalassistant.R;
 import cz.cuni.mff.nutritionalassistant.data.DataHolder;
 import cz.cuni.mff.nutritionalassistant.MainActivity;
 import cz.cuni.mff.nutritionalassistant.foodtypes.Food;
@@ -60,7 +61,8 @@ class Generator {
                     mealFoodDataList.add(filterUnsatisfyingFoods(recipesList, constr));
                     if (mealFoodDataList.get(mealFoodDataList.size() - 1).size() == 0) {
                         if (generatedListCallback != null) {
-                            generatedListCallback.onFail(new IllegalStateException("Meal list for generation empty."));
+                            generatedListCallback.onFail(new IllegalStateException(
+                                    context.getString(R.string.empty_list_exception_en)));
                             return;
                         }
                     }
@@ -72,7 +74,8 @@ class Generator {
 
         if (mealFoodDataList.isEmpty()) {
             if (generatedListCallback != null) {
-                generatedListCallback.onFail(new IllegalStateException("Nothing to generate."));
+                generatedListCallback.onFail(new IllegalStateException(
+                        context.getString(R.string.nothing_to_generate_exception_en)));
                 return;
             }
         }
@@ -86,13 +89,13 @@ class Generator {
             counter++;
             if (counter > 2000000) {
                 if (generatedListCallback != null && satisfyMealConstr) {
-                    generatedListCallback.onFail(new TimeoutException("Too many iterations of algorithm using meal constraints."));
+                    generatedListCallback.onFail(new TimeoutException(context.getString(R.string.heuristic_1_failed_exception_en)));
                     return;
                 } else if (generatedListCallback != null && satisfyMacroConstr) {
-                    generatedListCallback.onFail(new TimeoutException("Too many iterations of algorithm WITHOUT using meal constraints."));
+                    generatedListCallback.onFail(new TimeoutException(context.getString(R.string.heuristic_2_failed_exception_en)));
                     return;
                 } else if (generatedListCallback != null) {
-                    generatedListCallback.onFail(new TimeoutException("Too many iterations of algorithm without using meal and macro constraints."));
+                    generatedListCallback.onFail(new TimeoutException(context.getString(R.string.heuristic_3_failed_exception_en)));
                     return;
                 }
             }

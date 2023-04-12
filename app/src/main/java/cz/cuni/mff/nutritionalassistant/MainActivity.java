@@ -1,6 +1,7 @@
 package cz.cuni.mff.nutritionalassistant;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -284,7 +285,7 @@ public class MainActivity extends BaseAbstractActivity {
                 intentFoodDetails = new Intent(this, RestaurantfoodOverviewActivity.class);
                 break;
             default:
-                throw new IllegalStateException("Unexpected value: " + clickedFood.getFoodType());
+                throw new IllegalStateException(getString(R.string.unexpected_value_en) + clickedFood.getFoodType());
         }
         intentFoodDetails.setAction(ACTION_EXAMINE_DETAILS);
         intentFoodDetails.putExtra(EXTRA_SERIALIZABLE_FOOD, clickedFood);
@@ -332,14 +333,14 @@ public class MainActivity extends BaseAbstractActivity {
                                     AlertDialog.Builder myAlertBuilder;
                                     myAlertBuilder = new AlertDialog.Builder(MainActivity.this);
                                     // Add the dialog buttons.
-                                    myAlertBuilder.setPositiveButton("Dismiss",
+                                    myAlertBuilder.setPositiveButton(getString(R.string.dismiss_en),
                                             new DialogInterface.OnClickListener() {
                                                 public void onClick(DialogInterface dialog, int which) {
                                                 }
                                             });
-                                    myAlertBuilder.setTitle("Error");
+                                    myAlertBuilder.setTitle(getString(R.string.error_en));
                                     myAlertBuilder.setMessage(
-                                            "Application wasn't able to generate meal plan for you because of following reason:\n" + throwable.getMessage());
+                                            getString(R.string.meal_plan_generation_exception_en) + throwable.getMessage());
                                     // Create and show the AlertDialog.
                                     myAlertBuilder.show();
                                     binding.content.progressBar.setIndeterminate(false);
@@ -356,14 +357,13 @@ public class MainActivity extends BaseAbstractActivity {
                             AlertDialog.Builder myAlertBuilder;
                             myAlertBuilder = new AlertDialog.Builder(MainActivity.this);
                             // Add the dialog buttons.
-                            myAlertBuilder.setPositiveButton("Dismiss",
+                            myAlertBuilder.setPositiveButton(getString(R.string.dismiss_en),
                                     new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int which) {
                                         }
                                     });
-                            myAlertBuilder.setTitle("Error");
-                            myAlertBuilder.setMessage(
-                                    "Set your parameters first!");
+                            myAlertBuilder.setTitle(getString(R.string.error_en));
+                            myAlertBuilder.setMessage(getString(R.string.set_parameters_en));
                             // Create and show the AlertDialog.
                             myAlertBuilder.show();
                             binding.content.progressBar.setIndeterminate(false);

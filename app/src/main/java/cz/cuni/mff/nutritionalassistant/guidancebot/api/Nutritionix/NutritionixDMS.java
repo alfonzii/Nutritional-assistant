@@ -27,6 +27,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 // Nutritionix Data Manager System
 public class NutritionixDMS {
 
+    private static final String baseurl = "https://trackapi.nutritionix.com/";
+
     private Retrofit retrofit;
     private NutritionixApi nutritionixApi;
 
@@ -40,7 +42,7 @@ public class NutritionixDMS {
 
     public NutritionixDMS() {
         retrofit = new Retrofit.Builder()
-                .baseUrl("https://trackapi.nutritionix.com/")
+                .baseUrl(baseurl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -71,6 +73,7 @@ public class NutritionixDMS {
                     if (response.body() != null) {
                         callback.onSuccess(PojoConverter.Nutritionix.fromNutritionixDetailedProductPojo(response.body().getFoods().get(0)));
                     } else {
+                        // TODO
                         callback.onFail(new NetworkErrorException("Error while getting product details."));
                     }
                 }

@@ -23,7 +23,7 @@ public class NHSetActivity extends BaseAbstractActivity {
 
         myAlertBuilder = new AlertDialog.Builder(NHSetActivity.this);
         // Add the dialog buttons.
-        myAlertBuilder.setPositiveButton("OK",
+        myAlertBuilder.setPositiveButton(getString(R.string.ok_en),
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         setResult(Constants.RESULT_AUTOMATIC_FAILURE);
@@ -38,11 +38,10 @@ public class NHSetActivity extends BaseAbstractActivity {
     }
 
     public void automaticClick(View view) {
-        if (data.getAge() + data.getWeight() + data.getHeight() == 0) {
+        if (data.getAge() == 0 || data.getWeight() == 0 || data.getHeight() == 0) {
             // Set the dialog title and message.
-            myAlertBuilder.setTitle("Error");
-            myAlertBuilder.setMessage(
-                    "You don't have defined user parameters. Please, fill them in and then return back for automatic calculation.");
+            myAlertBuilder.setTitle(getString(R.string.error_en));
+            myAlertBuilder.setMessage(getString(R.string.not_defined_parameters_en));
             // Create and show the AlertDialog.
             myAlertBuilder.show();
         } else {

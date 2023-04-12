@@ -45,10 +45,6 @@ public final class DataHolder {
     // However, we made it package private so it won't be much problematic
     static void setInstance(DataHolder d) { INSTANCE = d; }
 
-    public static void init() {
-
-    }
-
     // fully thread-safe implementation
     public static DataHolder getInstance() {
         if (INSTANCE == null) {

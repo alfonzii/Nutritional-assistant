@@ -36,7 +36,7 @@ public class CurrentLifestyleActivity extends BaseAbstractActivity {
 
         myAlertBuilder = new AlertDialog.Builder(CurrentLifestyleActivity.this);
         // Add the dialog buttons.
-        myAlertBuilder.setPositiveButton("Dismiss",
+        myAlertBuilder.setPositiveButton(getString(R.string.dismiss_en),
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                     }
@@ -53,7 +53,7 @@ public class CurrentLifestyleActivity extends BaseAbstractActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_info) {
-            myAlertBuilder.setTitle("Info");
+            myAlertBuilder.setTitle(getString(R.string.info_en));
             myAlertBuilder.setMessage(
                     Html.fromHtml("<p>" + "<b>" + "Sedentary" + "</b>" + " - easy or no exercise at all" + "</p>" +
                             "<p>" + "<b>" + "Mild activity" + "</b>" + " - easy exercise or sport, 1-3 times a week" + "</p>" +

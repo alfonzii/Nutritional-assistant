@@ -26,6 +26,11 @@ class DataSupplier {
     private NutritionixDMS nutritionixDMS;
     private SpoonacularDMS spoonacularDMS;
 
+    private static final String breakfastRecipesFile =  "breakfast_recipes.json";
+    private static final String mainRecipesFile = "main_course_recipes.json";
+    private static final String snackRecipesFile = "snack_recipes.json";
+
+
     DataSupplier() {
         nutritionixDMS = new NutritionixDMS();
         spoonacularDMS = new SpoonacularDMS();
@@ -62,21 +67,21 @@ class DataSupplier {
 
     List<Food> getBreakfastRecipesList(Context context) {
         SpoonacularAdapterFullReposnsePojo breakfastPojo = gson.fromJson(
-                loadJSONFromAsset("breakfast_recipes.json", context), SpoonacularAdapterFullReposnsePojo.class);
+                loadJSONFromAsset(breakfastRecipesFile, context), SpoonacularAdapterFullReposnsePojo.class);
 
         return PojoConverter.Spoonacular.fromSpoonacularGenerativeRecipesPojoList(breakfastPojo.getResults());
     }
 
     List<Food> getMainCourseRecipesList(Context context) {
         SpoonacularAdapterFullReposnsePojo mainCoursePojo = gson.fromJson(
-                loadJSONFromAsset("main_course_recipes.json", context), SpoonacularAdapterFullReposnsePojo.class);
+                loadJSONFromAsset(mainRecipesFile, context), SpoonacularAdapterFullReposnsePojo.class);
 
         return PojoConverter.Spoonacular.fromSpoonacularGenerativeRecipesPojoList(mainCoursePojo.getResults());
     }
 
     List<Food> getSnackRecipesList(Context context) {
         SpoonacularAdapterFullReposnsePojo snackPojo = gson.fromJson(
-                loadJSONFromAsset("snack_recipes.json", context), SpoonacularAdapterFullReposnsePojo.class);
+                loadJSONFromAsset(snackRecipesFile, context), SpoonacularAdapterFullReposnsePojo.class);
 
         return PojoConverter.Spoonacular.fromSpoonacularGenerativeRecipesPojoList(snackPojo.getResults());
     }

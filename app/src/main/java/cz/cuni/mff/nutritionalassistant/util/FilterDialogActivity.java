@@ -83,14 +83,14 @@ public class FilterDialogActivity extends AppCompatActivity {
                 AlertDialog.Builder myAlertBuilder =
                         new AlertDialog.Builder(FilterDialogActivity.this);
 
-                myAlertBuilder.setPositiveButton("OK",
+                myAlertBuilder.setPositiveButton(getString(R.string.ok_en),
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 // User clicked OK button.
                             }
                         });
-                myAlertBuilder.setTitle("Error");
-                myAlertBuilder.setMessage("Wrong format. Minimum number shouldn't be bigger than max.");
+                myAlertBuilder.setTitle(getString(R.string.error_en));
+                myAlertBuilder.setMessage(getString(R.string.wrong_format_en));
                 myAlertBuilder.show();
                 return;
             }
