@@ -22,7 +22,7 @@ import static cz.cuni.mff.nutritionalassistant.Constants.Sex;
 @Setter
 public final class DataHolder {
     // Should be final to be proper singleton
-    private static DataHolder INSTANCE = new DataHolder();
+    private static volatile DataHolder INSTANCE = null;
 
     private boolean isInitialized = false;
 
@@ -42,8 +42,22 @@ public final class DataHolder {
     }
 
     // Should not exist to be proper singleton
-    public static void setInstance(DataHolder d) { INSTANCE = d; }
+    // However, we made it package private so it won't be much problematic
+    static void setInstance(DataHolder d) { INSTANCE = d; }
+
+    public static void init() {
+
+    }
+
+    // fully thread-safe implementation
     public static DataHolder getInstance() {
+        if (INSTANCE == null) {
+            synchronized (DataHolder.class) {
+                if (INSTANCE == null) {
+                    INSTANCE = new DataHolder();
+                }
+            }
+        }
         return INSTANCE;
     }
 
