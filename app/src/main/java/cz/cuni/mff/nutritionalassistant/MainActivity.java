@@ -1,7 +1,6 @@
 package cz.cuni.mff.nutritionalassistant;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -27,6 +26,9 @@ import cz.cuni.mff.nutritionalassistant.activity.BaseAbstractActivity;
 import cz.cuni.mff.nutritionalassistant.activity.overview.ProductOverviewActivity;
 import cz.cuni.mff.nutritionalassistant.activity.overview.RecipeOverviewActivity;
 import cz.cuni.mff.nutritionalassistant.activity.overview.RestaurantfoodOverviewActivity;
+import cz.cuni.mff.nutritionalassistant.data.DataHolder;
+import cz.cuni.mff.nutritionalassistant.data.PersistentStorage;
+import cz.cuni.mff.nutritionalassistant.data.PersistentStorageBySharedPrefs;
 import cz.cuni.mff.nutritionalassistant.databinding.ActivityMainBinding;
 import cz.cuni.mff.nutritionalassistant.databinding.LayoutGeneratedFoodBinding;
 import cz.cuni.mff.nutritionalassistant.foodtypes.Food;
@@ -46,6 +48,7 @@ import static cz.cuni.mff.nutritionalassistant.Constants.VALUES_REQUEST;
 public class MainActivity extends BaseAbstractActivity {
     //Reference to singleton object
     private DataHolder dataHolder;
+    private PersistentStorage storage;
 
     //View binding object
     private ActivityMainBinding binding;
@@ -120,6 +123,7 @@ public class MainActivity extends BaseAbstractActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         dataHolder = DataHolder.getInstance();
+        storage = new PersistentStorageBySharedPrefs(this);
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -151,13 +155,7 @@ public class MainActivity extends BaseAbstractActivity {
     protected void onStop() {
         super.onStop();
 
-        SharedPreferences mPreferences = getSharedPreferences(SHARED_PREFERENCES_FILE, MODE_PRIVATE);
-
-        SharedPreferences.Editor preferencesEditor = mPreferences.edit();
-
-        String json = MyGson.PolymorphicGson.getInstance().toJson(dataHolder);
-        preferencesEditor.putString(DataHolder.class.getName(), json);
-        preferencesEditor.apply();
+        storage.save();
     }
 
     @Override

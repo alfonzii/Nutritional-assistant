@@ -1,4 +1,4 @@
-package cz.cuni.mff.nutritionalassistant;
+package cz.cuni.mff.nutritionalassistant.data;
 
 import android.util.Pair;
 
@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import cz.cuni.mff.nutritionalassistant.MainActivity;
 import cz.cuni.mff.nutritionalassistant.foodtypes.Food;
 import cz.cuni.mff.nutritionalassistant.foodtypes.Recipe;
 import cz.cuni.mff.nutritionalassistant.guidancebot.Mathematics;
@@ -78,14 +79,14 @@ public final class DataHolder {
     private List<List<Food>> userAddedFoods;
     private int lastAddedMeal;
 
-    int convertSex(Sex sex) {
+    public int convertSex(Sex sex) {
         if (sex == Sex.MALE)
             return 0;
         else
             return 1;
     }
 
-    Sex convertSex(int i) {
+    public Sex convertSex(int i) {
         if (i == 0)
             return Sex.MALE;
         else if (i == 1)
@@ -94,7 +95,7 @@ public final class DataHolder {
             throw new IllegalArgumentException();
     }
 
-    Food getLastEatenFood() {
+    public Food getLastEatenFood() {
         int lastFood = userAddedFoods.get(lastAddedMeal).size() - 1;
         return userAddedFoods.get(lastAddedMeal).get(lastFood);
     }

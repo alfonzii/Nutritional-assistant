@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import cz.cuni.mff.nutritionalassistant.DataHolder;
+import cz.cuni.mff.nutritionalassistant.data.DataHolder;
 import cz.cuni.mff.nutritionalassistant.MainActivity;
 import cz.cuni.mff.nutritionalassistant.foodtypes.Food;
 

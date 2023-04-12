@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import cz.cuni.mff.nutritionalassistant.activity.BaseAbstractActivity;
+import cz.cuni.mff.nutritionalassistant.data.DataHolder;
 import cz.cuni.mff.nutritionalassistant.databinding.ActivityFoodAddingBinding;
 import cz.cuni.mff.nutritionalassistant.foodtypes.Food;
 import cz.cuni.mff.nutritionalassistant.foodtypes.FoodAdapterType;

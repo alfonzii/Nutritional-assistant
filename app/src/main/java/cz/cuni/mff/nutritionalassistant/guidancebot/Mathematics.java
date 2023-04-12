@@ -5,7 +5,7 @@ import android.util.Pair;
 import java.util.Random;
 
 import cz.cuni.mff.nutritionalassistant.Constants;
-import cz.cuni.mff.nutritionalassistant.DataHolder;
+import cz.cuni.mff.nutritionalassistant.data.DataHolder;
 import lombok.Getter;
 
 @Getter

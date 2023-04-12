@@ -2,11 +2,11 @@ package cz.cuni.mff.nutritionalassistant;
 
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
 import cz.cuni.mff.nutritionalassistant.activity.BaseAbstractActivity;
+import cz.cuni.mff.nutritionalassistant.data.DataHolder;
 import cz.cuni.mff.nutritionalassistant.databinding.ActivityManualNhBinding;
 
 public class ManualNHActivity extends BaseAbstractActivity {

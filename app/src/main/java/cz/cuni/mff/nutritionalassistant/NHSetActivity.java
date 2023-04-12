@@ -4,11 +4,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
 import cz.cuni.mff.nutritionalassistant.activity.BaseAbstractActivity;
+import cz.cuni.mff.nutritionalassistant.data.DataHolder;
 
 public class NHSetActivity extends BaseAbstractActivity {
     //Reference to singleton object

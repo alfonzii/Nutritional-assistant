@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import cz.cuni.mff.nutritionalassistant.activity.BaseAbstractActivity;
+import cz.cuni.mff.nutritionalassistant.data.DataHolder;
 import cz.cuni.mff.nutritionalassistant.databinding.ActivityUserParametersBinding;
 
 
