@@ -31,7 +31,7 @@ import static cz.cuni.mff.nutritionalassistant.util.FormatUtil.roundedStringForm
  *
  * We have an assumption, that there can be only these 2 scenarios with Food:
  * 1. Null servingWeight implies no alt_measures.
- * 2. Non-null servingWeight imples alt_measures must also have non-null serving weight.
+ * 2. Non-null servingWeight implies alt_measures must also have non-null serving weight.
  *
  * Provided this assumption is incorrect, then code can do unexpected things.
  */

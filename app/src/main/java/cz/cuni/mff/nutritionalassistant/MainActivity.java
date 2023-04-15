@@ -1,6 +1,7 @@
 package cz.cuni.mff.nutritionalassistant;
 
 import android.annotation.SuppressLint;
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
@@ -48,6 +49,8 @@ public class MainActivity extends BaseAbstractActivity {
     private DataHolder dataHolder;
     private PersistentStorage storage;
 
+    private MainViewModel mViewModel;
+
     //View binding object
     private ActivityMainBinding binding;
 
@@ -66,8 +69,6 @@ public class MainActivity extends BaseAbstractActivity {
         dataHolder = DataHolder.getInstance();
         storage = new PersistentStorageBySharedPrefs(this);
 
-
-
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setSupportActionBar(binding.toolbar);
@@ -77,24 +78,19 @@ public class MainActivity extends BaseAbstractActivity {
             startActivityForResult(intent, FOOD_REQUEST);
         });
 
-        // Change .getDateInstance() to .getDateTimeInstance() and rerun to check Nextday
-        // functionality instantly.
-        if (!dataHolder.getLastRunDate().equals(DateFormat.getDateInstance().format(new Date()))) {
-            reset(false);
-            Brain.getInstance().requestNHConstraintsCalculation(dataHolder.getCaloriesExcess());
-        }
+        // Setup ViewModel
+        mViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
+        // Create observers
+        mViewModel.getNutValuesTrigger().observe(this, aBoolean -> refreshValues());
+        mViewModel.getGenFoodsTrigger().observe(this, aBoolean -> refreshGeneratedFoods());
+        mViewModel.getUserAddTrigger().observe(this, aBoolean -> refreshUserAddedFoods());
 
-        dataHolder.setLastRunDate(DateFormat.getDateInstance().format(new Date()));
-
-        refreshGeneratedFoods();
-        refreshUserAddedFoods();
-        refreshValues();
+        mViewModel.dateCheckInit();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-
         storage.save();
     }
 
@@ -125,8 +121,7 @@ public class MainActivity extends BaseAbstractActivity {
                 break;
 
             case R.id.action_resetCurrent:
-                reset();
-                refreshValues();
+                mViewModel.reset(true);
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -162,6 +157,12 @@ public class MainActivity extends BaseAbstractActivity {
     }
 
     private void refreshUserAddedFoods() {
+        // clear user added foods frontend
+        for (int meal = 0; meal < MealController.NUMBER_OF_MEALS; meal++) {
+            int childCount = MealController.getLayoutFromMealID(binding, meal).getChildCount();
+            MealController.getLayoutFromMealID(binding, meal).removeViews(2, childCount - 2);
+        }
+
         for (int meal = 0; meal < MealController.NUMBER_OF_MEALS; meal++) {
             for (Food food : dataHolder.getUserAddedFoods().get(meal)) {
                 View userAddedFoodView = createAddedFoodView(food);
@@ -169,54 +170,6 @@ public class MainActivity extends BaseAbstractActivity {
             }
         }
     }
-
-    private void reset() {
-        reset(true);
-    }
-
-    private void reset(boolean isButtonClicked) {
-        // clear user added foods frontend
-        for (int meal = 0; meal < MealController.NUMBER_OF_MEALS; meal++) {
-            int childCount = MealController.getLayoutFromMealID(binding, meal).getChildCount();
-            MealController.getLayoutFromMealID(binding, meal).removeViews(2, childCount - 2);
-        }
-        // clear user added foods backend
-        for (List<Food> mealList : dataHolder.getUserAddedFoods()) {
-            mealList.clear();
-        }
-        // clear generatedFoods checkboxes frontend and backend flags
-        for (int i = 0; i < MealController.NUMBER_OF_MEALS; i++) {
-            LayoutGeneratedFoodBinding generatedFoodBinding = MealController.getGeneratedFoodBindingFromMealID(binding, i);
-            generatedFoodBinding.checkBox.setChecked(false);
-            Food genFood = dataHolder.getGeneratedFoods().get(i).first;
-            dataHolder.getGeneratedFoods().set(i, new Pair<>(genFood, false));
-        }
-
-        // reset is called from MainActivity initialization
-        if (!isButtonClicked) {
-            if (dataHolder.getAdHocFlag() == DataHolder.AdHocFlag.NEXTDAY) {
-                if (dataHolder.getCaloriesCurrent() - dataHolder.getCaloriesGoal() > 0) {
-                    dataHolder.setCaloriesExcess(dataHolder.getCaloriesCurrent() - dataHolder.getCaloriesGoal());
-                } else {
-                    dataHolder.setCaloriesExcess(0);
-                }
-            } else {
-                dataHolder.setCaloriesExcess(0);
-            }
-        }
-
-        // set adhoc flag on UNSET
-        dataHolder.setAdHocFlag(DataHolder.AdHocFlag.UNSET);
-
-        // annulate NH values
-        dataHolder.setCaloriesCurrent(0);
-        dataHolder.setFatsCurrent(0);
-        dataHolder.setCarbohydratesCurrent(0);
-        dataHolder.setProteinsCurrent(0);
-    }
-
-
-
 
 
     @SuppressLint({"SetTextI18n"}) //suppress setText warning
