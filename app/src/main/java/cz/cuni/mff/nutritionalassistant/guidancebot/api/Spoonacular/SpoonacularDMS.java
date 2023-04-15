@@ -29,7 +29,7 @@ public class SpoonacularDMS {
 
     private Retrofit retrofit;
     private SpoonacularApi spoonacularApi;
-    private static final String apiKey = "54483141f36447f38d9451d5ea8236cd"; //"53eb0eca288d46358db6dafd0961a0b9";
+    private static final String apiKey = "53eb0eca288d46358db6dafd0961a0b9"; //"54483141f36447f38d9451d5ea8236cd";
     private static final String baseurl = "https://api.spoonacular.com/";
 
     public SpoonacularDMS() {

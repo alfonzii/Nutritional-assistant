@@ -1,32 +1,55 @@
 package cz.cuni.mff.nutritionalassistant;
 
+import android.app.Application;
+import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
+import android.content.ContextWrapper;
+import android.support.annotation.NonNull;
 import android.util.Pair;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import cz.cuni.mff.nutritionalassistant.data.DataHolder;
 import cz.cuni.mff.nutritionalassistant.foodtypes.Food;
 import cz.cuni.mff.nutritionalassistant.guidancebot.Brain;
+import cz.cuni.mff.nutritionalassistant.guidancebot.GeneratedFoodListCallback;
+import lombok.Getter;
 
-public final class MainViewModel extends ViewModel {
+public final class MainViewModel extends AndroidViewModel {
     private final MutableLiveData<Boolean> nutValuesTrigger;
     private final MutableLiveData<Boolean> genFoodsTrigger;
     private final MutableLiveData<Boolean> userAddTrigger;
 
-    private DataHolder dataHolder;
+    private final MutableLiveData<Boolean> progressBarLoading;
+    private final MutableLiveData<Boolean> checkboxesEnabled;
+    // 0 - nothing, 1 - succes, 2 - fail, 3 - exception
+    private final MutableLiveData<Integer> backendRegenerateCallResult;
 
-    public MainViewModel() {
+    private DataHolder dataHolder;
+    @Getter
+    private Throwable failThrowable;
+
+    public MainViewModel(@NonNull Application application) {
+        super(application);
+
         nutValuesTrigger = new MutableLiveData<>();
         nutValuesTrigger.setValue(false);
         genFoodsTrigger = new MutableLiveData<>();
         genFoodsTrigger.setValue(false);
         userAddTrigger = new MutableLiveData<>();
         userAddTrigger.setValue(false);
+
+        progressBarLoading = new MutableLiveData<>();
+        progressBarLoading.setValue(false);
+        checkboxesEnabled = new MutableLiveData<>();
+        checkboxesEnabled.setValue(true);
+        backendRegenerateCallResult = new MutableLiveData<>();
+        backendRegenerateCallResult.setValue(0);
 
         dataHolder = DataHolder.getInstance();
     }
@@ -46,11 +69,26 @@ public final class MainViewModel extends ViewModel {
         return userAddTrigger;
     }
 
+    LiveData<Boolean> getProgressBarLoading() {
+        return progressBarLoading;
+    }
+    LiveData<Boolean> getCheckboxesEnabled() {
+        return checkboxesEnabled;
+    }
+    LiveData<Integer> getBackendRegenerateCallResult() {
+        return backendRegenerateCallResult;
+    }
+
+
+
     private void trigValuesRefresh() {
         nutValuesTrigger.setValue(!nutValuesTrigger.getValue());
     }
     private void trigGenFoodsRefresh() {
         genFoodsTrigger.setValue(!genFoodsTrigger.getValue());
+    }
+    private void postGenFoodsRefresh() {
+        genFoodsTrigger.postValue(!genFoodsTrigger.getValue());
     }
     private void trigUserAddRefresh() {
         userAddTrigger.setValue(!userAddTrigger.getValue());
@@ -122,5 +160,52 @@ public final class MainViewModel extends ViewModel {
         dataHolder.getGeneratedFoods().set(checkboxMealID, new Pair<>(genFood.first, !genFood.second));
 
         trigValuesRefresh();
+    }
+
+    public void regenerateButtonClick() {
+        List<Boolean> generatedFoodsChecked = new ArrayList<>();
+        for (Pair<Food, Boolean> p : dataHolder.getGeneratedFoods()) {
+            generatedFoodsChecked.add(p.second);
+        }
+
+        checkboxesEnabled.setValue(false);
+        progressBarLoading.setValue(true);
+
+        Thread t = new Thread() {
+            @Override
+            public void run() {
+                try {
+                    Brain.getInstance().requestRegenerate(generatedFoodsChecked, getApplication(), new GeneratedFoodListCallback() {
+                        @Override
+                        public void onSuccess(@NonNull List<Food> newGeneratedRecipes, List<Boolean> generatedFoodsFlags) {
+                            for (int i = 0; i < MainActivity.MealController.NUMBER_OF_MEALS; i++) {
+                                if (!generatedFoodsFlags.get(i)) {
+                                    dataHolder.getGeneratedFoods().set(i, new Pair<>(newGeneratedRecipes.get(0), false));
+                                    newGeneratedRecipes.remove(0);
+                                }
+                            }
+
+                            postGenFoodsRefresh();
+                            progressBarLoading.postValue(false);
+                            backendRegenerateCallResult.postValue(1); // success
+                            checkboxesEnabled.postValue(true);
+                        }
+
+                        @Override
+                        public void onFail(@NonNull Throwable throwable) {
+                            progressBarLoading.postValue(false);
+                            failThrowable = throwable;
+                            backendRegenerateCallResult.postValue(2); // fail
+                            checkboxesEnabled.postValue(true);
+                        }
+                    });
+                } catch (NullPointerException e) {
+                    progressBarLoading.postValue(false);
+                    backendRegenerateCallResult.postValue(3); // exception
+                    checkboxesEnabled.postValue(true);
+                }
+            }
+        };
+        t.start();
     }
 }

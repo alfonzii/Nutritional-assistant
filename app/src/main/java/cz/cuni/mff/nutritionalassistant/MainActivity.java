@@ -87,6 +87,34 @@ public class MainActivity extends BaseAbstractActivity {
         mViewModel.getNutValuesTrigger().observe(this, aBoolean -> refreshValues());
         mViewModel.getGenFoodsTrigger().observe(this, aBoolean -> refreshGeneratedFoods());
         mViewModel.getUserAddTrigger().observe(this, aBoolean -> refreshUserAddedFoods());
+        mViewModel.getProgressBarLoading().observe(this, isLoading -> {
+            if (isLoading) {
+                binding.content.progressBar.setVisibility(View.VISIBLE);
+                binding.content.progressBar.setIndeterminate(true);
+            } else {
+                binding.content.progressBar.setVisibility(View.GONE);
+                binding.content.progressBar.setIndeterminate(false);
+            }
+        });
+        mViewModel.getCheckboxesEnabled().observe(this, areEnabled -> {
+            if (areEnabled) {
+                enableCheckboxes();
+            } else {
+                disableCheckboxes();
+            }
+        });
+
+        mViewModel.getBackendRegenerateCallResult().observe(this, callResult -> {
+            if (callResult == 1) { //success
+                showRegenerateSuccesDialog();
+            } else if (callResult == 2) { //fail
+                showRegenerateFailDialog(mViewModel.getFailThrowable());
+            } else if (callResult == 3) { //exception
+                showRegenerateExceptionDialog();
+            } else { //different situation
+
+            }
+        });
 
         mViewModel.dateCheckInit();
     }
@@ -277,78 +305,34 @@ public class MainActivity extends BaseAbstractActivity {
         mViewModel.onCheckboxClick(checkboxMealID, isChecked);
     }
 
+
+//-------------------------------------- REGENERATE-------------------------------------------------
+    private AlertDialog.Builder createRegenerateDialog(String message) {
+        AlertDialog.Builder myAlertBuilder;
+        myAlertBuilder = new AlertDialog.Builder(MainActivity.this);
+        // Add the dialog buttons.
+        myAlertBuilder.setPositiveButton(getString(R.string.dismiss_en),
+                (dialog, which) -> {}); // Dismiss button
+        myAlertBuilder.setTitle(getString(R.string.error_en));
+        myAlertBuilder.setMessage(message);
+
+        return myAlertBuilder;
+    }
+
+    public void showRegenerateSuccesDialog() {
+    }
+    public void showRegenerateFailDialog(@NonNull Throwable failThrowable) {
+        AlertDialog.Builder myAlertBuilder = createRegenerateDialog(
+                getString(R.string.meal_plan_generation_exception_en) + failThrowable.getMessage());
+        myAlertBuilder.show();
+    }
+    public void showRegenerateExceptionDialog() {
+        AlertDialog.Builder myAlertBuilder = createRegenerateDialog(getString(R.string.set_parameters_en));
+        myAlertBuilder.show();
+    }
+
     public void regenerateButtonClick(View view) {
-        List<Boolean> generatedFoodsChecked = new ArrayList<>();
-        for (Pair<Food, Boolean> p : dataHolder.getGeneratedFoods()) {
-            generatedFoodsChecked.add(p.second);
-        }
-
-        binding.content.progressBar.setVisibility(View.VISIBLE);
-        binding.content.progressBar.setIndeterminate(true);
-        disableCheckboxes();
-        Thread t = new Thread() {
-            @Override
-            public void run() {
-                try {
-                    Brain.getInstance().requestRegenerate(generatedFoodsChecked, getApplicationContext(), new GeneratedFoodListCallback() {
-                        //private boolean alreadyFailed = false;
-
-                        @Override
-                        public void onSuccess(@NonNull List<Food> newGeneratedRecipes, List<Boolean> generatedFoodsFlags) {
-                            //ListIterator<Pair<Food, Boolean>> it = dataHolder.getGeneratedFoods().listIterator();
-
-                            for (int i = 0; i < MealController.NUMBER_OF_MEALS; i++) {
-                                if (!generatedFoodsFlags.get(i)) {
-                                    dataHolder.getGeneratedFoods().set(i, new Pair<>(newGeneratedRecipes.get(0), false));
-                                    newGeneratedRecipes.remove(0);
-                                }
-                            }
-
-                            refreshGeneratedFoods();
-                            binding.content.progressBar.setIndeterminate(false);
-                            binding.content.progressBar.setVisibility(View.GONE);
-                            enableCheckboxes();
-                        }
-
-                        @Override
-                        public void onFail(@NonNull Throwable throwable) {
-                            MainActivity.this.runOnUiThread(() -> {
-                                AlertDialog.Builder myAlertBuilder;
-                                myAlertBuilder = new AlertDialog.Builder(MainActivity.this);
-                                // Add the dialog buttons.
-                                myAlertBuilder.setPositiveButton(getString(R.string.dismiss_en),
-                                        (dialog, which) -> {}); // Click just dismisses and does nothing
-                                myAlertBuilder.setTitle(getString(R.string.error_en));
-                                myAlertBuilder.setMessage(
-                                        getString(R.string.meal_plan_generation_exception_en) + throwable.getMessage());
-                                // Create and show the AlertDialog.
-                                myAlertBuilder.show();
-                                binding.content.progressBar.setIndeterminate(false);
-                                binding.content.progressBar.setVisibility(View.GONE);
-                                enableCheckboxes();
-                            });
-                        }
-                    });
-                } catch (NullPointerException e) {
-                    MainActivity.this.runOnUiThread(() -> {
-                        AlertDialog.Builder myAlertBuilder;
-                        myAlertBuilder = new AlertDialog.Builder(MainActivity.this);
-                        // Add the dialog buttons.
-                        myAlertBuilder.setPositiveButton(getString(R.string.dismiss_en),
-                                (dialog, which) -> {}); // Dismiss button
-                        myAlertBuilder.setTitle(getString(R.string.error_en));
-                        myAlertBuilder.setMessage(getString(R.string.set_parameters_en));
-                        // Create and show the AlertDialog.
-                        myAlertBuilder.show();
-                        binding.content.progressBar.setIndeterminate(false);
-                        binding.content.progressBar.setVisibility(View.GONE);
-                        enableCheckboxes();
-                    });
-                }
-            }
-        };
-        t.start();
-
+        mViewModel.regenerateButtonClick();
     }
 
 
