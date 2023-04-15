@@ -23,12 +23,7 @@ import cz.cuni.mff.nutritionalassistant.util.FoodAddingAdapter;
 public class FoodAddingActivity extends BaseAbstractActivity {
     // View binding object
     private ActivityFoodAddingBinding binding;
-
     private FoodAddingAdapter foodAddingAdapter;
-    //private int spinnerCategorySelection = Food.FoodType.PRODUCT.getId();
-
-    // Key - EditText ID, Value - value of filter parameter
-    //private HashMap<Integer, Integer> filterTable = new HashMap<>();
 
     private FoodAddingViewModel fViewModel;
 
@@ -141,6 +136,8 @@ public class FoodAddingActivity extends BaseAbstractActivity {
             Intent intent = new Intent(this, FilterDialogActivity.class);
             intent.putExtra(FilterDialogActivity.EXTRA_SERIALIZABLE_FILTER_HASHMAP, fViewModel.getFilterTable().getValue());
             startActivityForResult(intent, FILTER_REQUEST);
+            // Action processed
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }

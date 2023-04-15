@@ -195,8 +195,11 @@ public class MainActivity extends BaseAbstractActivity {
             case R.id.action_resetCurrent:
                 mViewModel.reset(true);
                 break;
+
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
+        return true;
     }
 
     // LayoutAddedFood.onClick

@@ -59,6 +59,7 @@ public class CurrentLifestyleActivity extends BaseAbstractActivity {
                             "<p>" + "<b>" + "High activity" + "</b>" + " - intense training, sport or hard manual work, 6+ times a week" + "</p>"));
             // Create and show the AlertDialog.
             myAlertBuilder.show();
+            // Action processed
             return true;
         }
 
