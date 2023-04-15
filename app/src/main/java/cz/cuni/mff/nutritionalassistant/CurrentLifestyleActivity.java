@@ -37,9 +37,7 @@ public class CurrentLifestyleActivity extends BaseAbstractActivity {
         myAlertBuilder = new AlertDialog.Builder(CurrentLifestyleActivity.this);
         // Add the dialog buttons.
         myAlertBuilder.setPositiveButton(getString(R.string.dismiss_en),
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
+                (dialog, which) -> {
                 });
     }
 

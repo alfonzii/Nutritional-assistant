@@ -1,10 +1,8 @@
 package cz.cuni.mff.nutritionalassistant;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.DialogInterface;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -36,7 +34,6 @@ import cz.cuni.mff.nutritionalassistant.foodtypes.Food;
 import cz.cuni.mff.nutritionalassistant.guidancebot.Brain;
 import cz.cuni.mff.nutritionalassistant.guidancebot.GeneratedFoodListCallback;
 import cz.cuni.mff.nutritionalassistant.util.FormatUtil;
-import cz.cuni.mff.nutritionalassistant.util.MyGson;
 import cz.cuni.mff.nutritionalassistant.util.listener.AddedFoodTouchListener;
 import cz.cuni.mff.nutritionalassistant.util.listener.GeneratedFoodClickListener;
 import lombok.Setter;
@@ -62,63 +59,6 @@ public class MainActivity extends BaseAbstractActivity {
     public static final String EXTRA_SERIALIZABLE_FOOD =
             "cz.cuni.mff.nutritionalassistant.EXTRA_SERIALIZABLE_FOOD";
 
-
-    public void refreshValues() {
-        binding.content.textCaloriesValue.setText(
-                Math.round(dataHolder.getCaloriesCurrent()) + "/" + Math.round(dataHolder.getCaloriesGoal()));
-        binding.content.textFatsValue.setText(
-                Math.round(dataHolder.getFatsCurrent()) + "/" + Math.round(dataHolder.getFatsGoal()));
-        binding.content.textCarbsValue.setText(
-                Math.round(dataHolder.getCarbohydratesCurrent()) + "/" + Math.round(dataHolder.getCarbohydratesGoal()));
-        binding.content.textProteinsValue.setText(
-                Math.round(dataHolder.getProteinsCurrent()) + "/" + Math.round(dataHolder.getProteinsGoal()));
-    }
-
-    private void reset() {
-        reset(true);
-    }
-
-    private void reset(boolean isButtonClicked) {
-        // clear user added foods frontend
-        for (int meal = 0; meal < MealController.NUMBER_OF_MEALS; meal++) {
-            int childCount = MealController.getLayoutFromMealID(binding, meal).getChildCount();
-            MealController.getLayoutFromMealID(binding, meal).removeViews(2, childCount - 2);
-        }
-        // clear user added foods backend
-        for (List<Food> mealList : dataHolder.getUserAddedFoods()) {
-            mealList.clear();
-        }
-        // clear generatedFoods checkboxes frontend and backend flags
-        for (int i = 0; i < MealController.NUMBER_OF_MEALS; i++) {
-            LayoutGeneratedFoodBinding generatedFoodBinding = MealController.getGeneratedFoodBindingFromMealID(binding, i);
-            generatedFoodBinding.checkBox.setChecked(false);
-            Food genFood = dataHolder.getGeneratedFoods().get(i).first;
-            dataHolder.getGeneratedFoods().set(i, new Pair<>(genFood, false));
-        }
-
-        // reset is called from MainActivity initialization
-        if (!isButtonClicked) {
-            if (dataHolder.getAdHocFlag() == DataHolder.AdHocFlag.NEXTDAY) {
-                if (dataHolder.getCaloriesCurrent() - dataHolder.getCaloriesGoal() > 0) {
-                    dataHolder.setCaloriesExcess(dataHolder.getCaloriesCurrent() - dataHolder.getCaloriesGoal());
-                } else {
-                    dataHolder.setCaloriesExcess(0);
-                }
-            } else {
-                dataHolder.setCaloriesExcess(0);
-            }
-        }
-
-        // set adhoc flag on UNSET
-        dataHolder.setAdHocFlag(DataHolder.AdHocFlag.UNSET);
-
-        // annulate NH values
-        dataHolder.setCaloriesCurrent(0);
-        dataHolder.setFatsCurrent(0);
-        dataHolder.setCarbohydratesCurrent(0);
-        dataHolder.setProteinsCurrent(0);
-    }
-
     @SuppressLint("SetTextI18n") //suppress setText warning
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,16 +66,15 @@ public class MainActivity extends BaseAbstractActivity {
         dataHolder = DataHolder.getInstance();
         storage = new PersistentStorageBySharedPrefs(this);
 
+
+
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setSupportActionBar(binding.toolbar);
 
-        binding.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, FoodAddingActivity.class);
-                startActivityForResult(intent, FOOD_REQUEST);
-            }
+        binding.fab.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, FoodAddingActivity.class);
+            startActivityForResult(intent, FOOD_REQUEST);
         });
 
         // Change .getDateInstance() to .getDateTimeInstance() and rerun to check Nextday
@@ -193,6 +132,93 @@ public class MainActivity extends BaseAbstractActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @SuppressLint("SetTextI18n")
+    public void refreshValues() {
+        binding.content.textCaloriesValue.setText(
+                Math.round(dataHolder.getCaloriesCurrent()) + "/" + Math.round(dataHolder.getCaloriesGoal()));
+        binding.content.textFatsValue.setText(
+                Math.round(dataHolder.getFatsCurrent()) + "/" + Math.round(dataHolder.getFatsGoal()));
+        binding.content.textCarbsValue.setText(
+                Math.round(dataHolder.getCarbohydratesCurrent()) + "/" + Math.round(dataHolder.getCarbohydratesGoal()));
+        binding.content.textProteinsValue.setText(
+                Math.round(dataHolder.getProteinsCurrent()) + "/" + Math.round(dataHolder.getProteinsGoal()));
+    }
+
+    @SuppressLint("SetTextI18n")
+    private void refreshGeneratedFoods() {
+        for (int i = 0; i < MealController.NUMBER_OF_MEALS; i++) {
+            Food genFood = dataHolder.getGeneratedFoods().get(i).first;
+            boolean isChecked = dataHolder.getGeneratedFoods().get(i).second;
+            LayoutGeneratedFoodBinding generatedFoodBinding = MealController.getGeneratedFoodBindingFromMealID(binding, i);
+            generatedFoodBinding.textNameGeneratedFood.setText(genFood.getFoodName());
+            generatedFoodBinding.textCaloriesGeneratedFood.setText(
+                    FormatUtil.roundedStringFormat(genFood.getCalories()) + " cals");
+            generatedFoodBinding.checkBox.setChecked(isChecked);
+            //if (!dataHolder.getGeneratedFoods().get(i).second) {
+            generatedFoodBinding.textNameGeneratedFood.setOnClickListener(
+                    new GeneratedFoodClickListener(this, genFood));
+            //}
+        }
+    }
+
+    private void refreshUserAddedFoods() {
+        for (int meal = 0; meal < MealController.NUMBER_OF_MEALS; meal++) {
+            for (Food food : dataHolder.getUserAddedFoods().get(meal)) {
+                View userAddedFoodView = createAddedFoodView(food);
+                MealController.getLayoutFromMealID(binding, meal).addView(userAddedFoodView);
+            }
+        }
+    }
+
+    private void reset() {
+        reset(true);
+    }
+
+    private void reset(boolean isButtonClicked) {
+        // clear user added foods frontend
+        for (int meal = 0; meal < MealController.NUMBER_OF_MEALS; meal++) {
+            int childCount = MealController.getLayoutFromMealID(binding, meal).getChildCount();
+            MealController.getLayoutFromMealID(binding, meal).removeViews(2, childCount - 2);
+        }
+        // clear user added foods backend
+        for (List<Food> mealList : dataHolder.getUserAddedFoods()) {
+            mealList.clear();
+        }
+        // clear generatedFoods checkboxes frontend and backend flags
+        for (int i = 0; i < MealController.NUMBER_OF_MEALS; i++) {
+            LayoutGeneratedFoodBinding generatedFoodBinding = MealController.getGeneratedFoodBindingFromMealID(binding, i);
+            generatedFoodBinding.checkBox.setChecked(false);
+            Food genFood = dataHolder.getGeneratedFoods().get(i).first;
+            dataHolder.getGeneratedFoods().set(i, new Pair<>(genFood, false));
+        }
+
+        // reset is called from MainActivity initialization
+        if (!isButtonClicked) {
+            if (dataHolder.getAdHocFlag() == DataHolder.AdHocFlag.NEXTDAY) {
+                if (dataHolder.getCaloriesCurrent() - dataHolder.getCaloriesGoal() > 0) {
+                    dataHolder.setCaloriesExcess(dataHolder.getCaloriesCurrent() - dataHolder.getCaloriesGoal());
+                } else {
+                    dataHolder.setCaloriesExcess(0);
+                }
+            } else {
+                dataHolder.setCaloriesExcess(0);
+            }
+        }
+
+        // set adhoc flag on UNSET
+        dataHolder.setAdHocFlag(DataHolder.AdHocFlag.UNSET);
+
+        // annulate NH values
+        dataHolder.setCaloriesCurrent(0);
+        dataHolder.setFatsCurrent(0);
+        dataHolder.setCarbohydratesCurrent(0);
+        dataHolder.setProteinsCurrent(0);
+    }
+
+
+
+
+
     @SuppressLint({"SetTextI18n"}) //suppress setText warning
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -227,11 +253,7 @@ public class MainActivity extends BaseAbstractActivity {
         }
     }
 
-    public void exampleClick(View view) {
-        Intent intent = new Intent(this, SwapActivity.class);
-        startActivity(intent);
-    }
-
+    @SuppressLint("SetTextI18n")
     private View createAddedFoodView(Food food) {
         View newAddedFood = getLayoutInflater().inflate(R.layout.layout_added_food, null, false);
         TextView txtNameAddedFood, txtWeightAddedFood, txtCaloriesAddedFood;
@@ -260,36 +282,6 @@ public class MainActivity extends BaseAbstractActivity {
                 this, newAddedFood, food));
 
         return newAddedFood;
-    }
-
-    private void refreshUserAddedFoods() {
-        for (int meal = 0; meal < MealController.NUMBER_OF_MEALS; meal++) {
-            for (Food food : dataHolder.getUserAddedFoods().get(meal)) {
-                View userAddedFoodView = createAddedFoodView(food);
-                MealController.getLayoutFromMealID(binding, meal).addView(userAddedFoodView);
-            }
-        }
-    }
-
-    // LayoutAddedFood.onClick
-    public void examineAddedFoodDetails(View view) {
-        Intent intentFoodDetails;
-        switch (clickedFood.getFoodType()) {
-            case PRODUCT:
-                intentFoodDetails = new Intent(this, ProductOverviewActivity.class);
-                break;
-            case RECIPE:
-                intentFoodDetails = new Intent(this, RecipeOverviewActivity.class);
-                break;
-            case RESTAURANTFOOD:
-                intentFoodDetails = new Intent(this, RestaurantfoodOverviewActivity.class);
-                break;
-            default:
-                throw new IllegalStateException(getString(R.string.unexpected_value_en) + clickedFood.getFoodType());
-        }
-        intentFoodDetails.setAction(ACTION_EXAMINE_DETAILS);
-        intentFoodDetails.putExtra(EXTRA_SERIALIZABLE_FOOD, clickedFood);
-        startActivity(intentFoodDetails);
     }
 
     public void regenerateButtonClick(View view) {
@@ -327,71 +319,43 @@ public class MainActivity extends BaseAbstractActivity {
 
                         @Override
                         public void onFail(@NonNull Throwable throwable) {
-                            MainActivity.this.runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    AlertDialog.Builder myAlertBuilder;
-                                    myAlertBuilder = new AlertDialog.Builder(MainActivity.this);
-                                    // Add the dialog buttons.
-                                    myAlertBuilder.setPositiveButton(getString(R.string.dismiss_en),
-                                            new DialogInterface.OnClickListener() {
-                                                public void onClick(DialogInterface dialog, int which) {
-                                                }
-                                            });
-                                    myAlertBuilder.setTitle(getString(R.string.error_en));
-                                    myAlertBuilder.setMessage(
-                                            getString(R.string.meal_plan_generation_exception_en) + throwable.getMessage());
-                                    // Create and show the AlertDialog.
-                                    myAlertBuilder.show();
-                                    binding.content.progressBar.setIndeterminate(false);
-                                    binding.content.progressBar.setVisibility(View.GONE);
-                                    enableCheckboxes();
-                                }
+                            MainActivity.this.runOnUiThread(() -> {
+                                AlertDialog.Builder myAlertBuilder;
+                                myAlertBuilder = new AlertDialog.Builder(MainActivity.this);
+                                // Add the dialog buttons.
+                                myAlertBuilder.setPositiveButton(getString(R.string.dismiss_en),
+                                        (dialog, which) -> {}); // Click just dismisses and does nothing
+                                myAlertBuilder.setTitle(getString(R.string.error_en));
+                                myAlertBuilder.setMessage(
+                                        getString(R.string.meal_plan_generation_exception_en) + throwable.getMessage());
+                                // Create and show the AlertDialog.
+                                myAlertBuilder.show();
+                                binding.content.progressBar.setIndeterminate(false);
+                                binding.content.progressBar.setVisibility(View.GONE);
+                                enableCheckboxes();
                             });
                         }
                     });
                 } catch (NullPointerException e) {
-                    MainActivity.this.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            AlertDialog.Builder myAlertBuilder;
-                            myAlertBuilder = new AlertDialog.Builder(MainActivity.this);
-                            // Add the dialog buttons.
-                            myAlertBuilder.setPositiveButton(getString(R.string.dismiss_en),
-                                    new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int which) {
-                                        }
-                                    });
-                            myAlertBuilder.setTitle(getString(R.string.error_en));
-                            myAlertBuilder.setMessage(getString(R.string.set_parameters_en));
-                            // Create and show the AlertDialog.
-                            myAlertBuilder.show();
-                            binding.content.progressBar.setIndeterminate(false);
-                            binding.content.progressBar.setVisibility(View.GONE);
-                            enableCheckboxes();
-                        }
+                    MainActivity.this.runOnUiThread(() -> {
+                        AlertDialog.Builder myAlertBuilder;
+                        myAlertBuilder = new AlertDialog.Builder(MainActivity.this);
+                        // Add the dialog buttons.
+                        myAlertBuilder.setPositiveButton(getString(R.string.dismiss_en),
+                                (dialog, which) -> {}); // Dismiss button
+                        myAlertBuilder.setTitle(getString(R.string.error_en));
+                        myAlertBuilder.setMessage(getString(R.string.set_parameters_en));
+                        // Create and show the AlertDialog.
+                        myAlertBuilder.show();
+                        binding.content.progressBar.setIndeterminate(false);
+                        binding.content.progressBar.setVisibility(View.GONE);
+                        enableCheckboxes();
                     });
                 }
             }
         };
         t.start();
 
-    }
-
-    private void refreshGeneratedFoods() {
-        for (int i = 0; i < MealController.NUMBER_OF_MEALS; i++) {
-            Food genFood = dataHolder.getGeneratedFoods().get(i).first;
-            boolean isChecked = dataHolder.getGeneratedFoods().get(i).second;
-            LayoutGeneratedFoodBinding generatedFoodBinding = MealController.getGeneratedFoodBindingFromMealID(binding, i);
-            generatedFoodBinding.textNameGeneratedFood.setText(genFood.getFoodName());
-            generatedFoodBinding.textCaloriesGeneratedFood.setText(
-                    FormatUtil.roundedStringFormat(genFood.getCalories()) + " cals");
-            generatedFoodBinding.checkBox.setChecked(isChecked);
-            //if (!dataHolder.getGeneratedFoods().get(i).second) {
-            generatedFoodBinding.textNameGeneratedFood.setOnClickListener(
-                    new GeneratedFoodClickListener(this, genFood));
-            //}
-        }
     }
 
     public void onCheckboxClick(View view) {
@@ -409,12 +373,35 @@ public class MainActivity extends BaseAbstractActivity {
         refreshValues();
     }
 
+
+
+    // FRONT-END
+
+    // LayoutAddedFood.onClick
+    public void examineAddedFoodDetails(View view) {
+        Intent intentFoodDetails;
+        switch (clickedFood.getFoodType()) {
+            case PRODUCT:
+                intentFoodDetails = new Intent(this, ProductOverviewActivity.class);
+                break;
+            case RECIPE:
+                intentFoodDetails = new Intent(this, RecipeOverviewActivity.class);
+                break;
+            case RESTAURANTFOOD:
+                intentFoodDetails = new Intent(this, RestaurantfoodOverviewActivity.class);
+                break;
+            default:
+                throw new IllegalStateException(getString(R.string.unexpected_value_en) + clickedFood.getFoodType());
+        }
+        intentFoodDetails.setAction(ACTION_EXAMINE_DETAILS);
+        intentFoodDetails.putExtra(EXTRA_SERIALIZABLE_FOOD, clickedFood);
+        startActivity(intentFoodDetails);
+    }
     private void disableCheckboxes() {
         for (int i = 0; i < MealController.NUMBER_OF_MEALS; i++) {
             MealController.getGeneratedFoodBindingFromMealID(binding, i).checkBox.setEnabled(false);
         }
     }
-
     private void enableCheckboxes() {
         for (int i = 0; i < MealController.NUMBER_OF_MEALS; i++) {
             MealController.getGeneratedFoodBindingFromMealID(binding, i).checkBox.setEnabled(true);
@@ -504,4 +491,10 @@ public class MainActivity extends BaseAbstractActivity {
     }
 
 
+
+    //Not implemented - doing nothing
+    /*public void exampleClick(View view) {
+        Intent intent = new Intent(this, SwapActivity.class);
+        startActivity(intent);
+    }*/
 }

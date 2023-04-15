@@ -70,7 +70,6 @@ public final class DataHolder {
     private String lastRunDate;
     private float caloriesExcess = 0;
 
-    // TODO mali by to byt floaty, a zobrazovacie views by sa mali starat o ich konverziu
     private float caloriesGoal = 0;
     private float fatsGoal = 0;
     private float carbohydratesGoal = 0;
