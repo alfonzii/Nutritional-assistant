@@ -27,7 +27,7 @@ public final class MainViewModel extends AndroidViewModel {
 
     private final MutableLiveData<Boolean> progressBarLoading;
     private final MutableLiveData<Boolean> checkboxesEnabled;
-    // 0 - nothing, 1 - succes, 2 - fail, 3 - exception
+    // 1 - succes, 2 - fail, 3 - exception
     private final MutableLiveData<Integer> backendRegenerateCallResult;
 
     private DataHolder dataHolder;

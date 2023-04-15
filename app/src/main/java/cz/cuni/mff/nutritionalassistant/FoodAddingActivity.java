@@ -1,5 +1,6 @@
 package cz.cuni.mff.nutritionalassistant;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,61 +14,25 @@ import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 
 import java.util.HashMap;
-import java.util.List;
 
 import cz.cuni.mff.nutritionalassistant.activity.BaseAbstractActivity;
-import cz.cuni.mff.nutritionalassistant.data.DataHolder;
 import cz.cuni.mff.nutritionalassistant.databinding.ActivityFoodAddingBinding;
-import cz.cuni.mff.nutritionalassistant.foodtypes.Food;
-import cz.cuni.mff.nutritionalassistant.foodtypes.FoodAdapterType;
-import cz.cuni.mff.nutritionalassistant.guidancebot.Brain;
-import cz.cuni.mff.nutritionalassistant.guidancebot.api.AdapterDataCallback;
 import cz.cuni.mff.nutritionalassistant.util.FilterDialogActivity;
 import cz.cuni.mff.nutritionalassistant.util.FoodAddingAdapter;
 
 public class FoodAddingActivity extends BaseAbstractActivity {
-    // Reference to singleton object
-    private DataHolder data = DataHolder.getInstance();
-
     // View binding object
     private ActivityFoodAddingBinding binding;
 
     private FoodAddingAdapter foodAddingAdapter;
-    private int spinnerCategorySelection = Food.FoodType.PRODUCT.getId();
+    //private int spinnerCategorySelection = Food.FoodType.PRODUCT.getId();
 
     // Key - EditText ID, Value - value of filter parameter
-    private HashMap<Integer, Integer> filterTable = new HashMap<>();
+    //private HashMap<Integer, Integer> filterTable = new HashMap<>();
+
+    private FoodAddingViewModel fViewModel;
 
     private static int FILTER_REQUEST = 0;
-
-    private SearchView.OnQueryTextListener searchQueryListener = new SearchView.OnQueryTextListener() {
-        @Override
-        public boolean onQueryTextSubmit(String query) {
-            foodAddingAdapter.clearItems();
-            Brain.getInstance().requestFoodAdapterTypeData(
-                    query, spinnerCategorySelection, filterTable, new AdapterDataCallback() {
-                        @Override
-                        public void onSuccess(@NonNull List<FoodAdapterType> list) {
-                            foodAddingAdapter.addItems(list);
-                        }
-
-                        @Override
-                        public void onFail(@NonNull Throwable throwable) {
-
-                        }
-                    });
-
-            // clear focus of searchview widget to hide keyboard
-            binding.toolbar.getMenu().findItem(R.id.action_search).getActionView().clearFocus();
-            return true;
-        }
-
-        @Override
-        public boolean onQueryTextChange(String newText) {
-            return false;
-        }
-    };
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +46,30 @@ public class FoodAddingActivity extends BaseAbstractActivity {
                 new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         foodAddingAdapter = new FoodAddingAdapter(this);
         binding.recyclerFoodAdding.setAdapter(foodAddingAdapter);
+
+        fViewModel = ViewModelProviders.of(this).get(FoodAddingViewModel.class);
+        fViewModel.getFoodList().observe(this, foodList -> {
+            foodAddingAdapter.clearItems();
+            foodAddingAdapter.addItems(foodList);
+        });
     }
+
+
+    private SearchView.OnQueryTextListener searchQueryListener = new SearchView.OnQueryTextListener() {
+        @Override
+        public boolean onQueryTextSubmit(String query) {
+            fViewModel.textSubmit(query);
+
+            // clear focus of searchview widget to hide keyboard
+            binding.toolbar.getMenu().findItem(R.id.action_search).getActionView().clearFocus();
+            return true;
+        }
+
+        @Override
+        public boolean onQueryTextChange(String newText) {
+            return false;
+        }
+    };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -128,13 +116,13 @@ public class FoodAddingActivity extends BaseAbstractActivity {
                 for (int i = 0; i < binding.toolbar.getMenu().size(); i++) {
                     binding.toolbar.getMenu().getItem(i).setVisible(false).setEnabled(false);
                 }
-                spinner.setSelection(spinnerCategorySelection);
+                spinner.setSelection(fViewModel.getSpinnerCategorySelection().getValue());
                 return true;
             }
 
             @Override
             public boolean onMenuItemActionCollapse(MenuItem item) {
-                spinnerCategorySelection = spinner.getSelectedItemPosition();
+                fViewModel.getSpinnerCategorySelection().setValue(spinner.getSelectedItemPosition());
                 invalidateOptionsMenu();
                 return true;
             }
@@ -142,7 +130,6 @@ public class FoodAddingActivity extends BaseAbstractActivity {
 
         binding.toolbar.getMenu().findItem(R.id.action_search).setOnActionExpandListener(searchActionExpandListener);
         binding.toolbar.getMenu().findItem(R.id.action_category).setOnActionExpandListener(categoryActionExpandListener);
-
         return true;
     }
 
@@ -152,7 +139,7 @@ public class FoodAddingActivity extends BaseAbstractActivity {
         // Need to be further coded.
         if (item.getItemId() == R.id.action_filter) {
             Intent intent = new Intent(this, FilterDialogActivity.class);
-            intent.putExtra(FilterDialogActivity.EXTRA_SERIALIZABLE_FILTER_HASHMAP, filterTable);
+            intent.putExtra(FilterDialogActivity.EXTRA_SERIALIZABLE_FILTER_HASHMAP, fViewModel.getFilterTable().getValue());
             startActivityForResult(intent, FILTER_REQUEST);
         }
         return super.onOptionsItemSelected(item);
@@ -170,8 +157,10 @@ public class FoodAddingActivity extends BaseAbstractActivity {
             }
         } else if (requestCode == FILTER_REQUEST) {
             if (resultCode == RESULT_OK) {
-                filterTable = (HashMap<Integer, Integer>) data.getSerializableExtra(
-                        FilterDialogActivity.EXTRA_SERIALIZABLE_FILTER_HASHMAP);
+                fViewModel.getFilterTable().setValue(
+                        (HashMap<Integer, Integer>) data.getSerializableExtra(
+                                FilterDialogActivity.EXTRA_SERIALIZABLE_FILTER_HASHMAP)
+                );
             }
         }
     }
